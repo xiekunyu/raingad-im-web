@@ -1,0 +1,114 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+a,
+a:focus,
+a:hover {
+    cursor: pointer;
+    color: inherit;
+    outline: none;
+    text-decoration: none;
+}
+
+body {
+    height: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: Microsoft YaHei, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Arial, sans-serif;
+    font-size: 14px;
+    color: #252438;
+}
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+
+pre {
+    font-family: Consolas, Menlo, Courier, monospace;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+.clear-fix {
+    &:before,
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+
+/* el-button禁用相关样式 */
+
+.el-button {
+    &.is-disabled {
+        cursor: default!important;
+    }
+    &.is-disabled {
+        &:focus,
+        &:hover {
+            cursor: default!important;
+        }
+    }
+}
+
+
+/* 子菜单箭头图标样式 */
+
+.el-submenu {
+    >.el-submenu__title {
+        i {
+            font-size: 14px;
+            color: #fff;
+        }
+    }
+}
+
+
+/* 卡片样式 */
+
+.el-card {
+    .el-card__header {
+        .title {
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    }
+    .el-card__body {
+        .content-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+
+/* 穿梭框样式 */
+
+.el-transfer-panel__body {
+    height: 280px;
+    .el-transfer-panel__list {
+        &.is-filterable {
+            height: 230px;
+        }
+    }
+}
