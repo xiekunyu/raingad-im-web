@@ -170,3 +170,31 @@ export function regexIsCRMEmail(email) {
     }
     return true
 }
+
+/** 搜索数组*/
+export function search_object(array,field,keywords) {
+    if(typeof array !== 'object'){
+        return false;
+    }else{
+        var found = [];
+        for(var i=0;array.length>i;i++){
+            if(typeof field == 'object'){
+                for(var j=0;field.length>j;j++){
+                    var field_str=field[j];
+                    var str=array[i][field_str];
+                    // 只需要匹配到一个即可
+                    if(str.indexOf(keywords) != -1){
+                        found.push(array[i]);
+                        break;
+                    }
+                }
+            }else{
+                var str=array[i][field];
+                if(str.indexOf(keywords) != -1){
+                    found.push(array[i]);
+                }
+            }
+        }
+        return found;
+    }
+}
