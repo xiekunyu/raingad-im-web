@@ -40,22 +40,13 @@
                         break;
                     // 登录 更新用户列表
                     case 'init':
+                        Lockr.set('client_id',data['client_id']);
                         bindClientIdAPI({client_id: data['client_id'],user_id:userInfo.user_id}).then(res=>{
                             console.log(data['client_id'],'消息服务启动成功');
                         }).catch(error => {
                             console.log('连接失败');
                         })
                         break;
-                    // case 'simple':
-                    //     this.playAudio ()
-                    //     this.$emit('recieveMsg',data.data);
-                    //     break;
-                    // case 'group':
-                    //     if(message.fromUser.id!=userInfo.user_id){
-                    //         this.playAudio ();
-                    //         // message.toContactId="group-"+message.toContactId;
-                    //         this.$emit('recieveMsg',message);
-                    //     }
                     default:
                         this.$store.commit('catchSocketAction', data);
                         break;

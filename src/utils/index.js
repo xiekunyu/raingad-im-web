@@ -172,29 +172,43 @@ export function regexIsCRMEmail(email) {
 }
 
 /** 搜索数组*/
-export function search_object(array,field,keywords) {
-    if(typeof array !== 'object'){
+export function search_object(array, field, keywords) {
+    if (typeof array !== 'object') {
         return false;
-    }else{
+    } else {
         var found = [];
-        for(var i=0;array.length>i;i++){
-            if(typeof field == 'object'){
-                for(var j=0;field.length>j;j++){
-                    var field_str=field[j];
-                    var str=array[i][field_str];
+        for (var i = 0; array.length > i; i++) {
+            if (typeof field == 'object') {
+                for (var j = 0; field.length > j; j++) {
+                    var field_str = field[j];
+                    var str = array[i][field_str];
                     // 只需要匹配到一个即可
-                    if(str.indexOf(keywords) != -1){
+                    if (str.indexOf(keywords) != -1) {
                         found.push(array[i]);
                         break;
                     }
                 }
-            }else{
-                var str=array[i][field];
-                if(str.indexOf(keywords) != -1){
+            } else {
+                var str = array[i][field];
+                if (str.indexOf(keywords) != -1) {
                     found.push(array[i]);
                 }
             }
         }
         return found;
+    }
+}
+
+/** 数组转化为字符串*/
+export function arrayToString(arr, field, isTrans) {
+    isTrans = typeof isTrans !== 'undefined' ? isTrans : false;
+    var idr = [];
+    for (var i = 0; i < arr.length; i++) {
+        idr.push(arr[i][field]);
+    }
+    if (isTrans === true) {
+        return idr.join(",");
+    } else {
+        return idr;
     }
 }

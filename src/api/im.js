@@ -16,7 +16,7 @@ export function getContactsAPI(data) {
  * 发送聊天消息
  * @param {*} data
  */
- export function sendMessageAPI(data) {
+export function sendMessageAPI(data) {
     return request({
         url: 'im/sendMessage',
         method: 'post',
@@ -28,7 +28,7 @@ export function getContactsAPI(data) {
  * 发送图片或文件消息
  * @param {*} data
  */
- export function sendFileAPI(data) {
+export function sendFileAPI(data) {
     return request({
         url: 'upload/uploadFile',
         method: 'post',
@@ -43,7 +43,7 @@ export function getContactsAPI(data) {
  * 获取聊天记录
  * @param {*} data
  */
- export function getMessageListAPI(data) {
+export function getMessageListAPI(data) {
     return request({
         url: 'im/getMessageList',
         method: 'post',
@@ -55,7 +55,7 @@ export function getContactsAPI(data) {
  * 修改消息为已读
  * @param {*} data
  */
- export function setMsgIsReadAPI(data) {
+export function setMsgIsReadAPI(data) {
     return request({
         url: 'im/setMsgIsRead',
         method: 'post',
@@ -67,7 +67,7 @@ export function getContactsAPI(data) {
  * 设置
  * @param {*} data
  */
- export function settingAPI(data) {
+export function settingAPI(data) {
     return request({
         url: 'im/setting',
         method: 'post',
@@ -79,9 +79,83 @@ export function getContactsAPI(data) {
  * 修改群组名称
  * @param {*} data
  */
- export function editGroupNameAPI(data) {
+export function editGroupNameAPI(data) {
     return request({
-        url: 'im/editGroupName',
+        url: 'group/editGroupName',
+        method: 'post',
+        data: data
+    })
+}
+
+/**
+ * 获取群成员列表
+ * @param {*} data
+ */
+export function groupUserListAPI(data) {
+    return request({
+        url: 'group/groupuserlist',
+        method: 'post',
+        data: data
+    })
+}
+
+/**
+ * 获取群成员列表
+ * @param {*} data
+ */
+export function getAllUserAPI(data) {
+    return request({
+        url: 'group/getAllUser',
+        method: 'post',
+        data: data
+    })
+}
+
+/**
+ * 创建群聊
+ * @param {*} data
+ */
+export function addGroupAPI(data) {
+    return request({
+        url: 'group/add',
+        method: 'post',
+        data: data
+    })
+}
+
+
+/**
+ * 设置管理员
+ * @param {*} data
+ */
+export function setManagerAPI(data) {
+    return request({
+        url: 'group/setManager',
+        method: 'post',
+        data: data
+    })
+}
+
+
+/**
+ * 设置管理员
+ * @param {*} data
+ */
+export function removeUserAPI(data) {
+    return request({
+        url: 'group/removeUser',
+        method: 'post',
+        data: data
+    })
+}
+
+/**
+ * 添加群成员
+ * @param {*} data
+ */
+export function addGroupUserAPI(data) {
+    return request({
+        url: 'group/addGroupUser',
         method: 'post',
         data: data
     })

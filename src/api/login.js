@@ -15,9 +15,19 @@ export function logoutAPI() {
     })
 }
 
+// 绑定用户id以及初始化消息服务
 export function bindClientIdAPI(params) {
     return request({
         url: 'pub/bindUid',
+        method: 'post',
+        data: params
+    })
+}
+
+// 绑定群聊id
+export function bindGroupAPI(params) {
+    return request({
+        url: 'pub/bindGroup',
         method: 'post',
         data: params
     })
