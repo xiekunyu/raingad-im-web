@@ -18,6 +18,7 @@
       @message-click="handleMessageClick"
       @menu-avatar-click="handleMenuAvatarClick"
       @send="handleSend"
+      style="min-height:530px"
     >
       <template #cover>
         <div>
@@ -28,7 +29,10 @@
         </div>
       </template>
       <!-- 消息窗口顶部的插槽 -->
-      <template #message-title="contact" style="color: red">
+      <template
+        #message-title="contact"
+        style="color: red"
+      >
         <span
           v-if="isEdit == false"
           @click="
@@ -37,8 +41,7 @@
             }
           "
           class="displayName"
-          >{{ contact.displayName }}</span
-        >
+        >{{ contact.displayName }}</span>
         <input
           v-if="isEdit == true"
           v-model="displayName"
@@ -65,7 +68,10 @@
               @click="openCreateGroup"
             ></el-button>
           </el-input>
-          <div class="search-list" v-if="searchResult">
+          <div
+            class="search-list"
+            v-if="searchResult"
+          >
             <div
               v-for="(item, index) in searchList"
               :key="index"
@@ -88,48 +94,79 @@
       </template>
       <!-- 群组聊天展示的抽屉 -->
       <template #message-side="contact">
-        <div class="slot-group-list" v-if="contact.is_group == 1">
+        <div
+          class="slot-group-list"
+          v-if="contact.is_group == 1"
+        >
           <div class="group-side-box">
-            <div class="group-side-title">群公告</div>
-            <hr />
-            <div class="group-side-body">
-              随便写点，自己实现即可
+            <div class="group-notice">
+              <div class="group-side-title">
+                <h3>群公告</h3>
+                <div>
+                  <el-button
+                    type="text"
+                    @click="noticeBox=true"
+                    v-if='contact.owner_id==user.id'
+                  >发布公告</el-button>
+                </div>
+              </div>
+              <hr />
+              <div  class="group-side-body" v-if="contact.notice">
+                {{contact.notice}}
+              </div>
+              <div class="group-side-body" v-if="!contact.notice">
+                暂无公告
+              </div>
             </div>
-            <div class="group-side-title"><span>群成员</span>&emsp;<el-button type="text" @click="openAddGroupUser">添加成员</el-button></div>
-            <hr />
-            <div class="group-user-body">
-              <lemon-contact
-                class="user-list"
-                v-for="(item, index) in groupUser"
-                :key="index"
-                :contact="item"
-                v-lemon-contextmenu.contact="groupMenu"
-              >
-                <div class="user-avatar">
-                  <el-avatar :size="20" :src="item.userInfo.avatar"></el-avatar>
+            <div class="group-user">
+              <div class="group-side-title">
+                <h3>群成员</h3>
+                <div>
+                  <el-button
+                    type="text"
+                    @click="openAddGroupUser"
+                  >添加成员</el-button>
                 </div>
-                <div class="user-name">
-                  {{ item.userInfo.displayName }}
-                </div>
-                <div class="user-role">
-                  <i
-                    class="el-icon-user-solid fc-danger"
-                    title="创建者"
-                    v-if="item.role == 1"
-                  ></i>
-                  <i
-                    class="el-icon-user-solid fc-warning"
-                    title="管理员"
-                    v-if="item.role == 2"
-                  ></i>
-                  <i
-                    class="el-icon-user-solid fc-info"
-                    title="普通成员"
-                    v-if="item.role == 3"
-                  ></i>
-                </div>
-              </lemon-contact>
+              </div>
+              <hr />
+              <div class="group-user-body"  id="group-user">
+                <lemon-contact
+                  class="user-list"
+                  v-for="(item, index) in groupUser"
+                  :key="index"
+                  :contact="item"
+                  v-lemon-contextmenu.contact="groupMenu"
+                >
+                  <div class="user-avatar">
+                    <el-avatar
+                      :size="20"
+                      :src="item.userInfo.avatar"
+                    ></el-avatar>
+                  </div>
+                  <div class="user-name">
+                    {{ item.userInfo.displayName }}
+                  </div>
+                  <div class="user-role">
+                    <i
+                      class="el-icon-user-solid fc-danger"
+                      title="创建者"
+                      v-if="item.role == 1"
+                    ></i>
+                    <i
+                      class="el-icon-user-solid fc-warning"
+                      title="管理员"
+                      v-if="item.role == 2"
+                    ></i>
+                    <i
+                      class="el-icon-user-solid fc-info"
+                      title="普通成员"
+                      v-if="item.role == 3"
+                    ></i>
+                  </div>
+                </lemon-contact>
+              </div>
             </div>
+
           </div>
         </div>
       </template>
@@ -140,7 +177,10 @@
           style="visibility: visible"
         >
           <span v-if="!message.is_read"> 未读 </span>
-          <span v-if="message.is_read" style="color: green"> 已读 </span>
+          <span
+            v-if="message.is_read"
+            style="color: green"
+          > 已读 </span>
         </span>
       </template>
       <!-- 发送按钮左边插槽 -->
@@ -164,9 +204,15 @@
         :data="allUser"
       >
       </el-transfer>
-      <span slot="footer" class="dialog-footer">
+      <span
+        slot="footer"
+        class="dialog-footer"
+      >
         <el-button @click="createChatBox = false">取 消</el-button>
-        <el-button type="primary" @click="createGroup">确 定</el-button>
+        <el-button
+          type="primary"
+          @click="createGroup"
+        >确 定</el-button>
       </span>
     </el-dialog>
     <!-- 添加群成员 -->
@@ -185,9 +231,15 @@
         :data="allUser"
       >
       </el-transfer>
-      <span slot="footer" class="dialog-footer">
+      <span
+        slot="footer"
+        class="dialog-footer"
+      >
         <el-button @click="addGroupUserBox = false">取 消</el-button>
-        <el-button type="primary" @click="addGroupUser">确 定</el-button>
+        <el-button
+          type="primary"
+          @click="addGroupUser"
+        >确 定</el-button>
       </span>
     </el-dialog>
     <!-- 设置中心 -->
@@ -197,20 +249,33 @@
       :modal="false"
       width="500px"
     >
-      <el-tabs :tab-position="tabPosition" style="min-height: 300px">
+      <el-tabs
+        :tab-position="tabPosition"
+        style="min-height: 300px"
+      >
         <el-tab-pane label="账号设置">
           <div align="center">
-            <el-avatar :src="user.avatar" :size="50"> </el-avatar>
+            <el-avatar
+              :src="user.avatar"
+              :size="50"
+            > </el-avatar>
             <br /><br />
             <p>{{ user.displayName }}</p>
             <br />
             <p>账号：{{ user.account }}</p>
             <br />
-            <el-button type="danger" @click="logout">退出登录</el-button>
+            <el-button
+              type="danger"
+              @click="logout"
+            >退出登录</el-button>
           </div>
         </el-tab-pane>
         <el-tab-pane label="通用设置">
-          <el-form ref="form" :model="setting" label-width="100px">
+          <el-form
+            ref="form"
+            :model="setting"
+            label-width="100px"
+          >
             <el-form-item label="发送消息：">
               <el-radio-group v-model="setting.sendKey">
                 <el-radio-button label="1">Enter</el-radio-button>
@@ -225,33 +290,32 @@
             </el-form-item>
           </el-form>
           <div class="setting-switch">
-            <el-switch v-model="setting.isVoice"> </el-switch
-            >&emsp;开启新消息声音提醒
+            <el-switch v-model="setting.isVoice"> </el-switch>&emsp;开启新消息声音提醒
           </div>
           <div class="setting-switch">
-            <el-switch v-model="setting.avatarCricle"> </el-switch
-            >&emsp;开启聊天圆形头像（需要刷新）
+            <el-switch v-model="setting.avatarCricle"> </el-switch>&emsp;开启聊天圆形头像（需要刷新）
           </div>
           <div class="setting-switch">
-            <el-switch v-model="setting.hideMessageName"> </el-switch
-            >&emsp;是否隐藏聊天窗口内的联系人名字
+            <el-switch v-model="setting.hideMessageName"> </el-switch>&emsp;是否隐藏聊天窗口内的联系人名字
           </div>
           <div class="setting-switch">
-            <el-switch v-model="setting.hideMessageTime"> </el-switch
-            >&emsp;是否隐藏聊天窗口内的消息发送时间
+            <el-switch v-model="setting.hideMessageTime"> </el-switch>&emsp;是否隐藏聊天窗口内的消息发送时间
           </div>
         </el-tab-pane>
         <el-tab-pane label="关于IM">
           <div align="center">
-            <el-avatar src="http://img.raingad.com/logo/logo.png" :size="50">
+            <el-avatar
+              src="http://img.raingad.com/logo/logo.png"
+              :size="50"
+            >
             </el-avatar>
             <br /><br />
-            <p><span class="main-color"> Raingad IM </span>for 0.5.13</p>
+            <p><span class="main-color"> Raingad IM </span>for 0.5.18</p>
           </div>
-          <div class="setting-version">
+          <!-- <div class="setting-version">
             <b> 即将支持功能：</b>
             <p>1、解散群聊、群公告设置、群功能设置</p>
-          </div>
+          </div> -->
           <div class="setting-version">
             <b> 已经支持功能：</b>
             <p>1、单聊和群聊</p>
@@ -260,9 +324,12 @@
             <p>4、支持设置新消息提醒</p>
             <p>5、支持部分Lemon-imui内功能设置</p>
             <p>5、支持文件和图片在线预览</p>
-            <p>6、群聊创建和邀请、删除群成员，管理员设置</p>
+            <p>6、群聊创建、删除和群成员管理、群公告等</p>
           </div>
-          <div class="setting-version" style="color: #a6a6a6">
+          <div
+            class="setting-version"
+            style="color: #a6a6a6"
+          >
             <p>后端技术栈：thinkphp6+workerman</p>
             <p>前端技术栈：vue+Lemon-IMUI+element-UI</p>
           </div>
@@ -273,8 +340,36 @@
         <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
       </span> -->
     </el-dialog>
+    <!-- 创建群聊 -->
+    <el-dialog
+      title="发布公告"
+      :visible.sync="noticeBox"
+      :modal="false"
+      width="500px"
+    >
+      <el-input
+        type="textarea"
+        :rows="4"
+        placeholder="请输入内容"
+        v-model="notice"
+      >
+      </el-input>
+      <span
+        slot="footer"
+        class="dialog-footer"
+      >
+        <el-button @click="noticeBox = false">取 消</el-button>
+        <el-button
+          type="primary"
+          @click="publishNotice"
+        >确 定</el-button>
+      </span>
+    </el-dialog>
     <transition name="fade-user">
-      <div class="previewBox" v-if="drawer">
+      <div
+        class="previewBox"
+        v-if="drawer"
+      >
         <el-button
           class="drawer-close"
           type="danger"
@@ -310,10 +405,12 @@ import {
   addGroupAPI,
   setManagerAPI,
   removeUserAPI,
-  addGroupUserAPI
+  addGroupUserAPI,
+  removeGrouprAPI,
+  setNoticeAPI
 } from "@/api/im";
 import { bindGroupAPI } from "@/api/login";
-import { search_object,arrayToString } from "@/utils/index";
+import { search_object, arrayToString } from "@/utils/index";
 import Lockr from "lockr";
 import Socket from "../components/socket";
 
@@ -333,14 +430,19 @@ export default {
   components: {
     Socket
   },
-  data() {
+  data () {
+    var _this = this;
     return {
       // 搜索结果展示
       searchResult: false,
       createChatBox: false,
       addGroupUserBox: false,
+      noticeBox: false,
+      // 公告
+      notice: '',
       createChatTitles: ["待选成员", "已选成员"],
       selectUid: [],
+      // 所有成员默认的props
       defaultProps: {
         key: "user_id",
         label: "realname",
@@ -357,6 +459,7 @@ export default {
       settingBox: false,
       tabPosition: "left",
       sendTips: "使用 Enter 键发送消息",
+      // 群成员邮件菜单
       groupMenu: [
         {
           text: "发送消息",
@@ -385,9 +488,9 @@ export default {
                 role: 2
               });
               this.$message({
-              type: 'success',
-              message: '设置成功!'
-            });
+                type: "success",
+                message: "设置成功!"
+              });
             });
           },
           visible: instance => {
@@ -414,9 +517,9 @@ export default {
                 role: 3
               });
               this.$message({
-              type: 'success',
-              message: '取消成功!'
-            });
+                type: "success",
+                message: "取消成功!"
+              });
             });
           },
           visible: instance => {
@@ -440,9 +543,9 @@ export default {
             }).then(() => {
               removeUserAPI({ id: this.group_id, user_id: contact.user_id });
               this.$message({
-              type: 'success',
-              message: '移除成功!'
-            });
+                type: "success",
+                message: "移除成功!"
+              });
             });
           },
           visible: instance => {
@@ -465,14 +568,58 @@ export default {
           }
         },
         {
-          click(e, instance, hide) {
+          click (e, instance, hide) {
             const { IMUI, contact } = instance;
-            IMUI.removeContact(contact.id);
-            if (IMUI.currentContactId == contact.id) IMUI.changeContact(null);
             hide();
+            _this
+              .$confirm("确定删除该群聊吗？", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+              })
+              .then(() => {
+                removeGrouprAPI({ id: contact.id });
+                _this.$message({
+                  type: "success",
+                  message: "删除成功!"
+                });
+              });
           },
           color: "red",
-          text: "删除好友"
+          text: "删除群聊",
+          visible: instance => {
+            return (
+              instance.contact.owner_id == _this.user.id &&
+              instance.contact.is_group == 1
+            );
+          }
+        },
+        {
+          click (e, instance, hide) {
+            const { IMUI, contact } = instance;
+            hide();
+            _this
+              .$confirm("确定退出该群聊吗？", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+              })
+              .then(() => {
+                removeUserAPI({ id: contact.id, user_id: _this.user.id });
+                _this.$message({
+                  type: "success",
+                  message: "退出成功!"
+                });
+              });
+          },
+          color: "red",
+          text: "退出群聊",
+          visible: instance => {
+            return (
+              instance.contact.owner_id != _this.user.id &&
+              instance.contact.is_group == 1
+            );
+          }
         }
       ],
       // 定义消息内容的右键菜单
@@ -564,6 +711,7 @@ export default {
           text: "删除"
         }
       ],
+      // 设置
       setting: {
         theme: "blue",
         hideMessageName: false,
@@ -572,6 +720,7 @@ export default {
         sendKey: 1,
         isVoice: true
       },
+      // 当前登录用户
       user: {
         id: user.user_id,
         displayName: user.realname,
@@ -597,12 +746,12 @@ export default {
   },
   watch: {
     // 监听联系人搜索
-    keywords() {
+    keywords () {
       const { IMUI } = this.$refs;
       const contacts = IMUI.getContacts();
       this.searchContact(contacts);
     },
-    "setting.sendKey"(val) {
+    "setting.sendKey" (val) {
       if (val == 1) {
         this.sendTips = "使用 Enter 键发送消息";
       } else {
@@ -611,7 +760,7 @@ export default {
     },
     // 监听设置发送变化需要进行设置更改
     setting: {
-      handler(newValue, oldValue) {
+      handler (newValue, oldValue) {
         settingAPI(newValue);
         user.setting = newValue;
         Lockr.set("UserInfo", user);
@@ -619,7 +768,7 @@ export default {
       deep: true
     },
     // 监听接收socket消息
-    socketAction(val) {
+    socketAction (val) {
       let message = val.data;
       const { IMUI } = this.$refs;
       switch (val.type) {
@@ -685,10 +834,37 @@ export default {
             this.getGroupUserList(message.group_id);
           }
           break;
+        case "removeGroup":
+          IMUI.removeContact(message.group_id);
+          if (IMUI.currentContactId == message.group_id)
+            IMUI.changeContact(null);
+          break;
+        // 发布公告
+        case "setNotice":
+          IMUI.updateContact({
+            id: message.group_id,
+            notice: message.notice
+          });
+          // 发布事件消息
+          IMUI.appendMessage({
+            id: generateRandId(),
+            type: "event",
+            //使用 jsx 时 click必须使用箭头函数（使上下文停留在vue内）
+            content: (
+              <div>
+                <span>
+                  管理员 发布了公告： {message.notice}
+                </span>
+              </div>
+            ),
+            toContactId: message.id,
+            sendTime: getTime()
+          }, true);
+          break;
       }
     }
   },
-  mounted() {
+  mounted () {
     // 初始化用户设置
     if (user.setting) {
       this.setting = eval(user.setting);
@@ -698,12 +874,15 @@ export default {
     const that = this;
     window.onresize = () => {
       return (() => {
+        if(this.is_group==1){
+          var html=document.getElementById('group-user');
+          html.style.height=(document.documentElement.clientHeight-280)+'px';
+        }
         that.height = document.documentElement.clientHeight;
       })();
     };
     if (this.searchResult) {
-      document.addEventListener("click", function(e) {
-        cosnole.log(123);
+      document.addEventListener("click", function (e) {
         if (!that.$refs.configforms.contains(e.target)) {
           that.searchResult = false;
         }
@@ -714,156 +893,8 @@ export default {
     this.getSimpleChat();
   },
   methods: {
-    // 获取所有人员列表
-    getAllUser(data){
-      getAllUserAPI(data).then(res => {
-        const data = res.data;
-        this.allUser = data;
-      });
-    },
-    openCreateGroup() {
-      this.getAllUser({});
-      this.createChatBox = true;
-    },
-    // 打开添加群成员的窗口
-    openAddGroupUser(){
-      var user_ids=arrayToString(this.groupUser,'user_id');
-      this.getAllUser({user_ids:user_ids});
-      this.addGroupUserBox = true;
-    },
-    // 添加群成员
-    addGroupUser(){
-      this.addGroupUserBox = false;
-      addGroupUserAPI({ user_ids: this.selectUid,id:this.group_id})
-      this.selectUid=[];
-    },
-    createGroup() {
-      this.createChatBox = false;
-      // 创建群聊
-      addGroupAPI({ user_ids: this.selectUid }).then(res => {
-        const data = res.data;
-        const { IMUI } = this.$refs;
-        if (res.code == 0) {
-          // 添加联系人
-          IMUI.appendContact(data);
-          // 切换到该联系人
-          IMUI.changeContact(data.id);
-        }
-        this.selectUid=[];
-      });
-    },
-    // 关闭搜索结果
-    closeSearch() {
-      var that = this;
-      setTimeout(function() {
-        that.searchResult = false;
-      }, 300);
-    },
-    // 搜索联系人
-    searchContact(contacts) {
-      if (this.keywords != "") {
-        this.searchList = search_object(
-          contacts,
-          ["displayName", "name_py"],
-          this.keywords
-        );
-      }
-    },
-    // 将本地消息设置为已读
-    setLocalMsgIsRead(message) {
-      const { IMUI } = this.$refs;
-      for (let i = 0; message.length > i; i++) {
-        const data = {
-          id: message[i]["id"],
-          is_read: 1,
-          status: "succeed",
-          content: message[i]["content"] + " "
-        };
-        IMUI.updateMessage(data);
-      }
-    },
-    // 下载文件
-    download(src, name, type) {
-      let a = document.createElement("a");
-      if (type == "image") {
-        a.download = name || "pic";
-      } else {
-        a.download = name || "file";
-      }
-      a.href = src;
-      a.click();
-    },
-    // 播放消息声音
-    playAudio() {
-      const audio = document.getElementById("chatAudio");
-      // 从头播放
-      audio.currentTime = 0;
-      audio.play();
-    },
-    // 接收消息重新渲染
-    recieveMsg(message) {
-      const { IMUI } = this.$refs;
-      const contact = IMUI.getCurrentContact();
-      // 如果收到消息是当前窗口的聊天，需要将消息修改为已读
-      if (contact.id == message.toContactId) {
-        var data = [];
-        data.push(message);
-        setMsgIsReadAPI({
-          toContactId: contact.id,
-          is_group: contact.is_group,
-          messages: data,
-          fromUser: message.fromUser.id
-        });
-      }
-      IMUI.appendMessage(message, true);
-    },
-    // 修改群组的名称
-    saveGroupName(contact) {
-      if (this.displayName.length < 1) {
-        this.$notify({
-          title: "警告",
-          message: "名称不能为空！",
-          type: "warning"
-        });
-        this.isEdit = false;
-        return false;
-      }
-      // 如果更改了名称，请求服务器，并通知所有群更改名称
-      if (this.displayName != this.oldName) {
-        const { IMUI } = this.$refs;
-        editGroupNameAPI({
-          id: contact.id,
-          displayName: this.displayName
-        }).then(res => {
-          IMUI.updateContact({
-            id: contact.id,
-            displayName: this.displayName
-          });
-        });
-      }
-      this.isEdit = false;
-    },
-    // 退出聊天室
-    logout() {
-      this.$confirm("你确定要退出聊天室吗?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          this.$store.dispatch("LogOut").then(() => {
-            this.$router.push({ path: "/login" });
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消退出"
-          });
-        });
-    },
     // 初始化聊天
-    getSimpleChat() {
+    getSimpleChat () {
       const { IMUI } = this.$refs;
       IMUI.setLastContentRender("event", message => {
         return `[自定义通知内容]`;
@@ -912,14 +943,8 @@ export default {
       // 初始化表情
       IMUI.initEmoji(EmojiData);
     },
-    scrollToTop() {
-      document.body.scrollIntoView();
-    },
-    handleMenuAvatarClick() {
-      console.log("Event:menu-avatar-click");
-    },
     // 设置发送键
-    setSendKey(e) {
+    setSendKey (e) {
       if (this.setting.sendKey == 1) {
         return e.keyCode == 13;
       } else {
@@ -927,7 +952,7 @@ export default {
       }
     },
     // 点击了消息
-    handleMessageClick(e, key, message, instance) {
+    handleMessageClick (e, key, message, instance) {
       if (key == "status") {
         instance.updateMessage({
           id: message.id,
@@ -953,69 +978,13 @@ export default {
         this.$message.error("没有配置预览接口");
       }
     },
-    changeMenuAvatarVisible() {
-      this.hideMenuAvatar = !this.hideMenuAvatar;
-    },
-    changeMenuVisible() {
-      this.hideMenu = !this.hideMenu;
-    },
-    changeMessageNameVisible() {
-      this.hideMessageName = !this.hideMessageName;
-    },
-    changeMessageTimeVisible() {
-      this.hideMessageTime = !this.hideMessageTime;
-    },
-    removeMessage() {
-      const { IMUI } = this.$refs;
-      const messages = IMUI.getCurrentMessages();
-      const id = messages[messages.length - 1].id;
-      if (messages.length > 0) {
-        IMUI.removeMessage(id);
-      }
-    },
-    appendEventMessage() {
-      const { IMUI } = this.$refs;
-      const message = {
-        id: generateRandId(),
-        type: "event",
-        content: (
-          <span>
-            邀请你加入群聊{" "}
-            <span
-              style="color:#333;cursor:pointer"
-              on-click={() => alert("OK")}
-            >
-              接受
-            </span>
-          </span>
-        ),
-        toContactId: "contact-3",
-        sendTime: getTime()
-      };
-      IMUI.appendMessage(message, true);
-    },
-
-    changeDrawer(contact, instance) {
-      instance.changeDrawer({
-        render: () => {
-          return (
-            <div class="drawer-content">
-              <p>
-                <b>自定义抽屉</b>
-              </p>
-              <p>买跌的</p>
-            </div>
-          );
-        }
-      });
-    },
     // 打开聊天窗口
     openChat(contactId, instance) {
       this.keywords = "";
       instance.changeContact(contactId);
     },
     // 切换聊天窗口时要检测那些消息未读
-    handleChangeContact(contact, instance) {
+    handleChangeContact (contact, instance) {
       instance.updateContact({
         id: contact.id,
         unread: 0
@@ -1062,18 +1031,8 @@ export default {
       }
       instance.closeDrawer();
     },
-    // 获取群聊成员列表
-    getGroupUserList(group_id) {
-      groupUserListAPI({
-        group_id: group_id
-      }).then(res => {
-        if (res.code == 0) {
-          this.groupUser = res.data;
-        }
-      });
-    },
     // 发送聊天消息
-    handleSend(message, next, file) {
+    handleSend (message, next, file) {
       let formdata = new FormData();
       message.is_group = this.is_group;
       const { IMUI } = this.$refs;
@@ -1107,7 +1066,7 @@ export default {
       }
     },
     // 拉取聊天记录
-    handlePullMessages(contact, next, instance) {
+    handlePullMessages (contact, next, instance) {
       getMessageListAPI({
         toContactId: contact.id,
         is_group: contact.is_group,
@@ -1128,10 +1087,178 @@ export default {
         });
       return true;
     },
-    handleChangeMenu() {
-      console.log("Event:change-menu");
+    // 发布公告
+    publishNotice () {
+      this.noticeBox = false;
+      setNoticeAPI({ id: this.group_id, notice: this.notice }).then(res => {
+        if (res.code == 0) {
+          this.$message({
+            type: "success",
+            message: "发布成功!"
+          });
+        }
+      });
+
     },
-    openCustomContainer() {}
+    // 获取所有人员列表
+    getAllUser (data) {
+      getAllUserAPI(data).then(res => {
+        const data = res.data;
+        this.allUser = data;
+      });
+    },
+    // 打开创建团队的窗口
+    openCreateGroup () {
+      this.getAllUser({});
+      this.createChatBox = true;
+    },
+    // 打开添加群成员的窗口
+    openAddGroupUser () {
+      var user_ids = arrayToString(this.groupUser, "user_id");
+      this.getAllUser({ user_ids: user_ids });
+      this.addGroupUserBox = true;
+    },
+    // 添加群成员
+    addGroupUser () {
+      this.addGroupUserBox = false;
+      addGroupUserAPI({ user_ids: this.selectUid, id: this.group_id });
+      this.selectUid = [];
+    },
+    // 创建群聊
+    createGroup () {
+      this.createChatBox = false;
+      addGroupAPI({ user_ids: this.selectUid }).then(res => {
+        const data = res.data;
+        const { IMUI } = this.$refs;
+        if (res.code == 0) {
+          // 添加联系人
+          IMUI.appendContact(data);
+          // 切换到该联系人
+          IMUI.changeContact(data.id);
+        }
+        this.selectUid = [];
+      });
+    },
+    // 获取群聊成员列表
+    getGroupUserList (group_id) {
+      groupUserListAPI({
+        group_id: group_id
+      }).then(res => {
+        if (res.code == 0) {
+          this.groupUser = res.data;
+        }
+      });
+    },
+     // 修改群组的名称
+    saveGroupName (contact) {
+      if (this.displayName.length < 1) {
+        this.$notify({
+          title: "警告",
+          message: "名称不能为空！",
+          type: "warning"
+        });
+        this.isEdit = false;
+        return false;
+      }
+      // 如果更改了名称，请求服务器，并通知所有群更改名称
+      if (this.displayName != this.oldName) {
+        const { IMUI } = this.$refs;
+        editGroupNameAPI({
+          id: contact.id,
+          displayName: this.displayName
+        }).then(res => {
+          IMUI.updateContact({
+            id: contact.id,
+            displayName: this.displayName
+          });
+        });
+      }
+      this.isEdit = false;
+    },
+    // 关闭搜索结果
+    closeSearch () {
+      var that = this;
+      setTimeout(function () {
+        that.searchResult = false;
+      }, 300);
+    },
+    // 搜索联系人
+    searchContact (contacts) {
+      if (this.keywords != "") {
+        this.searchList = search_object(
+          contacts,
+          ["displayName", "name_py"],
+          this.keywords
+        );
+      }
+    },
+    // 将本地消息设置为已读
+    setLocalMsgIsRead (message) {
+      const { IMUI } = this.$refs;
+      for (let i = 0; message.length > i; i++) {
+        const data = {
+          id: message[i]["id"],
+          is_read: 1,
+          status: "succeed",
+          content: message[i]["content"] + " "
+        };
+        IMUI.updateMessage(data);
+      }
+    },
+    // 下载文件
+    download (src, name, type) {
+      let a = document.createElement("a");
+      if (type == "image") {
+        a.download = name || "pic";
+      } else {
+        a.download = name || "file";
+      }
+      a.href = src;
+      a.click();
+    },
+    // 播放消息声音
+    playAudio () {
+      const audio = document.getElementById("chatAudio");
+      // 从头播放
+      audio.currentTime = 0;
+      audio.play();
+    },
+    // 接收消息重新渲染
+    recieveMsg (message) {
+      const { IMUI } = this.$refs;
+      const contact = IMUI.getCurrentContact();
+      // 如果收到消息是当前窗口的聊天，需要将消息修改为已读
+      if (contact.id == message.toContactId) {
+        var data = [];
+        data.push(message);
+        setMsgIsReadAPI({
+          toContactId: contact.id,
+          is_group: contact.is_group,
+          messages: data,
+          fromUser: message.fromUser.id
+        });
+      }
+      IMUI.appendMessage(message, true);
+    },
+    // 退出聊天室
+    logout () {
+      this.$confirm("你确定要退出聊天室吗?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$store.dispatch("LogOut").then(() => {
+            this.$router.push({ path: "/login" });
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消退出"
+          });
+        });
+    }
   }
 };
 </script>
@@ -1195,16 +1322,14 @@ export default {
 }
 
 .slot-group-list {
-  padding: 0 10px;
   width: 200px;
   border-left: solid 1px #e6e6e6;
   height: 100%;
   white-space: initial;
   .group-side-box {
     padding: 10px 0;
-    .group-side-title {
-      font-size: 16px;
-      font-weight: 600;
+    .group-side-title{
+      padding:0 10px;
     }
     .group-side-body {
       padding: 10px;
@@ -1217,7 +1342,7 @@ export default {
         align-items: center;
         flex-wrap: nowrap;
         justify-content: flex-start;
-        padding: 10px;
+        padding: 5px;
         background: #fff;
         .user-avatar {
           margin: 3px 8px 0 0;
@@ -1236,6 +1361,25 @@ export default {
     }
   }
 }
+
+.group-side-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.group-notice{
+  height:150px;
+}
+
+.group-user{
+  min-height:300px;
+  overflow: auto;
+}
+
+
 .setting-switch {
   margin: 0 30px 20px;
 }

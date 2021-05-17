@@ -71,13 +71,10 @@ export default {
         }
         if (valid) {
           this.loading = true
-          console.log(this.$store);
           this.$store
           .dispatch('Login', data)
           .then(res => {
-            this.$router.push({ path: this.redirect || '/' })
-            this.loading = false
-
+            window.location.reload();
           })
           .catch(() => {
            this.loading = false

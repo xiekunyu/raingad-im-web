@@ -160,3 +160,28 @@ export function addGroupUserAPI(data) {
         data: data
     })
 }
+
+/**
+ * 添加群成员
+ * @param {*} data
+ */
+export function removeGrouprAPI(data) {
+    return request({
+        url: 'group/removeGroup',
+        method: 'post',
+        data: data
+    })
+}
+
+
+/**
+ * 添加群成员
+ * @param {*} data
+ */
+export function setNoticeAPI(data) {
+    return request({
+        url: 'group/setNotice',
+        method: 'post',
+        data: data
+    })
+}
