@@ -1,30 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home'
-import Im from '@/views/Im'
 import Login from '@/views/Login'
 
 Vue.use(Router)
 
-export const constantRouterMap = [
-    {
-      path: '/',
-      name: 'home',
-      component: Home,
-      meta: { title: '首页' }
+export const constantRouterMap = [{
+        path: '/',
+        name: 'home',
+        component: Home,
+        meta: { title: '首页' }
     },
     {
-      path: '/im',
-      name: 'im',
-      component: Im,
-      meta: { title: 'im' }
-    }
-    ,
-    {
-      path: '/login',
-      name: 'login',
-      component: Login,
-      meta: { title: '登录' }
+        path: '/login',
+        name: 'login',
+        component: Login,
+        meta: { title: '登录' }
     },
     {
         path: '*',
@@ -41,15 +32,15 @@ export const constantRouterMap = [
 ];
 
 const createRouter = () => new Router({
-  mode: 'hash', // require service support
-  scrollBehavior: () => ({ y: 0 }),
-  routes: constantRouterMap
+    mode: 'hash', // require service support
+    scrollBehavior: () => ({ y: 0 }),
+    routes: constantRouterMap
 })
 
 const router = createRouter()
 export function resetRouter() {
-  const newRouter = createRouter()
-  router.matcher = newRouter.matcher // reset router
+    const newRouter = createRouter()
+    router.matcher = newRouter.matcher // reset router
 }
- 
+
 export default router

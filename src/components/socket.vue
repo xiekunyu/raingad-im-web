@@ -21,9 +21,24 @@
             }
         },
         methods: {
+            getWsUrl(){
+                let WS_URI = "ws://im.raingad.com:8282";
+                if(process.env.NODE_ENV==='production'){
+                    var domain=document.domain;
+                    var protocol=window.location.protocol;
+                    var wsProtocol="ws://";
+                    if(protocol=="https"){
+                        wsProtocol="wss://";
+                    }
+                    WS_URI=wsProtocol+domain+":8282";
+                    console.log(WS_URI);
+                }
+                return WS_URI;
+                
+            },
             initWebSocket() { //初始化weosocket
                 //ws地址
-                const WS_URI = "ws://im.raingad.com:8282";
+                const WS_URI = this.getWsUrl();
                 this.websocket = new WebSocket(WS_URI);
                 this.websocket.onmessage = this.websocketOnMessage;
                 this.websocket.onclose = this.websocketClose;

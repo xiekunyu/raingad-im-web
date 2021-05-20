@@ -12,11 +12,9 @@
       :hide-message-time="setting.hideMessageTime"
       :avatarCricle="setting.avatarCricle"
       :sendKey="setSendKey"
-      @change-menu="handleChangeMenu"
       @change-contact="handleChangeContact"
       @pull-messages="handlePullMessages"
       @message-click="handleMessageClick"
-      @menu-avatar-click="handleMenuAvatarClick"
       @send="handleSend"
       style="min-height:530px"
     >
@@ -302,20 +300,12 @@
             <el-switch v-model="setting.hideMessageTime"> </el-switch>&emsp;是否隐藏聊天窗口内的消息发送时间
           </div>
         </el-tab-pane>
-        <el-tab-pane label="关于IM">
+        <el-tab-pane label="关于 IM">
           <div align="center">
-            <el-avatar
-              src="http://img.raingad.com/logo/logo.png"
-              :size="50"
-            >
-            </el-avatar>
+            <el-avatar :src="logo" :size="50"></el-avatar>
             <br /><br />
-            <p><span class="main-color"> Raingad IM </span>for 0.5.18</p>
+            <p><span class="main-color"> {{softname}} </span>for {{version}}</p>
           </div>
-          <!-- <div class="setting-version">
-            <b> 即将支持功能：</b>
-            <p>1、解散群聊、群公告设置、群功能设置</p>
-          </div> -->
           <div class="setting-version">
             <b> 已经支持功能：</b>
             <p>1、单聊和群聊</p>
@@ -326,12 +316,29 @@
             <p>5、支持文件和图片在线预览</p>
             <p>6、群聊创建、删除和群成员管理、群公告等</p>
           </div>
-          <div
-            class="setting-version"
-            style="color: #a6a6a6"
-          >
+
+        </el-tab-pane>
+        <el-tab-pane label="关于开源">
+          <div align="center">
+            <el-avatar :src="logo" :size="50"></el-avatar>
+            <br /><br />
+            <p><span class="main-color"> {{softname}} </span>for {{version}}</p>
+          </div>
+          <!-- <div class="setting-version">
+            <b> 即将支持功能：</b>
+            <p>1、解散群聊、群公告设置、群功能设置</p>
+          </div> -->
+          <div class="setting-version">
+            <p>前端地址：<a class="main-color" href="https://gitee.com/raingad/im-chat-front" target="_blank">im-chat-front</a></p>
+            <p>后端地址：<a class="main-color" href="https://gitee.com/raingad/im-instant-chat" target="_blank">im-instant-chat</a></p>
+          </div>
+          
+          <div class="setting-version" style="color: #a6a6a6">
             <p>后端技术栈：thinkphp6+workerman</p>
             <p>前端技术栈：vue+Lemon-IMUI+element-UI</p>
+          </div>
+          <div class="setting-version">
+            <p>QQ交流群： <a class="main-color" href="https://jq.qq.com/?_wv=1027&k=jMQAt9lh" target="_blank">336921267</a></p>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -433,6 +440,9 @@ export default {
   data () {
     var _this = this;
     return {
+      version:'0.5.18',
+      softname:'Raingad IM',
+      logo:'http://img.raingad.com/logo/logo.png',
       // 搜索结果展示
       searchResult: false,
       createChatBox: false,
@@ -857,7 +867,7 @@ export default {
                 </span>
               </div>
             ),
-            toContactId: message.id,
+            toContactId: message.group_id,
             sendTime: getTime()
           }, true);
           break;
@@ -1386,7 +1396,7 @@ export default {
 
 .setting-version {
   margin: 10px 20px;
-  line-height: 20px;
+  line-height: 2;
 }
 
 .main-color {

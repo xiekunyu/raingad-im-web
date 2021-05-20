@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import EmojiData from "../utils/emoji";
+import EmojiData from "../../utils/emoji";
 import{ getContactsAPI } from "@/api/im";
 const getTime = () => {
   return new Date().getTime();
