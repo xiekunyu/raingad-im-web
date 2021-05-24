@@ -142,7 +142,8 @@
                     ></el-avatar>
                   </div>
                   <div class="user-name">
-                    {{ item.userInfo.displayName }}
+                    <span v-if="item.userInfo.id==user.id" class="fc-danger">{{ item.userInfo.displayName }}（我）</span>
+                    <span v-if="item.userInfo.id!=user.id">{{ item.userInfo.displayName }}</span>
                   </div>
                   <div class="user-role">
                     <i
@@ -154,11 +155,6 @@
                       class="el-icon-user-solid fc-warning"
                       title="管理员"
                       v-if="item.role == 2"
-                    ></i>
-                    <i
-                      class="el-icon-user-solid fc-info"
-                      title="普通成员"
-                      v-if="item.role == 3"
                     ></i>
                   </div>
                 </lemon-contact>
@@ -440,7 +436,7 @@ export default {
   data () {
     var _this = this;
     return {
-      version:'0.5.18',
+      version:'0.5.24',
       softname:'Raingad IM',
       logo:'http://img.raingad.com/logo/logo.png',
       // 搜索结果展示
@@ -504,7 +500,7 @@ export default {
             });
           },
           visible: instance => {
-            // 只有群组才可以设置管理员
+            // 只有群主才可以设置管理员
             return (
               instance.contact.role == 3 &&
               this.currentChat.owner_id == this.user.id
@@ -533,7 +529,7 @@ export default {
             });
           },
           visible: instance => {
-            // 只有群组才可以设置管理员
+            // 只有群主才可以设置管理员
             return (
               instance.contact.role == 2 &&
               this.currentChat.owner_id == this.user.id
@@ -552,31 +548,27 @@ export default {
               type: "warning"
             }).then(() => {
               removeUserAPI({ id: this.group_id, user_id: contact.user_id });
-              this.$message({
-                type: "success",
-                message: "移除成功!"
-              });
             });
           },
           visible: instance => {
-            return instance.contact.user_id != this.user.id;
+            return instance.contact.user_id != this.user.id && this.currentChat.owner_id != instance.contact.user_id && this.currentChat.role<=2;
           }
         }
       ],
       // 定义联系人的右键菜单
       contactContextmenu: [
-        {
-          text: "删除该聊天",
-          click: (e, instance, hide) => {
-            const { IMUI, contact } = instance;
-            IMUI.updateContact({
-              id: contact.id,
-              lastContent: null
-            });
-            if (IMUI.currentContactId == contact.id) IMUI.changeContact(null);
-            hide();
-          }
-        },
+        // {
+        //   text: "删除该聊天",
+        //   click: (e, instance, hide) => {
+        //     const { IMUI, contact } = instance;
+        //     IMUI.updateContact({
+        //       id: contact.id,
+        //       lastContent: null
+        //     });
+        //     if (IMUI.currentContactId == contact.id) IMUI.changeContact(null);
+        //     hide();
+        //   }
+        // },
         {
           click (e, instance, hide) {
             const { IMUI, contact } = instance;
@@ -634,43 +626,43 @@ export default {
       ],
       // 定义消息内容的右键菜单
       contextmenu: [
-        {
-          click: (e, instance, hide) => {
-            const { IMUI, message } = instance;
-            const data = {
-              id: generateRandId(),
-              type: "event",
-              //使用 jsx 时 click必须使用箭头函数（使上下文停留在vue内）
-              content: (
-                <div>
-                  <span>
-                    你撤回了一条消息{" "}
-                    <span
-                      v-show={message.type == "text"}
-                      style="color:#333;cursor:pointer"
-                      content={message.content}
-                      on-click={e => {
-                        IMUI.setEditorValue(e.target.getAttribute("content"));
-                      }}
-                    >
-                      重新编辑
-                    </span>
-                  </span>
-                </div>
-              ),
+        // {
+        //   click: (e, instance, hide) => {
+        //     const { IMUI, message } = instance;
+        //     const data = {
+        //       id: generateRandId(),
+        //       type: "event",
+        //       //使用 jsx 时 click必须使用箭头函数（使上下文停留在vue内）
+        //       content: (
+        //         <div>
+        //           <span>
+        //             你撤回了一条消息{" "}
+        //             <span
+        //               v-show={message.type == "text"}
+        //               style="color:#333;cursor:pointer"
+        //               content={message.content}
+        //               on-click={e => {
+        //                 IMUI.setEditorValue(e.target.getAttribute("content"));
+        //               }}
+        //             >
+        //               重新编辑
+        //             </span>
+        //           </span>
+        //         </div>
+        //       ),
 
-              toContactId: message.toContactId,
-              sendTime: getTime()
-            };
-            IMUI.removeMessage(message.id);
-            IMUI.appendMessage(data, true);
-            hide();
-          },
-          visible: instance => {
-            return instance.message.fromUser.id == this.user.id;
-          },
-          text: "撤回消息"
-        },
+        //       toContactId: message.toContactId,
+        //       sendTime: getTime()
+        //     };
+        //     IMUI.removeMessage(message.id);
+        //     IMUI.appendMessage(data, true);
+        //     hide();
+        //   },
+        //   visible: instance => {
+        //     return instance.message.fromUser.id == this.user.id;
+        //   },
+        //   text: "撤回消息"
+        // },
         // {
         //   visible: (instance) => {
         //     return instance.message.fromUser.id != this.user.id;
@@ -680,12 +672,12 @@ export default {
         // {
         //   text: "转发",
         // },
-        {
-          visible: instance => {
-            return instance.message.type == "text";
-          },
-          text: "复制文字"
-        },
+        // {
+        //   visible: instance => {
+        //     return instance.message.type == "text";
+        //   },
+        //   text: "复制文字"
+        // },
         {
           visible: instance => {
             return instance.message.type == "image";
@@ -708,18 +700,18 @@ export default {
             hide();
           }
         },
-        {
-          click: (e, instance, hide) => {
-            alert("无法删除");
-            return;
-            const { IMUI, message } = instance;
-            IMUI.removeMessage(message.id);
-            hide();
-          },
-          icon: "lemon-icon-folder",
-          color: "red",
-          text: "删除"
-        }
+        // {
+        //   click: (e, instance, hide) => {
+        //     alert("无法删除");
+        //     return;
+        //     const { IMUI, message } = instance;
+        //     IMUI.removeMessage(message.id);
+        //     hide();
+        //   },
+        //   icon: "lemon-icon-folder",
+        //   color: "red",
+        //   text: "删除"
+        // }
       ],
       // 设置
       setting: {
@@ -1332,7 +1324,7 @@ export default {
 }
 
 .slot-group-list {
-  width: 200px;
+  width: 250px;
   border-left: solid 1px #e6e6e6;
   height: 100%;
   white-space: initial;
@@ -1359,7 +1351,7 @@ export default {
           line-height: 10px;
         }
         .user-name {
-          width: 140px;
+          width: 180px;
         }
         .user-role {
           width: 20px;
