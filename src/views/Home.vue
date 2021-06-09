@@ -86,6 +86,12 @@
           </div>
         </div>
       </template>
+      <!-- 联系人列表顶部插槽 -->
+      <template #sidebar-contact-fixedtop="instance">
+        <div style="margin: 15px 10px">
+          联系人
+        </div>
+      </template>
       <!-- 群组聊天展示的抽屉 -->
       <template #message-side="contact">
         <div class="slot-group-list" v-if="contact.is_group == 1">
@@ -98,12 +104,12 @@
                     type="text"
                     @click="noticeBox = true"
                     v-if="contact.owner_id == user.id"
-                    >发布公告</el-button
+                    >编辑公告</el-button
                   >
                 </div>
               </div>
-              <hr />
-              <div class="group-side-body" v-if="contact.notice">
+              <hr style="border:solid 1px #e6e6e6"/>
+              <div class="group-side-body" v-if="contact.notice" @click="openNotice">
                 {{ contact.notice }}
               </div>
               <div class="group-side-body" v-if="!contact.notice">
@@ -119,7 +125,7 @@
                   >
                 </div>
               </div>
-              <hr />
+              <hr  style="border:solid 1px #e6e6e6"/>
               <div class="group-user-body" id="group-user">
                 <lemon-contact
                   class="user-list"
@@ -1003,6 +1009,7 @@ export default {
       // 如果是团队id，保存当前团队id避免下次切换回来的时候重复请求成员列表
       if (this.is_group == 1) {
         this.group_id = contact.id;
+        this.notice = contact.notice;
       }
       var data = [];
       const { IMUI } = this.$refs;
@@ -1098,6 +1105,13 @@ export default {
           });
         }
       });
+    },
+    // 查看
+    openNotice() {
+      var _this=this;
+       this.$alert(_this.notice, '公告', {
+          confirmButtonText: '确定'
+        });
     },
     // 获取所有人员列表
     getAllUser(data) {
@@ -1340,6 +1354,7 @@ export default {
 }
 
 .slot-group-list {
+  background: #fff;
   width: 200px;
   border-left: solid 1px #e6e6e6;
   height: 100%;
@@ -1350,7 +1365,10 @@ export default {
       padding: 0 10px;
     }
     .group-side-body {
+      height:85px;
       padding: 10px;
+      cursor: pointer;
+      overflow: hidden;
     }
     .group-user-body {
       margin-top: 10px;
