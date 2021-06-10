@@ -385,33 +385,12 @@
       </div>
     </transition>
     <Socket ref="socket"></Socket>
-      <!-- 转发聊天 -->
-    <el-dialog
-      title="转发"
-      :visible.sync="forwardBox"
-      :modal="true"
-      width="612px"
-    >
-      <el-transfer
-        filterable
-        :titles="createChatTitles"
-        filter-placeholder="请输入关键词"
-        v-model="selectUid"
-        :props="defaultProps"
-        :data="allUser"
-      >
-      </el-transfer>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="forwardBox = false">取 消</el-button>
-        <el-button type="primary" @click="forwardUser">确 定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import EmojiData from "../utils/emoji";
+import EmojiData from "../../utils/emoji";
 import Background from '../assets/img/login-background.jpg'
 import {
   getContactsAPI,
@@ -462,7 +441,6 @@ export default {
       searchResult: false,
       createChatBox: false,
       addGroupUserBox: false,
-      forwardBox: false,
       noticeBox: false,
       // 公告
       notice: "",
@@ -650,66 +628,58 @@ export default {
       ],
       // 定义消息内容的右键菜单
       contextmenu: [
-        {
-          click: (e, instance, hide) => {
-            const { IMUI, message } = instance;
-            const data = {
-              id: generateRandId(),
-              type: "event",
-              //使用 jsx 时 click必须使用箭头函数（使上下文停留在vue内）
-              content: (
-                <div>
-                  <span>
-                    你撤回了一条消息{" "}
-                    <span
-                      v-show={message.type == "text"}
-                      style="color:#333;cursor:pointer"
-                      content={message.content}
-                      on-click={e => {
-                        IMUI.setEditorValue(e.target.getAttribute("content"));
-                      }}
-                    >
-                      重新编辑
-                    </span>
-                  </span>
-                </div>
-              ),
+        // {
+        //   click: (e, instance, hide) => {
+        //     const { IMUI, message } = instance;
+        //     const data = {
+        //       id: generateRandId(),
+        //       type: "event",
+        //       //使用 jsx 时 click必须使用箭头函数（使上下文停留在vue内）
+        //       content: (
+        //         <div>
+        //           <span>
+        //             你撤回了一条消息{" "}
+        //             <span
+        //               v-show={message.type == "text"}
+        //               style="color:#333;cursor:pointer"
+        //               content={message.content}
+        //               on-click={e => {
+        //                 IMUI.setEditorValue(e.target.getAttribute("content"));
+        //               }}
+        //             >
+        //               重新编辑
+        //             </span>
+        //           </span>
+        //         </div>
+        //       ),
 
-              toContactId: message.toContactId,
-              sendTime: getTime()
-            };
-            IMUI.removeMessage(message.id);
-            IMUI.appendMessage(data, true);
-            hide();
-          },
-          visible: instance => {
-            return instance.message.fromUser.id == this.user.id;
-          },
-          text: "撤回消息",
-          click: (e, instance, hide) => {
-            alert('马上就做！');
-            hide();
-          }
-        },
-        {
-          text: "转发",
-          click: (e, instance, hide) => {
-            this.currentMessage=instance.message;
-            this.getAllUser();
-            hide();
-            this.forwardBox=true;
-          }
-        },
-        {
-          visible: instance => {
-            return instance.message.type == "text";
-          },
-          text: "复制文字",
-          click: (e, instance, hide) => {
-            alert('马上就做！');
-            hide();
-          }
-        },
+        //       toContactId: message.toContactId,
+        //       sendTime: getTime()
+        //     };
+        //     IMUI.removeMessage(message.id);
+        //     IMUI.appendMessage(data, true);
+        //     hide();
+        //   },
+        //   visible: instance => {
+        //     return instance.message.fromUser.id == this.user.id;
+        //   },
+        //   text: "撤回消息"
+        // },
+        // {
+        //   visible: (instance) => {
+        //     return instance.message.fromUser.id != this.user.id;
+        //   },
+        //   text: "举报",
+        // },
+        // {
+        //   text: "转发",
+        // },
+        // {
+        //   visible: instance => {
+        //     return instance.message.type == "text";
+        //   },
+        //   text: "复制文字"
+        // },
         {
           visible: instance => {
             return instance.message.type == "image";
@@ -769,8 +739,7 @@ export default {
       contacts: [],
       allUser: [],
       groupUser: [],
-      currentChat: {},
-      currentMessage:{}
+      currentChat: {}
     };
   },
   computed: {
@@ -1161,36 +1130,6 @@ export default {
       var user_ids = arrayToString(this.groupUser, "user_id");
       this.getAllUser({ user_ids: user_ids });
       this.addGroupUserBox = true;
-    },
-    // 转发消息
-    forwardUser() {
-      var userIds=this.selectUid;
-      if(userIds.length>5){
-        return this.$message.error("转发的人数不能超过5人！")
-      }
-      this.forwardBox = false;
-      var message=this.currentMessage;
-      for(var i=0;i<userIds.length;i++){
-        var toContactId=userIds[i].toString();
-        message.id=generateRandId();
-        message.status='successd';
-        message.sendTime=getTime();
-        message.toContactId=toContactId;
-        message.fromUser=this.user;
-        message.is_group=0;
-        if(toContactId.indexOf("group") != -1){
-          message.is_group=1;
-        }
-        sendMessageAPI(message).then(res => {
-            var data=res.data;
-            if(message.is_group==0){
-                data.toContactId=this.user.id;
-            }
-            IMUI.appendMessage(data);
-          }).catch(error => {
-            this.$message.error("转发失败！");
-          });
-      }
     },
     // 添加群成员
     addGroupUser() {

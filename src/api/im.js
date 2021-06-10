@@ -25,6 +25,17 @@ export function sendMessageAPI(data) {
 }
 
 /**
+ * 发送聊天消息
+ * @param {*} data
+ */
+export function forwardMessageAPI(data) {
+    return request({
+        url: 'im/forwardMessage',
+        method: 'post',
+        data: data
+    })
+}
+/**
  * 发送图片或文件消息
  * @param {*} data
  */
