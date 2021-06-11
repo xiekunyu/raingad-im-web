@@ -1,189 +1,224 @@
 <template>
-<div class="main-container" :style="'background-image:url('+ Background +')'">
-  <div class="chat-box">
-    <lemon-imui
-      :user="user"
-      ref="IMUI"
-      width="900px"
-      :height="height"
-      :contextmenu="contextmenu"
-      :contact-contextmenu="contactContextmenu"
-      :theme="setting.theme"
-      :hide-message-name="setting.hideMessageName"
-      :hide-message-time="setting.hideMessageTime"
-      :avatarCricle="setting.avatarCricle"
-      :sendKey="setSendKey"
-      @change-contact="handleChangeContact"
-      @pull-messages="handlePullMessages"
-      @message-click="handleMessageClick"
-      @send="handleSend"
-      style="min-height:530px"
-    >
-      <template #cover>
-        <div>
-          <div class="cover">
-            <i class="lemon-icon-message"></i>
-            <p><b>即时聊天 Raingad</b> IM</p>
+  <div
+    class="main-container"
+    :style="'background-image:url(' + Background + ')'"
+  >
+    <div class="chat-box">
+      <lemon-imui
+        :user="user"
+        ref="IMUI"
+        width="900px"
+        :height="height"
+        :contextmenu="contextmenu"
+        :contact-contextmenu="contactContextmenu"
+        :theme="setting.theme"
+        :hide-message-name="setting.hideMessageName"
+        :hide-message-time="setting.hideMessageTime"
+        :avatarCricle="setting.avatarCricle"
+        :sendKey="setSendKey"
+        @change-contact="handleChangeContact"
+        @pull-messages="handlePullMessages"
+        @message-click="handleMessageClick"
+        @send="handleSend"
+        style="min-height:530px"
+      >
+        <template #cover>
+          <div>
+            <div class="cover">
+              <i class="lemon-icon-message"></i>
+              <p><b>即时聊天 Raingad</b> IM</p>
+            </div>
           </div>
-        </div>
-      </template>
-      <!-- 消息窗口顶部的插槽 -->
-      <template #message-title="contact" style="color: red">
-        <span
-          v-if="isEdit == false"
-          @click="
-            if (contact.is_group == 1) {
-              isEdit = true;
-            }
-          "
-          class="displayName"
-          >{{ contact.displayName }}</span
-        >
-        <input
-          v-if="isEdit == true"
-          v-model="displayName"
-          class="editInput"
-          @blur="saveGroupName(contact)"
-        />
-      </template>
-      <!-- 最近联系人列表顶部插槽 -->
-      <template #sidebar-message-fixedtop="instance">
-        <div style="margin: 15px 10px">
-          <el-input
-            placeholder="搜索联系人"
-            prefix-icon="el-icon-search"
-            @blur="closeSearch"
-            @focus="searchResult = true"
-            v-model="keywords"
-            class="input-with-select"
-          >
-            <el-button
-              slot="append"
-              icon="el-icon-plus"
-              type="primary"
-              title="创建群聊"
-              @click="openCreateGroup"
-            ></el-button>
-          </el-input>
-          <div class="search-list" v-if="searchResult">
-            <div
-              v-for="(item, index) in searchList"
-              :key="index"
-              v-if="searchList.length > 0"
-            >
-              <lemon-contact
-                :contact="item"
-                @click="openChat(item.id, instance)"
+        </template>
+        <!-- 消息窗口顶部的插槽 -->
+        <template #message-title="contact" style="color: red">
+          <div class="message-title-box">
+            <div>
+              <span
+                v-if="isEdit == false"
+                @click="
+                  if (contact.is_group == 1) {
+                    isEdit = true;
+                  }
+                "
+                class="displayName"
+                >{{ contact.displayName }}</span
+              >
+              <input
+                v-if="isEdit == true"
+                v-model="displayName"
+                class="editInput"
+                @blur="saveGroupName(contact)"
               />
             </div>
-            <div
-              v-if="searchList.length == 0"
-              style="margin: 20px"
-              align="center"
+            <div class="message-title-tools" v-if="contact.is_group == 1">
+              <el-button
+                type="primary"
+                icon="el-icon-picture"
+                circle
+                title="群相册"
+                @click="openGallery"
+              ></el-button>
+              <el-button
+                type="success"
+                icon="el-icon-s-order"
+                circle
+                title="群文件"
+                @click="openFileList"
+              ></el-button>
+              <el-button
+                type="info"
+                icon="el-icon-s-tools"
+                circle
+                title="群设置"
+                @click="openGroupSetting"
+              ></el-button>
+            </div>
+          </div>
+        </template>
+        <!-- 最近联系人列表顶部插槽 -->
+        <template #sidebar-message-fixedtop="instance">
+          <div class="contact-fixedtop-box">
+            <el-input
+              placeholder="搜索联系人"
+              prefix-icon="el-icon-search"
+              @blur="closeSearch"
+              @focus="searchResult = true"
+              v-model="keywords"
+              class="input-with-select"
             >
-              暂无
+            </el-input>
+            <div style="margin-left:10px">
+              <el-button
+                type="primary"
+                title="创建群聊"
+                icon="el-icon-plus"
+                @click="openCreateGroup"
+              ></el-button>
             </div>
-          </div>
-        </div>
-      </template>
-      <!-- 联系人列表顶部插槽 -->
-      <template #sidebar-contact-fixedtop="instance">
-        <div style="margin: 15px 10px">
-          联系人
-        </div>
-      </template>
-      <!-- 群组聊天展示的抽屉 -->
-      <template #message-side="contact">
-        <div class="slot-group-list" v-if="contact.is_group == 1">
-          <div class="group-side-box">
-            <div class="group-notice">
-              <div class="group-side-title">
-                <h3>群公告</h3>
-                <div>
-                  <el-button
-                    type="text"
-                    @click="noticeBox = true"
-                    v-if="contact.owner_id == user.id"
-                    >编辑公告</el-button
-                  >
-                </div>
-              </div>
-              <hr style="border:solid 1px #e6e6e6"/>
-              <div class="group-side-body" v-if="contact.notice" @click="openNotice">
-                {{ contact.notice }}
-              </div>
-              <div class="group-side-body" v-if="!contact.notice">
-                暂无公告
-              </div>
-            </div>
-            <div class="group-user">
-              <div class="group-side-title">
-                <h3>群成员</h3>
-                <div>
-                  <el-button type="text" @click="openAddGroupUser"
-                    >添加成员</el-button
-                  >
-                </div>
-              </div>
-              <hr  style="border:solid 1px #e6e6e6"/>
-              <div class="group-user-body" id="group-user">
+            <div class="search-list" v-if="searchResult">
+              <div
+                v-for="(item, index) in searchList"
+                :key="index"
+                v-if="searchList.length > 0"
+                class="search-list-item"
+              >
                 <lemon-contact
-                  class="user-list"
-                  v-for="(item, index) in groupUser"
-                  :key="index"
                   :contact="item"
-                  v-lemon-contextmenu.contact="groupMenu"
-                >
-                  <div class="user-avatar">
-                    <el-avatar
-                      :size="20"
-                      :src="item.userInfo.avatar"
-                    ></el-avatar>
-                  </div>
-                  <div class="user-name">
-                    <span v-if="item.userInfo.id == user.id" class="fc-danger"
-                      >{{ item.userInfo.displayName }}（我）</span
-                    >
-                    <span v-if="item.userInfo.id != user.id">{{
-                      item.userInfo.displayName
-                    }}</span>
-                  </div>
-                  <div class="user-role">
-                    <i
-                      class="el-icon-user-solid fc-danger"
-                      title="创建者"
-                      v-if="item.role == 1"
-                    ></i>
-                    <i
-                      class="el-icon-user-solid fc-warning"
-                      title="管理员"
-                      v-if="item.role == 2"
-                    ></i>
-                  </div>
-                </lemon-contact>
+                  @click="openChat(item.id, instance)"
+                />
+              </div>
+              <div
+                v-if="searchList.length == 0"
+                style="margin: 20px"
+                align="center"
+              >
+                暂无
               </div>
             </div>
           </div>
-        </div>
-      </template>
-      <!-- 每条消息后面展示的文字 -->
-      <template #message-after="message">
-        <span
-          v-if="message.fromUser.id == user.id && message.is_group == 0"
-          style="visibility: visible"
-        >
-          <span v-if="!message.is_read"> 未读 </span>
-          <span v-if="message.is_read" style="color: green"> 已读 </span>
-        </span>
-      </template>
-      <!-- 发送按钮左边插槽 -->
-      <template #editor-footer>
-        {{ sendTips }}
-      </template>
-    </lemon-imui>
-
-  </div>
-      <!-- 创建群聊 -->
+        </template>
+        <!-- 联系人列表顶部插槽 -->
+        <template #sidebar-contact-fixedtop="instance">
+          <div style="margin: 15px 10px">
+            联系人
+          </div>
+        </template>
+        <!-- 群组聊天展示的抽屉 -->
+        <template #message-side="contact">
+          <div class="slot-group-list" v-if="contact.is_group == 1">
+            <div class="group-side-box">
+              <div class="group-notice">
+                <div class="group-side-title">
+                  <h3>群公告</h3>
+                  <div>
+                    <el-button
+                      type="text"
+                      @click="noticeBox = true"
+                      v-if="contact.owner_id == user.id"
+                      >编辑公告</el-button
+                    >
+                  </div>
+                </div>
+                <hr style="border:solid 1px #e6e6e6" />
+                <div
+                  class="group-side-body"
+                  v-if="contact.notice"
+                  @click="openNotice"
+                >
+                  {{ contact.notice }}
+                </div>
+                <div class="group-side-body" v-if="!contact.notice">
+                  暂无公告
+                </div>
+              </div>
+              <div class="group-user">
+                <div class="group-side-title">
+                  <h3>群成员</h3>
+                  <div>
+                    <el-button type="text" @click="openAddGroupUser"
+                      >添加成员</el-button
+                    >
+                  </div>
+                </div>
+                <hr style="border:solid 1px #e6e6e6" />
+                <div class="group-user-body" id="group-user">
+                  <lemon-contact
+                    class="user-list"
+                    v-for="(item, index) in groupUser"
+                    :key="index"
+                    :contact="item"
+                    v-lemon-contextmenu.contact="groupMenu"
+                  >
+                    <div class="user-avatar">
+                      <el-avatar
+                        :size="20"
+                        :src="item.userInfo.avatar"
+                      ></el-avatar>
+                    </div>
+                    <div class="user-name">
+                      <span v-if="item.userInfo.id == user.id" class="fc-danger"
+                        >{{ item.userInfo.displayName }}（我）</span
+                      >
+                      <span v-if="item.userInfo.id != user.id">{{
+                        item.userInfo.displayName
+                      }}</span>
+                    </div>
+                    <div class="user-role">
+                      <i
+                        class="el-icon-user-solid fc-danger"
+                        title="创建者"
+                        v-if="item.role == 1"
+                      ></i>
+                      <i
+                        class="el-icon-user-solid fc-warning"
+                        title="管理员"
+                        v-if="item.role == 2"
+                      ></i>
+                    </div>
+                  </lemon-contact>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+        <!-- 每条消息后面展示的文字 -->
+        <template #message-after="message">
+          <span
+            v-if="message.fromUser.id == user.id && message.is_group == 0"
+            style="visibility: visible"
+          >
+            <span v-if="!message.is_read"> 未读 </span>
+            <span v-if="message.is_read" style="color: green"> 已读 </span>
+          </span>
+        </template>
+        <!-- 发送按钮左边插槽 -->
+        <template #editor-footer>
+          {{ sendTips }}
+        </template>
+      </lemon-imui>
+    </div>
+    <!-- 创建群聊 -->
     <el-dialog
       title="创建群聊"
       :visible.sync="createChatBox"
@@ -200,7 +235,7 @@
       >
       </el-transfer>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="createChatBox = false">取 消</el-button>
+        <el-button @click="createChatBox = false;selectUid=[]">取 消</el-button>
         <el-button type="primary" @click="createGroup">确 定</el-button>
       </span>
     </el-dialog>
@@ -221,7 +256,7 @@
       >
       </el-transfer>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="addGroupUserBox = false">取 消</el-button>
+        <el-button @click="addGroupUserBox = false;selectUid=[]">取 消</el-button>
         <el-button type="primary" @click="addGroupUser">确 定</el-button>
       </span>
     </el-dialog>
@@ -385,7 +420,7 @@
       </div>
     </transition>
     <Socket ref="socket"></Socket>
-      <!-- 转发聊天 -->
+    <!-- 转发聊天 -->
     <el-dialog
       title="转发"
       :visible.sync="forwardBox"
@@ -397,12 +432,12 @@
         :titles="createChatTitles"
         filter-placeholder="请输入关键词"
         v-model="selectUid"
-        :props="defaultProps"
+        :props="contactsProps"
         :data="allUser"
       >
       </el-transfer>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="forwardBox = false">取 消</el-button>
+        <el-button @click="forwardBox = false;selectUid=[]">取 消</el-button>
         <el-button type="primary" @click="forwardUser">确 定</el-button>
       </span>
     </el-dialog>
@@ -412,7 +447,7 @@
 <script>
 import { mapState } from "vuex";
 import EmojiData from "../utils/emoji";
-import Background from '../assets/img/login-background.jpg'
+import Background from "../assets/img/login-background.jpg";
 import {
   getContactsAPI,
   sendMessageAPI,
@@ -431,7 +466,7 @@ import {
   setNoticeAPI
 } from "@/api/im";
 import { bindGroupAPI } from "@/api/login";
-import { search_object, arrayToString } from "@/utils/index";
+import { search_object, arrayToString, editArrValue } from "@/utils/index";
 import Lockr from "lockr";
 import Socket from "../components/socket";
 
@@ -473,6 +508,10 @@ export default {
         key: "user_id",
         label: "realname",
         pinyin: "name_py"
+      },
+      contactsProps: {
+        key: "id",
+        label: "realname"
       },
       // 搜索结果列表
       searchList: [],
@@ -687,17 +726,24 @@ export default {
           },
           text: "撤回消息",
           click: (e, instance, hide) => {
-            alert('马上就做！');
+            this.$message({
+              message: "即将呈现！",
+              type: "warning"
+            });
             hide();
           }
         },
         {
           text: "转发",
           click: (e, instance, hide) => {
-            this.currentMessage=instance.message;
-            this.getAllUser();
+            this.currentMessage = instance.message;
+            // 获取本地所有联系人，转发时必须去除当前的聊天对象
+            const { IMUI } = this.$refs;
+            const contactList = IMUI.getContacts();
+            const currentContact = IMUI.getCurrentContact();
+            this.allUser = editArrValue(contactList, "id", currentContact.id);
             hide();
-            this.forwardBox=true;
+            this.forwardBox = true;
           }
         },
         {
@@ -706,7 +752,10 @@ export default {
           },
           text: "复制文字",
           click: (e, instance, hide) => {
-            alert('马上就做！');
+            this.$message({
+              message: "即将呈现！",
+              type: "warning"
+            });
             hide();
           }
         },
@@ -770,7 +819,7 @@ export default {
       allUser: [],
       groupUser: [],
       currentChat: {},
-      currentMessage:{}
+      currentMessage: {}
     };
   },
   computed: {
@@ -1139,10 +1188,10 @@ export default {
     },
     // 查看
     openNotice() {
-      var _this=this;
-       this.$alert(_this.notice, '公告', {
-          confirmButtonText: '确定'
-        });
+      var _this = this;
+      this.$alert(_this.notice, "公告", {
+        confirmButtonText: "确定"
+      });
     },
     // 获取所有人员列表
     getAllUser(data) {
@@ -1162,35 +1211,69 @@ export default {
       this.getAllUser({ user_ids: user_ids });
       this.addGroupUserBox = true;
     },
+    // 封装循环请求
+    fn(formData) {
+      return new Promise((resolve, reject) => {
+        sendMessageAPI(formData)
+          .then(res => {
+            if (res.code === 0) {
+              resolve(res);
+            } else {
+              this.$message.error(res.msg);
+            }
+          })
+          .catch(err => {});
+      });
+    },
+    async test(formData) {
+      let n = await this.fn(formData);
+      return n;
+    },
     // 转发消息
     forwardUser() {
-      var userIds=this.selectUid;
-      if(userIds.length>5){
-        return this.$message.error("转发的人数不能超过5人！")
+      var userIds = this.selectUid;
+      this.selectUid=[];
+      if (userIds.length > 5) {
+        return this.$message.error("转发的人数不能超过5人！");
       }
       this.forwardBox = false;
-      var message=this.currentMessage;
-      for(var i=0;i<userIds.length;i++){
-        var toContactId=userIds[i].toString();
-        message.id=generateRandId();
-        message.status='successd';
-        message.sendTime=getTime();
-        message.toContactId=toContactId;
-        message.fromUser=this.user;
-        message.is_group=0;
-        if(toContactId.indexOf("group") != -1){
-          message.is_group=1;
+      var message = this.currentMessage;
+      var arr = [];
+      for (var i = 0; i < userIds.length; i++) {
+        var toContactId = userIds[i].toString();
+        message.id = generateRandId();
+        message.status = "successd";
+        message.sendTime = getTime();
+        message.toContactId = toContactId;
+        message.fromUser = this.user;
+        message.is_group = 0;
+        if (toContactId.indexOf("group") != -1) {
+          message.is_group = 1;
         }
-        sendMessageAPI(message).then(res => {
-            var data=res.data;
-            if(message.is_group==0){
-                data.toContactId=this.user.id;
-            }
-            IMUI.appendMessage(data);
-          }).catch(error => {
-            this.$message.error("转发失败！");
-          });
+        arr.push(this.test(message));
       }
+      // 批量请求
+      Promise.all(arr)
+        .then(res => {
+          console.log(res);
+          const { IMUI } = this.$refs;
+          for (var i = 0; i < res.length; i++) {
+            var data = res[i].data;
+            if (data.is_group == 0) {
+              data.toContactId = parseInt(data.toContactId);
+            }
+            // 添加消息
+            IMUI.appendMessage(data);
+            // 自己发送消息，修改未读数
+            IMUI.updateContact({
+              id: data.toContactId,
+              unread: 0
+            });
+          }
+        })
+        .catch(err => {
+          console.log("error", err);
+        });
     },
     // 添加群成员
     addGroupUser() {
@@ -1314,6 +1397,24 @@ export default {
       }
       IMUI.appendMessage(message, true);
     },
+    openGallery() {
+      this.$message({
+        message: "即将呈现！",
+        type: "warning"
+      });
+    },
+    openFileList() {
+      this.$message({
+        message: "即将呈现！",
+        type: "warning"
+      });
+    },
+    openGroupSetting() {
+      this.$message({
+        message: "即将呈现！",
+        type: "warning"
+      });
+    },
     // 退出聊天室
     logout() {
       this.$confirm("你确定要退出聊天室吗?", "提示", {
@@ -1337,37 +1438,24 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.main-container{
+.main-container {
   display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    background-size: cover;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
 }
-.chat-box{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
-}
-.search-list {
-  background: #fff;
+.chat-box {
   position: absolute;
-  z-index: 99;
-  width: 230px;
-  height: 300px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-  overflow: auto;
-  border: solid 1px #e6e6e6;
-  .lemon-contact {
-    background: #fff;
-  }
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 }
 
 .cover {
@@ -1400,10 +1488,49 @@ export default {
   font-size: 18px;
 }
 
+.contact-fixedtop-box {
+  margin: 15px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  visibility: visible;
+  position: relative;
+}
+
+.search-list {
+  background: #fff;
+  position: absolute;
+  z-index: 99;
+  top: 40px;
+  width: 230px;
+  height: 300px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  overflow: auto;
+  border: solid 1px #e6e6e6;
+  .search-list-item :hover {
+    background: #e6e6e6;
+  }
+  .lemon-contact {
+    background: #fff;
+  }
+}
+
+.message-title-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  visibility: visible;
+}
+
+.message-title-tools button {
+  padding: 4px !important;
+  font-size: 20px !important;
+}
+
 .editInput {
   font-size: 18px;
   border: none;
-  width: 500px;
+  width: 400px;
 }
 
 .editInput:focus {
@@ -1426,7 +1553,7 @@ export default {
       padding: 0 10px;
     }
     .group-side-body {
-      height:85px;
+      height: 85px;
       padding: 10px;
       cursor: pointer;
       overflow: hidden;

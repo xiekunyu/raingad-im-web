@@ -212,3 +212,25 @@ export function arrayToString(arr, field, isTrans) {
         return idr;
     }
 }
+
+
+/** 删除数组中某一个值*/
+export function delArrValue(arr, field, value) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i][field] == value) {
+            arr.splice(i, 1);
+        }
+    }
+    return arr;
+}
+
+/** 修改二位数组某个值*/
+export function editArrValue(arr, field, value) {
+    for (var i = 0; i < arr.length; i++) {
+        arr[i]['disabled'] = false;
+        if (arr[i][field] == value) {
+            arr[i]['disabled'] = true;
+        }
+    }
+    return arr;
+}
