@@ -804,21 +804,25 @@ export default {
             hide();
           }
         },
-        {
-          click: (e, instance, hide) => {
-            const { IMUI, message } = instance;
-            removeMessageAPI({ id: message.id })
-              .then(res => {
-                IMUI.removeMessage(message.id);
-              })
-              .catch(error => {
-                this.$message.error("发生错误");
-              });
-            hide();
-          },
-          color: "red",
-          text: "删除"
-        }
+        // {
+        //   click: (e, instance, hide) => {
+        //     const { IMUI, message } = instance;
+        //     hide();
+        //     this.$confirm("确定删除该条消息吗？", "提示", {
+        //       confirmButtonText: "确定",
+        //       cancelButtonText: "取消",
+        //       type: "warning"
+        //     }).then(() => {
+        //       console.log(message.id)
+        //       IMUI.removeMessage(message.id.toString());
+        //       removeMessageAPI({ id: message.id });
+        //     }).catch(error => {
+        //           console.log(error);
+        //         });;
+        //   },
+        //   color: "red",
+        //   text: "删除"
+        // }
       ],
       // 设置
       setting: {
