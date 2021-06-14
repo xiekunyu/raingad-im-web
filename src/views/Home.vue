@@ -235,7 +235,13 @@
       >
       </el-transfer>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="createChatBox = false;selectUid=[]">取 消</el-button>
+        <el-button
+          @click="
+            createChatBox = false;
+            selectUid = [];
+          "
+          >取 消</el-button
+        >
         <el-button type="primary" @click="createGroup">确 定</el-button>
       </span>
     </el-dialog>
@@ -256,7 +262,13 @@
       >
       </el-transfer>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="addGroupUserBox = false;selectUid=[]">取 消</el-button>
+        <el-button
+          @click="
+            addGroupUserBox = false;
+            selectUid = [];
+          "
+          >取 消</el-button
+        >
         <el-button type="primary" @click="addGroupUser">确 定</el-button>
       </span>
     </el-dialog>
@@ -437,7 +449,13 @@
       >
       </el-transfer>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="forwardBox = false;selectUid=[]">取 消</el-button>
+        <el-button
+          @click="
+            forwardBox = false;
+            selectUid = [];
+          "
+          >取 消</el-button
+        >
         <el-button type="primary" @click="forwardUser">确 定</el-button>
       </span>
     </el-dialog>
@@ -463,7 +481,9 @@ import {
   removeUserAPI,
   addGroupUserAPI,
   removeGrouprAPI,
-  setNoticeAPI
+  setNoticeAPI,
+  undoMessageAPI,
+  removeMessageAPI
 } from "@/api/im";
 import { bindGroupAPI } from "@/api/login";
 import { search_object, arrayToString, editArrValue } from "@/utils/index";
@@ -490,7 +510,7 @@ export default {
     var _this = this;
     return {
       Background,
-      version: "0.5.24",
+      version: "0.6.14",
       softname: "Raingad IM",
       logo: "http://img.raingad.com/logo/logo.png",
       // 搜索结果展示
@@ -692,46 +712,48 @@ export default {
         {
           click: (e, instance, hide) => {
             const { IMUI, message } = instance;
-            const data = {
-              id: generateRandId(),
-              type: "event",
-              //使用 jsx 时 click必须使用箭头函数（使上下文停留在vue内）
-              content: (
-                <div>
-                  <span>
-                    你撤回了一条消息{" "}
-                    <span
-                      v-show={message.type == "text"}
-                      style="color:#333;cursor:pointer"
-                      content={message.content}
-                      on-click={e => {
-                        IMUI.setEditorValue(e.target.getAttribute("content"));
-                      }}
-                    >
-                      重新编辑
-                    </span>
-                  </span>
-                </div>
-              ),
-
-              toContactId: message.toContactId,
-              sendTime: getTime()
-            };
-            IMUI.removeMessage(message.id);
-            IMUI.appendMessage(data, true);
+            undoMessageAPI({ id: message.id })
+              .then(res => {
+                const data = {
+                  id: message.id,
+                  type: "event",
+                  //使用 jsx 时 click必须使用箭头函数（使上下文停留在vue内）
+                  content: (
+                    <div>
+                      <span>
+                        你撤回了一条消息{" "}
+                        <span
+                          v-show={message.type == "text"}
+                          style="color:#409EFF;cursor:pointer"
+                          content={message.content}
+                          on-click={e => {
+                            IMUI.setEditorValue(
+                              e.target.getAttribute("content")
+                            );
+                          }}
+                        >
+                          重新编辑
+                        </span>
+                      </span>
+                    </div>
+                  ),
+                  toContactId: message.toContactId,
+                  sendTime: getTime()
+                };
+                IMUI.updateMessage(data);
+              })
+              .catch(error => {
+                this.$message.error("发生错误");
+              });
             hide();
           },
           visible: instance => {
-            return instance.message.fromUser.id == this.user.id;
+            return (
+              instance.message.fromUser.id == this.user.id &&
+              getTime() - instance.message.sendTime < 120000
+            );
           },
-          text: "撤回消息",
-          click: (e, instance, hide) => {
-            this.$message({
-              message: "即将呈现！",
-              type: "warning"
-            });
-            hide();
-          }
+          text: "撤回消息"
         },
         {
           text: "转发",
@@ -752,9 +774,10 @@ export default {
           },
           text: "复制文字",
           click: (e, instance, hide) => {
+            this.$clipboard(instance.message.content);
             this.$message({
-              message: "即将呈现！",
-              type: "warning"
+              type: "success",
+              message: "复制成功!"
             });
             hide();
           }
@@ -780,19 +803,22 @@ export default {
             this.download(message.content, message.fileName, message.type);
             hide();
           }
+        },
+        {
+          click: (e, instance, hide) => {
+            const { IMUI, message } = instance;
+            removeMessageAPI({ id: message.id })
+              .then(res => {
+                IMUI.removeMessage(message.id);
+              })
+              .catch(error => {
+                this.$message.error("发生错误");
+              });
+            hide();
+          },
+          color: "red",
+          text: "删除"
         }
-        // {
-        //   click: (e, instance, hide) => {
-        //     alert("无法删除");
-        //     return;
-        //     const { IMUI, message } = instance;
-        //     IMUI.removeMessage(message.id);
-        //     hide();
-        //   },
-        //   icon: "lemon-icon-folder",
-        //   color: "red",
-        //   text: "删除"
-        // }
       ],
       // 设置
       setting: {
@@ -874,6 +900,10 @@ export default {
             }
             this.recieveMsg(message);
           }
+          break;
+        // 撤回消息
+        case "undoMessage":
+          IMUI.updateMessage(message);
           break;
         // 修改群组名称
         case "editGroupName":
@@ -1054,14 +1084,13 @@ export default {
         }, 2000);
         return;
       }
-      if (
-        (message.type == "image" || message.type == "file") &&
-        message.preview
-      ) {
+      if (message.type == "image" || message.type == "file") {
+        if (!message.preview) {
+          return this.$message.error("没有配置预览接口");
+        }
         this.previewUrl = message.preview;
         this.drawer = true;
       } else {
-        this.$message.error("没有配置预览接口");
       }
     },
     // 打开聊天窗口
@@ -1232,7 +1261,7 @@ export default {
     // 转发消息
     forwardUser() {
       var userIds = this.selectUid;
-      this.selectUid=[];
+      this.selectUid = [];
       if (userIds.length > 5) {
         return this.$message.error("转发的人数不能超过5人！");
       }

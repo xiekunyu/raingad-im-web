@@ -12,13 +12,15 @@ import store from './store'
 Vue.use(store);
 Vue.use(ElementUI, { size: 'small' })
 Vue.use(LemonIMUI);
+import Clipboard from 'v-clipboard'
+Vue.use(Clipboard)
 Vue.config.productionTip = false
 import '@/permission' // 权限控制
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    router,
+    store,
+    components: { App },
+    template: '<App/>'
 })

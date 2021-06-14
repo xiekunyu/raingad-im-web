@@ -6,7 +6,7 @@ import request from '@/utils/request'
  */
 export function getContactsAPI(data) {
     return request({
-        url: 'im/getContacts',
+        url: 'enterprise/im/getContacts',
         method: 'post',
         data: data
     })
@@ -18,7 +18,7 @@ export function getContactsAPI(data) {
  */
 export function sendMessageAPI(data) {
     return request({
-        url: 'im/sendMessage',
+        url: 'enterprise/im/sendMessage',
         method: 'post',
         data: data
     })
@@ -30,7 +30,7 @@ export function sendMessageAPI(data) {
  */
 export function forwardMessageAPI(data) {
     return request({
-        url: 'im/forwardMessage',
+        url: 'enterprise/im/forwardMessage',
         method: 'post',
         data: data
     })
@@ -41,7 +41,7 @@ export function forwardMessageAPI(data) {
  */
 export function sendFileAPI(data) {
     return request({
-        url: 'upload/uploadFile',
+        url: 'enterprise/upload/uploadFile',
         method: 'post',
         data: data,
         headers: {
@@ -56,7 +56,7 @@ export function sendFileAPI(data) {
  */
 export function getMessageListAPI(data) {
     return request({
-        url: 'im/getMessageList',
+        url: 'enterprise/im/getMessageList',
         method: 'post',
         data: data
     })
@@ -68,11 +68,36 @@ export function getMessageListAPI(data) {
  */
 export function setMsgIsReadAPI(data) {
     return request({
-        url: 'im/setMsgIsRead',
+        url: 'enterprise/im/setMsgIsRead',
         method: 'post',
         data: data
     })
 }
+
+/**
+ * 撤回消息
+ * @param {*} data
+ */
+export function undoMessageAPI(data) {
+    return request({
+        url: 'enterprise/im/undoMessage',
+        method: 'post',
+        data: data
+    })
+}
+
+/**
+ * 撤回消息
+ * @param {*} data
+ */
+export function removeMessageAPI(data) {
+    return request({
+        url: 'enterprise/im/removeMessage',
+        method: 'post',
+        data: data
+    })
+}
+
 
 /**
  * 设置
@@ -80,7 +105,7 @@ export function setMsgIsReadAPI(data) {
  */
 export function settingAPI(data) {
     return request({
-        url: 'im/setting',
+        url: 'enterprise/im/setting',
         method: 'post',
         data: data
     })
@@ -92,7 +117,7 @@ export function settingAPI(data) {
  */
 export function editGroupNameAPI(data) {
     return request({
-        url: 'group/editGroupName',
+        url: 'enterprise/group/editGroupName',
         method: 'post',
         data: data
     })
@@ -104,7 +129,7 @@ export function editGroupNameAPI(data) {
  */
 export function groupUserListAPI(data) {
     return request({
-        url: 'group/groupuserlist',
+        url: 'enterprise/group/groupuserlist',
         method: 'post',
         data: data
     })
@@ -116,7 +141,7 @@ export function groupUserListAPI(data) {
  */
 export function getAllUserAPI(data) {
     return request({
-        url: 'group/getAllUser',
+        url: 'enterprise/group/getAllUser',
         method: 'post',
         data: data
     })
@@ -128,7 +153,7 @@ export function getAllUserAPI(data) {
  */
 export function addGroupAPI(data) {
     return request({
-        url: 'group/add',
+        url: 'enterprise/group/add',
         method: 'post',
         data: data
     })
@@ -141,7 +166,7 @@ export function addGroupAPI(data) {
  */
 export function setManagerAPI(data) {
     return request({
-        url: 'group/setManager',
+        url: 'enterprise/group/setManager',
         method: 'post',
         data: data
     })
@@ -154,7 +179,7 @@ export function setManagerAPI(data) {
  */
 export function removeUserAPI(data) {
     return request({
-        url: 'group/removeUser',
+        url: 'enterprise/group/removeUser',
         method: 'post',
         data: data
     })
@@ -166,7 +191,7 @@ export function removeUserAPI(data) {
  */
 export function addGroupUserAPI(data) {
     return request({
-        url: 'group/addGroupUser',
+        url: 'enterprise/group/addGroupUser',
         method: 'post',
         data: data
     })
@@ -178,7 +203,7 @@ export function addGroupUserAPI(data) {
  */
 export function removeGrouprAPI(data) {
     return request({
-        url: 'group/removeGroup',
+        url: 'enterprise/group/removeGroup',
         method: 'post',
         data: data
     })
@@ -191,7 +216,7 @@ export function removeGrouprAPI(data) {
  */
 export function setNoticeAPI(data) {
     return request({
-        url: 'group/setNotice',
+        url: 'enterprise/group/setNotice',
         method: 'post',
         data: data
     })
