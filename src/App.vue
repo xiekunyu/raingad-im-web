@@ -19,6 +19,7 @@ export default {
   .el-transfer-panel >>> .el-transfer-panel__body {
     height: 280px !important; 
   }
+
   .lemon-editor__submit .lemon-button{
     background: #409EFF;
     color:#fff;
@@ -32,5 +33,12 @@ export default {
     background: #fff;
     color:#aaa;
     border:solid 1px #aaa;
+  }
+
+  .el-scrollbar__wrap {
+      overflow-x: hidden;
+  }
+  .lemon-contact{
+    padding:10px;
   }
 </style>
