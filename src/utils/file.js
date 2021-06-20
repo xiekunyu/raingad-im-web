@@ -11,3 +11,16 @@ export function getFileSize(size) {
     }
     return filesize;
 }
+
+// 获取文件后缀
+export function getFileExtImg(fileName) {
+    var url = "https://file.lcoce.com/ext/";
+    var spl = fileName.split(".");
+    var exts = spl[spl.length - 1];
+    var ext = exts.toUpperCase();
+    console.log('ext：' + ext);
+    if (!ext) {
+        var ext = '';
+    }
+    return url + ext + '.png';
+}

@@ -394,7 +394,7 @@ export function date(format, timestamp) {
 }
 
 
-
+// 判断是否为今天
 export function isToday(time) {
     return new Date().getTime() - time < 86400000;
 }

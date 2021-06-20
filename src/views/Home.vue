@@ -140,7 +140,7 @@
             <div class="group-side-box">
               <div class="group-notice">
                 <div class="group-side-title">
-                  <h3>群公告</h3>
+                  <h4>群公告</h4>
                   <div>
                     <el-button
                       type="text"
@@ -166,7 +166,7 @@
               </div>
               <div class="group-user">
                 <div class="group-side-title">
-                  <h3>群成员</h3>
+                  <h4>群成员</h4>
                   <div>
                     <el-button
                       type="text"
@@ -1685,7 +1685,6 @@ justify-content: space-between;
   height: 100%;
   white-space: initial;
   .group-side-box {
-    padding: 10px 0;
     .group-side-title {
       padding: 0 10px;
     }
@@ -1700,7 +1699,7 @@ justify-content: space-between;
       -webkit-box-orient: vertical;
     }
     .group-user-body {
-      height: 340px;
+      height: 360px;
       .user-list {
         display: flex;
         flex-direction: row;
@@ -1737,7 +1736,7 @@ justify-content: space-between;
 }
 
 .group-notice {
-  height: 150px;
+  height: 140px;
 }
 
 .group-user {
