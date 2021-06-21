@@ -53,7 +53,7 @@
               class="message-title-tools"
               v-if="contact.is_group == 1"
             >
-            <i class="el-icon-time" @click="openFileList" title="消息管理器"></i>
+            <i class="el-icon-time" @click="openMessageBox" title="消息管理器"></i>
             <i class="el-icon-more" title="设置" @click="changeDrawer(contact, $refs.IMUI)"></i>
             </div>
           </div>
@@ -516,11 +516,11 @@
     </el-dialog>
     <el-dialog
       title="消息管理器"
-      :visible.sync="fileListModel"
+      :visible.sync="messageBox"
       :modal="true"
       width="800px"
     >
-      <ChatRecord :contactsId="currentChat.id"></ChatRecord>
+      <ChatRecord :contact="currentChat" :key="componentKey"></ChatRecord>
     </el-dialog>
   </div>
 </template>
@@ -575,6 +575,7 @@ export default {
     var _this = this;
     return {
       Background,
+      componentKey:1,
       version: "0.6.14",
       softname: "Raingad IM",
       logo: "http://img.raingad.com/logo/logo.png",
@@ -584,7 +585,7 @@ export default {
       addGroupUserBox: false,
       forwardBox: false,
       noticeBox: false,
-      fileListModel: false,
+      messageBox: false,
       groupUserCount: 0,
       // 公告
       notice: "",
@@ -1513,8 +1514,10 @@ export default {
         type: "warning"
       });
     },
-    openFileList () {
-      this.fileListModel = true;
+    openMessageBox () {
+      this.messageBox = true;
+      // 组件重置
+      this.componentKey+=1;
     },
     changeDrawer(contact, instance) {
       instance.changeDrawer({

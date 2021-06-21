@@ -1,11 +1,11 @@
 <template>
   <div class="chat-list-item">
     <div class="chat-list-avatar">
-      <el-avatar shape="square" size="medium" :src="data.avatar"></el-avatar>
+      <el-avatar shape="square" size="medium" :src="data.fromUser.avatar"></el-avatar>
     </div>
     <div class="chat-list-body">
       <div class="chat-list-title">
-        {{ data.displayName }}
+        {{ data.fromUser.realname }}
         <span class="time"> {{ formatTime(data.sendTime) }}</span>
       </div>
       <div
@@ -76,6 +76,7 @@ export default {
   computed: {
     formatTime() {
       return function(val) {
+        val = val/1000;
         return date("Y/m/d H:i:s", val);
       };
     },
