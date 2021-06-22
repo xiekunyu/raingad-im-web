@@ -5,12 +5,13 @@
         <el-image
           style="width: 100%;height:120px"
           :src="data.content"
+          :preview-src-list="previewUrl"
+          :z-index="9999"
           fit="cover"
         ></el-image>
         <div style="padding: 10px;">
           <div class="bottom clearfix">
-            <time class="time">{{ data.displayName }}</time>
-            <el-button type="text" class="button">操作按钮</el-button>
+            <time class="time">{{ data.fromUser.realname }} 上传于 {{formatTime(data.sendTime)}}</time>
           </div>
         </div>
       </el-card>
@@ -20,19 +21,26 @@
 
 <script>
 import { date } from "@/utils/index";
-import { getFileSize, getFileExtImg } from "@/utils/file";
+import { getFileSize, getFileExtImg,download } from "@/utils/file";
 export default {
   name: "chatImage",
   props: {
     data: {
       type: Object,
-      default: {} //定义参数默认值
+      default: {} 
+    },
+    previewUrl:{
+       type:Array,
+       default:function(){
+				return [];
+			}
     }
   },
   computed: {
     formatTime() {
       return function(val) {
-        return date("Y/m/d H:i:s", val);
+        val=parseInt(val/1000);
+        return date("Y/m/d", val);
       };
     },
     fileSize() {
@@ -58,9 +66,14 @@ export default {
         type: "success",
         message: "复制成功!"
       });
+    },
+    // 下载文件
+    downloadFile(item){
+      download(item.content,item.fileName,item.type);
     }
   },
-  created() {}
+  created() {
+  }
 };
 </script>
 <style scoped lang="scss">

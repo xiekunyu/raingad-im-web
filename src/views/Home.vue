@@ -447,7 +447,7 @@
     >
       <el-input
         type="textarea"
-        :rows="4"
+        :rows="10"
         placeholder="请输入内容"
         v-model="notice"
       >
@@ -483,7 +483,7 @@
         ></iframe>
       </div>
     </transition>
-    <Socket ref="socket"></Socket>
+    
     <!-- 转发聊天 -->
     <el-dialog
       title="转发"
@@ -522,6 +522,8 @@
     >
       <ChatRecord :contact="currentChat" :key="componentKey"></ChatRecord>
     </el-dialog>
+     <!-- <preview  :drawer="drawer" :previewUrl="previewUrl" :key="componentKey"></preview> -->
+     <Socket ref="socket"></Socket>
   </div>
 </template>
 
@@ -552,6 +554,7 @@ import { bindGroupAPI } from "@/api/login";
 import { search_object, arrayToString, editArrValue,timeFormat } from "@/utils/index";
 import Lockr from "lockr";
 import Socket from "../components/socket";
+import preview from "../components/preview";
 import ChatRecord from "../components/chatRecord";
 
 const getTime = () => {
@@ -569,7 +572,8 @@ export default {
   name: "app",
   components: {
     Socket,
-    ChatRecord
+    ChatRecord,
+    preview
   },
   data () {
     var _this = this;

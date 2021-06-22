@@ -1,11 +1,11 @@
 <template>
   <div class="chat-main">
     <el-input
-      placeholder="请输入内容"
-      v-model="input3"
+      placeholder="请输入关键字搜索聊天"
+      v-model="keywords"
       class="input-with-select"
     >
-      <el-button slot="append" icon="el-icon-search"></el-button>
+      <el-button slot="append" icon="el-icon-search" @click="searchMessage"></el-button>
     </el-input>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="全部" name="all">
@@ -18,70 +18,95 @@
             ></ChatItem>
           </el-scrollbar>
         </div>
-        <el-pagination background  :page-size.sync="listRows" :current-page.sync="pageSize" layout="prev, pager, next" :total="total" @current-change="handleCurrentChange">
-        </el-pagination>
+        
       </el-tab-pane>
       <el-tab-pane label="文本" name="text">
         <div class="el-tab-body-list">
-          <el-scrollbar style="height:100%;"> </el-scrollbar>
+          <el-scrollbar style="height:100%;">
+            <ChatItem
+              :data="item"
+              v-for="(item, index) in dataList"
+              :key="index"
+            ></ChatItem>
+          </el-scrollbar>
         </div>
-        <el-pagination background layout="prev, pager, next" :total="1000">
-        </el-pagination>
+        <!-- <el-pagination
+          background
+          :hide-on-single-page="singlePage"
+          :page-size.sync="listRows"
+          :current-page.sync="pageSize"
+          layout="prev, pager, next"
+          :total="total"
+          @current-change="handleCurrentChange"
+        >
+        </el-pagination> -->
       </el-tab-pane>
       <el-tab-pane label="图片" name="image">
         <div class="el-tab-body-list">
           <el-scrollbar style="height:100%;">
             <el-row style="100%">
-              <ChatImage :data="items"></ChatImage>
-              <ChatImage :data="items"></ChatImage>
-              <ChatImage :data="items"></ChatImage>
-              <ChatImage :data="items"></ChatImage>
-              <ChatImage :data="items"></ChatImage>
+              <ChatImage
+                :data="item"
+                :previewUrl="previewList"
+                v-for="(item, index) in dataList"
+                :key="index"
+              ></ChatImage>
             </el-row>
           </el-scrollbar>
         </div>
-        <el-pagination background :page-size="listRows" :current-page.sync="pageSize" layout="prev, pager, next" :total="total">
-        </el-pagination>
       </el-tab-pane>
       <el-tab-pane label="文件" name="file">
         <div class="el-tab-body-list">
-          <el-table :data="tableData" style="width: 100%" height="400">
+          <el-table :data="dataList" style="width: 100%" height="450">
             <el-table-column prop="fileName" label="文件" width="300">
               <template slot-scope="scope">
                 <div class="chat-file">
                   <div>
-                    <el-avatar
+                    <el-image
                       class="fileExt"
-                      shape="square"
-                      size="small"
-                      src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"
-                    ></el-avatar>
+                      fit="cover"
+                      :src="fileExt(scope.row.fileName)"
+                    ></el-image>
                   </div>
                   <div class="fileName">{{ scope.row.fileName }}</div>
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="sendTime" label="发送时间" width="160">
+            <el-table-column prop="sendTime" label="上传时间" width="160">
+              <template slot-scope="scope">
+                {{formatTime(scope.row.sendTime)}}
+              </template>
             </el-table-column>
             <el-table-column prop="fileSize" label="大小" width="100">
+              <template slot-scope="scope">
+                {{fileSize(scope.row.fileSize)}}
+              </template>
             </el-table-column>
-            <el-table-column prop="displayName" label="上传者" width="100">
+            <el-table-column prop="fromUser.realname" label="上传者" width="100">
             </el-table-column>
             <el-table-column label="操作">
               <template slot-scope="scope">
                 <el-button
                   size="mini"
-                  @click="handleEdit(scope.$index, scope.row)"
+                  @click="downloadFile(scope.row)"
                   >下载</el-button
                 >
               </template>
             </el-table-column>
           </el-table>
         </div>
-        <el-pagination :current-page.sync="pageSize" background layout="prev, pager, next" :total="total">
-        </el-pagination>
       </el-tab-pane>
     </el-tabs>
+    <el-pagination
+          background
+          :hide-on-single-page="singlePage"
+          :page-size.sync="listRows"
+          :current-page.sync="pageSize"
+          layout="prev, pager, next"
+          :total="total"
+          @current-change="handleCurrentChange"
+        >
+        </el-pagination>
   </div>
 </template>
 
@@ -89,8 +114,10 @@
 import ChatItem from "./chatItem";
 import ChatImage from "./chatImage";
 import { getMessageListAPI } from "@/api/im";
+import { arrayToString,date} from "@/utils/index";
+import { getFileSize, getFileExtImg ,download} from "@/utils/file";
 export default {
-  name: "file",
+  name: "chatRecord",
   components: {
     ChatItem,
     ChatImage
@@ -101,88 +128,84 @@ export default {
       default: {} //定义参数默认值
     }
   },
+  computed: {
+    formatTime() {
+      return function(val) {
+        val = val/1000;
+        return date("Y/m/d H:i:s", val);
+      };
+    },
+    fileSize() {
+      return function(val) {
+        return getFileSize(val);
+      };
+    },
+    fileExt() {
+      return function(val) {
+        return getFileExtImg(val);
+      };
+    }
+  },
   data() {
     return {
-      websocket: null,
       activeName: "all",
-      input3: "",
-      select: "",
-      items: {
-        avatar:
-          "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
-        displayName: "管理员",
-        content:
-          "http://im-img.gzydong.club/media/images/talks/60c1be090a0f1CpBf8qMZ6NzvczF8_550x281.png",
-        sendTime: 1601234567,
-        fileSize: "26545",
-        type: "file",
-        fileName: "测试文件.docx"
-      },
+      keywords: "",
+      msgType:"all",
       pageSize: 1,
-      listRows: 3,
-      total:0,
+      listRows: 20,
+      total: 0,
+      singlePage: false,
       dataList: [],
-      tableData: [
-        {
-          sendTime: "2016-05-03 12:25:52",
-          displayName: "王小虎",
-          fileName: "上海市普陀区金沙江路 1518 弄上海市普陀区金沙江路 1518 弄",
-          content: "普陀区",
-          address: "上海市普陀区金沙江路 1518 弄",
-          fileSize: 200333
-        },
-        {
-          sendTime: "2016-05-03 12:25:52",
-          displayName: "王小虎",
-          fileName: "上海",
-          content: "普陀区",
-          address: "上海市普陀区金沙江路 1518 弄",
-          fileSize: 200333
-        },
-        {
-          sendTime: "2016-05-03 12:25:52",
-          displayName: "王小虎",
-          fileName: "上海",
-          content: "普陀区",
-          address: "上海市普陀区金沙江路 1518 弄",
-          fileSize: 200333
-        }
-      ]
+      previewList:[]
     };
   },
   methods: {
     handleClick(tab, event) {
-      console.log(tab, event);
+      this.pageSize = 1;
+      this.msgType=tab.name;
+      this.getMessage();
     },
-    getMessage(type) {
+    searchMessage(){
+      this.getMessage();
+    },
+    getMessage() {
       getMessageListAPI({
         toContactId: this.contact.id,
         is_group: this.contact.is_group,
-        type: type,
+        type: this.msgType,
+        keywords: this.keywords,
         pageSize: this.pageSize,
         listRows: this.listRows
       })
         .then(res => {
           this.dataList = res.data;
-          this.total=res.count;
+          this.total = res.count;
+          if (res.count <= this.listRows) {
+            this.singlePage = true;
+          } else {
+            this.singlePage = false;
+          }
+          if(this.msgType=='image'){
+            this.previewList=arrayToString(res.data,'content',false);
+          }
         })
         .catch(error => {
           console.log(error);
         });
     },
-    handleCurrentChange(val){
-        console.log(val);
-        this.pageSize=val;
-        this.getMessage('');
+    handleCurrentChange(val) {
+      console.log(val);
+      this.pageSize = val;
+      this.getMessage();
+    },
+    downloadFile(item){
+          download(item.content,item.fileName,item.type);  
     }
-    
   },
   created() {
-    this.getMessage("");
+    this.getMessage();
   },
-  mounted(){
-
-  }
+  mounted() {}
 };
 </script>
 <style scoped lang="scss">
@@ -190,7 +213,7 @@ export default {
   margin: -20px -5px;
 }
 .el-tab-body-list {
-  height: 400px;
+  height: 450px;
 }
 
 .input-with-select {
@@ -208,6 +231,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
   .fileExt {
+    width:30px;
     display: block;
   }
   .fileName {

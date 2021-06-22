@@ -18,9 +18,20 @@ export function getFileExtImg(fileName) {
     var spl = fileName.split(".");
     var exts = spl[spl.length - 1];
     var ext = exts.toUpperCase();
-    console.log('ext：' + ext);
     if (!ext) {
         var ext = '';
     }
     return url + ext + '.png';
+}
+
+// 下载文件
+export function download(src, name, type) {
+    let a = document.createElement("a");
+    if (type == "image") {
+        a.download = name || "pic";
+    } else {
+        a.download = name || "file";
+    }
+    a.href = src;
+    a.click();
 }
