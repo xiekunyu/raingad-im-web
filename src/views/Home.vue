@@ -7,7 +7,7 @@
       <lemon-imui
         :user="user"
         ref="IMUI"
-        width="900px"
+        width="1000px"
         :height="height"
         :contextmenu="contextmenu"
         :contact-contextmenu="contactContextmenu"
@@ -20,7 +20,7 @@
         @pull-messages="handlePullMessages"
         @message-click="handleMessageClick"
         @send="handleSend"
-        style="min-height:530px"
+        style="min-height:600px"
       >
         <template #cover>
           <div>
@@ -54,7 +54,7 @@
               v-if="contact.is_group == 1"
             >
             <i class="el-icon-time" @click="openMessageBox" title="消息管理器"></i>
-            <i class="el-icon-more" title="设置" @click="changeDrawer(contact, $refs.IMUI)"></i>
+            <!-- <i class="el-icon-more" title="设置" @click="changeDrawer(contact, $refs.IMUI)"></i> -->
             </div>
           </div>
         </template>
@@ -62,8 +62,9 @@
         <template #sidebar-message="Contact">
 
             <span class="lemon-badge lemon-contact__avatar">
-              <span class="lemon-avatar lemon-avatar--circle" style="width: 40px; height: 40px; line-height: 40px; font-size: 20px;">
+              <span class="lemon-avatar" v-bind:class="{'lemon-avatar--circle':setting.avatarCricle}" style="width: 40px; height: 40px; line-height: 40px; font-size: 20px;">
                 <img :src="Contact.avatar" /></span>
+                <span class="lemon-badge__label" v-if="Contact.unread>0 && Contact.is_notice==1">{{Contact.unread}}</span>
             </span>
             <div class="lemon-contact__inner">
               <p class="lemon-contact__label">
@@ -74,8 +75,12 @@
                 <span class="lemon-contact__time" v-text="formatTime(Contact.lastSendTime) "></span>
               </p>
               <p class="lemon-contact__content lemon-last-content">
-                <span class="lastContent" v-html='Contact.lastContent'></span>
-                <span class="el-icon-close-notification font-16" v-if="1==2"></span>
+                
+                <span class="lastContent">
+                  <span v-if="Contact.is_notice==0 && Contact.unread>0">[{{Contact.unread}}条未读]</span>
+                  <span v-html='Contact.lastContent'></span>
+                </span>
+                <span class="el-icon-close-notification font-16" v-if="Contact.is_notice==0"></span>
               </p>
             </div>
 
@@ -142,11 +147,11 @@
                 <div class="group-side-title">
                   <h4>群公告</h4>
                   <div>
-                    <el-button
-                      type="text"
+                    <span
+                    class="el-icon-edit font-18 handle"
                       @click="noticeBox = true"
                       v-if="contact.owner_id == user.id"
-                    >编辑公告</el-button>
+                    ></span>
                   </div>
                 </div>
                 <hr style="border:solid 1px #e6e6e6" />
@@ -168,10 +173,10 @@
                 <div class="group-side-title">
                   <h4>群成员</h4>
                   <div>
-                    <el-button
-                      type="text"
+                    <span
+                    class="el-icon-circle-plus-outline font-18 handle"
                       @click="openAddGroupUser"
-                    >添加成员</el-button>
+                    ></span>
                   </div>
                 </div>
                 <hr style="border:solid 1px #e6e6e6" />
@@ -548,6 +553,7 @@ import {
   removeGrouprAPI,
   setNoticeAPI,
   undoMessageAPI,
+  isNoticeAPI,
   removeMessageAPI
 } from "@/api/im";
 import { bindGroupAPI } from "@/api/login";
@@ -728,6 +734,44 @@ export default {
           click (e, instance, hide) {
             const { IMUI, contact } = instance;
             hide();
+            isNoticeAPI({ id: contact.id,is_notice:0 });
+            IMUI.updateContact({
+              id: contact.id,
+              is_notice: 0
+            })
+          },
+          icon: "el-icon-bell",
+          text: "消息免打扰",
+          visible: instance => {
+            return (
+              instance.contact.is_notice == 1 &&
+              instance.contact.is_group == 1
+            )
+          }
+        },
+        {
+          click (e, instance, hide) {
+            const { IMUI, contact } = instance;
+            hide();
+            isNoticeAPI({ id: contact.id,is_notice:1 });
+            IMUI.updateContact({
+              id: contact.id,
+              is_notice: 1
+            })
+          },
+          icon: "el-icon-close-notification",
+          text: "取消免打扰",
+          visible: instance => {
+            return (
+              instance.contact.is_notice == 0 &&
+              instance.contact.is_group == 1
+            )
+          }
+        },
+        {
+          click (e, instance, hide) {
+            const { IMUI, contact } = instance;
+            hide();
             _this
               .$confirm("确定删除该群聊吗？", "提示", {
                 confirmButtonText: "确定",
@@ -742,6 +786,7 @@ export default {
                 });
               });
           },
+          icon:'el-icon-delete',
           color: "red",
           text: "删除群聊",
           visible: instance => {
@@ -769,6 +814,7 @@ export default {
                 });
               });
           },
+          icon:'',
           color: "red",
           text: "退出群聊",
           visible: instance => {
@@ -875,22 +921,25 @@ export default {
             this.download(message.content, message.fileName, message.type);
             hide();
           }
-        }
+        },
         // {
         //   click: (e, instance, hide) => {
         //     const { IMUI, message } = instance;
         //     hide();
-        //     this.$confirm("确定删除该条消息吗？", "提示", {
-        //       confirmButtonText: "确定",
-        //       cancelButtonText: "取消",
-        //       type: "warning"
-        //     }).then(() => {
-        //       console.log(message.id)
-        //       IMUI.removeMessage(message.id.toString());
-        //       removeMessageAPI({ id: message.id });
-        //     }).catch(error => {
-        //           console.log(error);
-        //         });;
+        //     console.log(message);
+        //     console.log(IMUI.getMessages());
+        //     IMUI.removeMessage(message.id)
+        //     // this.$confirm("确定删除该条消息吗？", "提示", {
+        //     //   confirmButtonText: "确定",
+        //     //   cancelButtonText: "取消",
+        //     //   type: "warning"
+        //     // }).then(() => {
+        //     //   console.log(message.id)
+        //     //   ;
+        //     //   removeMessageAPI({ id: message.id });
+        //     // }).catch(error => {
+        //     //       console.log(error);
+        //     // });;
         //   },
         //   color: "red",
         //   text: "删除"
@@ -912,7 +961,7 @@ export default {
         avatar: user.avatar,
         account: user.account
       },
-      height: "600px",
+      height: "640px",
       pageSize: 1,
       listRows: 10,
       is_group: 0,
@@ -969,7 +1018,14 @@ export default {
         case "simple":
           // 如果开启了声音才播放
           if (this.setting.isVoice) {
-            this.playAudio();
+            Notification.requestPermission();
+              var notification = new Notification('收到一条新消息', {
+                  body: message.fromUser.displayName+"："+message.content,
+                  icon: message.fromUser.avatar
+              });
+              if(!notification){
+                this.playAudio();
+              }
           }
           this.recieveMsg(message);
           break;
@@ -977,9 +1033,17 @@ export default {
         case "group":
           // 如果是自己发送的消息则不需要提示
           if (message.fromUser.id != this.user.id) {
+            var contact=this.getContact(message.toContactId);
             // 如果开启了声音才播放
-            if (this.setting.isVoice) {
-              this.playAudio();
+            if (this.setting.isVoice && contact.is_notice==1) {
+              Notification.requestPermission();
+              var notification = new Notification('收到一条新消息', {
+                  body: message.fromUser.displayName+"："+message.content,
+                  icon: message.fromUser.avatar
+              });
+              if(!notification){
+                this.playAudio();
+              }
             }
             this.recieveMsg(message);
           }
@@ -1142,6 +1206,15 @@ export default {
       ]);
       // 初始化表情
       IMUI.initEmoji(EmojiData);
+    },
+    getContact(id){
+      const { IMUI } = this.$refs;
+      const contactList = IMUI.getContacts();
+      for(var i=0;i<=contactList.length;i++){
+        if(contactList[i].id==id){
+          return contactList[i];
+        }
+      }
     },
     // 设置发送键
     setSendKey (e) {
@@ -1693,7 +1766,7 @@ justify-content: space-between;
   white-space: initial;
   .group-side-box {
     .group-side-title {
-      padding: 0 10px;
+      padding: 5px 10px;
     }
     .group-side-body {
       height: 85px;
@@ -1706,7 +1779,7 @@ justify-content: space-between;
       -webkit-box-orient: vertical;
     }
     .group-user-body {
-      height: 360px;
+      height: 400px;
       .user-list {
         display: flex;
         flex-direction: row;
@@ -1777,6 +1850,9 @@ justify-content: space-between;
   position: absolute;
   top: 60px;
   right: 40px;
+}
+.handle{
+  cursor: pointer;
 }
 .fc-danger {
   color: #f56c6c;

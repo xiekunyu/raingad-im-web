@@ -198,7 +198,7 @@ export function addGroupUserAPI(data) {
 }
 
 /**
- * 添加群成员
+ * 移除群成员
  * @param {*} data
  */
 export function removeGrouprAPI(data) {
@@ -211,12 +211,25 @@ export function removeGrouprAPI(data) {
 
 
 /**
- * 添加群成员
+ * 设置公告
  * @param {*} data
  */
 export function setNoticeAPI(data) {
     return request({
         url: 'enterprise/group/setNotice',
+        method: 'post',
+        data: data
+    })
+}
+
+
+/**
+ * 设置消息免打扰
+ * @param {*} data
+ */
+export function isNoticeAPI(data) {
+    return request({
+        url: 'enterprise/group/isNotice',
         method: 'post',
         data: data
     })
