@@ -60,7 +60,6 @@
         </template>
         <!-- 最近联系人列表插槽 -->
         <template #sidebar-message="Contact">
-
             <span class="lemon-badge lemon-contact__avatar">
               <span class="lemon-avatar" v-bind:class="{'lemon-avatar--circle':setting.avatarCricle}" style="width: 40px; height: 40px; line-height: 40px; font-size: 20px;">
                 <img :src="Contact.avatar" /></span>
@@ -75,7 +74,6 @@
                 <span class="lemon-contact__time" v-text="formatTime(Contact.lastSendTime) "></span>
               </p>
               <p class="lemon-contact__content lemon-last-content">
-                
                 <span class="lastContent">
                   <span v-if="Contact.is_notice==0 && Contact.unread>0">[{{Contact.unread}}条未读]</span>
                   <span v-html='Contact.lastContent'></span>
@@ -85,7 +83,7 @@
             </div>
 
         </template>
-        <!-- 最近联系人列表顶部插槽 -->
+        <!-- 最近联系人列表顶部插槽 不滚动-->
         <template #sidebar-message-fixedtop="instance">
           <div class="contact-fixedtop-box">
             <el-input
@@ -128,6 +126,19 @@
                 暂无
               </div>
             </div>
+          </div>
+        </template>
+        <!-- 最近联系人列表顶部插槽，滚动 -->
+        <template #sidebar-message-top="instance">
+          <div style="display:flex;padding:0 5px 10px 10px;justify-content: flex-start;flex-wrap:wrap">
+            <ChatTop :contact="currentChat"></ChatTop>
+            <ChatTop :contact="currentChat"></ChatTop>
+            <ChatTop :contact="currentChat"></ChatTop>
+            <ChatTop :contact="currentChat"></ChatTop>
+            <ChatTop :contact="currentChat"></ChatTop>
+            <ChatTop :contact="currentChat"></ChatTop>
+            <ChatTop :contact="currentChat"></ChatTop>
+            <ChatTop :contact="currentChat"></ChatTop>
           </div>
         </template>
         <!-- 联系人列表顶部插槽 -->
@@ -529,6 +540,15 @@
     >
       <ChatRecord :contact="currentChat" :key="componentKey"></ChatRecord>
     </el-dialog>
+        <!-- 设置中心 -->
+    <el-dialog
+      title="群设置"
+      :visible.sync="groupSetting"
+      :modal="true"
+      width="500px"
+    >
+    <ChatSet :contact="contactSetting" :key="componentKey"></ChatSet>
+    </el-dialog>
      <!-- <preview  :drawer="drawer" :previewUrl="previewUrl" :key="componentKey"></preview> -->
      <Socket ref="socket"></Socket>
   </div>
@@ -564,6 +584,8 @@ import Lockr from "lockr";
 import Socket from "../components/socket";
 import preview from "../components/preview";
 import ChatRecord from "../components/chatRecord";
+import ChatSet from "../components/chatSet";
+import ChatTop from "../components/chatTop";
 
 const getTime = () => {
   return new Date().getTime();
@@ -581,7 +603,9 @@ export default {
   components: {
     Socket,
     ChatRecord,
-    preview
+    preview,
+    ChatSet,
+    ChatTop
   },
   data () {
     var _this = this;
@@ -598,6 +622,8 @@ export default {
       forwardBox: false,
       noticeBox: false,
       messageBox: false,
+      groupSetting: false,
+      contactSetting: {},
       groupUserCount: 0,
       // 公告
       notice: "",
@@ -732,6 +758,22 @@ export default {
         //     hide();
         //   }
         // },
+        {
+          click (e, instance, hide) {
+            const { IMUI, contact } = instance;
+            hide();
+            _this.groupSetting=true;
+            _this.contactSetting=contact;
+          },
+          icon: "el-icon-setting",
+          text: "群管理",
+          visible: instance => {
+            return (
+              instance.contact.role == 1 &&
+              instance.contact.is_group == 1
+            )
+          }
+        },
         {
           click (e, instance, hide) {
             const { IMUI, contact } = instance;
@@ -1768,16 +1810,17 @@ export default {
 }
 
 .lemon-last-content{
-display:flex;
-justify-content: space-between;
+    display:flex;
+    justify-content: space-between;
+    .lastContent{
+        width: 150px !important;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+     }
 }
 
-.lastConetnt{
-  display:block;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
+
 
 .slot-group-list {
   background: #fff;
