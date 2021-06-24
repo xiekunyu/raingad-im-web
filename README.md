@@ -3,7 +3,7 @@
 #### 介绍
 IM前端代码，需要配合后端使用，本软件主要用于学习交流，开发的初衷旨在快速建立企业内部通讯系统，不能用于商业用途。
 
-前端传送门：https://gitee.com/raingad/im-chat-front
+后端传送门：https://gitee.com/raingad/im-instant-chat
 
 体验地址：http://im.raingad.com/index.html
 
@@ -52,6 +52,8 @@ npm run build
 
 #### 交流群
 如果有什么问题，请留言，或者加入我们的QQ群！
+
+创作不易，点个star吧
 
 [QQ 交流群：336921267](https://jq.qq.com/?_wv=1027&k=jMQAt9lh).
 
