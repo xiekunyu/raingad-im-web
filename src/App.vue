@@ -41,4 +41,9 @@ export default {
   .lemon-contact{
     padding:10px;
   }
+  hr {
+    height: 1px;
+    background-color: #e6e6e6;
+    border: none;
+  }
 </style>

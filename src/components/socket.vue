@@ -27,7 +27,7 @@
                     var domain=document.domain;
                     var protocol=window.location.protocol;
                     var wsProtocol="ws://";
-                    if(protocol=="https"){
+                    if(protocol=="https:"){
                         wsProtocol="wss://";
                     }
                     WS_URI=wsProtocol+domain+":8282";

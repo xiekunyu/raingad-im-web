@@ -154,7 +154,7 @@
                     ></span>
                   </div>
                 </div>
-                <hr style="border:solid 1px #e6e6e6" />
+                <hr />
                 <div
                   class="group-side-body"
                   v-if="contact.notice"
@@ -179,7 +179,7 @@
                     ></span>
                   </div>
                 </div>
-                <hr style="border:solid 1px #e6e6e6" />
+                <hr/>
                 <div
                   class="group-user-body"
                   id="group-user"
@@ -378,16 +378,18 @@
           </div>
           <div class="setting-version">
             <b> 已经支持功能：</b>
-            <p>1、单聊和群聊</p>
+            <p>1、单聊和群聊，新增消息管理器</p>
             <p>2、支持发送表情、图片和文件</p>
             <p>3、单聊支持消息已读未读的状态显示</p>
-            <p>4、支持设置新消息提醒</p>
+            <p>4、支持设置新消息声音提醒，浏览器通知</p>
             <p>5、支持部分Lemon-imui内功能设置</p>
             <p>5、支持文件和图片在线预览</p>
             <p>6、群聊创建、删除和群成员管理、群公告等</p>
+            <p>7、群聊可以设置消息免打扰</p>
+            <p>8、消息支持撤回</p>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="关于开源">
+        <el-tab-pane label="开源">
           <div align="center">
             <el-avatar
               :src="logo"
@@ -586,7 +588,7 @@ export default {
     return {
       Background,
       componentKey:1,
-      version: "0.6.14",
+      version: "0.6.24",
       softname: "Raingad IM",
       logo: "http://img.raingad.com/logo/logo.png",
       // 搜索结果展示
@@ -1018,14 +1020,7 @@ export default {
         case "simple":
           // 如果开启了声音才播放
           if (this.setting.isVoice) {
-            Notification.requestPermission();
-              var notification = new Notification('收到一条新消息', {
-                  body: message.fromUser.displayName+"："+message.content,
-                  icon: message.fromUser.avatar
-              });
-              if(!notification){
-                this.playAudio();
-              }
+            this.popNotice(message);
           }
           this.recieveMsg(message);
           break;
@@ -1036,14 +1031,7 @@ export default {
             var contact=this.getContact(message.toContactId);
             // 如果开启了声音才播放
             if (this.setting.isVoice && contact.is_notice==1) {
-              Notification.requestPermission();
-              var notification = new Notification('收到一条新消息', {
-                  body: message.fromUser.displayName+"："+message.content,
-                  icon: message.fromUser.avatar
-              });
-              if(!notification){
-                this.playAudio();
-              }
+              this.popNotice(message);
             }
             this.recieveMsg(message);
           }
@@ -1154,6 +1142,19 @@ export default {
 
     // 初始化联系人
     this.getSimpleChat();
+  },
+  created(){
+     if (window.Notification) {
+        // 浏览器通知--window.Notification
+        if (Notification.permission == "granted") {
+          console.log("允许通知")
+        }else if( Notification.permission != "denied"){
+          console.log("需要通知权限")
+          Notification.requestPermission((permission)=> {});
+        }
+      } else {
+        console.error('浏览器不支持Notification');
+      }
   },
   methods: {
     
@@ -1562,11 +1563,31 @@ export default {
       a.click();
     },
     // 播放消息声音
-    playAudio () {
-      const audio = document.getElementById("chatAudio");
-      // 从头播放
-      audio.currentTime = 0;
-      audio.play();
+    popNotice(message) {
+      let that = this;
+        if (Notification.permission == "granted") {
+          let notification = new Notification('收到一条新消息', {
+              body: message.fromUser.displayName+"："+message.content,
+              icon: message.fromUser.avatar
+          });
+          notification.onclick = function(e) {
+            that.$nextTick(() => {
+              setTimeout(()=>{
+                //具体操作
+              },500);
+            });
+            //可直接打开通知notification相关联的tab窗
+            window.focus();
+            notification.close();
+          };
+          console.log("浏览器通知！")
+        }else{
+           console.log("声音通知！")
+          const audio = document.getElementById("chatAudio");
+          // 从头播放
+          audio.currentTime = 0;
+          audio.play();
+        }
     },
     // 接收消息重新渲染
     recieveMsg (message) {

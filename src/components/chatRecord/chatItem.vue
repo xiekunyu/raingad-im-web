@@ -127,11 +127,6 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-hr {
-  height: 1px;
-  background-color: #bbb;
-  border: none;
-}
 .chat-list-item {
   display: flex;
   justify-content: flex-start;
@@ -180,7 +175,11 @@ hr {
             display: flex;
             justify-content: space-between;
             .fileName {
+              width:120px;
               margin-bottom: 8px;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
             }
             .fileSize {
               color: #ccc;
