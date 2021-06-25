@@ -2,10 +2,10 @@
   <div>
           <div class="group-item">
             <div class="group-avatar">
-               <el-avatar shape="square" src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"></el-avatar>
+               <el-avatar shape="square" :src="contact.avatar"></el-avatar>
             </div>
             <div class="group-content">
-              <div class="group-title">可爱的聊天群</div>
+              <div class="group-title">{{contact.displayName}}</div>
               <div class="group-user">群主：张三</div>
             </div>
           </div>

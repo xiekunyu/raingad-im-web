@@ -229,7 +229,19 @@ export function setNoticeAPI(data) {
  */
 export function isNoticeAPI(data) {
     return request({
-        url: 'enterprise/group/isNotice',
+        url: 'enterprise/im/isNotice',
+        method: 'post',
+        data: data
+    })
+}
+
+/**
+ * 设置消息免打扰
+ * @param {*} data
+ */
+export function setChatTopAPI(data) {
+    return request({
+        url: 'enterprise/im/setChatTop',
         method: 'post',
         data: data
     })

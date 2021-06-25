@@ -19,7 +19,6 @@ export default {
   .el-transfer-panel >>> .el-transfer-panel__body {
     height: 280px !important; 
   }
-
   .lemon-editor__submit .lemon-button{
     background: #409EFF;
     color:#fff;

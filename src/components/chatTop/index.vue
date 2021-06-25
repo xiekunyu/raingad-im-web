@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <el-tooltip content="Bottom center" placement="bottom" effect="light">
-       <div class="top-item">
+  <div class="chatTop">
+    <el-tooltip :content="contact.displayName" placement="top-start" effect="light">
+       <div class="top-item" :class="currentId==contact.id ? 'active' : ''">
           <div class="avatar">
-              <el-avatar shape="square" size="small" src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"></el-avatar>
+              <el-avatar :shape="avatarCricle?'circle':'square'" size="small" :src="contact.avatar"></el-avatar>
           </div>
           <div class="username">
-              可爱的聊天群
+              {{contact.displayName}}
           </div>
         </div> 
     </el-tooltip>
@@ -21,37 +21,45 @@ export default {
     contact: {
       type: Object,
       default:{}
+    },
+    currentId: [String, Number],
+    avatarCricle:{
+      type:Boolean,
+      default:false
     }
   },
   data() {
     return {
-      myDrawer: false,
-      nospeak:0,
-      form: {
-          delivery: false,
-          type: [],
-        },
     };
   },
   methods: {
-    closeDrawer(){
-      this.myDrawer=false;
-    }
   },
   created() {
   }
+
 };
 </script>
 <style scoped lang="scss">
+.top-item:hover{
+  background: #e9e9e9;
+  border-radius:6px;
+}
+.chatTop .active{
+  background: #d9d9d9;
+  border-radius:6px;
+}
 .top-item{
-    margin-bottom:10px;
-    margin-right:5px;
-    width:40px;
-    height:60px;
+    padding:5px 0;
+    width:46px;
+    height:46px;
     display:flex;
     flex-direction:column;
+    flex-basis: 41px;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
     .avatar{
-      margin-right:10px;
+      align-content: center;
     }
     .username{
         overflow: hidden;

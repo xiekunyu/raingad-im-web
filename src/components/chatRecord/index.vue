@@ -5,7 +5,11 @@
       v-model="keywords"
       class="input-with-select"
     >
-      <el-button slot="append" icon="el-icon-search" @click="searchMessage"></el-button>
+      <el-button
+        slot="append"
+        icon="el-icon-search"
+        @click="searchMessage"
+      ></el-button>
     </el-input>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="全部" name="all">
@@ -18,7 +22,6 @@
             ></ChatItem>
           </el-scrollbar>
         </div>
-        
       </el-tab-pane>
       <el-tab-pane label="文本" name="text">
         <div class="el-tab-body-list">
@@ -74,21 +77,23 @@
             </el-table-column>
             <el-table-column prop="sendTime" label="上传时间" width="160">
               <template slot-scope="scope">
-                {{formatTime(scope.row.sendTime)}}
+                {{ formatTime(scope.row.sendTime) }}
               </template>
             </el-table-column>
             <el-table-column prop="fileSize" label="大小" width="100">
               <template slot-scope="scope">
-                {{fileSize(scope.row.fileSize)}}
+                {{ fileSize(scope.row.fileSize) }}
               </template>
             </el-table-column>
-            <el-table-column prop="fromUser.realname" label="上传者" width="100">
+            <el-table-column
+              prop="fromUser.realname"
+              label="上传者"
+              width="100"
+            >
             </el-table-column>
             <el-table-column label="操作">
               <template slot-scope="scope">
-                <el-button
-                  size="mini"
-                  @click="downloadFile(scope.row)"
+                <el-button size="mini" @click="downloadFile(scope.row)"
                   >下载</el-button
                 >
               </template>
@@ -98,15 +103,15 @@
       </el-tab-pane>
     </el-tabs>
     <el-pagination
-          background
-          :hide-on-single-page="singlePage"
-          :page-size.sync="listRows"
-          :current-page.sync="pageSize"
-          layout="prev, pager, next"
-          :total="total"
-          @current-change="handleCurrentChange"
-        >
-        </el-pagination>
+      background
+      :hide-on-single-page="singlePage"
+      :page-size.sync="listRows"
+      :current-page.sync="pageSize"
+      layout="prev, pager, next"
+      :total="total"
+      @current-change="handleCurrentChange"
+    >
+    </el-pagination>
   </div>
 </template>
 
@@ -114,8 +119,8 @@
 import ChatItem from "./chatItem";
 import ChatImage from "./chatImage";
 import { getMessageListAPI } from "@/api/im";
-import { arrayToString,date} from "@/utils/index";
-import { getFileSize, getFileExtImg ,download} from "@/utils/file";
+import { arrayToString, date } from "@/utils/index";
+import { getFileSize, getFileExtImg, download } from "@/utils/file";
 export default {
   name: "chatRecord",
   components: {
@@ -131,7 +136,7 @@ export default {
   computed: {
     formatTime() {
       return function(val) {
-        val = val/1000;
+        val = val / 1000;
         return date("Y/m/d H:i:s", val);
       };
     },
@@ -150,22 +155,22 @@ export default {
     return {
       activeName: "all",
       keywords: "",
-      msgType:"all",
+      msgType: "all",
       pageSize: 1,
       listRows: 20,
       total: 0,
       singlePage: false,
       dataList: [],
-      previewList:[]
+      previewList: []
     };
   },
   methods: {
     handleClick(tab, event) {
       this.pageSize = 1;
-      this.msgType=tab.name;
+      this.msgType = tab.name;
       this.getMessage();
     },
-    searchMessage(){
+    searchMessage() {
       this.getMessage();
     },
     getMessage() {
@@ -185,8 +190,8 @@ export default {
           } else {
             this.singlePage = false;
           }
-          if(this.msgType=='image'){
-            this.previewList=arrayToString(res.data,'content',false);
+          if (this.msgType == "image") {
+            this.previewList = arrayToString(res.data, "content", false);
           }
         })
         .catch(error => {
@@ -198,8 +203,8 @@ export default {
       this.pageSize = val;
       this.getMessage();
     },
-    downloadFile(item){
-          download(item.content,item.fileName,item.type);  
+    downloadFile(item) {
+      download(item.content, item.fileName, item.type);
     }
   },
   created() {
@@ -231,7 +236,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
   .fileExt {
-    width:30px;
+    width: 30px;
     display: block;
   }
   .fileName {
@@ -240,5 +245,8 @@ export default {
     overflow: hidden;
     white-space: nowrap;
   }
+}
+.el-scrollbar__wrap {
+  overflow-x: hidden;
 }
 </style>
