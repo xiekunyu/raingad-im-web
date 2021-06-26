@@ -222,6 +222,30 @@ export function setNoticeAPI(data) {
     })
 }
 
+/**
+ * 群聊设置
+ * @param {*} data
+ */
+export function groupSettingAPI(data) {
+    return request({
+        url: 'enterprise/group/groupSetting',
+        method: 'post',
+        data: data
+    })
+}
+
+/**
+ * 群聊基本信息
+ * @param {*} data
+ */
+export function getGroupInfoAPI(data) {
+    return request({
+        url: 'enterprise/group/groupInfo',
+        method: 'post',
+        data: data
+    })
+}
+
 
 /**
  * 设置消息免打扰

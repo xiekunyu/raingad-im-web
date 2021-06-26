@@ -2,16 +2,15 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
-import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import LemonIMUI from 'lemon-imui';
 import 'lemon-imui/dist/index.css';
-
-import store from './store'
-Vue.use(store);
 Vue.use(ElementUI, { size: 'small' })
 Vue.use(LemonIMUI);
+import router from './router'
+import store from './store'
+Vue.use(store);
 import Clipboard from 'v-clipboard'
 Vue.use(Clipboard)
 Vue.config.productionTip = false

@@ -35,7 +35,7 @@ export default {
   }
 
   .el-scrollbar__wrap {
-      overflow-x: hidden;
+      overflow-x: hidden !important;
   }
   .lemon-contact{
     padding:10px;

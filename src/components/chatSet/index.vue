@@ -5,14 +5,14 @@
                <el-avatar shape="square" :src="contact.avatar"></el-avatar>
             </div>
             <div class="group-content">
-              <div class="group-title">{{contact.displayName}}</div>
-              <div class="group-user">群主：张三</div>
+              <div class="group-title">{{contact.displayName}} <span>({{groupInfo.groupUserCount}})</span></div>
+              <div class="group-user">群主：{{groupInfo.ownerName}}</div>
             </div>
           </div>
           <div class="setting-item">
             <div class="setting-title">群管理：</div>
             <div class="setting-option">
-              <el-switch v-model="myDrawer"> </el-switch>
+              <el-switch v-model="setting.manage"  :active-value="'1'" :inactive-value="'0'" @change="groupSetting"> </el-switch>
             </div>
             <div class="setting-description">
               <div class="des-title">仅群主和群管理员可以管理</div>
@@ -22,7 +22,7 @@
           <div class="setting-item">
             <div class="setting-title">群成员邀请：</div>
             <div class="setting-option">
-              <el-switch v-model="myDrawer"> </el-switch>
+              <el-switch v-model="setting.invite"  :active-value="'1'" :inactive-value="'0'"  @change="groupSetting"> </el-switch>
             </div>
             <div class="setting-description">
               <div class="des-title">允许群成员邀请</div>
@@ -32,21 +32,22 @@
           <div class="setting-item">
             <div class="setting-title">群禁言：</div>
             <div class="setting-option">
-              <el-radio-group v-model="nospeak" size="mini">
+              <el-radio-group v-model="setting.nospeak" size="mini"  @change="groupSetting">
                 <el-radio-button label="0">关闭</el-radio-button>
                 <el-radio-button label="1">仅管理员可发言</el-radio-button>
                 <el-radio-button label="2">仅群主可发言</el-radio-button>
               </el-radio-group>
             </div>
           </div>
-          <div align="center" style="margin-top:40px;">
-            <el-button type="primary">保存</el-button>
-          </div>
           
   </div>
 </template>
 
 <script>
+import {
+  groupSettingAPI,
+  getGroupInfoAPI,
+} from "@/api/im";
 export default {
   name: "chatSet",
   props: {
@@ -57,20 +58,21 @@ export default {
   },
   data() {
     return {
-      myDrawer: false,
-      nospeak:0,
-      form: {
-          delivery: false,
-          type: [],
-        },
+      setting:{},
+      groupInfo:{}
     };
   },
   methods: {
-    closeDrawer(){
-      this.myDrawer=false;
+    groupSetting(){
+      groupSettingAPI({id:this.contact.id,setting:this.setting})
     }
   },
-  created() {
+  created(){
+    getGroupInfoAPI({group_id:this.contact.id}).then(res=>{
+      var data=res.data;
+      this.groupInfo=data;
+      this.setting=data.setting;
+    })
   }
 };
 </script>

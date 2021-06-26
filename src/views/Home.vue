@@ -41,6 +41,8 @@
                   @click="isEdit = true"
                 >
                   <el-tag size="mini" v-if="contact.is_group == 1">群聊</el-tag> {{ contact.displayName }} <span>({{ groupUserCount }})</span>
+                  <el-tag size="mini" v-if="contact.setting.nospeak == 1"  type="warning">仅群管理员可发言</el-tag>
+                  <el-tag size="mini" v-if="contact.setting.nospeak == 2"  type="danger">全员禁言中</el-tag>
                 </span>
                 <span class="displayName" v-if="is_group == 0">{{
                   contact.displayName
@@ -177,7 +179,7 @@
                     <span
                       class="el-icon-edit font-18 handle"
                       @click="noticeBox = true"
-                      v-if="contact.owner_id == user.id"
+                      v-if="contact.role <3 || contact.setting.manage==false"
                     ></span>
                   </div>
                 </div>
@@ -199,6 +201,7 @@
                   <div>
                     <span
                       class="el-icon-circle-plus-outline font-18 handle"
+                      v-if="contact.role <3 || contact.setting.invite==1"
                       @click="openAddGroupUser"
                     ></span>
                   </div>
@@ -323,7 +326,7 @@
       title="设置"
       :visible.sync="settingBox"
       :modal="true"
-      width="500px"
+      width="550px"
     >
       <el-tabs :tab-position="tabPosition" style="min-height: 300px">
         <el-tab-pane label="账号设置">
@@ -384,10 +387,9 @@
             <p>3、单聊支持消息已读未读的状态显示</p>
             <p>4、支持设置新消息声音提醒，浏览器通知</p>
             <p>5、支持部分Lemon-imui内功能设置</p>
-            <p>5、支持文件和图片在线预览</p>
-            <p>6、群聊创建、删除和群成员管理、群公告等</p>
-            <p>7、群聊可以设置消息免打扰</p>
-            <p>8、消息支持撤回</p>
+            <p>6、支持文件、图片和绝大部分媒体文件在线预览</p>
+            <p>7、群聊创建、删除和群成员管理、群公告、群禁言等</p>
+            <p>8、可以置顶联系人，所有联系人可以设置消息免打扰</p>
           </div>
         </el-tab-pane>
         <el-tab-pane label="开源">
@@ -408,7 +410,7 @@
                 class="main-color"
                 href="https://gitee.com/raingad/im-chat-front"
                 target="_blank"
-                >im-chat-front</a
+              >[链接] im-chat-front</a
               >
             </p>
             <p>
@@ -416,14 +418,13 @@
                 class="main-color"
                 href="https://gitee.com/raingad/im-instant-chat"
                 target="_blank"
-                >im-instant-chat</a
+                >[链接] im-instant-chat</a
               >
             </p>
           </div>
-
           <div class="setting-version" style="color: #a6a6a6">
-            <p>后端技术栈：thinkphp6+workerman</p>
             <p>前端技术栈：vue+Lemon-IMUI+element-UI</p>
+            <p>后端技术栈：thinkphp6+workerman</p>
           </div>
           <div class="setting-version">
             <p>
@@ -438,10 +439,6 @@
           </div>
         </el-tab-pane>
       </el-tabs>
-      <!-- <span slot="footer" class="dialog-footer">
-        <el-button @click="centerDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
-      </span> -->
     </el-dialog>
     <!-- 创建群聊 -->
     <el-dialog
@@ -462,6 +459,7 @@
         <el-button type="primary" @click="publishNotice">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 预览接口 -->
     <transition name="fade-user">
       <div class="previewBox" v-if="drawer">
         <el-button
@@ -479,7 +477,6 @@
         ></iframe>
       </div>
     </transition>
-
     <!-- 转发聊天 -->
     <el-dialog
       title="转发"
@@ -507,6 +504,7 @@
         <el-button type="primary" @click="forwardUser">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 消息管理器 -->
     <el-dialog
       title="消息管理器"
       :visible.sync="messageBox"
@@ -515,7 +513,7 @@
     >
       <ChatRecord :contact="currentChat" :key="componentKey"></ChatRecord>
     </el-dialog>
-    <!-- 设置中心 -->
+    <!-- 群设置中心 -->
     <el-dialog
       title="群设置"
       :visible.sync="groupSetting"
@@ -584,8 +582,8 @@ export default {
   name: "app",
   components: {
     Socket,
-    ChatRecord,
     preview,
+    ChatRecord,
     ChatSet,
     ChatTop
   },
@@ -594,9 +592,9 @@ export default {
     return {
       Background,
       componentKey: 1,
-      version: "0.6.24",
+      version: "0.6.26",
       softname: "Raingad IM",
-      logo: "http://img.raingad.com/logo/logo.png",
+      logo: "https://img.file.raingad.com/logo/logo.png",
       // 搜索结果展示
       searchResult: false,
       createChatBox: false,
@@ -636,7 +634,7 @@ export default {
       setting: {
         theme: "blue",
         hideMessageName: false,
-        hideMessageTime: true,
+        hideMessageTime: false,
         avatarCricle: true,
         sendKey: 1,
         isVoice: true
@@ -808,19 +806,7 @@ export default {
             return instance.contact.is_top == 1;
           }
         },
-        {
-          click(e, instance, hide) {
-            const { IMUI, contact } = instance;
-            hide();
-            _this.groupSetting = true;
-            _this.contactSetting = contact;
-          },
-          icon: "el-icon-setting",
-          text: "群管理",
-          visible: instance => {
-            return instance.contact.role == 1 && instance.contact.is_group == 1;
-          }
-        },
+        
         {
           click(e, instance, hide) {
             const { IMUI, contact } = instance;
@@ -855,6 +841,19 @@ export default {
             return (
               instance.contact.is_notice == 0
             );
+          }
+        },
+        {
+          click(e, instance, hide) {
+            const { IMUI, contact } = instance;
+            hide();
+            _this.groupSetting = true;
+            _this.contactSetting = contact;
+          },
+          icon: "el-icon-setting",
+          text: "群管理",
+          visible: instance => {
+            return instance.contact.role == 1 && instance.contact.is_group == 1;
           }
         },
         {
@@ -1172,14 +1171,16 @@ export default {
             true
           );
           break;
+          // 群聊设置
+        case "groupSetting":
+          IMUI.updateContact({
+            id: message.group_id,
+            setting: message.setting
+          });
       }
     }
   },
   mounted() {
-    // 初始化用户设置
-    if (user.setting) {
-      this.setting = eval(user.setting);
-    }
     // 初始化动态设置窗口的高度
     // this.height = document.documentElement.clientHeight;
     // const that = this;
@@ -1205,6 +1206,11 @@ export default {
     this.getSimpleChat();
   },
   created() {
+    // 初始化用户设置
+    if (user.setting) {
+      console.log(user.setting);
+      this.setting = eval(user.setting);
+    }
     if (window.Notification) {
       // 浏览器通知--window.Notification
       if (Notification.permission == "granted") {
@@ -1221,9 +1227,9 @@ export default {
     // 初始化聊天
     getSimpleChat() {
       const { IMUI } = this.$refs;
-      IMUI.setLastContentRender("event", message => {
-        return `[自定义通知内容]`;
-      });
+      // IMUI.setLastContentRender("event", message => {
+      //   return `[自定义通知内容]`;
+      // });
       // 获取联系人列表
       getContactsAPI().then(res => {
         const data = res.data;
@@ -1242,7 +1248,7 @@ export default {
         },
         {
           name: "custom2",
-          title: "退出",
+          title: "系统设置",
           unread: 0,
           click: () => {
             this.settingBox = true;
@@ -1270,6 +1276,7 @@ export default {
       // 初始化表情
       IMUI.initEmoji(EmojiData);
     },
+    // 获取置顶联系人列表
     getChatTop() {
       var list = this.contacts;
       var topList = [];
@@ -1280,6 +1287,7 @@ export default {
       }
       this.chatTopList = topList;
     },
+    // 获取联系人
     getContact(id) {
       const { IMUI } = this.$refs;
       const contactList = IMUI.getContacts();
@@ -1303,13 +1311,13 @@ export default {
         instance.updateMessage({
           id: message.id,
           status: "going",
-          content: "正在重新发送消息..."
+          content: "这个功能没做"
         });
         setTimeout(() => {
           instance.updateMessage({
             id: message.id,
-            status: "succeed",
-            content: message.content
+            status: "failed",
+            content: "还是发送失败，哈哈哈哈！！！"
           });
         }, 2000);
         return;
@@ -1397,7 +1405,11 @@ export default {
             next();
           })
           .catch(error => {
-            next({ status: "failed" });
+            if(error.code==401){//已开启禁言
+              IMUI.removeMessage(message.id);
+            }else{
+              next({ status: "failed" });
+            }
           });
       } else {
         sendMessageAPI(message)
@@ -1407,7 +1419,11 @@ export default {
             next();
           })
           .catch(error => {
-            next({ status: "failed" });
+            if(error.code==401){//已开启禁言
+              IMUI.removeMessage(message.id);
+            }else{
+              next({ status: "failed" });
+            }
           });
       }
     },
@@ -1447,9 +1463,10 @@ export default {
     },
     // 查看
     openNotice() {
-      var _this = this;
-      this.$alert(_this.notice, "公告", {
-        confirmButtonText: "确定"
+      var notice="<div style='white-space: pre;'>"+this.notice+"</div>"
+      this.$alert(notice, "群公告", {
+        confirmButtonText: "确定",
+         dangerouslyUseHTMLString: true
       });
     },
     // 获取所有人员列表
@@ -1782,6 +1799,7 @@ export default {
 
 .displayName {
   font-size: 16px;
+  visibility: visible;
 }
 
 .contact-fixedtop-box {
@@ -1976,22 +1994,22 @@ export default {
 .font-16 {
   font-size: 16px;
 }
-  .lemon-editor__submit .lemon-button{
-    background: #409EFF;
-    color:#fff;
-  }
-   .lemon-editor__submit .lemon-button:hover{
-    background: #409EEE;
-    color:#fff;
-    border:solid 1px #409EEE;
-  }
-  .lemon-editor__submit button[disabled],.lemon-editor__submit button[disabled]:hover{
-    background: #fff;
-    color:#aaa;
-    border:solid 1px #aaa;
-  }
+.lemon-editor__submit .lemon-button{
+  background: #409EFF;
+  color:#fff;
+}
+  .lemon-editor__submit .lemon-button:hover{
+  background: #409EEE;
+  color:#fff;
+  border:solid 1px #409EEE;
+}
+.lemon-editor__submit button[disabled],.lemon-editor__submit button[disabled]:hover{
+  background: #fff;
+  color:#aaa;
+  border:solid 1px #aaa;
+}
 
-  .el-scrollbar__wrap {
-      overflow-x: hidden;
-  }
+.el-scrollbar__wrap {
+    overflow-x: hidden;
+}
 </style>
