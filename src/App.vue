@@ -25,8 +25,8 @@ export default {
   }
    .lemon-editor__submit .lemon-button:hover{
     background: #409EEE;
-    color:#fff;
-    border:solid 1px #409EEE;
+    color:#fff !important;
+    border:solid 1px #409EEE !important;
   }
   .lemon-editor__submit button[disabled],.lemon-editor__submit button[disabled]:hover{
     background: #fff;
