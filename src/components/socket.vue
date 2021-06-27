@@ -10,7 +10,7 @@
 
 <script>
     import Vue from 'vue'
-    import {bindClientIdAPI} from "@/api/login";
+    import {bindClientIdAPI,offlineAPI} from "@/api/login";
     import Lockr from 'lockr'
 
     export default {
@@ -22,7 +22,7 @@
         },
         methods: {
             getWsUrl(){
-                let WS_URI = "ws://im.raingad.com:8282";
+                let WS_URI = "ws://im.raingad.com/wss";
                 if(process.env.NODE_ENV==='production'){
                     var domain=document.domain;
                     var protocol=window.location.protocol;
@@ -30,7 +30,7 @@
                     if(protocol=="https:"){
                         wsProtocol="wss://";
                     }
-                    WS_URI=wsProtocol+domain+":8282";
+                    WS_URI=wsProtocol+domain+"/wss";
                     console.log(WS_URI);
                 }
                 return WS_URI;
@@ -51,12 +51,13 @@
                 switch (data['type']) {
                     // 服务端ping客户端
                     case 'ping':
-                        this.websocket.send('{"type":"pong"}');
+                        this.websocketSend({type:"pong"});
                         break;
                     // 登录 更新用户列表
                     case 'init':
                         Lockr.set('client_id',data['client_id']);
                         bindClientIdAPI({client_id: data['client_id'],user_id:userInfo.user_id}).then(res=>{
+                            this.websocketSend({type:"bindUid",user_id:userInfo.user_id});
                             console.log(data['client_id'],'消息服务启动成功');
                         }).catch(error => {
                             console.log('连接失败');
@@ -68,12 +69,14 @@
                 }
             },
             websocketSend(agentData) {//数据发送
-                console.log("发送消息：");
-                console.log(agentData);
-                this.websocket.send(agentData);
+                var data=JSON.stringify(agentData);
+                this.websocket.send(data);
             },
             websocketClose(e) {  //关闭
-                console.log("connection closed (" + e.code + ")");
+                let userInfo=Lockr.get('UserInfo');
+                offlineAPI({user_id:userInfo.user_id}).then(res=>{
+                    console.log("connection closed (" + e.code + ")");
+                })
             },
             playAudio () {
                 const audio = document.getElementById('chatAudio');

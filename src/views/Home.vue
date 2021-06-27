@@ -30,45 +30,9 @@
             </div>
           </div>
         </template>
-        <!-- 消息窗口顶部的插槽 -->
-        <template #message-title="contact" style="color: red">
-          <div class="message-title-box">
-            <div>
-              <span v-if="isEdit == false">
-                <span
-                  class="displayName"
-                  v-if="is_group == 1"
-                  @click="isEdit = true"
-                >
-                  <el-tag size="mini" v-if="contact.is_group == 1">群聊</el-tag> {{ contact.displayName }} <span>({{ groupUserCount }})</span>
-                  <el-tag size="mini" v-if="contact.setting.nospeak == 1"  type="warning">仅群管理员可发言</el-tag>
-                  <el-tag size="mini" v-if="contact.setting.nospeak == 2"  type="danger">全员禁言中</el-tag>
-                </span>
-                <span class="displayName" v-if="is_group == 0">{{
-                  contact.displayName
-                }}</span>
-              </span>
-
-              <input
-                v-if="isEdit == true"
-                v-model="displayName"
-                class="editInput"
-                @blur="saveGroupName(contact)"
-              />
-            </div>
-            <div class="message-title-tools" v-if="contact.is_group == 1">
-              <i
-                class="el-icon-time"
-                @click="openMessageBox"
-                title="消息管理器"
-              ></i>
-              <!-- <i class="el-icon-more" title="设置" @click="changeDrawer(contact, $refs.IMUI)"></i> -->
-            </div>
-          </div>
-        </template>
-        <!-- 最近联系人列表插槽 -->
+                <!-- 最近联系人列表插槽 -->
         <template #sidebar-message="Contact">
-          <span class="lemon-badge lemon-contact__avatar">
+            <span class="lemon-badge lemon-contact__avatar">
             <span
               class="lemon-avatar"
               v-bind:class="{ 'lemon-avatar--circle': setting.avatarCricle }"
@@ -85,6 +49,7 @@
           <div class="lemon-contact__inner">
             <p class="lemon-contact__label">
               <span class="lemon-contact__name">
+                <span v-if="Contact.is_online && Contact.is_group==0" class="online-status" title="在线"></span>
                 <el-tag size="mini" v-if="Contact.is_group == 1">群聊</el-tag>
                 {{ Contact.displayName }}
               </span>
@@ -106,7 +71,45 @@
               ></span>
             </p>
           </div>
+          
         </template>
+        <!-- 消息窗口顶部的插槽 -->
+        <template #message-title="contact" style="color: red">
+          <div class="message-title-box">
+            <div>
+              <span v-if="isEdit == false">
+                <span
+                  class="displayName"
+                  v-if="is_group == 1"
+                  @click="isEdit = true"
+                >
+                  <el-tag size="mini">群聊</el-tag> {{ contact.displayName }}<span>({{ groupUserCount }})</span>
+                  <el-tag size="mini" v-if="contact.setting.nospeak == 1"  type="warning">仅群管理员可发言</el-tag>
+                  <el-tag size="mini" v-if="contact.setting.nospeak == 2"  type="danger">全员禁言中</el-tag>
+                </span>
+                <span class="displayName" v-if="is_group == 0">
+                  <el-tag size="mini" type="success" v-if="contact.is_online">在线</el-tag> 
+                  <el-tag size="mini" type="info" v-if="!contact.is_online">离线 </el-tag> {{contact.displayName}}</span>
+              </span>
+
+              <input
+                v-if="isEdit == true"
+                v-model="displayName"
+                class="editInput"
+                @blur="saveGroupName(contact)"
+              />
+            </div>
+            <div class="message-title-tools">
+              <i
+                class="el-icon-time"
+                @click="openMessageBox"
+                title="消息管理器"
+              ></i>
+              <!-- <i class="el-icon-more" title="设置" @click="changeDrawer(contact, $refs.IMUI)"></i> -->
+            </div>
+          </div>
+        </template>
+
         <!-- 最近联系人列表顶部插槽 不滚动-->
         <template #sidebar-message-fixedtop="instance">
           <div class="contact-fixedtop-box">
@@ -654,6 +657,8 @@ export default {
       contacts: [],
       allUser: [],
       groupUser: [],
+      _beforeUnload_time:0,
+      _gap_time:0,
       // 当前聊天
       currentChat: {},
       // 当前消息
@@ -1074,7 +1079,31 @@ export default {
     socketAction(val) {
       let message = val.data;
       const { IMUI } = this.$refs;
+      let client_id=Lockr.get('client_id');
       switch (val.type) {
+        //上线、下线通知
+        case "isOnline":
+          IMUI.updateContact({
+            id:message.id,
+            is_online:message.is_online
+          })
+          break;
+        case "offline":
+          if(message.id==this.user.id && message.client_id!=client_id){
+            this.$confirm("你的账号在其他地方登陆，请选择其他账号！", "提示", {
+            showClose:false,
+            showCancelButton:false,
+            confirmButtonText: "确定",
+            type: "error"
+          })
+            .then(() => {
+              this.$store.dispatch("LogOut").then(() => {
+                this.$router.push({ path: "/login" });
+              });
+            })
+          }
+          
+          break;
         // 接收单聊消息
         case "simple":
           // 如果开启了声音才播放
@@ -1130,7 +1159,6 @@ export default {
           break;
         // 新增加了群聊
         case "addGroup":
-          const client_id = Lockr.get("client_id");
           if (message.owner_id != this.user.id) {
             IMUI.appendContact(message);
           }
@@ -1181,6 +1209,23 @@ export default {
       }
     }
   },
+    created() {
+    // 初始化用户设置
+    if (user.setting) {
+      this.setting = eval(user.setting);
+    }
+    if (window.Notification) {
+      // 浏览器通知--window.Notification
+      if (Notification.permission == "granted") {
+        console.log("允许通知");
+      } else if (Notification.permission != "denied") {
+        console.log("需要通知权限");
+        Notification.requestPermission(permission => {});
+      }
+    } else {
+      console.error("浏览器不支持Notification");
+    }
+  },
   mounted() {
     // 初始化动态设置窗口的高度
     // this.height = document.documentElement.clientHeight;
@@ -1205,24 +1250,6 @@ export default {
 
     // 初始化联系人
     this.getSimpleChat();
-  },
-  created() {
-    // 初始化用户设置
-    if (user.setting) {
-      console.log(user.setting);
-      this.setting = eval(user.setting);
-    }
-    if (window.Notification) {
-      // 浏览器通知--window.Notification
-      if (Notification.permission == "granted") {
-        console.log("允许通知");
-      } else if (Notification.permission != "denied") {
-        console.log("需要通知权限");
-        Notification.requestPermission(permission => {});
-      }
-    } else {
-      console.error("浏览器不支持Notification");
-    }
   },
   methods: {
     // 初始化聊天
@@ -1796,6 +1823,68 @@ export default {
   width: 100%;
   align-items: center;
   justify-content: center;
+}
+
+.online-status {
+  position: relative;
+  top: -1px;
+  left: 1px;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  vertical-align: middle;
+  border-radius: 50%;
+  position: relative;
+  background-color: #1890ff;
+  margin:auto 5px;
+  &:after {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #1890ff;
+    border-radius: 50%;
+    -webkit-animation: antStatusProcessing 1.2s ease-in-out infinite;
+    animation: antStatusProcessing 1.2s ease-in-out infinite;
+    content: '';
+  }
+}
+
+@-webkit-keyframes inputfade {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes antStatusProcessing {
+  0% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  to {
+    -webkit-transform: scale(2.4);
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+@keyframes antStatusProcessing {
+  0% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  to {
+    -webkit-transform: scale(2.4);
+    transform: scale(2.4);
+    opacity: 0;
+  }
 }
 
 .displayName {

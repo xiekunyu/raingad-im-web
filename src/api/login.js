@@ -24,6 +24,15 @@ export function bindClientIdAPI(params) {
     })
 }
 
+// 用户下线
+export function offlineAPI(params) {
+    return request({
+        url: 'common/pub/offline',
+        method: 'post',
+        data: params
+    })
+}
+
 // 绑定群聊id
 export function bindGroupAPI(params) {
     return request({
