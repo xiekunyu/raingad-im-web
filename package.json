@@ -14,7 +14,7 @@
     "element-ui": "^2.15.1",
     "lemon-imui": "^1.7.2",
     "lockr": "^0.8.5",
-    "node-sass": "^5.0.0",
+    "node-sass": "^4.0.0",
     "nprogress": "^0.2.0",
     "v-clipboard": "^2.2.3",
     "vue": "^2.5.2",
