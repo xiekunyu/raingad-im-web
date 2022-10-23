@@ -15,6 +15,13 @@ import Clipboard from 'v-clipboard'
 Vue.use(Clipboard)
 Vue.config.productionTip = false
 import '@/permission' // 权限控制
+
+import LemonMessageVoice from "./components/messageType/voice";
+import LemonMessageVideo from "./components/messageType/video";
+Vue.component(LemonMessageVideo.name, LemonMessageVideo);
+Vue.component(LemonMessageVoice.name, LemonMessageVoice);
+
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

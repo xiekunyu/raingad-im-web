@@ -386,7 +386,7 @@
           <div class="setting-version">
             <b> 已经支持功能：</b>
             <p>1、单聊和群聊，新增消息管理器</p>
-            <p>2、支持发送表情、图片和文件</p>
+            <p>2、支持发送表情、图片、语音、视频和文件消息</p>
             <p>3、单聊支持消息已读未读的状态显示</p>
             <p>4、支持设置新消息声音提醒，浏览器通知</p>
             <p>5、支持部分Lemon-imui内功能设置</p>
@@ -525,6 +525,11 @@
     >
       <ChatSet :contact="contactSetting" :key="componentKey"></ChatSet>
     </el-dialog>
+    <!-- 语音录制 -->
+    <el-dialog title="语音录制" custom-class="no-padding" :visible.sync="VoiceStatus" :modal="true" width="500px"
+        append-to-body destroy-on-close>
+        <voice-recorder @send="sendVoice"></voice-recorder>
+      </el-dialog>
     <!-- <preview  :drawer="drawer" :previewUrl="previewUrl" :key="componentKey"></preview> -->
     <Socket ref="socket"></Socket>
   </div>
@@ -569,7 +574,7 @@ import preview from "../components/preview";
 import ChatRecord from "../components/chatRecord";
 import ChatSet from "../components/chatSet";
 import ChatTop from "../components/chatTop";
-
+import VoiceRecorder from "@/components/MessageBox/VoiceRecorder";
 const getTime = () => {
   return new Date().getTime();
 };
@@ -588,16 +593,17 @@ export default {
     preview,
     ChatRecord,
     ChatSet,
-    ChatTop
+    ChatTop,
+    VoiceRecorder
   },
   data() {
     var _this = this;
     return {
       Background,
       componentKey: 1,
-      version: "0.6.26",
+      version: "1.10.23",
       softname: "Raingad IM",
-      logo: "https://img.file.raingad.com/logo/logo.png",
+      logo: "https://im.file.raingad.com/logo/logo.png",
       // 搜索结果展示
       searchResult: false,
       createChatBox: false,
@@ -606,6 +612,7 @@ export default {
       noticeBox: false,
       messageBox: false,
       groupSetting: false,
+      VoiceStatus: false,
       contactSetting: {},
       groupUserCount: 0,
       // 公告
@@ -665,6 +672,7 @@ export default {
       currentMessage: {},
       // 置顶列表
       chatTopList: [],
+      playAudio: null,
       // 群成员邮件菜单
       groupMenu: [
         {
@@ -1053,6 +1061,24 @@ export default {
     }
   },
   watch: {
+    playAudio (val) {
+      if (val && this.currentMessage) {
+        let message = this.currentMessage;
+        var that = this;
+        const { IMUI } = this.$refs;
+        this.playAudio.addEventListener('ended', function () {
+          console.log('声音停止');
+          that.playAudio = null;
+          that.currentMessage = null;
+          IMUI.updateMessage({
+            id: message.id,
+            status: 'successd',
+            isPlay: 0,
+          })
+        }, false);
+      }
+
+    },
     // 监听联系人搜索
     keywords() {
       const { IMUI } = this.$refs;
@@ -1252,18 +1278,38 @@ export default {
     this.getSimpleChat();
   },
   methods: {
+    //清除字符串内的所有HTML标签，除了IMG
+    clearHtml (str) {
+      return str.replace(/<.*?>/gi, "");
+    },
     // 初始化聊天
     getSimpleChat() {
       const { IMUI } = this.$refs;
-      // IMUI.setLastContentRender("event", message => {
-      //   return `[自定义通知内容]`;
-      // });
+      IMUI.setLastContentRender("text", message => {
+        return IMUI.emojiNameToImage(this.clearHtml(message.content));
+      });
+      IMUI.setLastContentRender("voice", message => {
+        return `[语音]`;
+      });
+      IMUI.setLastContentRender("video", message => {
+        return `[视频]`;
+      });
       // 获取联系人列表
       getContactsAPI().then(res => {
         const data = res.data;
         this.contacts = data;
+        var msg = {};
+        // 重新渲染消息
+        data.forEach((item, index) => {
+          if (item.type) {
+            msg.type = item.type;
+            msg.content = item.lastContent;
+            data[index]['lastContent'] = IMUI.lastContentRender(msg);
+          }
+			})
         // 设置置顶人
         this.getChatTop(data);
+
         IMUI.initContacts(data);
       });
       // 初始化左侧菜单栏
@@ -1297,8 +1343,29 @@ export default {
           title: "发送图片"
         },
         {
+          name: "sendVoice",
+          title: "发送语音",
+          click: () => { this.VoiceStatus = true },
+          render: () => { return <i class="el-icon el-icon-microphone f-18" style="vertical-align: middle;font-weight: 600;"></i> }
+        },
+        {
+          name: "uploadVideo",
+          title: "发送视频",
+          click: () => {
+            var uploadVideo = this.$refs.uploadVideo;
+            console.log(uploadVideo)
+            uploadVideo.click();
+          },
+          render: () => {
+            return <i class="el-icon el-icon-video-play f-18" style="vertical-align: middle;font-weight: 600;">
+              <input style="display:none" type="file" accept="video/*" ref="uploadVideo" on-change={e => {
+                this.uploadVideo(e);
+              }} /></i>
+          }
+        },
+        {
           name: "uploadFile",
-          title: "发送文件"
+          title: "发送文件",
         }
       ]);
       // 初始化表情
@@ -1350,7 +1417,29 @@ export default {
         }, 2000);
         return;
       }
-      if (message.type == "image" || message.type == "file") {
+      // 语音消息点击事件
+      if (message.type == 'voice') {
+        // 如果没有其他语音在播放，直接播放
+        if (!this.playAudio) {
+          this.currentMessage = message;
+          return this.playVoice(message, instance);
+        }
+        //只要有在播放的直接停止
+        this.playAudio.pause();
+        this.playAudio = null;
+        instance.updateMessage({
+          id: this.currentMessage.id,
+          status: "successd",
+          isPlay: 0,
+        })
+        // 如果不是点击的同一条数据，重新进行播放
+        if (message.id != this.currentMessage.id) {
+          this.currentMessage = message;
+          this.playVoice(message, instance);
+        }
+      }
+      var imageTypes = ["image", "file", "video"];
+      if (imageTypes.includes(message.type)) {
         if (!message.preview) {
           return this.$message.error("没有配置预览接口");
         }
@@ -1358,6 +1447,15 @@ export default {
         this.drawer = true;
       } else {
       }
+    },
+    playVoice (message, instance) {
+      this.playAudio = new Audio(message.content);
+      this.playAudio.play(); //播放这个音频对象
+      instance.updateMessage({
+        id: message.id,
+        status: "succeed",
+        isPlay: 1,
+      })
     },
     // 打开聊天窗口
     openChat(contactId, instance) {
@@ -1412,6 +1510,64 @@ export default {
         });
       }
       instance.closeDrawer();
+    },
+    uploadVideo (e) {
+      let file = e.srcElement.files[0];
+      let url = URL.createObjectURL(file);
+      //经测试，发现audio也可获取视频的时长
+      let audioElement = new Audio(url);
+      let duration;
+      audioElement.addEventListener("loadedmetadata", function (_event) {
+        duration = audioElement.duration;
+      });
+      let message = {
+        content: url,
+        fromUser: this.user,
+        id: generateRandId(),
+        sendTime: getTime(),
+        status: 'going',
+        toContactId: this.currentChat.id,
+        type: 'video',
+        extends: {
+          duration: duration
+        }//录音时长
+      }
+      this.diySendMessage(message, file);
+    },
+    // 发送语音消息
+    sendVoice (duration, file) {
+      let message = {
+        content: URL.createObjectURL(file),
+        fromUser: this.user,
+        id: generateRandId(),
+        sendTime: getTime(),
+        status: 'going',
+        toContactId: this.currentChat.id,
+        type: 'voice',
+        isPlay: 0,
+        extends: {
+          duration: duration
+        }//录音时长
+      }
+      this.VoiceStatus = false;
+      this.diySendMessage(message, file);
+    },
+    //自定义消息的发送
+    diySendMessage (message, file) {
+      const { IMUI } = this.$refs;
+      IMUI.appendMessage(message, true);
+      this.handleSend(message, function () {
+        var replaceMessage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+          status: "succeed"
+        };
+        IMUI.updateContact({
+          id: message.toContactId,
+          lastContent: IMUI.lastContentRender(message),
+          lastSendTime: message.sendTime
+        });
+        IMUI.CacheDraft.remove(message.toContactId);
+        IMUI.updateMessage(Object.assign(message, replaceMessage));
+      }, file);
     },
     // 发送聊天消息
     handleSend(message, next, file) {

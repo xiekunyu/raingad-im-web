@@ -227,7 +227,7 @@ export default {
 .el-select .el-input {
   width: 130px;
 }
-.el-dialog >>> .el-dialog__body {
+.el-dialog .el-dialog__body {
   padding: 15px;
 }
 
