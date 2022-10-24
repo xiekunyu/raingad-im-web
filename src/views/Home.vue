@@ -1867,17 +1867,21 @@ export default {
       }
       let hasMsg=false;
       
+      
       // 如果是自己的发送的消息推送，则需要获取发送对象的聊天记录，并且查询该聊天记录中是否有聊天消息，并进行push
+      
+      let allMsg=IMUI.getMessages(message.toUser);
+      console.log("🚀 ~ file: Home.vue ~ line 1873 ~ recieveMsg ~ allMsg", allMsg)
+      allMsg.forEach((item, index) => {
+          if (item.id==message.id) {
+            hasMsg=true;
+          }
+      })
       if(this.user.id==message.toContactId){
-        let allMsg=IMUI.getMessages(message.toUser);
-        allMsg.forEach((item, index) => {
-            if (item.id==message.id) {
-              hasMsg=true;
-            }
-        })
         // 这里需要将原来的发送对象的id换回来，哈哈哈
         message.toContactId=message.toUser;
       }
+      console.log("🚀 ~ file: Home.vue ~ line 1869 ~ recieveMsg ~ hasMsg", hasMsg)
       if(!hasMsg){
         IMUI.appendMessage(message, true);
       }
