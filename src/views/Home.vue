@@ -16,6 +16,7 @@
         :hide-message-time="setting.hideMessageTime"
         :avatarCricle="setting.avatarCricle"
         :sendKey="setSendKey"
+        :wrapKey="setWrapKey"
         @change-contact="handleChangeContact"
         @pull-messages="handlePullMessages"
         @message-click="handleMessageClick"
@@ -1114,33 +1115,19 @@ export default {
             is_online:message.is_online
           })
           break;
-        case "offline":
-          if(message.id==this.user.id && message.client_id!=client_id){
-            this.$confirm("你的账号在其他地方登陆，请选择其他账号！", "提示", {
-            showClose:false,
-            showCancelButton:false,
-            confirmButtonText: "确定",
-            type: "error"
-          })
-            .then(() => {
-              this.$store.dispatch("LogOut").then(() => {
-                this.$router.push({ path: "/login" });
-              });
-            })
-          }
-          
-          break;
         // 接收单聊消息
         case "simple":
-          // 如果开启了声音才播放
-          var contact = this.getContact(message.toContactId);
-            // 如果开启了声音才播放
-          if (this.setting.isVoice && contact.is_notice == 1) {
-            this.popNotice(message);
-          }
-          this.recieveMsg(message);
-          break;
-        // 接收群聊消息
+        //   // 如果开启了声音才播放
+        //   if(this.user.id!= message.toContactId){
+        //     var contact = this.getContact(message.toContactId);
+        //     // 如果开启了声音才播放
+        //     if (this.setting.isVoice && contact.is_notice == 1) {
+        //       this.popNotice(message);
+        //     }
+        //   }
+        //   this.recieveMsg(message);
+        //   break;
+        // // 接收群聊消息
         case "group":
           // 如果是自己发送的消息则不需要提示
           if (message.fromUser.id != this.user.id) {
@@ -1149,8 +1136,8 @@ export default {
             if (this.setting.isVoice && contact.is_notice == 1) {
               this.popNotice(message);
             }
-            this.recieveMsg(message);
           }
+          this.recieveMsg(message);
           break;
         // 撤回消息
         case "undoMessage":
@@ -1353,7 +1340,6 @@ export default {
           title: "发送视频",
           click: () => {
             var uploadVideo = this.$refs.uploadVideo;
-            console.log(uploadVideo)
             uploadVideo.click();
           },
           render: () => {
@@ -1391,6 +1377,9 @@ export default {
           return contactList[i];
         }
       }
+    },
+    setWrapKey(e){
+      return false
     },
     // 设置发送键
     setSendKey(e) {
@@ -1715,7 +1704,6 @@ export default {
       // 批量请求
       Promise.all(arr)
         .then(res => {
-          console.log(res);
           const { IMUI } = this.$refs;
           for (var i = 0; i < res.length; i++) {
             var data = res[i].data;
@@ -1877,7 +1865,22 @@ export default {
           fromUser: message.fromUser.id
         });
       }
-      IMUI.appendMessage(message, true);
+      let hasMsg=false;
+      
+      // 如果是自己的发送的消息推送，则需要获取发送对象的聊天记录，并且查询该聊天记录中是否有聊天消息，并进行push
+      if(this.user.id==message.toContactId){
+        let allMsg=IMUI.getMessages(message.toUser);
+        allMsg.forEach((item, index) => {
+            if (item.id==message.id) {
+              hasMsg=true;
+            }
+        })
+        // 这里需要将原来的发送对象的id换回来，哈哈哈
+        message.toContactId=message.toUser;
+      }
+      if(!hasMsg){
+        IMUI.appendMessage(message, true);
+      }
     },
     openGallery() {
       this.$message({

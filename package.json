@@ -1,6 +1,6 @@
 {
   "name": "raingadIm",
-  "version": "1.10.23",
+  "version": "1.10.25",
   "description": "A Vue.js project",
   "author": "raingad@foxmail.com <raingad@foxmail.com>",
   "private": true,
@@ -13,7 +13,7 @@
     "axios": "^0.21.1",
     "element-ui": "^2.15.1",
     "js-audio-recorder": "^1.0.7",
-    "lemon-imui": "^1.7.2",
+    "lemon-imui": "^1.7.4",
     "lockr": "^0.8.5",
     "nprogress": "^0.2.0",
     "v-clipboard": "^2.2.3",
