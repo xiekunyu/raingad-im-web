@@ -1115,19 +1115,17 @@ export default {
             is_online:message.is_online
           })
           break;
-        // 接收单聊消息
+        case "offline":
+          if(message.id==this.user.id && message.client_id!=client_id && !message.isMobile){
+            this.$message.error="您的账号在其他地方登录，已被迫下线！";
+            this.$store.dispatch("LogOut").then(() => {
+                this.$router.push({ path: "/login" });
+            });
+          }
+          
+          break;
+        // 接收消息
         case "simple":
-        //   // 如果开启了声音才播放
-        //   if(this.user.id!= message.toContactId){
-        //     var contact = this.getContact(message.toContactId);
-        //     // 如果开启了声音才播放
-        //     if (this.setting.isVoice && contact.is_notice == 1) {
-        //       this.popNotice(message);
-        //     }
-        //   }
-        //   this.recieveMsg(message);
-        //   break;
-        // // 接收群聊消息
         case "group":
           // 如果是自己发送的消息则不需要提示
           if (message.fromUser.id != this.user.id) {
