@@ -2,8 +2,8 @@
   <div class="login-wrapper" :style="'background-image:url('+ Background +')'">
     <div class="form-box">
       <div class="form-title">
-        <img src="../assets/img/logo2.png" alt="icon">
-        <p>账 号 登 录</p>
+        <img src="https://im.file.raingad.com/logo/logo.png" width="100" alt="icon">
+        <!-- <p>Raingad-IM 账号登录</p> -->
       </div>
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-width="0px" class="login-form">
         <el-form-item prop="username">
@@ -12,6 +12,7 @@
         <el-form-item prop="password">
           <el-input v-model="loginForm.password" type="password" auto-complete="off" placeholder="请输入密码" prefix-icon="el-icon-lock" @keyup.enter.native="handleLogin" />
         </el-form-item>
+        <div class="c-666" style="font-size:12px;">演示账号：13800000001~13800000009，密码:123456</div>
         <el-form-item>
           <el-checkbox v-model="loginForm.rememberMe">记住我</el-checkbox>
         </el-form-item>
@@ -21,6 +22,7 @@
             <span v-else>登 录 中...</span>
           </el-button>
         </el-form-item>
+        <div align="center" class="c-999">Raingad-IM for V-1.10.26</div>
       </el-form>
     </div>
   </div>
