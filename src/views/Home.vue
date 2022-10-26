@@ -602,7 +602,7 @@ export default {
     return {
       Background,
       componentKey: 1,
-      version: "1.10.23",
+      version: "1.10.26",
       softname: "Raingad IM",
       logo: "https://im.file.raingad.com/logo/logo.png",
       // 搜索结果展示
