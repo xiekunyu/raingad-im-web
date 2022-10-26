@@ -33,16 +33,6 @@
             ></ChatItem>
           </el-scrollbar>
         </div>
-        <!-- <el-pagination
-          background
-          :hide-on-single-page="singlePage"
-          :page-size.sync="listRows"
-          :current-page.sync="pageSize"
-          layout="prev, pager, next"
-          :total="total"
-          @current-change="handleCurrentChange"
-        >
-        </el-pagination> -->
       </el-tab-pane>
       <el-tab-pane label="图片" name="image">
         <div class="el-tab-body-list">
@@ -55,6 +45,17 @@
                 :key="index"
               ></ChatImage>
             </el-row>
+          </el-scrollbar>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="视频" name="video">
+        <div class="el-tab-body-list">
+          <el-scrollbar style="height:100%;">
+            <ChatItem
+              :data="item"
+              v-for="(item, index) in dataList"
+              :key="index"
+            ></ChatItem>
           </el-scrollbar>
         </div>
       </el-tab-pane>

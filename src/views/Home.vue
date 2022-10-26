@@ -16,7 +16,7 @@
         :hide-message-time="setting.hideMessageTime"
         :avatarCricle="setting.avatarCricle"
         :sendKey="setSendKey"
-        :wrapKey="setWrapKey"
+        :wrapKey="wrapKey"
         @change-contact="handleChangeContact"
         @pull-messages="handlePullMessages"
         @message-click="handleMessageClick"
@@ -1376,16 +1376,12 @@ export default {
         }
       }
     },
-    setWrapKey(e){
-      return false
+    wrapKey(e){
+      return this.setting.sendKey == 1 ? (e.keyCode == 13 && e.ctrlKey) : (e.keyCode == 13 && !e.ctrlKey && !e.shiftKey);
     },
     // 设置发送键
     setSendKey(e) {
-      if (this.setting.sendKey == 1) {
-        return e.keyCode == 13;
-      } else {
-        return e.keyCode == 13 && e.ctrlKey === true;
-      }
+      return this.setting.sendKey == 1 ? (e.keyCode == 13 && !e.ctrlKey && !e.shiftKey) : (e.keyCode == 13 && e.ctrlKey);
     },
     // 点击了消息
     handleMessageClick(e, key, message, instance) {

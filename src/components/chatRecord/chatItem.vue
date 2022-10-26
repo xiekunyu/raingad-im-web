@@ -27,6 +27,9 @@
           fit="contain"
         ></el-image>
       </div>
+      <div v-if="data.type == 'video'" class="chat-list-video">
+        <video  style="max-width: 300px; max-height: 200px;" :src="data.content" controls></video>
+      </div>
       <div v-if="data.type == 'file'" class="chat-list-file">
         <el-card
           :body-style="{ padding: '10px 10px 0 10px' }"
