@@ -18,10 +18,13 @@ export function getFileExtImg(fileName) {
     var spl = fileName.split(".");
     var exts = spl[spl.length - 1];
     var ext = exts.toUpperCase();
-    if (!ext) {
-        var ext = '';
+    var extlist=['jpg','jpeg','png','bmp','gif','pdf','mp3','wav','wmv','amr','mp4','3gp','avi','m2v','mkv','mov','webp','ppt','pptx','doc','docx','xls','xlsx','pdf'];
+    if(extlist.includes(ext)){
+        return url + ext + '.png';
+    }else{
+        return url+'icon/document.svg';
     }
-    return url + ext + '.png';
+    
 }
 
 // 下载文件
