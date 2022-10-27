@@ -567,7 +567,8 @@ import {
   arrayToString,
   editArrValue,
   timeFormat,
-  delArrValue
+  delArrValue,
+  generateRandId
 } from "@/utils/index";
 import Lockr from "lockr";
 import Socket from "../components/socket";
@@ -579,12 +580,6 @@ import packageData from "../../package.json";
 import VoiceRecorder from "@/components/messageBox/voiceRecorder";
 const getTime = () => {
   return new Date().getTime();
-};
-
-const generateRandId = () => {
-  return Math.random()
-    .toString(36)
-    .substr(-8);
 };
 
 const user = Lockr.get("UserInfo");
@@ -1220,7 +1215,7 @@ export default {
       }
     }
   },
-    created() {
+  created() {
     // 初始化用户设置
     if (user.setting) {
       this.setting = eval(user.setting);
@@ -1266,6 +1261,7 @@ export default {
     // 初始化聊天
     getSimpleChat() {
       const { IMUI } = this.$refs;
+      this.IMUI=IMUI;
       IMUI.setLastContentRender("voice", message => {
         return `[语音]`;
       });
