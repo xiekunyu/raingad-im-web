@@ -2,7 +2,7 @@
   <div class="login-wrapper" :style="'background-image:url('+ Background +')'">
     <div class="form-box">
       <div class="form-title">
-        <img src="https://im.file.raingad.com/logo/logo.png" width="100" alt="icon">
+        <img :src="packageData.logo" width="100" alt="icon">
         <!-- <p>Raingad-IM 账号登录</p> -->
       </div>
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-width="0px" class="login-form">
@@ -22,7 +22,7 @@
             <span v-else>登 录 中...</span>
           </el-button>
         </el-form-item>
-        <div align="center" class="c-999">Raingad-IM for V-1.10.26</div>
+        <div align="center" class="c-999">{{packageData.name}} for {{packageData.version}}</div>
       </el-form>
     </div>
   </div>
@@ -30,12 +30,13 @@
 
 <script>
 import Background from '../assets/img/login-background.jpg'
-
+import packageData from "../../package.json";
 export default {
   name: 'Login',
   data() {
     return {
       Background,
+      packageData,
       loginForm: {
         username: '13800000002',
         password: '123456',

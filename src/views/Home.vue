@@ -378,10 +378,10 @@
         </el-tab-pane>
         <el-tab-pane label="关于 IM">
           <div align="center">
-            <el-avatar :src="logo" :size="50"></el-avatar>
+            <el-avatar :src="packageData.logo" :size="50"></el-avatar>
             <br /><br />
             <p>
-              <span class="main-color"> {{ softname }} </span>for {{ version }}
+              <span class="main-color"> {{ packageData.name }} </span>for {{ packageData.version }}
             </p>
           </div>
           <div class="setting-version">
@@ -398,10 +398,10 @@
         </el-tab-pane>
         <el-tab-pane label="开源">
           <div align="center">
-            <el-avatar :src="logo" :size="50"></el-avatar>
+            <el-avatar :src="packageData.logo" :size="50"></el-avatar>
             <br /><br />
             <p>
-              <span class="main-color"> {{ softname }} </span>for {{ version }}
+              <span class="main-color"> {{ packageData.name }} </span>for {{ packageData.version }}
             </p>
           </div>
           <!-- <div class="setting-version">
@@ -575,10 +575,12 @@ import preview from "../components/preview";
 import ChatRecord from "../components/chatRecord";
 import ChatSet from "../components/chatSet";
 import ChatTop from "../components/chatTop";
-import VoiceRecorder from "@/components/MessageBox/VoiceRecorder";
+import packageData from "../../package.json";
+import VoiceRecorder from "@/components/messageBox/voiceRecorder";
 const getTime = () => {
   return new Date().getTime();
 };
+
 const generateRandId = () => {
   return Math.random()
     .toString(36)
@@ -600,11 +602,9 @@ export default {
   data() {
     var _this = this;
     return {
+      packageData,
       Background,
       componentKey: 1,
-      version: "1.10.26",
-      softname: "Raingad IM",
-      logo: "https://im.file.raingad.com/logo/logo.png",
       // 搜索结果展示
       searchResult: false,
       createChatBox: false,
@@ -1263,16 +1263,9 @@ export default {
     this.getSimpleChat();
   },
   methods: {
-    //清除字符串内的所有HTML标签，除了IMG
-    clearHtml (str) {
-      return str.replace(/<.*?>/gi, "");
-    },
     // 初始化聊天
     getSimpleChat() {
       const { IMUI } = this.$refs;
-      IMUI.setLastContentRender("text", message => {
-        return IMUI.emojiNameToImage(this.clearHtml(message.content));
-      });
       IMUI.setLastContentRender("voice", message => {
         return `[语音]`;
       });
@@ -1859,26 +1852,11 @@ export default {
           fromUser: message.fromUser.id
         });
       }
-      let hasMsg=false;
-      
-      
-      // 如果是自己的发送的消息推送，则需要获取发送对象的聊天记录，并且查询该聊天记录中是否有聊天消息，并进行push
-      
-      let allMsg=IMUI.getMessages(message.toUser);
-      console.log("🚀 ~ file: Home.vue ~ line 1873 ~ recieveMsg ~ allMsg", allMsg)
-      allMsg.forEach((item, index) => {
-          if (item.id==message.id) {
-            hasMsg=true;
-          }
-      })
       if(this.user.id==message.toContactId){
         // 这里需要将原来的发送对象的id换回来，哈哈哈
         message.toContactId=message.toUser;
       }
-      console.log("🚀 ~ file: Home.vue ~ line 1869 ~ recieveMsg ~ hasMsg", hasMsg)
-      if(!hasMsg){
-        IMUI.appendMessage(message, true);
-      }
+      IMUI.appendMessage(message, true);
     },
     openGallery() {
       this.$message({
@@ -1893,14 +1871,8 @@ export default {
     },
     changeDrawer(contact, instance) {
       instance.changeDrawer({
-        //width: 240,
-        //height: "90%",
         offsetX: 0,
         offsetY: 1,
-        //position: "center",
-        // inside: true,
-        // offsetX: -280,
-        // offsetY: -100,
         render: () => {
           return (
             <div class="drawer-content">
