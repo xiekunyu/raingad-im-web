@@ -101,12 +101,14 @@
               />
             </div>
             <div class="message-title-tools">
+              <i class="el-icon-phone-outline mr-10" title="语音通话" v-if="!contact.is_group" @click="called(false)"></i>
+              <i class="el-icon-video-camera mr-10" title="视频通话" v-if="!contact.is_group" @click="called(true)"></i>
               <i
                 class="el-icon-time"
                 @click="openMessageBox"
                 title="消息管理器"
               ></i>
-              <!-- <i class="el-icon-more" title="设置" @click="changeDrawer(contact, $refs.IMUI)"></i> -->
+              
             </div>
           </div>
         </template>
@@ -515,8 +517,10 @@
       :modal="true"
       width="800px"
     >
+    
       <ChatRecord :contact="currentChat" :key="componentKey"></ChatRecord>
     </el-dialog>
+    <!-- 消息管理器 -->
     <!-- 群设置中心 -->
     <el-dialog
       title="群设置"
@@ -533,6 +537,8 @@
       </el-dialog>
     <!-- <preview  :drawer="drawer" :previewUrl="previewUrl" :key="componentKey"></preview> -->
     <Socket ref="socket"></Socket>
+    <!-- 视频通话组件 -->
+    <webrtc :contact="currentChat" :config="webrtcConfig" :alias="packageData.name" :userInfo="user" ref="webrtc" :key="componentKey"></webrtc>
   </div>
 </template>
 
@@ -578,6 +584,7 @@ import ChatSet from "../components/chatSet";
 import ChatTop from "../components/chatTop";
 import packageData from "../../package.json";
 import VoiceRecorder from "@/components/messageBox/voiceRecorder";
+import webrtc from "@/components/webrtc";
 const getTime = () => {
   return new Date().getTime();
 };
@@ -592,13 +599,19 @@ export default {
     ChatRecord,
     ChatSet,
     ChatTop,
-    VoiceRecorder
+    VoiceRecorder,
+    webrtc
   },
   data() {
     var _this = this;
     return {
       packageData,
       Background,
+      webrtcConfig:{
+          config: { 'iceServers':[{
+	  	    'urls': 'stun:stun.voipbuster.com',
+	  	  }]}
+      },
       componentKey: 1,
       // 搜索结果展示
       searchResult: false,
@@ -607,6 +620,7 @@ export default {
       forwardBox: false,
       noticeBox: false,
       messageBox: false,
+      webrtcBox: false,
       groupSetting: false,
       VoiceStatus: false,
       contactSetting: {},
@@ -1258,6 +1272,10 @@ export default {
     this.getSimpleChat();
   },
   methods: {
+    called(is_video){
+      this.webrtcBox=true;
+      this.$refs.webrtc.called(is_video);
+    },
     // 初始化聊天
     getSimpleChat() {
       const { IMUI } = this.$refs;

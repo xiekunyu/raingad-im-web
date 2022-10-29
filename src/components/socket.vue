@@ -22,7 +22,7 @@
         },
         methods: {
             getWsUrl(){
-                let WS_URI = "ws://im.raingad.com/wss";
+                let WS_URI = "wss://im.raingad.com/wss";
                 if(process.env.NODE_ENV==='production'){
                     var domain=document.domain;
                     var protocol=window.location.protocol;
