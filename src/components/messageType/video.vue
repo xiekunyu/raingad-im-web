@@ -21,7 +21,11 @@ export default {
               style={{
               }}
               >
-                 <el-image style="max-height: 200px" src={ props.extends.poster } fit="cover"></el-image>
+                 <el-image style="max-height: 200px" src={ props.extends.poster } fit="cover">
+                  <div slot="error" class="image-slot">
+                    <i class="el-icon-picture-outline"></i>
+                  </div>
+                 </el-image>
                   {props.extends.duration}
                   <div class="video-shadow">
                   <div class="el-icon el-icon-video-play c-white f-28 video-icon"></div>

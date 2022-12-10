@@ -1504,6 +1504,9 @@ export default {
     },
     uploadVideo (e) {
       let file = e.srcElement.files[0];
+      if(!file){
+        return false;
+      }
       let url = URL.createObjectURL(file);
       //经测试，发现audio也可获取视频的时长
       let audioElement = new Audio(url);
