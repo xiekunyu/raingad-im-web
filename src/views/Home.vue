@@ -1504,9 +1504,6 @@ export default {
     },
     uploadVideo (e) {
       let file = e.srcElement.files[0];
-      if(!file){
-        return false;
-      }
       let url = URL.createObjectURL(file);
       //经测试，发现audio也可获取视频的时长
       let audioElement = new Audio(url);
@@ -1527,6 +1524,8 @@ export default {
         }//录音时长
       }
       this.diySendMessage(message, file);
+      // 将选择的文件清空
+      this.$refs.uploadVideo.value='';
     },
     // 发送语音消息
     sendVoice (duration, file) {
