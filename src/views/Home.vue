@@ -415,7 +415,7 @@
             <p>
               前端地址：<a
                 class="main-color"
-                href="https://gitee.com/raingad/im-chat-front"
+                :href="packageData.frontUrl"
                 target="_blank"
               >[链接] im-chat-front</a
               >
@@ -423,7 +423,7 @@
             <p>
               后端地址：<a
                 class="main-color"
-                href="https://gitee.com/raingad/im-instant-chat"
+                :href="packageData.backstageUrl"
                 target="_blank"
                 >[链接] im-instant-chat</a
               >
@@ -1312,6 +1312,28 @@ export default {
         },
         {
           name: "contacts"
+        },
+        {
+          name: "kaiyuan",
+          title: "开源",
+          unread: 0,
+          click: () => {
+            window.open(this.packageData.frontUrl);
+          },
+          render: menu => {
+            return <i class="el-icon-connection" />;
+          }
+        },
+        {
+          name: "mobile",
+          title: "移动端体验",
+          unread: 0,
+          click: () => {
+            window.open('https://im.raingad.com/web');
+          },
+          render: menu => {
+            return <i class="el-icon-mobile-phone" />;
+          }
         },
         {
           name: "custom2",
