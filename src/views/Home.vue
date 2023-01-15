@@ -610,7 +610,7 @@ export default {
       Background,
       webrtcConfig:{
           config: { 'iceServers':[{
-	  	    'urls': 'stun:stun.voipbuster.com',
+	  	    'urls': 'stun:stun.callwithus.com',
 	  	  }]}
       },
       componentKey: 1,
