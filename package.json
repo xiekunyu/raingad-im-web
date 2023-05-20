@@ -1,10 +1,14 @@
 {
   "name": "Raingad-IM",
-  "version": "1.12.11",
+  "version": "2.5.20",
   "description": "一款基于vue2.0的即时聊天工具", 
   "logo": "https://im.file.raingad.com/logo/logo.png", 
   "frontUrl": "https://gitee.com/raingad/im-chat-front", 
   "backstageUrl": "https://gitee.com/raingad/im-instant-chat", 
+  "mobileUrl": "https://im.raingad.com/web", 
+  "author": "Raingad",
+  "license": "Apache2.0",
+  "qqGroupUrl":"https://jq.qq.com/?_wv=1027&k=jMQAt9lh",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

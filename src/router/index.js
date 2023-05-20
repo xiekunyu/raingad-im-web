@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home'
+import Chat from '@/views/Chat'
 import Login from '@/views/Login'
 
 Vue.use(Router)
@@ -10,6 +11,12 @@ export const constantRouterMap = [{
         name: 'home',
         component: Home,
         meta: { title: '首页' }
+    },
+    {
+        path: '/chat',
+        name: 'chat',
+        component: Chat,
+        meta: { title: '聊天' }
     },
     {
         path: '/login',

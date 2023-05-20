@@ -22,7 +22,11 @@ const state = {
     userInfo: null, // 用户信息
     // 权限信息
     allAuth: null, // 总权限信息 默认空 调整动态路由
-    socketAction: ''
+    socketAction: '',
+    contactSync: '',
+    toContactId: 0,
+    unread: 0,
+    allContacts: [],
 }
 
 const mutations = {
@@ -40,6 +44,16 @@ const mutations = {
     },
     catchSocketAction(state, data) {
         state.socketAction = data;
+    },
+    updateUnread: (state, data) => {
+        state.unread = parseInt(data);
+    },
+    initContacts: (state, data) => {
+        state.allContacts = data;
+    },
+    openChat: (state, data) => {
+        state.toContactId = data;
+        state.contactSync = Math.random().toString(36).substr(-8);
     },
 }
 
