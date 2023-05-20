@@ -1932,9 +1932,13 @@ export default {
           messages: data,
           fromUser: message.fromUser.id
         });
-      } else {
-        this.unread++;
+      }else{
+        // 如果不是自己的消息，需要将未读数加1
+        if (this.user.id != message.fromUser.id) {
+          this.unread++;
+        }
       }
+      
       if(this.user.id==message.toContactId){
         // 这里需要将原来的发送对象的id换回来，哈哈哈
         message.toContactId=message.toUser;
