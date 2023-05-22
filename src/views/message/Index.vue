@@ -1,7 +1,7 @@
 <template>
   <div class="messageBoxStyle" v-show="dialogTableVisible">
   <el-dialog :visible.sync="dialogIsShow" :modal="false" @close="closeDialog" custom-class="sideMenu-message"
-        :show-close="false" :width="'1000px'" :close-on-press-escape="true">
+        :show-close="false" :width="'1000px'" :close-on-press-escape="true" >
     <div class="chat-box">
       <lemon-imui
         :user="user"
@@ -278,6 +278,7 @@
       :visible.sync="createChatBox"
       :modal="true"
       width="612px"
+      append-to-body
     >
       <el-transfer
         filterable
@@ -305,6 +306,7 @@
       :visible.sync="addGroupUserBox"
       :modal="true"
       width="612px"
+      append-to-body
     >
       <el-transfer
         filterable
@@ -332,6 +334,7 @@
       :visible.sync="settingBox"
       :modal="true"
       width="550px"
+      append-to-body
     >
       <el-tabs :tab-position="tabPosition" style="min-height: 300px">
         <el-tab-pane label="账号设置">
@@ -452,6 +455,7 @@
       :visible.sync="noticeBox"
       :modal="true"
       width="500px"
+      append-to-body
     >
       <el-input
         type="textarea"
@@ -489,6 +493,7 @@
       :visible.sync="forwardBox"
       :modal="true"
       width="612px"
+      append-to-body
     >
       <el-transfer
         filterable
@@ -516,6 +521,7 @@
       :visible.sync="messageBox"
       :modal="true"
       width="800px"
+      append-to-body
     >
     
       <ChatRecord :contact="currentChat" :key="componentKey"></ChatRecord>
@@ -527,6 +533,7 @@
       :visible.sync="groupSetting"
       :modal="true"
       width="500px"
+      append-to-body
     >
       <ChatSet :contact="contactSetting" :key="componentKey"></ChatSet>
     </el-dialog>
@@ -2009,13 +2016,14 @@ export default {
 }
 
 .messageBoxStyle {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   width: 100%;
   z-index: 1999;
   background: rgba(0, 0, 0, 0.5);
+  overflow-y: visible;
   .el-dialog__wrapper {
     display: flex;
     align-items: center;

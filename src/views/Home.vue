@@ -84,8 +84,8 @@
       
     </div>
     <p>
-        <el-image style="width:300px;" src="https://emoji.raingad.com/file/wx.jpg"></el-image>
-        <el-image class="ml-40" style="width:300px;" src="https://emoji.raingad.com/file/zfb.jpg"></el-image>
+        <el-image class="mr-40" style="width:300px;" src="https://emoji.raingad.com/file/wx.jpg"></el-image>
+        <el-image style="width:280px;" src="https://emoji.raingad.com/file/zfb.jpg"></el-image>
     </p>
     <div class="tip">
       <p>开源不易，同时如果需要以下功能，作者提供付费服务，收费标准为：进群后咨询作者！</p>
