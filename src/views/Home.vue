@@ -57,8 +57,12 @@
         <el-button>原来的DEMO</el-button>
       </div>
       <div class="ml-20">
-        <el-button><a :href="packageData.mobileUrl"
+        <el-tooltip placement="right-start" effect="light">
+  <div slot="content"><el-image style="width:200px" src="https://emoji.raingad.com/file/h5.png"></el-image></div>
+  <el-button><a :href="packageData.mobileUrl"
             target="_blank">移动端体验</a></el-button>
+</el-tooltip>
+        
       </div>
     </div>
     
@@ -236,7 +240,13 @@ export default {
   }
 }
 
+</style>
+
+<style>
 .el-image {
   overflow: inherit;
+}
+.el-tooltip__popper{
+  padding:0 !important;
 }
 </style>
