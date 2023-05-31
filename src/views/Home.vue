@@ -58,11 +58,22 @@
       </div>
       <div class="ml-20">
         <el-tooltip placement="right-start" effect="light">
-  <div slot="content"><el-image style="width:200px" src="https://emoji.raingad.com/file/h5.png"></el-image></div>
-  <el-button><a :href="packageData.mobileUrl"
-            target="_blank">移动端体验</a></el-button>
-</el-tooltip>
+          <div slot="content"><el-image style="width:200px" src="https://emoji.raingad.com/file/h5.png"></el-image></div>
+          <el-button><a :href="packageData.mobileUrl"
+                    target="_blank">H5体验</a></el-button>
+        </el-tooltip>
         
+      </div>
+      <div class="ml-20">
+        <el-tooltip placement="right-start" effect="light">
+          <div slot="content"><el-image style="width:200px" src="https://emoji.raingad.com/file/app.png"></el-image></div>
+          <el-button><a href="https://emoji.raingad.com/file/raingad.apk"
+                    target="_blank">安卓APP体验</a></el-button>
+        </el-tooltip>
+        
+      </div>
+      <div class="ml-20">
+        前端技术有限，仅实现了基础功能。
       </div>
     </div>
     

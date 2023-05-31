@@ -5,7 +5,7 @@
   "logo": "https://im.file.raingad.com/logo/logo.png", 
   "frontUrl": "https://gitee.com/raingad/im-chat-front", 
   "backstageUrl": "https://gitee.com/raingad/im-instant-chat", 
-  "mobileUrl": "https://im.raingad.com/web", 
+  "mobileUrl": "https://im.raingad.com/h5", 
   "author": "Raingad",
   "license": "Apache2.0",
   "qqGroupUrl":"https://jq.qq.com/?_wv=1027&k=jMQAt9lh",

@@ -12,7 +12,7 @@
         <el-form-item prop="password">
           <el-input v-model="loginForm.password" type="password" auto-complete="off" placeholder="请输入密码" prefix-icon="el-icon-lock" @keyup.enter.native="handleLogin" />
         </el-form-item>
-        <div class="c-666" style="font-size:12px;">演示账号：13800000001~13800000009，密码:123456</div>
+        <div class="c-666" style="font-size:12px;">演示账号：13800000002~13800000009，密码:123456</div>
         <el-form-item>
           <el-checkbox v-model="loginForm.rememberMe">记住我</el-checkbox>
         </el-form-item>
