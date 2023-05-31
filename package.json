@@ -20,7 +20,7 @@
     "core-js": "^3.8.3",
     "element-ui": "^2.15.1",
     "js-audio-recorder": "^1.0.7",
-    "lemon-imui": "^1.7.6",
+    "lemon-imui": "^1.7.7",
     "lockr": "^0.8.5",
     "nprogress": "^0.2.0",
     "v-clipboard": "^2.2.3",
