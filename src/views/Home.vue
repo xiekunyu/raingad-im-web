@@ -46,6 +46,12 @@
       </p>
     </div>
 
+    <div class="warning">
+      <p>
+        新增了uniapp移动端音视频通话，目前仅支持H5和APP（安卓已经测试）。
+      
+    </div>
+
     <!-- 消息 -->
     <div class="demo-btn">
       <div class="flex-box-center" @click="showMessageBox()">
@@ -73,14 +79,14 @@
         
       </div>
       <div class="ml-20">
-        前端技术有限，仅实现了基础功能。
+        前端技术有限，仅实现了基础聊天功能。
       </div>
     </div>
     
     
     <div class="contact-main">
-      <div class="title">联系人</div>
-      <div class="contact-box" v-for="x in allContacts" :key="x.id" v-if="x.is_group == 0">
+      <div class="title"><b style="font-size:24px">联系人</b>（仅展示部分用于演示）</div>
+      <div class="contact-box" v-for="x in allContacts" :key="x.id" v-if="x.is_group == 0 && x.id<6">
         <div class="contact-item">
           <el-avatar :src="x.avatar"></el-avatar>
           <span>{{ x.realname }}</span>
@@ -105,8 +111,8 @@
     <div class="tip">
       <p>开源不易，同时如果需要以下功能，作者提供付费服务，收费标准为：进群后咨询作者！</p>
       <p>1. 协助部署：200元/次（需要自行安装好运行环境，最好是宝塔面板）</p>
-      <p>2. 1v1音视频通话源码：200元/套</p>
-      <p>3. uniapp移动端源码：200元/套</p>
+      <p>2. web端1v1音视频通话源码：200元/套</p>
+      <p>3. uniapp移动端源码：200元/套。(带uniapp音视频通话源码的388元/套)</p>
     </div>
 
     <Message ref="Message" :dialogTableVisible.sync="dialogTableVisible"></Message>

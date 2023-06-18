@@ -83,7 +83,7 @@ git clone https://gitee.com/raingad/im-chat-front.git
 ```
 2.  进入项目目录，执行： 
 ```
-npm intsall
+npm install
 ```
 3.  开发调试
 ```
