@@ -1186,6 +1186,26 @@ export default {
         case "undoMessage":
           IMUI.updateMessage(message);
           break;
+        // 设置置顶
+        case "setChatTop":
+          IMUI.updateContact({
+            id: message.id,
+            is_top: message.is_top
+          });
+          if(message.is_top==1){
+            const contact = this.getContact(message.id);
+            this.chatTopList.push(contact);
+          }else{
+            delArrValue(this.chatTopList, "id", message.id);
+          }
+          break;
+        // 设置消息免打扰
+        case "setIsNotice":
+          IMUI.updateContact({
+            id: message.id,
+            is_notice: message.is_notice
+          });
+          break;
         // 修改群组名称
         case "editGroupName":
           IMUI.updateContact({

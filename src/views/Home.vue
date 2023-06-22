@@ -16,53 +16,53 @@
         <div class="im-des">{{ packageData.description }}</div>
       </div>
     </div>
-    <div class="code-url mb-20">
-      <div class="ml-15">
+    <div class="code-url">
+      <div class="ml-15 mb-15">
         前端地址：<a :href="packageData.frontUrl" target="_blank"><el-image
             :src="packageData.frontUrl + '/badge/star.svg?theme=white'" alt="star"></el-image></a>
       </div>
-      <div class="ml-15">
+      <div class="ml-15 mb-15">
         后端地址：<a :href="packageData.backstageUrl" target="_blank"><el-image
             :src="packageData.backstageUrl + '/badge/star.svg?theme=dark'" alt="star"></el-image></a>
       </div>
-      <div class="ml-15">
+      <div class="ml-15 mb-15">
         <el-button type="warning" plain size="mini" round><a :href="packageData.qqGroupUrl"
             target="_blank">QQ交流群:336921267</a></el-button>
       </div>
-      <div class="ml-15">
+      <div class="ml-15 mb-15">
         <el-button plain size="mini" round><a href="http://june000.gitee.io/lemon-im"
             target="_blank">Lemon-IMUI手册</a></el-button>
       </div>
     </div>
 
     <div class="tip">
+      <h3 class="mb-5"><b>介绍</b></h3>
       <p>
-        1.
-        {{ packageData.name }}是一个开源的即时通信demo，主要用于学习交流，为大家提供即时通讯的开发思路，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统，不建议用于商业用途。
+        1、{{ packageData.name }}是一个<b class="c-red">开源的即时通信demo，主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统，或者用于内网交流。不建议用于商业用途，如确有需要商用，请自行开发完善，并注明相关的版权问题。
       </p>
       <p>
-        2.
-        目前仅开源了网页端(lemon-imui+element-ui)和后台接口（TP6+workerman），主要是对接企业应用等内部聊天，非社区版，没有后台管理。移动端代码仅实现了基础聊天功能，无群聊管理等相关功能，未开源。
+        2、支持发送表情、图片、语音、视频和文件消息，支持单聊、群聊、群管理、1对1音视频通话（移动端目前仅支持H5和安卓APP，IOS没条件测试，和web端不相通，独立使用）具体功能可以看项目主页。
       </p>
     </div>
 
     <div class="warning">
-      <p>
-        新增了uniapp移动端音视频通话，目前仅支持H5和APP（安卓已经测试）。
-      
+      <h3 class="mb-5"><b>TIPS</b></h3>
+      <p>1、目前仅开源了网页端(lemon-imui+element-ui)和后台接口（TP6+workerman），可以用于对接企业应用等内部聊天，内网私有聊天室。</p>
+      <p>2、非社区版，不能加好友等，暂时没有后台管理，正在计划开发中，增加一些简单的管理功能，比如加、减人等。</p>
+      <p>3、移动端代码未开源，如有需要请查看底部说明。</p>
     </div>
 
     <!-- 消息 -->
     <div class="demo-btn">
-      <div class="flex-box-center" @click="showMessageBox()">
+      <div class="flex-box-center  mb-15" @click="showMessageBox()">
         <el-badge :value="unread" :max="99" :hidden="unread ? false : true" class="item">
           <el-button>打开消息盒子</el-button>
         </el-badge>
       </div>
-      <div @click="$router.push({path:'/chat'})">
-        <el-button>原来的DEMO</el-button>
+      <div class="mb-15 mr-20" @click="$router.push({path:'/chat'})">
+        <el-button>纯享模式</el-button>
       </div>
-      <div class="ml-20">
+      <div class=" mb-15 mr-20">
         <el-tooltip placement="right-start" effect="light">
           <div slot="content"><el-image style="width:200px" src="https://emoji.raingad.com/file/h5.png"></el-image></div>
           <el-button><a :href="packageData.mobileUrl"
@@ -70,16 +70,13 @@
         </el-tooltip>
         
       </div>
-      <div class="ml-20">
+      <div class="mb-15">
         <el-tooltip placement="right-start" effect="light">
           <div slot="content"><el-image style="width:200px" src="https://emoji.raingad.com/file/app.png"></el-image></div>
           <el-button><a href="https://emoji.raingad.com/file/raingad.apk"
                     target="_blank">安卓APP体验</a></el-button>
         </el-tooltip>
         
-      </div>
-      <div class="ml-20">
-        前端技术有限，仅实现了基础聊天功能。
       </div>
     </div>
     
@@ -105,14 +102,23 @@
       
     </div>
     <p>
-        <el-image class="mr-40" style="width:300px;" src="https://emoji.raingad.com/file/wx.jpg"></el-image>
-        <el-image style="width:280px;" src="https://emoji.raingad.com/file/zfb.jpg"></el-image>
+        <el-image class="mr-40 mb-20" style="width:300px;" src="https://emoji.raingad.com/file/wx.jpg"></el-image>
+        <el-image class="" style="width:280px;" src="https://emoji.raingad.com/file/zfb.jpg"></el-image>
     </p>
     <div class="tip">
+      <h3 class="mb-5"><b>服务介绍</b></h3>
       <p>开源不易，同时如果需要以下功能，作者提供付费服务，收费标准为：进群后咨询作者！</p>
-      <p>1. 协助部署：200元/次（需要自行安装好运行环境，最好是宝塔面板）</p>
-      <p>2. web端1v1音视频通话源码：200元/套</p>
-      <p>3. uniapp移动端源码：200元/套。(带uniapp音视频通话源码的388元/套)</p>
+      <p>1. 协助部署：200元/次（需要自行安装好运行环境，最好是宝塔面板），赠送web端1v1音视频通话源码</p>
+      <p>2. uniapp移动端源码：388元/套。(全开源)</p>
+    </div>
+
+        <!-- 其他项目 -->
+    <div class="other-pro">
+      <h2>其他项目</h2>
+      <br>
+      <div class="mb-15">
+        <el-link type="primary" href="https://gitee.com/raingad/j-preview">纯JS文件预览插件</el-link>
+      </div>
     </div>
 
     <Message ref="Message" :dialogTableVisible.sync="dialogTableVisible"></Message>
@@ -195,6 +201,7 @@ export default {
 
   .code-url {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
   }
 
@@ -250,13 +257,21 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
     .item{
       margin-right: 20px;
     }
   }
 }
 
+.other-pro{
+
+}
+@media screen and (max-width: 768px) {
+  .main-container{
+    padding: 15px;
+  }
+}
 </style>
 
 <style>
