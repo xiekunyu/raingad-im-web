@@ -22,19 +22,17 @@
         },
         methods: {
             getWsUrl(){
-                let WS_URI = "wss://im.raingad.com/wss";
+                const ws_host=process.env.VUE_APP_BASE_API;
+                let protocol=window.location.protocol;
+                let wsProtocol="ws://";
                 if(process.env.NODE_ENV==='production'){
-                    var domain=document.domain;
-                    var protocol=window.location.protocol;
-                    var wsProtocol="ws://";
-                    if(protocol=="https:"){
-                        wsProtocol="wss://";
-                    }
-                    WS_URI=wsProtocol+domain+"/wss";
-                    console.log(WS_URI);
+                    ws_host=window.location.host;
                 }
+                if(protocol=="https:"){
+                    wsProtocol="wss://";
+                }
+                const WS_URI=wsProtocol+ws_host+"/wss";
                 return WS_URI;
-                
             },
             initWebSocket() { //初始化weosocket
                 //ws地址

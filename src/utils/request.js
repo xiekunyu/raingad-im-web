@@ -55,8 +55,9 @@ if (window.location.href.indexOf('index.html') != -1) {
 const baseURL = hrefs.length > 0 ? hrefs[0] : window.location.href
     // baseURL + 'index.php/' 默认请求地址
     // process.env.BASE_API 自定义请求地址
+const devUrl=window.location.protocol+'//'+process.env.VUE_APP_BASE_API;
 
-window.BASE_URL = process.env.NODE_ENV === 'production' ? baseURL + '/' : process.env.VUE_APP_BASE_API
+window.BASE_URL = process.env.NODE_ENV === 'production' ? baseURL + '/' : devUrl
 const service = axios.create({
     baseURL: window.BASE_URL, // api 的 base_url
     timeout: 60000 // 请求超时时间
