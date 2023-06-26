@@ -4,8 +4,8 @@
       <lemon-imui
         :user="user"
         ref="IMUI"
-        width="1000px"
-        :height="height"
+        :width="curWidth"
+        :height="curHeight"
         :contextmenu="contextmenu"
         :contact-contextmenu="contactContextmenu"
         :theme="setting.theme"
@@ -210,7 +210,7 @@
                   </div>
                 </div>
                 <hr />
-                <div class="group-user-body" id="group-user">
+                <div class="group-user-body" :style="'height:calc('+height+' - 230px )'" id="group-user">
                   <el-scrollbar style="height:100%;">
                     <lemon-contact
                       class="user-list"
@@ -550,36 +550,9 @@
 <script>
 import { mapState } from "vuex";
 import EmojiData from "@/utils/emoji";
-import {
-  getContactsAPI,
-  sendMessageAPI,
-  getMessageListAPI,
-  setMsgIsReadAPI,
-  editGroupNameAPI,
-  sendFileAPI,
-  settingAPI,
-  groupUserListAPI,
-  getAllUserAPI,
-  addGroupAPI,
-  setManagerAPI,
-  removeUserAPI,
-  addGroupUserAPI,
-  removeGrouprAPI,
-  setNoticeAPI,
-  undoMessageAPI,
-  isNoticeAPI,
-  setChatTopAPI,
-  removeMessageAPI
-} from "@/api/im";
-import { bindGroupAPI } from "@/api/login";
-import {
-  search_object,
-  arrayToString,
-  editArrValue,
-  timeFormat,
-  delArrValue,
-  generateRandId
-} from "@/utils/index";
+import * as imApi from "@/api/im";
+import * as loginApi from "@/api/login";
+import * as utils from "@/utils/index";
 import Lockr from "lockr";
 import Socket from "./socket";
 import preview from "./preview";
@@ -607,11 +580,24 @@ export default {
     webrtc
   },
   props: {
-
+    width: {
+      type: String,
+      default: "1000px"
+    },
+    height: {
+      type: String,
+      default: "640px"
+    },
+    fullScreen: {
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     var _this = this;
     return {
+      curWidth:this.width,
+      curHeight:this.height,
       unread:0,
       dialogIsShow:true,
       packageData,
@@ -674,7 +660,6 @@ export default {
         avatar: user.avatar,
         account: user.account
       },
-      height: "640px",
       pageSize: 1,
       listRows: 10,
       is_group: 0,
@@ -714,7 +699,7 @@ export default {
               cancelButtonText: "取消",
               type: "warning"
             }).then(() => {
-              setManagerAPI({
+              imApi.setManagerAPI({
                 id: this.group_id,
                 user_id: contact.user_id,
                 role: 2
@@ -743,7 +728,7 @@ export default {
               cancelButtonText: "取消",
               type: "warning"
             }).then(() => {
-              setManagerAPI({
+              imApi.setManagerAPI({
                 id: this.group_id,
                 user_id: contact.user_id,
                 role: 3
@@ -773,7 +758,7 @@ export default {
               cancelButtonText: "取消",
               type: "warning"
             }).then(() => {
-              removeUserAPI({ id: this.group_id, user_id: contact.user_id });
+              imApi.removeUserAPI({ id: this.group_id, user_id: contact.user_id });
             });
           },
           visible: instance => {
@@ -792,7 +777,7 @@ export default {
           text: "置顶聊天",
           click: (e, instance, hide) => {
             const { IMUI, contact } = instance;
-            setChatTopAPI({
+            imApi.setChatTopAPI({
               id: contact.id,
               is_top: 1,
               is_group: contact.is_group
@@ -817,7 +802,7 @@ export default {
           text: "取消置顶",
           click: (e, instance, hide) => {
             const { IMUI, contact } = instance;
-            setChatTopAPI({
+            imApi.setChatTopAPI({
               id: contact.id,
               is_top: 0,
               is_group: contact.is_group
@@ -828,7 +813,7 @@ export default {
                   is_top: 0
                 });
                 // 删除置顶聊天列表人员
-                delArrValue(this.chatTopList, "id", contact.id);
+                utils.delArrValue(this.chatTopList, "id", contact.id);
               }
             });
             hide();
@@ -842,7 +827,7 @@ export default {
           click(e, instance, hide) {
             const { IMUI, contact } = instance;
             hide();
-            isNoticeAPI({ id: contact.id, is_notice: 0 ,is_group:contact.is_group});
+            imApi.isNoticeAPI({ id: contact.id, is_notice: 0 ,is_group:contact.is_group});
             IMUI.updateContact({
               id: contact.id,
               is_notice: 0
@@ -860,7 +845,7 @@ export default {
           click(e, instance, hide) {
             const { IMUI, contact } = instance;
             hide();
-            isNoticeAPI({ id: contact.id, is_notice: 1 ,is_group:contact.is_group});
+            imApi.isNoticeAPI({ id: contact.id, is_notice: 1 ,is_group:contact.is_group});
             IMUI.updateContact({
               id: contact.id,
               is_notice: 1
@@ -899,7 +884,7 @@ export default {
                 type: "warning"
               })
               .then(() => {
-                removeGrouprAPI({ id: contact.id });
+                imApi.removeGrouprAPI({ id: contact.id });
                 _this.$message({
                   type: "success",
                   message: "删除成功!"
@@ -927,7 +912,7 @@ export default {
                 type: "warning"
               })
               .then(() => {
-                removeUserAPI({ id: contact.id, user_id: _this.user.id });
+                imApi.removeUserAPI({ id: contact.id, user_id: _this.user.id });
                 _this.$message({
                   type: "success",
                   message: "退出成功!"
@@ -950,7 +935,7 @@ export default {
         {
           click: (e, instance, hide) => {
             const { IMUI, message } = instance;
-            undoMessageAPI({ id: message.id })
+            imApi.undoMessageAPI({ id: message.id })
               .then(res => {
                 const data = {
                   id: message.id,
@@ -1001,7 +986,7 @@ export default {
             const { IMUI } = this.$refs;
             const contactList = IMUI.getContacts();
             const currentContact = IMUI.getCurrentContact();
-            this.allUser = editArrValue(contactList, "id", currentContact.id);
+            this.allUser = utils.editArrValue(contactList, "id", currentContact.id);
             hide();
             this.forwardBox = true;
           }
@@ -1056,7 +1041,7 @@ export default {
         //     // }).then(() => {
         //     //   console.log(message.id)
         //     //   ;
-        //     //   removeMessageAPI({ id: message.id });
+        //     //   imApi.removeMessageAPI({ id: message.id });
         //     // }).catch(error => {
         //     //       console.log(error);
         //     // });;
@@ -1076,7 +1061,7 @@ export default {
     }),
     formatTime() {
       return function(val) {
-        return timeFormat(val);
+        return utils.timeFormat(val);
       };
     }
   },
@@ -1124,7 +1109,7 @@ export default {
     // 监听设置发送变化需要进行设置更改
     setting: {
       handler(newValue, oldValue) {
-        settingAPI(newValue);
+        imApi.settingAPI(newValue);
         user.setting = newValue;
         Lockr.set("UserInfo", user);
       },
@@ -1179,7 +1164,7 @@ export default {
             const contact = this.getContact(message.id);
             this.chatTopList.push(contact);
           }else{
-            delArrValue(this.chatTopList, "id", message.id);
+            utils.delArrValue(this.chatTopList, "id", message.id);
           }
           break;
         // 设置消息免打扰
@@ -1197,7 +1182,7 @@ export default {
           });
           // 更新群名
           const data = {
-            id: generateRandId(),
+            id: utils.generateRandId(),
             type: "event",
             //使用 jsx 时 click必须使用箭头函数（使上下文停留在vue内）
             content: (
@@ -1221,7 +1206,7 @@ export default {
           if (message.owner_id != this.user.id) {
             IMUI.appendContact(message);
           }
-          bindGroupAPI({ client_id: client_id, group_id: message.id });
+          loginApi.bindGroupAPI({ client_id: client_id, group_id: message.id });
           break;
         // 设置群管理员
         case "setManager":
@@ -1245,7 +1230,7 @@ export default {
           // 发布事件消息
           IMUI.appendMessage(
             {
-              id: generateRandId(),
+              id: utils.generateRandId(),
               type: "event",
               //使用 jsx 时 click必须使用箭头函数（使上下文停留在vue内）
               content: (
@@ -1327,7 +1312,7 @@ export default {
           return `[视频]`;
         });
         // 获取联系人列表
-        getContactsAPI().then(res => {
+        imApi.getContactsAPI().then(res => {
           const data = res.data;
           this.contacts = data;
           var msg = {};
@@ -1348,8 +1333,7 @@ export default {
 
           IMUI.initContacts(data);
         });
-        // 初始化左侧菜单栏
-        IMUI.initMenus([
+        let menus=[
           {
             name: "messages"
           },
@@ -1372,7 +1356,7 @@ export default {
             title: "移动端体验",
             unread: 0,
             click: () => {
-              window.open('https://im.raingad.com/web');
+              window.open('https://im.raingad.com/h5');
             },
             render: menu => {
               return <i class="el-icon-mobile-phone" />;
@@ -1390,7 +1374,28 @@ export default {
             },
             isBottom: true
           }
-        ]);
+        ];
+        if(this.fullScreen){
+          menus.push({
+            name: "fullscrren",
+            title: "全屏/窗口",
+            unread: 0,
+            click: () => {
+              if(this.curWidth=="100vw"){
+                this.curWidth="1000px";
+                this.curHeight="640px";
+              }else{
+                this.curWidth="100vw";
+                this.curHeight="100vh";
+              }
+            },
+            render: menu => {
+              return <i class="el-icon-full-screen" />;
+            }
+          });
+        }
+        // 初始化左侧菜单栏
+        IMUI.initMenus(menus);
         // 初始化工具栏
         IMUI.initEditorTools([
           {
@@ -1557,7 +1562,7 @@ export default {
       }
       // 如果有未读的消息，需要将消息修改为已读
       if (data.length > 0) {
-        setMsgIsReadAPI({
+        imApi.setMsgIsReadAPI({
           is_group: contact.is_group,
           toContactId: contact.id,
           messages: data,
@@ -1582,7 +1587,7 @@ export default {
       let message = {
         content: url,
         fromUser: this.user,
-        id: generateRandId(),
+        id: utils.generateRandId(),
         sendTime: getTime(),
         status: 'going',
         toContactId: this.currentChat.id,
@@ -1600,7 +1605,7 @@ export default {
       let message = {
         content: URL.createObjectURL(file),
         fromUser: this.user,
-        id: generateRandId(),
+        id: utils.generateRandId(),
         sendTime: getTime(),
         status: 'going',
         toContactId: this.currentChat.id,
@@ -1644,7 +1649,7 @@ export default {
         }
         formdata.append("file", file);
         formdata.append("message", JSON.stringify(message));
-        sendFileAPI(formdata)
+        imApi.sendFileAPI(formdata)
           .then(res => {
             IMUI.updateMessage(res.data);
             next();
@@ -1657,7 +1662,7 @@ export default {
             }
           });
       } else {
-        sendMessageAPI(message)
+        imApi.sendMessageAPI(message)
           .then(res => {
             IMUI.setEditorValue("");
             IMUI.updateMessage(res.data);
@@ -1674,7 +1679,7 @@ export default {
     },
     // 拉取聊天记录
     handlePullMessages(contact, next, instance) {
-      getMessageListAPI({
+      imApi.getMessageListAPI({
         toContactId: contact.id,
         is_group: contact.is_group,
         pageSize: this.pageSize,
@@ -1697,7 +1702,7 @@ export default {
     // 发布公告
     publishNotice() {
       this.noticeBox = false;
-      setNoticeAPI({ id: this.group_id, notice: this.notice }).then(res => {
+      imApi.setNoticeAPI({ id: this.group_id, notice: this.notice }).then(res => {
         if (res.code == 0) {
           this.$message({
             type: "success",
@@ -1716,7 +1721,7 @@ export default {
     },
     // 获取所有人员列表
     getAllUser(data) {
-      getAllUserAPI(data).then(res => {
+      imApi.getAllUserAPI(data).then(res => {
         const data = res.data;
         this.allUser = data;
       });
@@ -1728,14 +1733,14 @@ export default {
     },
     // 打开添加群成员的窗口
     openAddGroupUser() {
-      var user_ids = arrayToString(this.groupUser, "user_id");
+      var user_ids = utils.arrayToString(this.groupUser, "user_id");
       this.getAllUser({ user_ids: user_ids });
       this.addGroupUserBox = true;
     },
     // 封装循环请求
     fn(formData) {
       return new Promise((resolve, reject) => {
-        sendMessageAPI(formData)
+        imApi.sendMessageAPI(formData)
           .then(res => {
             if (res.code === 0) {
               resolve(res);
@@ -1762,7 +1767,7 @@ export default {
       var arr = [];
       for (var i = 0; i < userIds.length; i++) {
         var toContactId = userIds[i].toString();
-        message.id = generateRandId();
+        message.id = utils.generateRandId();
         message.status = "successd";
         message.sendTime = getTime();
         message.toContactId = toContactId;
@@ -1798,13 +1803,13 @@ export default {
     // 添加群成员
     addGroupUser() {
       this.addGroupUserBox = false;
-      addGroupUserAPI({ user_ids: this.selectUid, id: this.group_id });
+      imApi.addGroupUserAPI({ user_ids: this.selectUid, id: this.group_id });
       this.selectUid = [];
     },
     // 创建群聊
     createGroup() {
       this.createChatBox = false;
-      addGroupAPI({ user_ids: this.selectUid }).then(res => {
+      imApi.addGroupAPI({ user_ids: this.selectUid }).then(res => {
         const data = res.data;
         const { IMUI } = this.$refs;
         if (res.code == 0) {
@@ -1818,7 +1823,7 @@ export default {
     },
     // 获取群聊成员列表
     getGroupUserList(group_id) {
-      groupUserListAPI({
+      imApi.groupUserListAPI({
         group_id: group_id
       }).then(res => {
         if (res.code == 0) {
@@ -1842,7 +1847,7 @@ export default {
       // 如果更改了名称，请求服务器，并通知所有群更改名称
       if (this.displayName != this.oldName) {
         const { IMUI } = this.$refs;
-        editGroupNameAPI({
+        imApi.editGroupNameAPI({
           id: contact.id,
           displayName: this.displayName
         }).then(res => {
@@ -1864,7 +1869,7 @@ export default {
     // 搜索联系人
     searchContact(contacts) {
       if (this.keywords != "") {
-        this.searchList = search_object(
+        this.searchList = utils.search_object(
           contacts,
           ["displayName", "name_py"],
           this.keywords
@@ -1930,7 +1935,7 @@ export default {
       if (contact.id == message.toContactId) {
         var data = [];
         data.push(message);
-        setMsgIsReadAPI({
+        imApi.setMsgIsReadAPI({
           toContactId: contact.id,
           is_group: contact.is_group,
           messages: data,
@@ -2218,7 +2223,7 @@ export default {
       -webkit-box-orient: vertical;
     }
     .group-user-body {
-      height: 410px;
+      min-height: 410px;
       .user-list {
         display: flex;
         flex-direction: row;

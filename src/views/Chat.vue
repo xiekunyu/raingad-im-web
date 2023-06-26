@@ -3,7 +3,7 @@
     class="main-container"
     :style="'background-image:url(' + Background + ')'"
   >
-    <raingadIm></raingadIm>
+    <raingadIm :fullScreen="true"></raingadIm>
   </div>
 </template>
 
