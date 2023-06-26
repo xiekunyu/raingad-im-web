@@ -210,7 +210,7 @@
                   </div>
                 </div>
                 <hr />
-                <div class="group-user-body" :style="'height:calc('+height+' - 230px )'" id="group-user">
+                <div class="group-user-body" :style="'height:calc('+curHeight+' - 230px )'" id="group-user">
                   <el-scrollbar style="height:100%;">
                     <lemon-contact
                       class="user-list"
@@ -1271,19 +1271,6 @@ export default {
     }
   },
   mounted() {
-    // 初始化动态设置窗口的高度
-    // this.height = document.documentElement.clientHeight;
-    // const that = this;
-    // window.onresize = () => {
-    //   return (() => {
-    //     if (this.is_group == 1) {
-    //       var html = document.getElementById("group-user");
-    //       html.style.height =
-    //         document.documentElement.clientHeight - 280 + "px";
-    //     }
-    //     that.height = document.documentElement.clientHeight;
-    //   })();
-    // };
     if (this.searchResult) {
       document.addEventListener("click", function(e) {
         if (!that.$refs.configforms.contains(e.target)) {
@@ -1291,7 +1278,6 @@ export default {
         }
       });
     }
-
     // 初始化联系人
     this.getSimpleChat();
   },
@@ -1954,32 +1940,10 @@ export default {
       }
       IMUI.appendMessage(message, true);
     },
-    openGallery() {
-      this.$message({
-        message: "即将呈现！",
-        type: "warning"
-      });
-    },
     openMessageBox() {
       this.messageBox = true;
       // 组件重置
       this.componentKey += 1;
-    },
-    changeDrawer(contact, instance) {
-      instance.changeDrawer({
-        offsetX: 0,
-        offsetY: 1,
-        render: () => {
-          return (
-            <div class="drawer-content">
-              <p>
-                <b>自定义抽屉</b>
-              </p>
-              <p>{contact.displayName}</p>
-            </div>
-          );
-        }
-      });
     },
     // 退出聊天室
     logout() {
