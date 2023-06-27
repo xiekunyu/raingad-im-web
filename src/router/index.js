@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from '@/views/Home'
 import Chat from '@/views/Chat'
 import Login from '@/views/Login'
-
+import manage from './manage.js'
 Vue.use(Router)
 
 export const constantRouterMap = [{
@@ -29,7 +29,6 @@ export const constantRouterMap = [{
         redirect: '/404',
         hidden: true
     },
-    // userRouter,
     {
         path: '/404',
         component: () =>
@@ -41,7 +40,7 @@ export const constantRouterMap = [{
 const createRouter = () => new Router({
     mode: 'hash', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    routes: constantRouterMap
+    routes: [...constantRouterMap,...manage]
 })
 
 const router = createRouter()

@@ -272,13 +272,14 @@ export default {
     padding: 15px;
   }
 }
+::v-deep .el-tooltip__popper{
+  padding:0 !important;
+}
 </style>
 
 <style>
 .el-image {
   overflow: inherit;
 }
-.el-tooltip__popper{
-  padding:0 !important;
-}
+
 </style>
