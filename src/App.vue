@@ -34,6 +34,10 @@ export default {
     border:solid 1px #aaa;
   }
 
+  .el-scrollbar{
+      height: 100% !important;
+  }
+
   .el-scrollbar__wrap {
       overflow-x: hidden !important;
   }

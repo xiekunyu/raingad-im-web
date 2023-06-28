@@ -6,20 +6,25 @@
         <el-row type="flex" justify="space-between" align="middle" :style="{ height: '60px' }">
           <el-col :span="8" class="logo">
             <div class="image">
-              <img src="https://im.file.raingad.com/logo/logo.png" alt="logo">
+              <img :src="packageData.logo" alt="logo">
             </div>
-            <div class="f-20 ml-5">Raingad-IM</div>  
+            <div class="f-20 ml-5">{{packageData.name}}</div>  
           </el-col>
           <el-col :span="16" class="text-right">
             <div class="user">
+              <span class="message">
+                <router-link to="/chat">
+                  <el-button> 进入聊天 </el-button>
+                </router-link>
+              </span>
               <span class="message"  @click="showMessageBox()">
                 <el-badge :value="unread" :max="99" :hidden="unread ? false : true">
-                  <el-button icon="el-icon-message f-18" circle></el-button>
+                  <el-button icon="el-icon-chat-line-round f-18" circle></el-button>
                 </el-badge>
               </span>
               <el-dropdown trigger="click">
                 <span class="avatar">
-                  <img src="https://im.file.raingad.com/logo/logo.png" alt="avatar">
+                  <img :src="packageData.logo" alt="avatar">
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>个人中心</el-dropdown-item>
@@ -43,6 +48,22 @@
                   </el-menu-item>
                 </template>
               </el-menu>
+              <el-menu :default-active="active" mode="vertical" @select="handleMenuSelect" style="border:none" class="el-menu-vertical-demo" ext-color="#fff"  :collapse="isCollapse">
+                <template v-for="(route, index) in routes">
+                  <el-menu-item :index="route.path" :key="index">
+                    <i :class="route.meta.icon"></i>
+                    <span slot="title">{{ route.meta.title }}</span>
+                  </el-menu-item>
+                </template>
+              </el-menu>
+              <el-menu :default-active="active" mode="vertical" @select="handleMenuSelect" style="border:none" class="el-menu-vertical-demo" ext-color="#fff"  :collapse="isCollapse">
+                <template v-for="(route, index) in routes">
+                  <el-menu-item :index="route.path" :key="index">
+                    <i :class="route.meta.icon"></i>
+                    <span slot="title">{{ route.meta.title }}</span>
+                  </el-menu-item>
+                </template>
+              </el-menu>
             </el-scrollbar>
           </div>
           <div class="aside-bottom" @click="isCollapse=!isCollapse">
@@ -50,7 +71,7 @@
           </div>
         </el-aside>
         
-        <el-main style="background-color: #f5f5f5;">
+        <el-main style="background-color: #f5f5f5;max-height: calc(100vh - 61px);;">
           <el-scrollbar style="height:100%">
             <transition name="fade" mode="out-in">
               <router-view :key="key" />
@@ -67,7 +88,6 @@
 import packageData from "../../package.json";
 import { mapGetters, mapMutations, mapState } from "vuex";
 import Message from "@/views/message/Index"; 
-import ManageRouter from "@/router/manage.js"; 
 export default {
   name: "Index",
   components: {
@@ -111,15 +131,20 @@ export default {
     }
   },
   mounted() {
+    this.active = this.$route.path;
     const route = this.$router.options.routes.filter(route => route.name=='manage');
     this.routes = route[0].children;
-    console.log(this.routes)
   },
   methods: {
     handleMenuSelect(index) {
       this.active = index
       if(this.$route.path == index) return;
       this.$router.push(index)
+    },
+    showMessageBox() {
+      this.dialogTableVisible
+        ? (this.dialogTableVisible = false)
+        : (this.dialogTableVisible = true);
     }
   }
 };

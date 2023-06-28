@@ -9,7 +9,7 @@
 
 <script>
 import Background from "../assets/img/login-background.jpg";
-import raingadIm from "@/components/index";
+import raingadIm from "@/components/message/index";
 
 export default {
   name: "app",

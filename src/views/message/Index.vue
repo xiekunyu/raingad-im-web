@@ -9,7 +9,7 @@
 
 <script>
 
-import rainagdIm from "@/components/index.vue";
+import rainagdIm from "@/components/message/index.vue";
 const getTime = () => {
   return new Date().getTime();
 };

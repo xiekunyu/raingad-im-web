@@ -13,6 +13,15 @@ export default [
                 component: () =>import ('@/views/manage/index.vue'),
                 meta: { 
                     title: '概况',
+                    icon: 'el-icon-data-line'
+                }
+            },
+            {
+                path: '/manage/setting',
+                name: 'index',
+                component: () =>import ('@/views/manage/setting.vue'),
+                meta: { 
+                    title: '设置',
                     icon: 'el-icon-setting'
                 }
             },
