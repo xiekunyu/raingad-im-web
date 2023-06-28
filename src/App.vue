@@ -33,6 +33,10 @@ export default {
     color:#aaa;
     border:solid 1px #aaa;
   }
+  body,html,#app{
+    height: 100%;
+    width:100%
+  }
 
   .el-scrollbar{
       height: 100% !important;
@@ -41,12 +45,55 @@ export default {
   .el-scrollbar__wrap {
       overflow-x: hidden !important;
   }
+
+  .el-container{
+    overflow: auto;
+  }
+
+  .el-select-dropdown__wrap {
+    margin-bottom: 0 !important;
+  }
+
   .lemon-contact{
     padding:10px;
   }
+
   hr {
     height: 1px;
     background-color: #e6e6e6;
     border: none;
   }
+
+  // 滚动条美化
+  ::-webkit-scrollbar {
+		  width: 10px;
+		  height: 10px;
+		}
+
+  ::-webkit-scrollbar-track {
+    background-color: #eee;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(185,185,185,0.5);
+    border-radius: 10px;
+  }
+
+  /* Firefox scrollbar */
+  .scrollbar-firefox {
+		  scrollbar-width: thin;
+		  scrollbar-color: #888 #eee;
+		}
+
+		.scrollbar-firefox::-webkit-scrollbar {
+		  width: initial;
+		  height: initial;
+		}
+
+		.scrollbar-firefox::-webkit-scrollbar-thumb {
+		  background-color: #888;
+		  border-radius: 10px;
+		}
+
+
 </style>

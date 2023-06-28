@@ -19,19 +19,23 @@
               </span>
               <span class="message"  @click="showMessageBox()">
                 <el-badge :value="unread" :max="99" :hidden="unread ? false : true">
-                  <el-button icon="el-icon-chat-line-round f-18" circle></el-button>
+                  <i class="el-icon-chat-line-round f-24" circle></i>
                 </el-badge>
               </span>
               <el-dropdown trigger="click">
-                <span class="avatar">
-                  <img :src="packageData.logo" alt="avatar">
-                </span>
+                <div class="lz-flex lz-align-items-center">
+                  <span class="avatar">
+                    <img :src="packageData.logo" alt="avatar">
+                  </span>
+                  <span class="username">用户名</span>
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </div>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>个人中心</el-dropdown-item>
                   <el-dropdown-item>退出登录</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
-              <span class="username">用户名</span>
+              
             </div>
           </el-col>
         </el-row>
@@ -39,23 +43,7 @@
       <el-container>
         <el-aside class="main-aside" :style="{width:asideWidth}">
           <div class="aside-menu">
-            <el-scrollbar style="height:100%">
-              <el-menu :default-active="active" mode="vertical" @select="handleMenuSelect" style="border:none" class="el-menu-vertical-demo" ext-color="#fff"  :collapse="isCollapse">
-                <template v-for="(route, index) in routes">
-                  <el-menu-item :index="route.path" :key="index">
-                    <i :class="route.meta.icon"></i>
-                    <span slot="title">{{ route.meta.title }}</span>
-                  </el-menu-item>
-                </template>
-              </el-menu>
-              <el-menu :default-active="active" mode="vertical" @select="handleMenuSelect" style="border:none" class="el-menu-vertical-demo" ext-color="#fff"  :collapse="isCollapse">
-                <template v-for="(route, index) in routes">
-                  <el-menu-item :index="route.path" :key="index">
-                    <i :class="route.meta.icon"></i>
-                    <span slot="title">{{ route.meta.title }}</span>
-                  </el-menu-item>
-                </template>
-              </el-menu>
+            <el-scrollbar>
               <el-menu :default-active="active" mode="vertical" @select="handleMenuSelect" style="border:none" class="el-menu-vertical-demo" ext-color="#fff"  :collapse="isCollapse">
                 <template v-for="(route, index) in routes">
                   <el-menu-item :index="route.path" :key="index">
@@ -71,8 +59,8 @@
           </div>
         </el-aside>
         
-        <el-main style="background-color: #f5f5f5;max-height: calc(100vh - 61px);;">
-          <el-scrollbar style="height:100%">
+        <el-main style="background-color: #f5f5f5;padding:0">
+          <el-scrollbar>
             <transition name="fade" mode="out-in">
               <router-view :key="key" />
             </transition>
@@ -216,7 +204,6 @@ export default {
     padding: 0;
     box-sizing: border-box;
     outline: none;
-    max-height: calc(100vh - 112px);
   }
   .aside-bottom{
     border-top: 1px solid #ebeef5;

@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div class="m-20">
       <div class="mb-15 lz-flex lz-space-between">
          <div>
             <el-button class="mr-15">添加成员</el-button>
@@ -21,7 +21,7 @@
       <el-table
       :data="tableData"
       stripe
-      style="width: 100%"
+      style="width: 100%;border: solid 1px #e3e3e3;"
       :height="'calc(100vh - 200px)'"
       :header-cell-style="{'background-color':'#f5f7fa','color':'#909399'}"
       >
