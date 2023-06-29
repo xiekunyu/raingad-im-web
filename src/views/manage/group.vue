@@ -1,16 +1,17 @@
 <template>
     <div class="pd-20">
         <el-container>
-            <el-aside width="360px">
-                <el-card class="box-card">
-                    <div slot="header" class="clearfix">
-                        <span>群聊列表</span>
-                        <el-button style="float: right; padding: 3px 0" type="text">创建群聊</el-button>
-                    </div>
-                    <div class="lz-flex group-box">
+            <el-aside width="320px">
+                <div class="lz-flex group-box">
+                        <div class="group-box-header">
+                            <div>群列表</div>
+                            <div>
+                                <el-button plain round>创建群聊</el-button>
+                            </div>
+                        </div>
                         <div class="group-box-list">
                             <el-scrollbar>
-                                <div v-for="chat in chats" :key="chat.id" class="chat-item">
+                                <div v-for="chat in chats" :key="chat.id" class="chat-item"  @click="openGroup(chat)" :class="active==chat.id ? 'active' : ''">
                                     <div class="chat-avatar">
                                         <img :src="chat.avatar" alt="avatar">
                                     </div>
@@ -32,39 +33,40 @@
                                 </el-pagination>
                         </div>
                     </div>
-                </el-card>
             </el-aside>
             <el-main style="padding:0">
-                <el-card class="box-card ml-20">
-                    <div slot="header" class="clearfix">
-                        <span>群聊成员</span>
-                        <el-button style="float: right; padding: 3px 0" type="text">解散群聊</el-button>
+                <div class="lz-flex group-box group-user-box">
+                    <div class="group-box-header">
+                        <div>群成员</div>
+                        <div>
+                            <el-button plain round>更换群主</el-button>
+                            <el-button type="warning" plain round>群聊监控</el-button>
+                            <el-button type="danger" plain round>解散群聊</el-button>
+                        </div>
                     </div>
-                    <div class="lz-flex group-box">
-                        <div class="group-box-list">
-                            <el-scrollbar>
-                                <div  class="member-list pd-20">
-                                    <div v-for="member in members" :key="member.id" class="member-item">
-                                        <div class="member-avatar">
-                                            <img :src="member.avatar" alt="avatar">
+                    <div class="group-box-list">
+                        <el-scrollbar>
+                            <div  class="member-list">
+                                <div v-for="member in members" :key="member.id" class="member-item">
+                                    <div class="member-avatar">
+                                        <img :src="member.avatar" alt="avatar">
+                                    </div>
+                                    <div class="member-content">
+                                        <div class="member-header">
+                                            <span class="member-name">{{ member.name }}</span>
+                                            <span class="member-role">{{ member.role }}</span>
                                         </div>
-                                        <div class="member-content">
-                                            <div class="member-header">
-                                                <span class="member-name">{{ member.name }}</span>
-                                                <span class="member-role">{{ member.role }}</span>
-                                            </div>
-                                            <div class="member-actions">
-                                            <el-tooltip content="更多操作" placement="top">
-                                                <el-button type="text" icon="el-icon-more"></el-button>
-                                            </el-tooltip>
-                                            </div>
+                                        <div class="member-actions">
+                                        <el-tooltip content="更多操作" placement="top">
+                                            <el-button type="text" icon="el-icon-more"></el-button>
+                                        </el-tooltip>
                                         </div>
                                     </div>
                                 </div>
-                            </el-scrollbar>
-                        </div>
+                            </div>
+                        </el-scrollbar>
                     </div>
-                </el-card>
+                </div>
             </el-main>
         </el-container>
     </div>
@@ -76,6 +78,7 @@
       return {
         value: false,
         currentPage4: 4,
+        active:0,
         chats: [
             {
             id: 1,
@@ -180,6 +183,11 @@
         
       ]
       }
+    },
+    methods: {
+      openGroup(item) {
+        this.active = item.id;
+      }
     }
   }
 </script>
@@ -187,7 +195,17 @@
 .group-box{
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 160px);
+    height: calc(100vh - 104px);
+    background: #fff;
+    border:solid 1px #e6e6e6;
+    .group-box-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding:0 15px;
+        height:60px;
+        border-bottom: solid 1px #e6e6e6;
+    }
     .group-box-list{
         flex:1;
         overflow: auto;
@@ -195,7 +213,6 @@
     .group-box-page{
         padding-top:15px;
         height: 48px;
-        line-height: 48px;
     }
 }
 .chat-item {
@@ -203,7 +220,7 @@
     align-items: center;
     padding: 10px;
     cursor: pointer;
-    &:hover{
+    &:hover, &.active{
         background: #f5f5f5;
     }
     .chat-avatar {
@@ -231,10 +248,15 @@
         color: #999;
     }
 }
+
+.group-user-box{
+    border-left:none;
+}
 .member-list{
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+    padding:20px 0 20px 20px;
     .member-item {
         display: flex;
         align-items: center;
@@ -262,10 +284,11 @@
         .member-content {
             flex-grow: 1;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             .member-header {
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
+                flex-direction: column;
                 .member-name {
                     font-weight: bold;
                     margin-right: 10px;
