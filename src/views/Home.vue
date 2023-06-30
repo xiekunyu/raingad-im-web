@@ -2,31 +2,31 @@
   <div class="main-container">
     <div class="im-title">
       <div class="logo">
-        <el-image style="width: 80px; height: 80px" :src="packageData.logo" fit="cover"></el-image>
+        <el-image style="width: 80px; height: 80px" :src="$packageData.logo" fit="cover"></el-image>
       </div>
       <div class="im-content">
         <div class="im-name">
-          <div class="text f-36">{{ packageData.name }}</div>
+          <div class="text f-36">{{ $packageData.name }}</div>
           <div class="version ml-5">
             <el-tag size="mini" type="primary" effect="plain">v{{
-              packageData.version
+              $packageData.version
             }}</el-tag>
           </div>
         </div>
-        <div class="im-des">{{ packageData.description }}</div>
+        <div class="im-des">{{ $packageData.description }}</div>
       </div>
     </div>
     <div class="code-url">
       <div class="ml-15 mb-15">
-        前端地址：<a :href="packageData.frontUrl" target="_blank"><el-image
-            :src="packageData.frontUrl + '/badge/star.svg?theme=white'" alt="star"></el-image></a>
+        前端地址：<a :href="$packageData.frontUrl" target="_blank"><el-image
+            :src="$packageData.frontUrl + '/badge/star.svg?theme=white'" alt="star"></el-image></a>
       </div>
       <div class="ml-15 mb-15">
-        后端地址：<a :href="packageData.backstageUrl" target="_blank"><el-image
-            :src="packageData.backstageUrl + '/badge/star.svg?theme=dark'" alt="star"></el-image></a>
+        后端地址：<a :href="$packageData.backstageUrl" target="_blank"><el-image
+            :src="$packageData.backstageUrl + '/badge/star.svg?theme=dark'" alt="star"></el-image></a>
       </div>
       <div class="ml-15 mb-15">
-        <el-button type="warning" plain size="mini" round><a :href="packageData.qqGroupUrl"
+        <el-button type="warning" plain size="mini" round><a :href="$packageData.qqGroupUrl"
             target="_blank">QQ交流群:336921267</a></el-button>
       </div>
       <div class="ml-15 mb-15">
@@ -38,7 +38,7 @@
     <div class="tip">
       <h3 class="mb-5"><b>介绍</b></h3>
       <p>
-        1、{{ packageData.name }}是一个<b class="c-red">开源的即时通信demo，主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统，或者用于内网交流。不建议用于商业用途，如确有需要商用，请自行开发完善，并注明相关的版权问题。
+        1、{{ $packageData.name }}是一个<b class="c-red">开源的即时通信demo，主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统，或者用于内网交流。不建议用于商业用途，如确有需要商用，请自行开发完善，并注明相关的版权问题。
       </p>
       <p>
         2、支持发送表情、图片、语音、视频和文件消息，支持单聊、群聊、群管理、1对1音视频通话（移动端目前仅支持H5和安卓APP，IOS没条件测试，和web端不相通，独立使用）具体功能可以看项目主页。
@@ -65,7 +65,7 @@
       <div class=" mb-15 mr-20">
         <el-tooltip placement="right-start" effect="light">
           <div slot="content"><el-image style="width:200px" src="https://emoji.raingad.com/file/h5.png"></el-image></div>
-          <el-button><a :href="packageData.mobileUrl"
+          <el-button><a :href="$packageData.mobileUrl"
                     target="_blank">H5体验</a></el-button>
         </el-tooltip>
         
@@ -126,7 +126,6 @@
 </template>
 
 <script>
-import packageData from "../../package.json";
 import { mapGetters, mapMutations, mapState } from "vuex";
 import Message from "@/views/message/Index"; //临时位置
 export default {
@@ -136,7 +135,6 @@ export default {
   },
   data() {
     return {
-      packageData,
       dialogTableVisible: false, //消息弹窗是否显示
       unread: 0,
       allContacts: [],

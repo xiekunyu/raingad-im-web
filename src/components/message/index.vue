@@ -381,31 +381,29 @@
         </el-tab-pane>
         <el-tab-pane label="关于 IM">
           <div align="center">
-            <el-avatar :src="packageData.logo" :size="50"></el-avatar>
+            <el-avatar :src="$packageData.logo" :size="50"></el-avatar>
             <br /><br />
             <p>
-              <span class="main-color"> {{ packageData.name }} </span>for {{ packageData.version }}
+              <span class="main-color"> {{ $packageData.name }} </span>for {{ $packageData.version }}
             </p>
           </div>
           <div class="setting-version">
             <b> 已经支持功能：</b>
-            <p>1、单聊和群聊，新增消息管理器</p>
-            <p>2、支持发送表情、图片、语音、视频和文件消息</p>
-            <p>3、单聊支持消息已读未读的状态显示</p>
-            <p>4、支持设置新消息声音提醒，浏览器通知</p>
-            <p>5、支持部分Lemon-imui内功能设置</p>
+            <p>1、支持单聊和群聊，支持发送表情、图片、语音、视频和文件消息</p>
+            <p>2、单聊支持消息已读未读的状态显示，在线状态显示</p>
+            <p>3、群聊创建、删除和群成员管理、群公告、群禁言等</p>
+            <p>4、支持置顶联系人，消息免打扰；支持设置新消息声音提醒，浏览器通知</p>
+            <p>5、支持一对一音视频通话（和移动端不互通）</p>
             <p>6、支持文件、图片和绝大部分媒体文件在线预览</p>
-            <p>7、群聊创建、删除和群成员管理、群公告、群禁言等</p>
-            <p>8、可以置顶联系人，所有联系人可以设置消息免打扰</p>
-            <p>9、全新支持增加音视频通话(一对一)</p>
+            <p>7、支持移动端（H5和APP），即将支持后台管理</p>
           </div>
         </el-tab-pane>
         <el-tab-pane label="开源">
           <div align="center">
-            <el-avatar :src="packageData.logo" :size="50"></el-avatar>
+            <el-avatar :src="$packageData.logo" :size="50"></el-avatar>
             <br /><br />
             <p>
-              <span class="main-color"> {{ packageData.name }} </span>for {{ packageData.version }}
+              <span class="main-color"> {{ $packageData.name }} </span>for {{ $packageData.version }}
             </p>
           </div>
           <!-- <div class="setting-version">
@@ -416,7 +414,7 @@
             <p>
               前端地址：<a
                 class="main-color"
-                :href="packageData.frontUrl"
+                :href="$packageData.frontUrl"
                 target="_blank"
               >[链接] im-chat-front</a
               >
@@ -424,7 +422,7 @@
             <p>
               后端地址：<a
                 class="main-color"
-                :href="packageData.backstageUrl"
+                :href="$packageData.backstageUrl"
                 target="_blank"
                 >[链接] im-instant-chat</a
               >
@@ -439,7 +437,7 @@
               QQ交流群：
               <a
                 class="main-color"
-                :href="packageData.qqGroupUrl"
+                :href="$packageData.qqGroupUrl"
                 target="_blank"
                 >336921267</a
               >
@@ -544,7 +542,7 @@
     <!-- <preview  :drawer="drawer" :previewUrl="previewUrl" :key="componentKey"></preview> -->
     <Socket ref="socket"></Socket>
     <!-- 视频通话组件 -->
-    <webrtc :contact="currentChat" :config="webrtcConfig" :alias="packageData.name" :userInfo="user" ref="webrtc" :key="componentKey"></webrtc>
+    <webrtc :contact="currentChat" :config="webrtcConfig" :alias="$packageData.name" :userInfo="user" ref="webrtc" :key="componentKey"></webrtc>
   </div>
 </template>
 
@@ -562,7 +560,6 @@ import ChatSet from "./chatSet";
 import ChatTop from "./chatTop";
 import VoiceRecorder from "./messageBox/voiceRecorder";
 import webrtc from "./webrtc";
-import packageData from "../../../package.json";
 const getTime = () => {
   return new Date().getTime();
 };
@@ -601,7 +598,6 @@ export default {
       curHeight:this.height,
       unread:0,
       dialogIsShow:true,
-      packageData,
       webrtcConfig:{
           config: { 'iceServers':[{
 	  	    'urls': 'stun:stun.callwithus.com',
@@ -1332,7 +1328,7 @@ export default {
             title: "开源",
             unread: 0,
             click: () => {
-              window.open(this.packageData.frontUrl);
+              window.open(this.$packageData.frontUrl);
             },
             render: menu => {
               return <i class="el-icon-connection" />;

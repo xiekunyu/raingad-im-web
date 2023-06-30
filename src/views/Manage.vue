@@ -6,9 +6,9 @@
         <el-row type="flex" justify="space-between" align="middle" :style="{ height: '60px' }">
           <el-col :span="8" class="logo">
             <div class="image">
-              <img :src="packageData.logo" alt="logo">
+              <img :src="$packageData.logo" alt="logo">
             </div>
-            <div class="f-20 ml-5">{{packageData.name}}</div>  
+            <div class="f-20 ml-5">{{$packageData.name}}</div>  
           </el-col>
           <el-col :span="16" class="text-right">
             <div class="user">
@@ -25,7 +25,7 @@
               <el-dropdown trigger="click">
                 <div class="lz-flex lz-align-items-center">
                   <span class="avatar">
-                    <img :src="packageData.logo" alt="avatar">
+                    <img :src="$packageData.logo" alt="avatar">
                   </span>
                   <span class="username">用户名</span>
                   <i class="el-icon-arrow-down el-icon--right"></i>
@@ -73,7 +73,6 @@
 </template>
 
 <script>
-import packageData from "../../package.json";
 import { mapGetters, mapMutations, mapState } from "vuex";
 import Message from "@/views/message/Index"; 
 export default {
@@ -83,7 +82,6 @@ export default {
   },
   data() {
     return {
-      packageData,
       dialogTableVisible: false, //消息弹窗是否显示
       unread: 0,
       allContacts: [],

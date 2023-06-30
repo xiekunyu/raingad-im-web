@@ -15,7 +15,8 @@ import Clipboard from 'v-clipboard'
 Vue.use(Clipboard)
 Vue.config.productionTip = false
 import '@/permission' // 权限控制
-
+import packageData from '../package.json' // 全局数据
+Vue.prototype.$packageData = packageData;
 import LemonMessageVoice from "./components/message/messageType/voice";
 import LemonMessageVideo from "./components/message/messageType/video";
 Vue.component(LemonMessageVideo.name, LemonMessageVideo);
