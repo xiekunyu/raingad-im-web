@@ -62,7 +62,7 @@ const service = axios.create({
     baseURL: window.BASE_URL, // api 的 base_url
     timeout: 60000 // 请求超时时间
 })
-
+service.baseURL=window.BASE_URL;
 // request拦截器
 service.interceptors.request.use(
     config => {

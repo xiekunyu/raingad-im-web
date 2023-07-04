@@ -63,20 +63,29 @@
       <el-col :span="6"><el-card  class="task task-item mb-20" shadow="hover">
         <div slot="header">
           <span>系统服务</span>
-          <span class="handler" style="float: right;margin-top: -3px;">
+            <span class="handler" style="float: right;margin-top: -3px;">
 							<el-popconfirm title="确定重启吗？" @confirm="run(item)">
 								<template #reference>
 									<el-button class="f-20 c-999" type="primary" style="padding:5px;" icon="el-icon-caret-right" circle></el-button>
 								</template>
 							</el-popconfirm>
 						</span>
+            
         </div>
-
+        <div class="lz-flex lz-space-between mb-10">
+          <div class="el-icon-set-up"> 消息推送服务 </div> <div class="c-green">运行中</div>
+        </div>
+        <div class="lz-flex lz-space-between mb-10">
+          <div class="el-icon-files"> 消息队列服务 </div>  <div class="c-red">已停止</div>
+        </div>
+        <div class="lz-flex lz-space-between">
+        <div class="el-icon-alarm-clock"> 定时任务 </div>  <div class="c-green">运行中</div>
+        </div>
         </el-card>
       </el-col>
       <el-col :span="6" header="数据概览">
         <el-card shadow="hover" class="mb-20">
-          统计
+          用户总数：{{ $packageData.userCount }}
         </el-card>
       </el-col>
     </el-row>

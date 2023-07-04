@@ -13,10 +13,10 @@
               <el-form-item label="系统LOGO" prop="logo">
                   <el-upload
                       class="avatar-uploader"
-                      action="https://jsonplaceholder.typicode.com/posts/"
+                      :headers="getToken"
+                      :action="getUrl"
                       :show-file-list="false"
-                      :auto-upload="false"
-                      :on-success="handleAvatarSuccess"
+                      :on-success="uploadSuccess"
                       :on-change="change"
                       :before-upload="beforeAvatarUpload">
                       <img v-if="sysInfo.logo" :src="sysInfo.logo" class="avatar">
@@ -31,18 +31,18 @@
                   </el-radio-group>
                   <div class="mt-15" v-show="sysInfo.regtype==2">
                       <el-input v-model="inviteUrl" class="input-with-select">
-                          <el-button slot="append">复制链接</el-button>
+                          <el-button slot="append" @click="copyUrl">复制链接</el-button>
                       </el-input>
                       <div class="mt-15">
-                          <span class="c-999 f-12 mr-10">邀请链接有效期：48小时</span> <el-button >重新生成</el-button>
+                          <span class="c-999 f-12 mr-10">邀请链接有效期：48小时</span> <el-button @click="resetInviteUrl">重新生成</el-button>
                       </div>
                       
                       <vue-qr ref="qrCode" :text="inviteUrl" width="200" height="200" :logoSrc="logo"></vue-qr>
                   </div>
               </el-form-item>
               <el-form-item label="系统状态" prop="state">
-                  <el-switch v-model="sysInfo.state"></el-switch>
-                  <div v-show="!sysInfo.state">
+                  <el-switch v-model="sysInfo.state" active-value="1" inactive-value="0"></el-switch>
+                  <div v-show="sysInfo.state==0">
                       <span class="mr-10 c-999 f-12">关闭提示语</span>
                       <el-input placeholder="请输入系统关闭后的提示语" type="textarea" v-model="sysInfo.closeTips"></el-input>
                   </div>
@@ -53,44 +53,48 @@
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="聊天设置">
-          <el-form :model="chatInfo" :rules="rules" ref="chatInfo" label-width="120px" class="demo-chatInfo">
+          <el-form :model="chatInfo" :rules="chatRules" ref="chatInfo" label-width="120px" class="demo-chatInfo">
               <el-form-item label="允许用户私聊"  prop="simpleChat">
-                  <el-switch v-model="chatInfo.simpleChat"></el-switch>
+                  <el-switch v-model="chatInfo.simpleChat" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">关闭后，用户将无法私聊</span>
               </el-form-item>
               <el-form-item label="允许用户建群" prop="groupChat">
-                  <el-switch v-model="chatInfo.groupChat"></el-switch>
+                  <el-switch v-model="chatInfo.groupChat" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">关闭后，用户将无法创建群聊</span>
               </el-form-item>
+              <el-form-item label="群聊最多人数" prop="groupChat">
+                <el-input v-model="chatInfo.groupUserMax" type="text" class="ml-10" style="width:120px"></el-input>
+                  <span class="ml-10 c-999 f-12">人，0表示不限制</span>
+              </el-form-item>
               <el-form-item label="开启在线状态" prop="online">
-                  <el-switch v-model="chatInfo.online"></el-switch>
+                  <el-switch v-model="chatInfo.online" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">开启后，用户可以看到联系人的在线状态</span>
               </el-form-item>
               <el-form-item label="消息自动清理"  prop="msgClear">
-                  <el-switch v-model="chatInfo.msgClear"></el-switch>
+                  <el-switch v-model="chatInfo.msgClear" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">开启后，将会自动删除系统内的聊天记录</span>
-                  <div v-show="chatInfo.msgClear">
+                  <div v-show="chatInfo.msgClear==1">
                       <span class="c-999 f-12">消息最大保留天数</span> 
                       <el-input v-model="chatInfo.msgClearDay" type="text" class="ml-10" style="width:120px"></el-input>
                       <span class="ml-10 c-999 f-12">系统在每日凌晨2点自动清理消息</span>
                   </div>
               </el-form-item>
               <el-form-item label="音视频通话" prop="webrtc">
-                  <el-switch v-model="chatInfo.webrtc"></el-switch>
+                  <el-switch v-model="chatInfo.webrtc" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">开启后，可以进行音视频通话，仅支持1对1音视频</span>
-                  <div v-show="chatInfo.webrtc">
+                  <div v-show="chatInfo.webrtc==1">
                       <span class="c-999 f-12">stun服务器</span> 
                       <el-input type="text"  placeholder="请输入stun服务器" v-model="chatInfo.stun" class="ml-10" style="width:300px"></el-input>
                       <span class="ml-10 c-999 f-12">音视频通话需要有Stun服务器才可以进行</span>
                   </div>
               </el-form-item>
               <el-form-item>
-                  <el-button type="primary" @click="submitForm('chatSet')">保存</el-button>
+                  <el-button type="primary" @click="submitForm('chatInfo')">保存</el-button>
               </el-form-item>
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="邮件SMTP设置">
-          <el-form :model="smtp" :rules="rules" ref="smtp" label-width="120px"  style="width:500px">
+          <el-form :model="smtp" :rules="smtpRules" ref="smtp" label-width="120px"  style="width:500px">
               <el-form-item label="邮件服务器" prop="host">
                   <el-input v-model="smtp.host" placeholder="请输入邮件服务器，如：smtp.mail.qq.com"></el-input>
               </el-form-item>
@@ -118,7 +122,7 @@
 
         </el-tab-pane>
         <el-tab-pane label="文件上传设置">
-          <el-form :model="fileUpload" :rules="rules" ref="fileUpload" label-width="120px"  style="width:500px">
+          <el-form :model="fileUpload" :rules="fileRules" ref="fileUpload" label-width="120px"  style="width:500px">
               <el-form-item label="上传位置" prop="disk">
                   <el-radio-group v-model="fileUpload.disk">
                   <el-radio label="1" border>本地</el-radio>
@@ -127,13 +131,13 @@
               </el-form-item>
               <el-form-item v-show="fileUpload.disk==2" label="阿里云配置">
                   <div>
-                    <span  class="mr-10 c-999 f-12">accessId</span> <el-input placeholder="请输入阿里云OSS平台的accessId" v-model="fileUpload.aliyun.size"></el-input>
+                    <span  class="mr-10 c-999 f-12">accessId</span> <el-input placeholder="请输入阿里云OSS平台的accessId" v-model="fileUpload.aliyun.accessId"></el-input>
                   </div>
                   <div>
-                    <span  class="mr-10 c-999 f-12">accessSecret</span> <el-input placeholder="请输入阿里云OSS平台的accessSecret" v-model="fileUpload.aliyun.size"></el-input>
+                    <span  class="mr-10 c-999 f-12">accessSecret</span> <el-input placeholder="请输入阿里云OSS平台的accessSecret" v-model="fileUpload.aliyun.accessSecret"></el-input>
                   </div>
                   <div>
-                    <span  class="mr-10 c-999 f-12">endpoint</span> <el-input placeholder="请输入阿里云OSS平台的endpoint" v-model="fileUpload.aliyun.size"></el-input>
+                    <span  class="mr-10 c-999 f-12">endpoint</span> <el-input placeholder="请输入阿里云OSS平台的endpoint" v-model="fileUpload.aliyun.endpoint"></el-input>
                   </div>
               </el-form-item>
               <el-form-item label="文件预览地址" prop="preview">
@@ -168,8 +172,10 @@
   </template>
   
 <script>
+import Lockr from 'lockr'
 import VueQr from 'vue-qr';
 import logo from '@/assets/img/logo.png';
+import * as ConfigApi from '@/api/manage';
 export default {
     components: {
         VueQr
@@ -188,7 +194,8 @@ export default {
         chatInfo: {
           simpleChat: true,
           groupChat: true,
-          online: '',
+          groupUserMax: 0,
+          online:true,
           msgClear: true,
           msgClearDay: 0,
           webrtc:true,
@@ -220,20 +227,105 @@ export default {
             { required: true, message: '请输入系统名称', trigger: 'blur' },
             { min: 4, max: 32, message: '长度在 4 到 32 个字符', trigger: 'blur' }
           ],
-          logo: [
-            { required: true, message: '请上传LOGO', trigger: 'change' }
-          ],
           description: [
             { required: true, message: '请输入系统描述', trigger: 'blur' }
+          ]
+        },
+        chatRules:{
+          groupUserMax:[
+            { required: true, message: '请输入群组人数上限', trigger: 'blur' }
+          ],
+          msgClearDay:[
+            { required: true, message: '请输入消息保存天数', trigger: 'blur' }
+          ]
+        },
+        smtpRules:{
+          host:[
+            { required: true, pattern:'^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}$', message: '请输入SMTP服务器地址', trigger: 'blur' }
+          ],
+          port:[
+            { required: true,type: 'number',  message: '请输入SMTP服务器端口', trigger: 'blur' }
+          ],
+          email:[
+            { required: true, type: 'email',  message: '请输入SMTP邮箱', trigger: ['blur', 'change'] }
+          ],
+          password:[
+            { required: true, message: '请输入SMTP邮箱密码', trigger: 'blur' }
+          ]
+        },
+        fileRules:{
+          size:[
+            { required: true, type: 'number',  message: '请输入文件大小限制', trigger: 'blur' }
+          ],
+          fileExt:[
+            { required: true, message: '请输入文件格式限制', trigger: 'blur' }
           ]
         }
       };
     },
+    computed: {
+      getToken () {
+        const authKey = Lockr.get('authToken');
+        return { authToken: authKey }
+      },
+      getUrl () {
+        return window.BASE_URL + '/enterprise/upload/uploadImage'
+      }
+    },
+    mounted() {
+      this.initConfig();
+      this.resetInviteUrl();
+    },
     methods: {
+      initConfig(){
+        ConfigApi.getAllConfig({}).then(res=>{
+          if(res.code==0){
+            res.data.forEach(item=>{
+              switch(item.name){
+                case 'sysInfo':
+                  if(item.value) this.sysInfo=item.value;
+                  break;
+                case 'chatInfo':
+                  if(item.value) this.chatInfo=item.value;
+                  break;
+                case 'smtp':
+                if(item.value) this.smtp=item.value;
+                  break;
+                case 'fileUpload':
+                if(item.value) this.fileUpload=item.value;
+                  break;
+              }
+            }) 
+          }
+        })
+      },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            var params = {};
+            params.name=formName;
+              switch(formName){
+                  case 'sysInfo':
+                    params.value=this.sysInfo;
+                    break;
+                  case 'chatInfo':
+                    params.value=this.chatInfo;
+                    break;
+                  case 'smtp':
+                    params.value=this.smtp;
+                    break;
+                  case 'fileUpload':
+                    params.value=this.fileUpload;
+                    break;
+              }
+              ConfigApi.setConfig(params).then(res=>{
+                if(res.code==0){
+                    this.$message({
+                        message: res.msg,
+                        type: 'success'
+                    });
+                }
+              })
           } else {
             console.log('error submit!!');
             return false;
@@ -243,25 +335,40 @@ export default {
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
-      handleAvatarSuccess(res, file) {
-        this.sysInfo.logo = URL.createObjectURL(file.raw);
+      uploadSuccess(res, file) {
+        console.log(res)
+        this.sysInfo.logo = res.data;
       },
       beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
+        // const isJPG = file.type === 'image/jpeg';
+        // const isLt2M = file.size / 1024 / 1024 < 2;
 
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        console.log(file)
+        // if (!isJPG) {
+        //   this.$message.error('上传头像图片只能是 JPG 格式!');
+        // }
+        // if (!isLt2M) {
+        //   this.$message.error('上传头像图片大小不能超过 2MB!');
+        // }
+        // console.log(file)
         
-        return isJPG && isLt2M;
+        // return isJPG && isLt2M;
       },
       change(file,fileList) {
         this.sysInfo.logo = URL.createObjectURL(file.raw);
+      },
+      copyUrl(){
+        this.$clipboard(this.inviteUrl)
+        this.$message({
+            message: '复制成功',
+            type: 'success'
+        });
+      },
+      resetInviteUrl(){
+        ConfigApi.getInviteLink({}).then(res=>{
+          if(res.code==0){
+            this.inviteUrl=res.data;
+          }
+        })
       }
     }
   }
