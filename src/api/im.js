@@ -41,7 +41,7 @@ export function forwardMessageAPI(data) {
  */
 export function sendFileAPI(data) {
     return request({
-        url: 'enterprise/upload/uploadFile',
+        url: 'common/upload/uploadFile',
         method: 'post',
         data: data,
         headers: {

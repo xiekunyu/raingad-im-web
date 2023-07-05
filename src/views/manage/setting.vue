@@ -122,14 +122,23 @@
 
         </el-tab-pane>
         <el-tab-pane label="文件上传设置">
-          <el-form :model="fileUpload" :rules="fileRules" ref="fileUpload" label-width="120px"  style="width:500px">
-              <el-form-item label="上传位置" prop="disk">
+          <div>
+            <el-alert
+              title="一旦设置了储存位置，就不能再进行更改，否则之前的图片加载就会出错！"
+              type="danger"
+              :closable="false">
+            </el-alert>
+          </div>
+          <el-form :model="fileUpload" :rules="fileRules" ref="fileUpload" label-width="120px"  style="width:600px">
+              <el-form-item label="储存位置" prop="disk">
                   <el-radio-group v-model="fileUpload.disk">
-                  <el-radio label="1" border>本地</el-radio>
-                  <el-radio label="2" border>阿里云OSS</el-radio>
+                  <el-radio label="local" border>本地</el-radio>
+                  <el-radio label="aliyun" border>阿里云</el-radio>
+                  <el-radio label="qiniu" border>七牛云</el-radio>
+                  <el-radio label="qcloud" border>腾讯云</el-radio>
                   </el-radio-group>
               </el-form-item>
-              <el-form-item v-show="fileUpload.disk==2" label="阿里云配置">
+              <el-form-item v-show="fileUpload.disk=='aliyun'" label="阿里云配置">
                   <div>
                     <span  class="mr-10 c-999 f-12">accessId</span> <el-input placeholder="请输入阿里云OSS平台的accessId" v-model="fileUpload.aliyun.accessId"></el-input>
                   </div>
@@ -139,12 +148,53 @@
                   <div>
                     <span  class="mr-10 c-999 f-12">endpoint</span> <el-input placeholder="请输入阿里云OSS平台的endpoint" v-model="fileUpload.aliyun.endpoint"></el-input>
                   </div>
+                  <div>
+                    <span  class="mr-10 c-999 f-12">bucket</span> <el-input placeholder="请输入阿里云OSS平台的bucket" v-model="fileUpload.aliyun.bucket"></el-input>
+                  </div>
+                  <div>
+                    <span  class="mr-10 c-999 f-12">url</span> <el-input placeholder="请输入阿里云OSS平台的域名" v-model="fileUpload.aliyun.url"></el-input>
+                  </div>
+              </el-form-item>
+              <el-form-item v-show="fileUpload.disk=='qiniu'" label="七牛云配置">
+                  <div>
+                    <span  class="mr-10 c-999 f-12">accessKey</span> <el-input placeholder="请输入七牛云平台的accessKey" v-model="fileUpload.qiniu.accessKey"></el-input>
+                  </div>
+                  <div>
+                    <span  class="mr-10 c-999 f-12">secretKey</span> <el-input placeholder="请输入七牛云平台的secretKey" v-model="fileUpload.qiniu.secretKey"></el-input>
+                  </div>
+                  <div>
+                    <span  class="mr-10 c-999 f-12">bucket</span> <el-input placeholder="请输入七牛云平台的bucket" v-model="fileUpload.qiniu.bucket"></el-input>
+                  </div>
+                  <div>
+                    <span  class="mr-10 c-999 f-12">url</span> <el-input placeholder="请输入七牛云平台的域名" v-model="fileUpload.qiniu.url"></el-input>
+                  </div>
+              </el-form-item>
+              <el-form-item v-show="fileUpload.disk=='qcloud'" label="腾讯云配置">
+                  <div>
+                    <span  class="mr-10 c-999 f-12">appId</span> <el-input placeholder="请输入腾讯云平台的appId" v-model="fileUpload.qcloud.appId"></el-input>
+                  </div>
+                  <div>
+                    <span  class="mr-10 c-999 f-12">secretId</span> <el-input placeholder="请输入腾讯云平台的secretId" v-model="fileUpload.qcloud.secretId"></el-input>
+                  </div>
+                  <div>
+                    <span  class="mr-10 c-999 f-12">secretKey</span> <el-input placeholder="请输入腾讯云平台的secretKey" v-model="fileUpload.qcloud.secretKey"></el-input>
+                  </div>
+                  <div>
+                    <span  class="mr-10 c-999 f-12">region</span> <el-input placeholder="请输入腾讯云平台的region" v-model="fileUpload.qcloud.region"></el-input>
+                  </div>
+                  
+                  <div>
+                    <span  class="mr-10 c-999 f-12">bucket</span> <el-input placeholder="请输入腾讯云平台的bucket" v-model="fileUpload.qiniu.bucket"></el-input>
+                  </div>
+                  <div>
+                    <span class="mr-10 c-999 f-12">cdn</span> <el-input placeholder="请输入腾讯云平台的域名" v-model="fileUpload.qiniu.cdn"></el-input>
+                  </div>
               </el-form-item>
               <el-form-item label="文件预览地址" prop="preview">
                   <el-input v-model="fileUpload.preview"  placeholder="请输入文件预览的地址，若无则使用默认预览工具"></el-input>
               </el-form-item>
               <el-form-item label="文件大小限制"  prop="size">
-                  <el-input v-model="fileUpload.size" style="width:80px;"></el-input> <span class="ml-10 c-999 f-12">MB</span>
+                <el-input-number v-model="fileUpload.size" :min="0" :max="100" label=""></el-input-number> <span class="ml-10 c-999 f-12">MB</span>
               </el-form-item>
               <el-form-item label="文件格式限制" prop="fileExt">
                   <el-select
@@ -209,14 +259,30 @@ export default {
             sign:''
         },
         fileUpload:{
-            disk:'1',
+            disk:'local',
             aliyun:{
                 accessId:'',
                 accessSecret:'',
-                endpoint:''
+                endpoint:'',
+                bucket:'',
+                url:''
+            },
+            qiniu:{
+                accessKey:'',
+                secretKey:'',
+                bucket:'',
+                url:''
+            },
+            qcloud:{
+                appId:'',
+                secretId:'',
+                secretKey:'',
+                region:'',
+                bucket:'',
+                cdn:''
             },
             preview:'',
-            size:'',
+            size:0,
             fileExt:''
         },
         options:['jpg','png'],
@@ -269,7 +335,7 @@ export default {
         return { authToken: authKey }
       },
       getUrl () {
-        return window.BASE_URL + '/enterprise/upload/uploadImage'
+        return window.BASE_URL + '/common/upload/uploadImage'
       }
     },
     mounted() {

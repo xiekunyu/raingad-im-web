@@ -396,7 +396,14 @@ export function date(format, timestamp) {
 
 // 判断是否为今天
 export function isToday(time) {
-    return new Date().getTime() - time < 86400000;
+    // 获取当前日期
+    const today = new Date().setHours(0, 0, 0, 0); // 将时分秒毫秒设为0
+    // 判断是否是今天
+    if (time >= today && time < today + 24 * 3600 * 1000) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 export function generateRandId(){
