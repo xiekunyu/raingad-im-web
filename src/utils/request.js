@@ -119,11 +119,12 @@ service.interceptors.response.use(
             // 302	登录已失效
             if (res.code === -1) {
                 confirmMessage(res.msg)
+            }else if([400, 402, 403, 404, 405, 502, 500].includes(res.code)) {
+                errorMessage(res.msg, 'warning')
             } else {
                 errorMessage(res.msg)
-
             }
-            return Promise.reject(res)
+            return res;
         } else {
             return res
         }

@@ -389,13 +389,7 @@
           </div>
           <div class="setting-version">
             <b> 已经支持功能：</b>
-            <p>1、支持单聊和群聊，支持发送表情、图片、语音、视频和文件消息</p>
-            <p>2、单聊支持消息已读未读的状态显示，在线状态显示</p>
-            <p>3、群聊创建、删除和群成员管理、群公告、群禁言等</p>
-            <p>4、支持置顶联系人，消息免打扰；支持设置新消息声音提醒，浏览器通知</p>
-            <p>5、支持一对一音视频通话（和移动端不互通）</p>
-            <p>6、支持文件、图片和绝大部分媒体文件在线预览</p>
-            <p>7、支持移动端（H5和APP），即将支持后台管理</p>
+            <p v-for="item in $packageData.funcList" :key="item.icon"><i :class="item.icon"></i> {{ item.text }}</p>
           </div>
         </el-tab-pane>
         <el-tab-pane label="开源">
@@ -1212,6 +1206,10 @@ export default {
           if (message.group_id == this.group_id) {
             this.getGroupUserList(message.group_id);
           }
+          IMUI.updateContact({
+            id: message.group_id,
+            avatar: message.avatar
+          });
           break;
         case "removeGroup":
           IMUI.removeContact(message.group_id);

@@ -10,33 +10,9 @@
               <h2>欢迎体验 {{$packageData.name}}</h2>
             </div>
             <div class="tips">
-              <div class="tips-item">
-                <div class="tips-item-icon"><i class="el-icon-chat-line-round"></i></div>
-                <div class="tips-item-message">支持单聊和群聊，支持发送表情、图片、语音、视频和文件消息</div>
-              </div>
-              <div class="tips-item">
-                <div class="tips-item-icon"><i class="el-icon-potato-strips"></i></div>
-                <div class="tips-item-message">单聊支持消息已读未读的状态显示，在线状态显示</div>
-              </div>
-              <div class="tips-item">
-                <div class="tips-item-icon"><i class="el-icon-user"></i></div>
-                <div class="tips-item-message">群聊创建、删除和群成员管理、群公告、群禁言等</div>
-              </div>
-              <div class="tips-item">
-                <div class="tips-item-icon"><i class="el-icon-ice-cream-round"></i></div>
-                <div class="tips-item-message">支持置顶联系人，消息免打扰；支持设置新消息声音提醒，浏览器通知</div>
-              </div>
-              <div class="tips-item">
-                <div class="tips-item-icon"><i class="el-icon-video-camera"></i></div>
-                <div class="tips-item-message">支持一对一音视频通话（和移动端不互通）</div>
-              </div>
-              <div class="tips-item">
-                <div class="tips-item-icon"><i class="el-icon-milk-tea"></i></div>
-                <div class="tips-item-message">支持文件、图片和绝大部分媒体文件在线预览</div>
-              </div>
-              <div class="tips-item">
-                <div class="tips-item-icon"><i class="el-icon-mobile-phone"></i></div>
-                <div class="tips-item-message">支持移动端（H5和APP），即将支持后台管理</div>
+              <div class="tips-item" v-for="item in $packageData.funcList" :key="item.icon">
+                <div class="tips-item-icon"><i :class="item.icon"></i></div>
+                <div class="tips-item-message" v-text="item.text"></div>
               </div>
             </div>
             <div class="actions">

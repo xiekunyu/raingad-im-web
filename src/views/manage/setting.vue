@@ -2,7 +2,7 @@
     <div class="m-20">
       <el-tabs type="border-card">
         <el-tab-pane>
-          <span slot="label"><i class="el-icon-date"></i> 基础设置</span>
+          <span slot="label"><i class="el-icon-setting"></i> 基础设置</span>
           <el-form :model="sysInfo" :rules="rules" ref="sysInfo" label-width="120px" style="width:600px">
               <el-form-item label="系统名称" prop="name">
                   <el-input placeholder="请输入系统名称" v-model="sysInfo.name"></el-input>
@@ -52,7 +52,8 @@
               </el-form-item>
           </el-form>
         </el-tab-pane>
-        <el-tab-pane label="聊天设置">
+        <el-tab-pane>
+          <span slot="label"><i class="el-icon-chat-line-square"></i> 聊天设置</span>
           <el-form :model="chatInfo" :rules="chatRules" ref="chatInfo" label-width="120px" class="demo-chatInfo">
               <el-form-item label="允许用户私聊"  prop="simpleChat">
                   <el-switch v-model="chatInfo.simpleChat" active-value="1" inactive-value="0"></el-switch>
@@ -93,19 +94,20 @@
               </el-form-item>
           </el-form>
         </el-tab-pane>
-        <el-tab-pane label="邮件SMTP设置">
+        <el-tab-pane>
+          <span slot="label"><i class="el-icon-message"></i> 邮件SMTP设置</span>
           <el-form :model="smtp" :rules="smtpRules" ref="smtp" label-width="120px"  style="width:500px">
               <el-form-item label="邮件服务器" prop="host">
                   <el-input v-model="smtp.host" placeholder="请输入邮件服务器，如：smtp.mail.qq.com"></el-input>
               </el-form-item>
               <el-form-item label="端口号" prop="port">
-                  <el-input v-model="smtp.port" style="width:80px"></el-input>
+                <el-input-number v-model="smtp.port" :min="0" :max="99999"></el-input-number>
               </el-form-item>
-              <el-form-item label="发件人邮箱"  prop="email">
-                  <el-input v-model="smtp.email" placeholder="请输入发件人的邮箱"></el-input>
+              <el-form-item label="发件人邮箱"  prop="addr">
+                  <el-input v-model="smtp.addr" placeholder="请输入发件人的邮箱"></el-input>
               </el-form-item>
-              <el-form-item label="发件人密码" prop="password">
-                  <el-input v-model="smtp.password" show-password  placeholder="请输入发件人的面"></el-input>
+              <el-form-item label="发件人密码" prop="pass">
+                  <el-input v-model="smtp.pass" show-password  placeholder="请输入发件人的面"></el-input>
               </el-form-item>
               <el-form-item label="发件人签名" prop="sign">
                   <el-input v-model="smtp.sign" placeholder="请输入发件人签名"></el-input>
@@ -115,17 +117,19 @@
               </el-form-item>
               <el-form-item label="测试邮件">
                   <el-input placeholder="请输入邮件地址" v-model="textEmail" class="input-with-select">
-                      <el-button slot="append" icon="el-icon-s-promotion">发送</el-button>
+                      <el-button slot="append" icon="el-icon-s-promotion" @click="sendEmail"  :loading="loadding">发送</el-button>
                   </el-input>
               </el-form-item>
           </el-form>
 
         </el-tab-pane>
-        <el-tab-pane label="文件上传设置">
-          <div>
+        <el-tab-pane>
+          <span slot="label"><i class="el-icon-upload"></i> 文件上传设置</span>
+          <div class="mb-20">
             <el-alert
-              title="一旦设置了储存位置，就不能再进行更改，否则之前的图片加载就会出错！"
-              type="danger"
+              title="一旦设置了储存位置，就不能再进行更改，否则之前的文件或者图片加载就会出错！此修改会变更环境变量中的参数，请慎重操作！"
+              type="warning"
+              show-icon
               :closable="false">
             </el-alert>
           </div>
@@ -233,6 +237,7 @@ export default {
     data() {
       return {
         logo,
+        loadding:false,
         sysInfo: {
           name: '',
           description: '',
@@ -254,8 +259,8 @@ export default {
         smtp:{
             host:'',
             port:465,
-            email:'',
-            password:'',
+            addr:'',
+            pass:'',
             sign:''
         },
         fileUpload:{
@@ -312,10 +317,10 @@ export default {
           port:[
             { required: true,type: 'number',  message: '请输入SMTP服务器端口', trigger: 'blur' }
           ],
-          email:[
+          addr:[
             { required: true, type: 'email',  message: '请输入SMTP邮箱', trigger: ['blur', 'change'] }
           ],
-          password:[
+          pass:[
             { required: true, message: '请输入SMTP邮箱密码', trigger: 'blur' }
           ]
         },
@@ -435,6 +440,35 @@ export default {
             this.inviteUrl=res.data;
           }
         })
+      },
+      sendEmail(){
+        if(!this.textEmail){
+          this.$message({
+              message: '请输入邮箱地址',
+              type: 'warning'
+          });
+          return;
+        }
+        this.loadding=true;
+        this.$confirm('确定发送测试邮件吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          ConfigApi.sendTestEmail({email:this.textEmail}).then(res=>{
+          this.loadding=false;
+          this.textEmail='';
+          if(res.code==0){
+              this.$message({
+                  message: res.msg,
+                  type: 'success'
+              });
+            }
+          })
+        }).catch(() => {  
+          this.loadding=false;       
+        });
+        
       }
     }
   }

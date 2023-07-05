@@ -35,3 +35,12 @@ export function getInviteLink(params) {
         data: params
     })
 }
+
+// 发送测试邮件
+export function sendTestEmail(params) {
+    return request({
+        url: 'manage/config/sendTestEmail',
+        method: 'post',
+        data: params
+    })
+}
