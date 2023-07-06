@@ -229,7 +229,6 @@
 import Lockr from 'lockr'
 import VueQr from 'vue-qr';
 import logo from '@/assets/img/logo.png';
-import * as ConfigApi from '@/api/manage';
 export default {
     components: {
         VueQr
@@ -349,7 +348,7 @@ export default {
     },
     methods: {
       initConfig(){
-        ConfigApi.getAllConfig({}).then(res=>{
+        this.$api.configApi.getAllConfig({}).then(res=>{
           if(res.code==0){
             res.data.forEach(item=>{
               switch(item.name){
@@ -389,7 +388,7 @@ export default {
                     params.value=this.fileUpload;
                     break;
               }
-              ConfigApi.setConfig(params).then(res=>{
+              this.$api.configApi.setConfig(params).then(res=>{
                 if(res.code==0){
                     this.$message({
                         message: res.msg,
@@ -435,7 +434,7 @@ export default {
         });
       },
       resetInviteUrl(){
-        ConfigApi.getInviteLink({}).then(res=>{
+        this.$api.configApi.getInviteLink({}).then(res=>{
           if(res.code==0){
             this.inviteUrl=res.data;
           }
@@ -455,7 +454,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          ConfigApi.sendTestEmail({email:this.textEmail}).then(res=>{
+          this.$api.configApi.sendTestEmail({email:this.textEmail}).then(res=>{
           this.loadding=false;
           this.textEmail='';
           if(res.code==0){

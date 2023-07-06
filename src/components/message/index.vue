@@ -543,7 +543,6 @@
 <script>
 import { mapState } from "vuex";
 import EmojiData from "@/utils/emoji";
-import * as imApi from "@/api/im";
 import * as loginApi from "@/api/login";
 import * as utils from "@/utils/index";
 import Lockr from "lockr";
@@ -690,7 +689,7 @@ export default {
               cancelButtonText: "取消",
               type: "warning"
             }).then(() => {
-              imApi.setManagerAPI({
+              this.$api.imApi.setManagerAPI({
                 id: this.group_id,
                 user_id: contact.user_id,
                 role: 2
@@ -719,7 +718,7 @@ export default {
               cancelButtonText: "取消",
               type: "warning"
             }).then(() => {
-              imApi.setManagerAPI({
+              this.$api.imApi.setManagerAPI({
                 id: this.group_id,
                 user_id: contact.user_id,
                 role: 3
@@ -749,7 +748,7 @@ export default {
               cancelButtonText: "取消",
               type: "warning"
             }).then(() => {
-              imApi.removeUserAPI({ id: this.group_id, user_id: contact.user_id });
+              this.$api.imApi.removeUserAPI({ id: this.group_id, user_id: contact.user_id });
             });
           },
           visible: instance => {
@@ -768,7 +767,7 @@ export default {
           text: "置顶聊天",
           click: (e, instance, hide) => {
             const { IMUI, contact } = instance;
-            imApi.setChatTopAPI({
+            this.$api.imApi.setChatTopAPI({
               id: contact.id,
               is_top: 1,
               is_group: contact.is_group
@@ -793,7 +792,7 @@ export default {
           text: "取消置顶",
           click: (e, instance, hide) => {
             const { IMUI, contact } = instance;
-            imApi.setChatTopAPI({
+            this.$api.imApi.setChatTopAPI({
               id: contact.id,
               is_top: 0,
               is_group: contact.is_group
@@ -818,7 +817,7 @@ export default {
           click(e, instance, hide) {
             const { IMUI, contact } = instance;
             hide();
-            imApi.isNoticeAPI({ id: contact.id, is_notice: 0 ,is_group:contact.is_group});
+            this.$api.imApi.isNoticeAPI({ id: contact.id, is_notice: 0 ,is_group:contact.is_group});
             IMUI.updateContact({
               id: contact.id,
               is_notice: 0
@@ -836,7 +835,7 @@ export default {
           click(e, instance, hide) {
             const { IMUI, contact } = instance;
             hide();
-            imApi.isNoticeAPI({ id: contact.id, is_notice: 1 ,is_group:contact.is_group});
+            this.$api.imApi.isNoticeAPI({ id: contact.id, is_notice: 1 ,is_group:contact.is_group});
             IMUI.updateContact({
               id: contact.id,
               is_notice: 1
@@ -875,7 +874,7 @@ export default {
                 type: "warning"
               })
               .then(() => {
-                imApi.removeGrouprAPI({ id: contact.id });
+                this.$api.imApi.removeGrouprAPI({ id: contact.id });
                 _this.$message({
                   type: "success",
                   message: "删除成功!"
@@ -903,7 +902,7 @@ export default {
                 type: "warning"
               })
               .then(() => {
-                imApi.removeUserAPI({ id: contact.id, user_id: _this.user.id });
+                this.$api.imApi.removeUserAPI({ id: contact.id, user_id: _this.user.id });
                 _this.$message({
                   type: "success",
                   message: "退出成功!"
@@ -926,7 +925,7 @@ export default {
         {
           click: (e, instance, hide) => {
             const { IMUI, message } = instance;
-            imApi.undoMessageAPI({ id: message.id })
+            this.$api.imApi.undoMessageAPI({ id: message.id })
               .then(res => {
                 const data = {
                   id: message.id,
@@ -1032,7 +1031,7 @@ export default {
         //     // }).then(() => {
         //     //   console.log(message.id)
         //     //   ;
-        //     //   imApi.removeMessageAPI({ id: message.id });
+        //     //   this.$api.imApi.removeMessageAPI({ id: message.id });
         //     // }).catch(error => {
         //     //       console.log(error);
         //     // });;
@@ -1100,7 +1099,7 @@ export default {
     // 监听设置发送变化需要进行设置更改
     setting: {
       handler(newValue, oldValue) {
-        imApi.settingAPI(newValue);
+        this.$api.imApi.settingAPI(newValue);
         user.setting = newValue;
         Lockr.set("UserInfo", user);
       },
@@ -1293,7 +1292,7 @@ export default {
           return `[视频]`;
         });
         // 获取联系人列表
-        imApi.getContactsAPI().then(res => {
+        this.$api.imApi.getContactsAPI().then(res => {
           const data = res.data;
           this.contacts = data;
           var msg = {};
@@ -1545,7 +1544,7 @@ export default {
       }
       // 如果有未读的消息，需要将消息修改为已读
       if (data.length > 0) {
-        imApi.setMsgIsReadAPI({
+        this.$api.imApi.setMsgIsReadAPI({
           is_group: contact.is_group,
           toContactId: contact.id,
           messages: data,
@@ -1632,7 +1631,7 @@ export default {
         }
         formdata.append("file", file);
         formdata.append("message", JSON.stringify(message));
-        imApi.sendFileAPI(formdata)
+        this.$api.imApi.sendFileAPI(formdata)
           .then(res => {
             IMUI.updateMessage(res.data);
             next();
@@ -1645,7 +1644,7 @@ export default {
             }
           });
       } else {
-        imApi.sendMessageAPI(message)
+        this.$api.imApi.sendMessageAPI(message)
           .then(res => {
             IMUI.setEditorValue("");
             IMUI.updateMessage(res.data);
@@ -1662,7 +1661,7 @@ export default {
     },
     // 拉取聊天记录
     handlePullMessages(contact, next, instance) {
-      imApi.getMessageListAPI({
+      this.$api.imApi.getMessageListAPI({
         toContactId: contact.id,
         is_group: contact.is_group,
         pageSize: this.pageSize,
@@ -1685,7 +1684,7 @@ export default {
     // 发布公告
     publishNotice() {
       this.noticeBox = false;
-      imApi.setNoticeAPI({ id: this.group_id, notice: this.notice }).then(res => {
+      this.$api.imApi.setNoticeAPI({ id: this.group_id, notice: this.notice }).then(res => {
         if (res.code == 0) {
           this.$message({
             type: "success",
@@ -1704,7 +1703,7 @@ export default {
     },
     // 获取所有人员列表
     getAllUser(data) {
-      imApi.getAllUserAPI(data).then(res => {
+      this.$api.imApi.getAllUserAPI(data).then(res => {
         const data = res.data;
         this.allUser = data;
       });
@@ -1723,7 +1722,7 @@ export default {
     // 封装循环请求
     fn(formData) {
       return new Promise((resolve, reject) => {
-        imApi.sendMessageAPI(formData)
+        this.$api.imApi.sendMessageAPI(formData)
           .then(res => {
             if (res.code === 0) {
               resolve(res);
@@ -1786,13 +1785,13 @@ export default {
     // 添加群成员
     addGroupUser() {
       this.addGroupUserBox = false;
-      imApi.addGroupUserAPI({ user_ids: this.selectUid, id: this.group_id });
+      this.$api.imApi.addGroupUserAPI({ user_ids: this.selectUid, id: this.group_id });
       this.selectUid = [];
     },
     // 创建群聊
     createGroup() {
       this.createChatBox = false;
-      imApi.addGroupAPI({ user_ids: this.selectUid }).then(res => {
+      this.$api.imApi.addGroupAPI({ user_ids: this.selectUid }).then(res => {
         const data = res.data;
         const { IMUI } = this.$refs;
         if (res.code == 0) {
@@ -1806,7 +1805,7 @@ export default {
     },
     // 获取群聊成员列表
     getGroupUserList(group_id) {
-      imApi.groupUserListAPI({
+      this.$api.imApi.groupUserListAPI({
         group_id: group_id
       }).then(res => {
         if (res.code == 0) {
@@ -1830,7 +1829,7 @@ export default {
       // 如果更改了名称，请求服务器，并通知所有群更改名称
       if (this.displayName != this.oldName) {
         const { IMUI } = this.$refs;
-        imApi.editGroupNameAPI({
+        this.$api.imApi.editGroupNameAPI({
           id: contact.id,
           displayName: this.displayName
         }).then(res => {
@@ -1918,7 +1917,7 @@ export default {
       if (contact.id == message.toContactId) {
         var data = [];
         data.push(message);
-        imApi.setMsgIsReadAPI({
+        this.$api.imApi.setMsgIsReadAPI({
           toContactId: contact.id,
           is_group: contact.is_group,
           messages: data,

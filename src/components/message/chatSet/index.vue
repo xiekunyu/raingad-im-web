@@ -44,10 +44,6 @@
 </template>
 
 <script>
-import {
-  groupSettingAPI,
-  getGroupInfoAPI,
-} from "@/api/im";
 export default {
   name: "chatSet",
   props: {
@@ -64,11 +60,11 @@ export default {
   },
   methods: {
     groupSetting(){
-      groupSettingAPI({id:this.contact.id,setting:this.setting})
+      this.$api.imApi.groupSettingAPI({id:this.contact.id,setting:this.setting})
     }
   },
   created(){
-    getGroupInfoAPI({group_id:this.contact.id}).then(res=>{
+    this.$api.imApi.getGroupInfoAPI({group_id:this.contact.id}).then(res=>{
       var data=res.data;
       this.groupInfo=data;
       this.setting=data.setting;

@@ -1,10 +1,11 @@
 import request from '@/utils/request'
 
+const imApi = {}
 /**
  * 获取聊天联系人列表
  * @param {*} data
  */
-export function getContactsAPI(data) {
+imApi.getContactsAPI= (data)  =>{
     return request({
         url: 'enterprise/im/getContacts',
         method: 'post',
@@ -16,7 +17,7 @@ export function getContactsAPI(data) {
  * 发送聊天消息
  * @param {*} data
  */
-export function sendMessageAPI(data) {
+imApi.sendMessageAPI= (data)  =>{
     return request({
         url: 'enterprise/im/sendMessage',
         method: 'post',
@@ -28,7 +29,7 @@ export function sendMessageAPI(data) {
  * 发送聊天消息
  * @param {*} data
  */
-export function forwardMessageAPI(data) {
+imApi.forwardMessageAPI= (data)  =>{
     return request({
         url: 'enterprise/im/forwardMessage',
         method: 'post',
@@ -39,7 +40,7 @@ export function forwardMessageAPI(data) {
  * 发送图片或文件消息
  * @param {*} data
  */
-export function sendFileAPI(data) {
+imApi.sendFileAPI= (data)  =>{
     return request({
         url: 'common/upload/uploadFile',
         method: 'post',
@@ -54,7 +55,7 @@ export function sendFileAPI(data) {
  * 获取聊天记录
  * @param {*} data
  */
-export function getMessageListAPI(data) {
+imApi.getMessageListAPI= (data)  =>{
     return request({
         url: 'enterprise/im/getMessageList',
         method: 'post',
@@ -66,7 +67,7 @@ export function getMessageListAPI(data) {
  * 修改消息为已读
  * @param {*} data
  */
-export function setMsgIsReadAPI(data) {
+imApi.setMsgIsReadAPI= (data)  =>{
     return request({
         url: 'enterprise/im/setMsgIsRead',
         method: 'post',
@@ -78,7 +79,7 @@ export function setMsgIsReadAPI(data) {
  * 撤回消息
  * @param {*} data
  */
-export function undoMessageAPI(data) {
+imApi.undoMessageAPI= (data)  =>{
     return request({
         url: 'enterprise/im/undoMessage',
         method: 'post',
@@ -90,7 +91,7 @@ export function undoMessageAPI(data) {
  * 撤回消息
  * @param {*} data
  */
-export function removeMessageAPI(data) {
+imApi.removeMessageAPI= (data)  =>{
     return request({
         url: 'enterprise/im/removeMessage',
         method: 'post',
@@ -103,7 +104,7 @@ export function removeMessageAPI(data) {
  * 设置
  * @param {*} data
  */
-export function settingAPI(data) {
+imApi.settingAPI= (data)  =>{
     return request({
         url: 'enterprise/im/setting',
         method: 'post',
@@ -115,7 +116,7 @@ export function settingAPI(data) {
  * 修改群组名称
  * @param {*} data
  */
-export function editGroupNameAPI(data) {
+imApi.editGroupNameAPI= (data)  =>{
     return request({
         url: 'enterprise/group/editGroupName',
         method: 'post',
@@ -127,7 +128,7 @@ export function editGroupNameAPI(data) {
  * 获取群成员列表
  * @param {*} data
  */
-export function groupUserListAPI(data) {
+imApi.groupUserListAPI= (data)  =>{
     return request({
         url: 'enterprise/group/groupuserlist',
         method: 'post',
@@ -139,7 +140,7 @@ export function groupUserListAPI(data) {
  * 获取群成员列表
  * @param {*} data
  */
-export function getAllUserAPI(data) {
+imApi.getAllUserAPI= (data)  =>{
     return request({
         url: 'enterprise/group/getAllUser',
         method: 'post',
@@ -151,7 +152,7 @@ export function getAllUserAPI(data) {
  * 创建群聊
  * @param {*} data
  */
-export function addGroupAPI(data) {
+imApi.addGroupAPI= (data)  =>{
     return request({
         url: 'enterprise/group/add',
         method: 'post',
@@ -164,7 +165,7 @@ export function addGroupAPI(data) {
  * 设置管理员
  * @param {*} data
  */
-export function setManagerAPI(data) {
+imApi.setManagerAPI= (data)  =>{
     return request({
         url: 'enterprise/group/setManager',
         method: 'post',
@@ -177,7 +178,7 @@ export function setManagerAPI(data) {
  * 设置管理员
  * @param {*} data
  */
-export function removeUserAPI(data) {
+imApi.removeUserAPI= (data)  =>{
     return request({
         url: 'enterprise/group/removeUser',
         method: 'post',
@@ -189,7 +190,7 @@ export function removeUserAPI(data) {
  * 添加群成员
  * @param {*} data
  */
-export function addGroupUserAPI(data) {
+imApi.addGroupUserAPI= (data)  =>{
     return request({
         url: 'enterprise/group/addGroupUser',
         method: 'post',
@@ -201,7 +202,7 @@ export function addGroupUserAPI(data) {
  * 移除群成员
  * @param {*} data
  */
-export function removeGrouprAPI(data) {
+imApi.removeGrouprAPI= (data)  =>{
     return request({
         url: 'enterprise/group/removeGroup',
         method: 'post',
@@ -214,7 +215,7 @@ export function removeGrouprAPI(data) {
  * 设置公告
  * @param {*} data
  */
-export function setNoticeAPI(data) {
+imApi.setNoticeAPI= (data)  =>{
     return request({
         url: 'enterprise/group/setNotice',
         method: 'post',
@@ -226,7 +227,7 @@ export function setNoticeAPI(data) {
  * 群聊设置
  * @param {*} data
  */
-export function groupSettingAPI(data) {
+imApi.groupSettingAPI= (data)  =>{
     return request({
         url: 'enterprise/group/groupSetting',
         method: 'post',
@@ -238,7 +239,7 @@ export function groupSettingAPI(data) {
  * 群聊基本信息
  * @param {*} data
  */
-export function getGroupInfoAPI(data) {
+imApi.getGroupInfoAPI= (data)  =>{
     return request({
         url: 'enterprise/group/groupInfo',
         method: 'post',
@@ -251,7 +252,7 @@ export function getGroupInfoAPI(data) {
  * 设置消息免打扰
  * @param {*} data
  */
-export function isNoticeAPI(data) {
+imApi.isNoticeAPI= (data)  =>{
     return request({
         url: 'enterprise/im/isNotice',
         method: 'post',
@@ -263,10 +264,12 @@ export function isNoticeAPI(data) {
  * 设置消息免打扰
  * @param {*} data
  */
-export function setChatTopAPI(data) {
+imApi.setChatTopAPI= (data)  =>{
     return request({
         url: 'enterprise/im/setChatTop',
         method: 'post',
         data: data
     })
 }
+
+export default imApi;

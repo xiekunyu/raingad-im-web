@@ -40,11 +40,7 @@
         <div slot="header">
           <span>系统服务</span>
             <span class="handler" style="float: right;margin-top: -3px;">
-							<el-popconfirm title="确定重启吗？" @confirm="run(item)">
-								<template #reference>
-									<el-button class="f-20 c-999" type="primary" style="padding:5px;" icon="el-icon-caret-right" circle></el-button>
-								</template>
-							</el-popconfirm>
+							<el-button class="f-20 c-999" type="primary" style="padding:5px;" icon="el-icon-caret-right" circle @click="startService"></el-button>
 						</span>
             
         </div>
@@ -69,7 +65,21 @@
 </template>
   
 <script>
-
+export default {
+    components: {
+    },
+    data() {
+      return {
+        }
+        },
+        methods: {
+            startService() {
+              this.$api.taskApi.startTask().then(res => {
+                    this.$message.success('服务启动成功');
+                })
+            }
+        },
+        }
 </script>
 <style scoped lang="scss">
 .item-background p {

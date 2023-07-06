@@ -119,7 +119,6 @@
 <script>
 import ChatItem from "./chatItem";
 import ChatImage from "./chatImage";
-import { getMessageListAPI } from "@/api/im";
 import { arrayToString, date } from "@/utils/index";
 import { getFileSize, getFileExtImg, download } from "@/utils/file";
 export default {
@@ -175,7 +174,7 @@ export default {
       this.getMessage();
     },
     getMessage() {
-      getMessageListAPI({
+      this.$api.imApi.getMessageListAPI({
         toContactId: this.contact.id,
         is_group: this.contact.is_group,
         type: this.msgType,

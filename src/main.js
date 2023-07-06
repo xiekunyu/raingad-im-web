@@ -21,7 +21,8 @@ import LemonMessageVoice from "./components/message/messageType/voice";
 import LemonMessageVideo from "./components/message/messageType/video";
 Vue.component(LemonMessageVideo.name, LemonMessageVideo);
 Vue.component(LemonMessageVoice.name, LemonMessageVoice);
-
+import Api from "@/api/index.js"
+Vue.prototype.$api = Api
 
 /* eslint-disable no-new */
 new Vue({
