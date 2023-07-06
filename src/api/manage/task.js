@@ -7,7 +7,7 @@ const taskApi = {};
  */
 taskApi.getTaskList = (data) => {
     return request({
-        url: "/admin/Task/getTaskList",
+        url: "/manage/Task/getTaskList",
         method: "post",
         data: data,
     });
@@ -18,7 +18,7 @@ taskApi.getTaskList = (data) => {
  */
 taskApi.startTask = (data) => {
     return request({
-        url: "/admin/Task/startTask",
+        url: "/manage/Task/startTask",
         method: "post",
         data: data,
     });
@@ -29,7 +29,7 @@ taskApi.startTask = (data) => {
  */
 taskApi.stopTask = (data) => {
     return request({
-        url: "/admin/Task/stopTask",
+        url: "/manage/Task/stopTask",
         method: "post",
         data: data,
     });
@@ -40,7 +40,7 @@ taskApi.stopTask = (data) => {
  */
 taskApi.getTaskLog = (data) => {
     return request({
-        url: "/admin/Task/getTaskLog",
+        url: "/manage/Task/getTaskLog",
         method: "post",
         data: data,
     });
@@ -51,7 +51,7 @@ taskApi.getTaskLog = (data) => {
  */
 taskApi.clearTaskLog = (data) => {
     return request({
-        url: "/admin/Task/clearTaskLog",
+        url: "/manage/Task/clearTaskLog",
         method: "post",
         data: data,
     });
