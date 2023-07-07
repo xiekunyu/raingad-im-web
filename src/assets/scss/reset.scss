@@ -147,6 +147,13 @@ pre {
 	Example:		class="mt-5|mt-10..."
 	Explain:		.mt表示上边距|.mb表示下边距|.ml表示左边距|.mr表示右边距
 */
+.no-padding {
+    padding: 0px!important
+}
+
+.no-margin {
+    margin: 0px!important
+}
 
 .m-5 {
     margin: 5px

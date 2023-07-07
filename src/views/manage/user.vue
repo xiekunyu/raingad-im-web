@@ -12,14 +12,14 @@
                style="width: 200px"
                @keyup.enter.native="search"
                v-model="params.keywords">
-               <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
+               <el-button slot="append" icon="el-icon-search" @click="handleChange"></el-button>
             </el-input>
          </div>
          
       </div>
       
       <el-table
-      :data="tableData"
+      :data="userList"
       stripe
       style="width: 100%;border: solid 1px #e3e3e3;"
       :height="'calc(100vh - 200px)'"
@@ -27,7 +27,7 @@
       >
       <el-table-column
          fixed
-         prop="id"
+         prop="user_id"
          label="ID"
          width="150">
       </el-table-column>
@@ -45,15 +45,23 @@
          prop="sex"
          label="性别"
          width="120">
+         <template slot-scope="scope">
+            <span class="el-dropdown-link" v-if="scope.row.sex==0">女</span>
+            <span class="el-dropdown-link" v-if="scope.row.sex==1">男</span>
+            <span class="el-dropdown-link" v-if="scope.row.sex==2">未知</span>
+         </template>
       </el-table-column>
       <el-table-column
          prop="role"
          label="角色"
          width="120">
          <template slot-scope="scope">
-            <el-dropdown>
+            <span class="el-dropdown-link" v-if="scope.row.role==1">
+               超级管理员
+            </span>
+            <el-dropdown v-else>
             <span class="el-dropdown-link">
-               {{ scope.row.role }}<i class="el-icon-arrow-down el-icon--right"></i>
+            {{ scope.row.role==0 ? '普通成员' : "管理员" }}<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
                <el-dropdown-item>普通成员</el-dropdown-item>
@@ -72,8 +80,9 @@
          label="状态"
          width="120">
          <template slot-scope="scope">
-            <el-switch v-model="scope.row.status">
+            <el-switch v-if="scope.row.user_id!=1" v-model="scope.row.status" :active-value="1" :inactive-value="0">
             </el-switch>
+            <span v-else>--</span>
             </template>
       </el-table-column>
       <el-table-column
@@ -89,49 +98,53 @@
       <div class="mt-15">
          <el-pagination
                background
-               @size-change="handleSizeChange"
-               :current-page="params.page"
-               :page-sizes="[100, 200, 300, 400]"
-               :page-size="params.limit"
+               @size-change="handleChange"
+               @current-change="getUserList"
+               :current-page.sync="params.page"
+               :page-sizes="[20, 50 ,100 , 200, 300, 400,500]"
+               :page-size.sync="params.limit"
                layout="total, sizes, prev, pager, next, jumper"
-               :total="400">
+               :total="total">
          </el-pagination>
       </div>
-      
    </div>
  </template>
  
  <script>
    export default {
-     methods: {
-       handleClick(row) {
-         console.log(row);
-       },
-       search(){
-
-       },
-       handleSizeChange(){
-
-       }
-     },
- 
      data() {
        return {
+         total: 0,
          params:{
              page:1,
              limit:20,
              keywords:''
          },
-         tableData: [{
-           id: 1,
-           realname: '王小虎',
-           account: '18382420330',
-           sex: '男',
-           role: '管理员',
-           remark: '上海市普陀区金沙江路 1518 弄',
-           status: 1
-         }]
+         userList: [],
        }
+     },
+     mounted() {
+      this.getUserList();
+     },
+     methods: {
+      // 获取用户列表
+      getUserList(){
+         this.$api.userApi.getUserList(this.params).then(res=>{
+            if(res.code == 0){
+               this.userList = res.data;
+               this.total = res.count;
+               this.params.page = res.page;
+            }
+         })
+      },
+      handleClick(row) {
+         this.$user(row.user_id,{isManage:true});
+      },
+      handleChange() {
+         // 更换每页显示条数后，需要重新从第一页开始
+        this.params.page = 1;
+        this.getUserList();
+      },
      }
    }
  </script>

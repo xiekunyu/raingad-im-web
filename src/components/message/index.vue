@@ -636,7 +636,7 @@ export default {
       sendTips: "使用 Enter 键发送消息",
       // 设置
       setting: {
-        theme: "blue",
+        theme: "default",
         hideMessageName: false,
         hideMessageTime: false,
         avatarCricle: true,
@@ -778,7 +778,10 @@ export default {
                   is_top: 1
                 });
                 contact.is_top = 1;
-                this.chatTopList.push(contact);
+                const hasContact=this.chatTopList.filter(item => item.id == contact.id);
+                if(!hasContact.length){
+                  this.chatTopList.push(contact);
+                }
               }
             });
             hide();
@@ -1152,7 +1155,10 @@ export default {
           });
           if(message.is_top==1){
             const contact = this.getContact(message.id);
-            this.chatTopList.push(contact);
+            const hasContact=this.chatTopList.filter(item => item.id == message.id);
+            if(!hasContact.length){
+              this.chatTopList.push(contact);
+            }
           }else{
             utils.delArrValue(this.chatTopList, "id", message.id);
           }

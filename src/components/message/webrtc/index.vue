@@ -59,6 +59,7 @@
   right:20px;
   bottom: 20px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  z-index:5000;
   .webrtc-box-title{
     font-size:16px;
     font-weight: bold;
