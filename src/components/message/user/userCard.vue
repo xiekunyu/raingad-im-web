@@ -2,7 +2,7 @@
     <div class="user-card-box">
           <el-container class="container"  v-outside="closeDialog">
             <el-header class="no-padding header" height="180px">
-              <i class="close el-icon-error pointer" @click="closeDialog" />
+              <i class="close el-icon-error cur-handle" @click="closeDialog" />
               <div class="img-banner">
                 
               </div>
@@ -41,6 +41,11 @@
                 <div class="card-row">
                   <label>邮箱</label>
                   <span>{{ detail.email || "未设置"}}</span>
+                </div>
+                <div class="card-row">
+                  <label>IP</label>
+                  <span v-if="detail.last_login_ip">{{ detail.last_login_ip || "未知"}} （{{detail.location || "未知"}}）</span>
+                  <span v-else>未知</span>
                 </div>
               </div>
             </el-main>
