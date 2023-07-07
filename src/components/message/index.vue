@@ -82,7 +82,7 @@
                   v-if="is_group == 1"
                   @click="isEdit = true"
                 >
-                  <el-tag size="mini">群聊</el-tag> {{ contact.displayName }}<span>({{ groupUserCount }})</span>
+                  <el-tag size="mini">群聊</el-tag> {{ contact.displayName }}<span class="mr-5">({{ groupUserCount }})</span>
                   <el-tag size="mini" v-if="contact.setting.nospeak == 1"  type="warning">仅群管理员可发言</el-tag>
                   <el-tag size="mini" v-if="contact.setting.nospeak == 2"  type="danger">全员禁言中</el-tag>
                 </span>
@@ -101,11 +101,8 @@
             <div class="message-title-tools">
               <i class="el-icon-phone-outline mr-10" title="语音通话" v-if="!contact.is_group" @click="called(false)"></i>
               <i class="el-icon-video-camera mr-10" title="视频通话" v-if="!contact.is_group" @click="called(true)"></i>
-              <i
-                class="el-icon-time"
-                @click="openMessageBox"
-                title="消息管理器"
-              ></i>
+              <i class="el-icon-time mr-10" @click="openMessageBox" title="消息管理器"></i>
+              <i class="el-icon-more" @click="$user(contact.id)" title="基本资料" v-if="!contact.is_group"></i>
               
             </div>
           </div>

@@ -272,4 +272,16 @@ imApi.setChatTopAPI= (data)  =>{
     })
 }
 
+/**
+ * 获取用户资料
+ * @param {*} data
+ */
+imApi.getUserInfo= (data)  =>{
+    return request({
+        url: 'enterprise/im/getUserInfo',
+        method: 'post',
+        data: data
+    })
+}
+
 export default imApi;

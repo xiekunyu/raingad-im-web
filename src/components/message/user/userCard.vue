@@ -99,7 +99,7 @@
             this.$emit('close')
         },
         getUserDetal(){
-          this.$api.userApi.getUserDetail({user_id:this.user_id}).then(res=>{
+          this.$api.imApi.getUserInfo({user_id:this.user_id}).then(res=>{
             if(res.code == 0){
               this.detail = res.data;
             }
