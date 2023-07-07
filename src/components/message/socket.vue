@@ -1,9 +1,9 @@
 <template>
     <div>
         <audio id="chatAudio">
-        <!-- <source src="./assets/voice/notify.ogg" type="audio/ogg"> -->
+        <source src="../../assets/voice/notify.ogg" type="audio/ogg">
         <source src="../../assets/voice/notify.mp3" type="audio/mpeg">
-        <!-- <source src="./assets/voice/notify.wav" type="audio/wav"> -->
+        <source src="../../assets/voice/notify.wav" type="audio/wav">
         </audio>
     </div>
 </template>
@@ -22,7 +22,7 @@
         },
         methods: {
             getWsUrl(){
-                const ws_host=process.env.VUE_APP_BASE_API;
+                let ws_host=process.env.VUE_APP_BASE_API;
                 let protocol=window.location.protocol;
                 let wsProtocol="ws://";
                 if(process.env.NODE_ENV==='production'){

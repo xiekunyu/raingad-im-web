@@ -409,17 +409,13 @@
               前端地址：<a
                 class="main-color"
                 :href="$packageData.frontUrl"
-                target="_blank"
-              >[链接] im-chat-front</a
-              >
+                target="_blank">[链接] im-chat-front</a>
             </p>
             <p>
               后端地址：<a
                 class="main-color"
                 :href="$packageData.backstageUrl"
-                target="_blank"
-                >[链接] im-instant-chat</a
-              >
+                target="_blank">[链接] im-instant-chat</a>
             </p>
           </div>
           <div class="setting-version" style="color: #a6a6a6">
@@ -432,9 +428,7 @@
               <a
                 class="main-color"
                 :href="$packageData.qqGroupUrl"
-                target="_blank"
-                >336921267</a
-              >
+                target="_blank">336921267</a>
             </p>
           </div>
         </el-tab-pane>
@@ -590,7 +584,6 @@ export default {
       curWidth:this.width,
       curHeight:this.height,
       unread:0,
-      dialogIsShow:true,
       webrtcConfig:{
           config: { 'iceServers':[{
 	  	    'urls': 'stun:stun.callwithus.com',
@@ -639,7 +632,7 @@ export default {
         theme: "default",
         hideMessageName: false,
         hideMessageTime: false,
-        avatarCricle: true,
+        avatarCricle: false,
         sendKey: 1,
         isVoice: true
       },
@@ -738,6 +731,14 @@ export default {
           }
         },
         {
+          text: "查看资料",
+          click: (e, instance, hide) => {
+            const { IMUI, contact } = instance;
+            hide();
+            this.$user(contact.user_id);
+          }
+        },
+        {
           text: "移出群聊",
           color: "red",
           click: (e, instance, hide) => {
@@ -759,15 +760,28 @@ export default {
             );
           }
         }
+        
       ],
       // 定义联系人的右键菜单
       contactContextmenu: [
+        {
+          click(e, instance, hide) {
+            const { IMUI, contact } = instance;
+            _this.$user(contact.user_id);
+            hide();
+          },
+          icon: "el-icon-tickets",
+          text: "查看资料",
+          visible: instance => {
+            return instance.contact.is_group == 0;
+          }
+        },
         {
           icon: "el-icon-upload2",
           text: "置顶聊天",
           click: (e, instance, hide) => {
             const { IMUI, contact } = instance;
-            this.$api.imApi.setChatTopAPI({
+            _this.$api.imApi.setChatTopAPI({
               id: contact.id,
               is_top: 1,
               is_group: contact.is_group
@@ -778,9 +792,9 @@ export default {
                   is_top: 1
                 });
                 contact.is_top = 1;
-                const hasContact=this.chatTopList.filter(item => item.id == contact.id);
+                const hasContact=_this.chatTopList.filter(item => item.id == contact.id);
                 if(!hasContact.length){
-                  this.chatTopList.push(contact);
+                  _this.chatTopList.push(contact);
                 }
               }
             });
@@ -795,7 +809,7 @@ export default {
           text: "取消置顶",
           click: (e, instance, hide) => {
             const { IMUI, contact } = instance;
-            this.$api.imApi.setChatTopAPI({
+            _this.$api.imApi.setChatTopAPI({
               id: contact.id,
               is_top: 0,
               is_group: contact.is_group
@@ -820,7 +834,7 @@ export default {
           click(e, instance, hide) {
             const { IMUI, contact } = instance;
             hide();
-            this.$api.imApi.isNoticeAPI({ id: contact.id, is_notice: 0 ,is_group:contact.is_group});
+            _this.$api.imApi.isNoticeAPI({ id: contact.id, is_notice: 0 ,is_group:contact.is_group});
             IMUI.updateContact({
               id: contact.id,
               is_notice: 0
@@ -838,7 +852,7 @@ export default {
           click(e, instance, hide) {
             const { IMUI, contact } = instance;
             hide();
-            this.$api.imApi.isNoticeAPI({ id: contact.id, is_notice: 1 ,is_group:contact.is_group});
+            _this.$api.imApi.isNoticeAPI({ id: contact.id, is_notice: 1 ,is_group:contact.is_group});
             IMUI.updateContact({
               id: contact.id,
               is_notice: 1
@@ -877,7 +891,7 @@ export default {
                 type: "warning"
               })
               .then(() => {
-                this.$api.imApi.removeGrouprAPI({ id: contact.id });
+                _this.$api.imApi.removeGrouprAPI({ id: contact.id });
                 _this.$message({
                   type: "success",
                   message: "删除成功!"
@@ -905,7 +919,7 @@ export default {
                 type: "warning"
               })
               .then(() => {
-                this.$api.imApi.removeUserAPI({ id: contact.id, user_id: _this.user.id });
+                _this.$api.imApi.removeUserAPI({ id: contact.id, user_id: _this.user.id });
                 _this.$message({
                   type: "success",
                   message: "退出成功!"
@@ -1368,13 +1382,19 @@ export default {
             }
           });
         }
-        if(this.user.id==1){
+        if(this.user.id>0){
           menus.push({
             name: "custom1",
             title: "后台管理",
             unread: 0,
             click: () => {
+              // 如果路由中有manage则关闭
+              if(this.$route.path.indexOf('manage')>-1){
+                this.$emit('close');
+                return;
+              }
               this.$router.push('/manage/index')
+
             },
             render: menu => {
               return <i class="el-icon-s-operation" />;
@@ -1465,6 +1485,9 @@ export default {
             content: "还是发送失败，哈哈哈哈！！！"
           });
         }, 2000);
+        return;
+      }else if(key == 'avatar'){
+        this.$user(message.fromUser.id);
         return;
       }
       // 语音消息点击事件

@@ -18,7 +18,7 @@ export default [
             },
             {
                 path: '/manage/setting',
-                name: 'index',
+                name: 'setting',
                 component: () =>import ('@/views/manage/setting.vue'),
                 meta: { 
                     title: '设置',

@@ -8,7 +8,7 @@
             <div class="image">
               <img :src="$packageData.logo" alt="logo">
             </div>
-            <div class="f-20 ml-5">{{$packageData.name}}</div>  
+            <div class="f-20 ml-5">{{$packageData.name}} 管理中心</div>  
           </el-col>
           <el-col :span="16" class="text-right">
             <div class="user">
@@ -22,17 +22,17 @@
                   <i class="el-icon-chat-line-round f-24" circle></i>
                 </el-badge>
               </span>
-              <el-dropdown trigger="click">
-                <div class="lz-flex lz-align-items-center">
+              <el-dropdown @command="handleCommand" trigger="click">
+                <div class="lz-flex lz-align-items-center cur-handle">
                   <span class="avatar">
-                    <img :src="$packageData.logo" alt="avatar">
+                    <img :src="userInfo.avatar" alt="avatar">
                   </span>
-                  <span class="username">用户名</span>
+                  <span class="username">{{userInfo.realname}}</span>
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </div>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>个人中心</el-dropdown-item>
-                  <el-dropdown-item>退出登录</el-dropdown-item>
+                  <el-dropdown-item command="profile">个人信息</el-dropdown-item>
+                  <el-dropdown-item command="logout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
               
@@ -75,6 +75,8 @@
 <script>
 import { mapGetters, mapMutations, mapState } from "vuex";
 import Message from "@/views/message/Index"; 
+import Lockr from "lockr";
+  const user = Lockr.get("UserInfo");
 export default {
   name: "Index",
   components: {
@@ -82,6 +84,7 @@ export default {
   },
   data() {
     return {
+      userInfo:user,
       dialogTableVisible: false, //消息弹窗是否显示
       unread: 0,
       allContacts: [],
@@ -131,7 +134,31 @@ export default {
       this.dialogTableVisible
         ? (this.dialogTableVisible = false)
         : (this.dialogTableVisible = true);
-    }
+    },
+    // 退出聊天室
+    handleCommand(e) {
+      if(e == 'profile'){
+        this.$user(this.userInfo.user_id);
+      }else{
+        this.$confirm("你确定要退出聊天室吗?", "提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning"
+          })
+            .then(() => {
+              this.$store.dispatch("LogOut").then(() => {
+                this.$router.push({ path: "/login" });
+              });
+            })
+            .catch(() => {
+              this.$message({
+                type: "info",
+                message: "已取消退出"
+              });
+            });
+        }
+      }
+      
   }
 };
 </script>

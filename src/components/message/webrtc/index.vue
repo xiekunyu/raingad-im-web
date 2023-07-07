@@ -1,10 +1,10 @@
 <template>
   <div class="webrtc-box" v-show="status">
     <audio id="music1">
-        <source src="https://im.file.raingad.com/static/voice/calling.mp3">
+        <source src="//im.file.raingad.com/static/voice/calling.mp3">
       </audio>
       <audio id="music2">
-        <source src="https://im.file.raingad.com/static/voice/guaduan.mp3">
+        <source src="//im.file.raingad.com/static/voice/guaduan.mp3">
       </audio>
     <video v-show="localStream && is_video" class="localvideo" ref="localvideo" autoplay playsinline></video>
     <video v-show="remoteStream && is_video" class="remotevideo" ref="remotevideo" autoplay playsinline></video>
@@ -59,7 +59,7 @@
   right:20px;
   bottom: 20px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  z-index:5000;
+  z-index:99999;
   .webrtc-box-title{
     font-size:16px;
     font-weight: bold;

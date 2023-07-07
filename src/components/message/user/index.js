@@ -14,9 +14,11 @@ export default {
                 el.$destroy()
                 document.body.removeChild(el.$el)
               },
-              changeRemark: data => {
-                options.editRemarkCallbak && options.editRemarkCallbak(data)
-              },
+              editUser: data => {
+                options.editDataCallbak && options.editDataCallbak(data);
+                el.$destroy()
+                document.body.removeChild(el.$el)
+              }
             },
             props: {
               user_id,

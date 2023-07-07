@@ -13,6 +13,15 @@ userApi.getUserList = (data) => {
     });
 };
 
+// 添加用户
+userApi.addUser = (data) => {
+    return request({
+        url: "/manage/User/add",
+        method: "post",
+        data: data,
+    });
+};
+
 // 修改用户
 userApi.editUser = (data) => {
     return request({
@@ -50,9 +59,9 @@ userApi.editPassword = (data) => {
 };
 
 // 修改状态
-userApi.editStatus = (data) => {
+userApi.setStatus = (data) => {
     return request({
-        url: "/manage/User/editStatus",
+        url: "/manage/User/setStatus",
         method: "post",
         data: data,
     });

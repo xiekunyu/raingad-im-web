@@ -38,9 +38,9 @@
       </el-col>
       <el-col :span="6">
         <el-card shadow="hover" class="mb-20" header="数据概览">
-          <div class="mb-15">用户总数：{{ $packageData.userCount }}</div> 
-          <div class="mb-15">群聊总数：{{ $packageData.userCount }}</div> 
-          <div class="mb-15">文件总数：{{ $packageData.userCount }}</div> 
+          <div class="mb-15">用户总数：20</div> 
+          <div class="mb-15">群聊总数：xxxx</div> 
+          <div class="mb-15">文件总数：xxxx</div> 
         </el-card>
       </el-col>
       <el-col :span="14"><el-card  class="task task-item mb-20" shadow="hover" v-loading="loading">

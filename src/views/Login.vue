@@ -58,6 +58,9 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
+      // 获取1-20的随机数
+      const random = Math.floor(Math.random() * 20 + 2)
+      this.loginForm.username=13800000000+random;
       this.$refs.username.focus()
     })
   },

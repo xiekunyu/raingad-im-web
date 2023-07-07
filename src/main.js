@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import UserCard from '@/components/message/user/index'
+Vue.use(UserCard)
 import LemonIMUI from 'lemon-imui';
 import 'lemon-imui/dist/index.css';
 Vue.use(ElementUI, { size: 'small' })
@@ -14,8 +16,6 @@ Vue.use(store);
 import Clipboard from 'v-clipboard'
 Vue.use(Clipboard)
 
-import UserCard from '@/components/message/user/index'
-Vue.use(UserCard)
 
 Vue.config.productionTip = false
 

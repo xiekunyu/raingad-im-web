@@ -22,37 +22,37 @@
               <div class="user-sign">
                 <div class="sign-arrow"></div>
                 <i class="iconfont icon-bianji" />
-                <span>{{detail.motto || "这个人有点懒，什么都没留下！"}} </span>
+                <span>{{detail.motto || "这家伙有点懒，什么都没留下！"}} </span>
               </div>
 
               <div class="card-rows no-select">
                 <div class="card-row">
-                  <label>账号</label>
-                  <span>{{ detail.account}}</span>
+                  <div class="label">账号</div>
+                  <div>{{ detail.account}}</div>
                 </div>
                 <div class="card-row">
-                  <label>姓名</label>
-                  <span>{{ detail.realname}}</span>
+                  <div class="label">姓名</div>
+                  <div>{{ detail.realname}}</div>
                 </div>
                 <div class="card-row">
-                  <label>性别</label>
-                  <span>{{ detail.sex | sex }}</span>
+                  <div class="label">性别</div>
+                  <div>{{ detail.sex | sex }}</div>
                 </div>
                 <div class="card-row">
-                  <label>邮箱</label>
-                  <span>{{ detail.email || "未设置"}}</span>
+                  <div class="label">邮箱</div>
+                  <div>{{ detail.email || "未设置"}}</div>
                 </div>
                 <div class="card-row">
-                  <label>IP</label>
-                  <span v-if="detail.last_login_ip">{{ detail.last_login_ip || "未知"}} （{{detail.location || "未知"}}）</span>
-                  <span v-else>未知</span>
+                  <div class="label">IP</div>
+                  <div v-if="detail.last_login_ip">{{ detail.last_login_ip || "未知"}} （{{detail.location || "未知"}}）</div>
+                  <div v-else>未知</div>
                 </div>
               </div>
             </el-main>
             <el-footer class="footer">
               <!-- <el-button round>加好友</el-button> -->
-              <el-button type="primary" round @click="openChat()" style="width:150px">发消息</el-button>
-              <el-button round v-if="options.isManage" style="width:150px">编辑资料</el-button>
+              <el-button type="primary" v-if="userInfo.user_id!=detail.user_id" round @click="openChat()" style="width:150px">发消息</el-button>
+              <el-button round v-if="options.isManage" style="width:150px" @click="editUser">编辑资料</el-button>
             </el-footer>
           </el-container>
     </div>
@@ -60,6 +60,8 @@
   </template>
   
   <script>
+  import Lockr from "lockr";
+  const user = Lockr.get("UserInfo");
   export default {
     name: 'UserCard',
     props: {
@@ -85,6 +87,7 @@
     data() {
         return {
           detail:{},
+          userInfo: user,
         };
     },
     mounted() {
@@ -105,6 +108,9 @@
         openChat(){
           this.closeDialog();
           this.$store.commit('openChat',this.detail.user_id)
+        },
+        editUser(){
+          this.$emit('editUser',this.detail)
         }
     }
   }
@@ -115,7 +121,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 19999;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
@@ -274,6 +280,8 @@
 
   .card-rows {
     .card-row {
+      display: flex;
+      justify-content: flex-start;
       height: 35px;
       line-height: 35px;
       font-size: 14px;
@@ -281,9 +289,11 @@
       cursor: pointer;
       color: #736f6f;
 
-      label {
-        margin-right: 25px;
+      .label {
+        width:30px;
+        margin-right: 20px;
         color: #cbc5c5;
+        text-align: right;
       }
 
       .friend-remark {

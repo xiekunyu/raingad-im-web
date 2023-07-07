@@ -17,9 +17,10 @@
       </div>
     </div>
     <div class="code-url">
-      <div class="ml-15 mb-15">
-        前端地址：<a :href="$packageData.frontUrl" target="_blank"><el-image
-            :src="$packageData.frontUrl + '/badge/star.svg?theme=white'" alt="star"></el-image></a>
+      <div class="ml-15 mb-15"> 前端地址：
+        <a :href="$packageData.frontUrl" target="_blank">
+          <el-image :src="$packageData.frontUrl + '/badge/star.svg?theme=white'" alt="star"></el-image>
+        </a>
       </div>
       <div class="ml-15 mb-15">
         后端地址：<a :href="$packageData.backstageUrl" target="_blank"><el-image
@@ -186,7 +187,7 @@ export default {
         font-weight: 600;
         margin-bottom: 5px;
         display: flex;
-        align-items: start;
+        align-items: flex-start;
       }
 
       .im-des {
@@ -262,9 +263,6 @@ export default {
   }
 }
 
-.other-pro{
-
-}
 @media screen and (max-width: 768px) {
   .main-container{
     padding: 15px;

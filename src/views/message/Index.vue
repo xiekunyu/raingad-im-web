@@ -2,7 +2,7 @@
   <div class="messageBoxStyle" v-show="dialogTableVisible">
   <el-dialog :visible.sync="dialogIsShow" :modal="false" @close="closeDialog" custom-class="sideMenu-message"
         :show-close="false" :width="'1000px'" :close-on-press-escape="true" >
-      <rainagdIm @newChat="contactSync"></rainagdIm>
+      <rainagdIm @newChat="contactSync" @close="closeDialog"></rainagdIm>
     </el-dialog>
   </div>
 </template>
