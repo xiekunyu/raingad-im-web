@@ -7,10 +7,10 @@
          <!-- 搜索 -->
          <div>
             <el-input
-               placeholder="请输入内容"
+               placeholder="请输入关键字搜索"
                prefix-icon="el-icon-search"
-               style="width: 200px"
-               @keyup.enter.native="search"
+               style="width: 300px"
+               @keyup.enter.native="handleChange"
                v-model="params.keywords">
                <el-button slot="append" icon="el-icon-search" @click="handleChange"></el-button>
             </el-input>
@@ -19,86 +19,88 @@
       </div>
       
       <el-table
-      :data="userList"
-      stripe
-      style="width: 100%;border: solid 1px #e3e3e3;"
-      :height="'calc(100vh - 200px)'"
-      :header-cell-style="{'background-color':'#f5f7fa','color':'#909399'}"
-      @sort-change="sortChange"
-      >
-      <el-table-column
-         fixed
-         prop="user_id"
-         label="ID"
-         sortable="custom"
-         width="150">
-      </el-table-column>
-      <el-table-column
-         prop="realname"
-         label="姓名"
-         width="120">
-      </el-table-column>
-      <el-table-column
-         prop="account"
-         label="账号"
-         width="120">
-      </el-table-column>
-      <el-table-column
-         prop="sex"
-         label="性别"
-         sortable="custom"
-         width="120">
-         <template slot-scope="scope">
-            <span class="el-dropdown-link" v-if="scope.row.sex==0">女</span>
-            <span class="el-dropdown-link" v-if="scope.row.sex==1">男</span>
-            <span class="el-dropdown-link" v-if="scope.row.sex==2">未知</span>
-         </template>
-      </el-table-column>
-      <el-table-column
-         prop="role"
-         label="角色"
-         sortable="custom"
-         width="120">
-         <template slot-scope="scope">
-            <span class="el-dropdown-link" v-if="scope.row.role==1">
-               超级管理员
-            </span>
-            <el-dropdown @command="handleCommand(scope.row,$event)" v-else>
-            <span class="el-dropdown-link cur-handle">
-            {{ scope.row.role==0 ? '普通用户' : "管理员" }}<i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-               <el-dropdown-item  :command="0">普通用户</el-dropdown-item>
-               <el-dropdown-item  :command="2">管理员</el-dropdown-item>
-            </el-dropdown-menu>
-            </el-dropdown>
-         </template>
-      </el-table-column>
-      <el-table-column
-         prop="remark"
-         label="备注"
-         min-width="300">
-      </el-table-column>
-      <el-table-column
-         prop="status"
-         label="状态"
-         width="120">
-         <template slot-scope="scope">
-            <el-switch @change="setStatus(scope.row)" v-if="scope.row.user_id!=1" v-model="scope.row.status" :active-value="1" :inactive-value="0">
-            </el-switch>
-            <span v-else>--</span>
+         :data="userList"
+         stripe
+         style="width: 100%;border: solid 1px #e3e3e3;"
+         :height="'calc(100vh - 200px)'"
+         :header-cell-style="{'background-color':'#f5f7fa','color':'#909399'}"
+         @sort-change="sortChange"
+         @row-dblclick="handleClick"
+         >
+         <el-table-column
+            fixed
+            prop="user_id"
+            label="ID"
+            sortable="custom"
+            width="150">
+         </el-table-column>
+         <el-table-column
+            prop="realname"
+            label="姓名"
+            width="120">
+         </el-table-column>
+         <el-table-column
+            prop="account"
+            label="账号"
+            width="120">
+         </el-table-column>
+         <el-table-column
+            prop="sex"
+            label="性别"
+            sortable="custom"
+            width="120">
+            <template slot-scope="scope">
+               <span class="el-dropdown-link" v-if="scope.row.sex==0">女</span>
+               <span class="el-dropdown-link" v-if="scope.row.sex==1">男</span>
+               <span class="el-dropdown-link" v-if="scope.row.sex==2">未知</span>
             </template>
-      </el-table-column>
-      <el-table-column
-         fixed="right"
-         label="操作"
-         width="140">
-         <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-            <el-button @click="editUser(scope.row)" type="text" size="small" v-if="scope.row.user_id>1">编辑</el-button>
-            <el-button @click="editPass(scope.row)" type="text" size="small">改密</el-button>
-         </template>
-      </el-table-column>
+         </el-table-column>
+         <el-table-column
+            prop="role"
+            label="角色"
+            sortable="custom"
+            width="120">
+            <template slot-scope="scope">
+               <span class="el-dropdown-link" v-if="scope.row.role==1">
+                  超级管理员
+               </span>
+               <el-dropdown @command="handleCommand(scope.row,$event)" v-else>
+                  <span class="el-dropdown-link cur-handle">
+                  {{ scope.row.role==0 ? '普通用户' : "管理员" }}<i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                     <el-dropdown-item  :command="0">普通用户</el-dropdown-item>
+                     <el-dropdown-item  :command="2">管理员</el-dropdown-item>
+                  </el-dropdown-menu>
+               </el-dropdown>
+            </template>
+         </el-table-column>
+         <el-table-column
+            prop="remark"
+            label="备注"
+            min-width="300">
+         </el-table-column>
+         <el-table-column
+            prop="status"
+            label="状态"
+            width="120">
+            <template slot-scope="scope">
+               <el-switch @change="setStatus(scope.row)" v-if="scope.row.user_id!=1" v-model="scope.row.status" :active-value="1" :inactive-value="0">
+               </el-switch>
+               <span v-else>--</span>
+               </template>
+         </el-table-column>
+         <el-table-column
+            fixed="right"
+            label="操作"
+            width="160">
+            <template slot-scope="scope">
+               <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+               <el-button @click="editUser(scope.row)" type="text" size="small" v-if="scope.row.user_id>1">编辑</el-button>
+               <el-button @click="editPass(scope.row)" type="text" size="small">改密</el-button>
+               <el-button @click="delUser(scope.row)" type="text" size="small" v-if="scope.row.user_id>1"><span class="c-red">删除</span></el-button>
+            </template>
+         </el-table-column>
       </el-table>
       <div class="mt-15">
          <el-pagination
@@ -306,6 +308,7 @@
                this.$api.userApi.addUser(this.detail).then(res=>{
                 if(res.code==0){
                   this.dialogVisible = false;
+                  this.getUserList();
                     this.$message({
                         message: res.msg,
                         type: 'success'
@@ -318,6 +321,7 @@
                this.$api.userApi.editUser(detail).then(res=>{
                   if(res.code==0){
                      this.dialogVisible = false;
+                     this.getUserList();
                      this.$message({
                         message: res.msg,
                         type: 'success'
@@ -397,8 +401,33 @@
                });
             }
          })
+      },
+      delUser(item){
+         this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+         }).then(() => {
+            let params = {
+               user_id:item.user_id
+            }
+            this.$api.userApi.delUser(params).then(res=>{
+               if(res.code==0){
+                  this.$message({
+                     message: res.msg,
+                     type: 'success'
+                  });
+                  this.getUserList();
+               }
+            })
+         }).catch(() => {
+            this.$message({
+               type: 'info',
+               message: '已取消删除'
+            });          
+         });
       }
-     },
+     }
    }
  </script>
  <style lang="scss" scoped>

@@ -269,61 +269,7 @@
       </lemon-imui>
     </div>
     <!-- 创建群聊 -->
-    <el-dialog
-      title="创建群聊"
-      :visible.sync="createChatBox"
-      :modal="true"
-      width="612px"
-      append-to-body
-    >
-      <el-transfer
-        filterable
-        :titles="createChatTitles"
-        filter-placeholder="请输入关键词"
-        v-model="selectUid"
-        :props="defaultProps"
-        :data="allUser"
-      >
-      </el-transfer>
-      <span slot="footer" class="dialog-footer">
-        <el-button
-          @click="
-            createChatBox = false;
-            selectUid = [];
-          "
-          >取 消</el-button
-        >
-        <el-button type="primary" @click="createGroup">确 定</el-button>
-      </span>
-    </el-dialog>
-    <!-- 添加群成员 -->
-    <el-dialog
-      title="添加成员"
-      :visible.sync="addGroupUserBox"
-      :modal="true"
-      width="612px"
-      append-to-body
-    >
-      <el-transfer
-        filterable
-        :titles="createChatTitles"
-        filter-placeholder="请输入关键词"
-        v-model="selectUid"
-        :props="defaultProps"
-        :data="allUser"
-      >
-      </el-transfer>
-      <span slot="footer" class="dialog-footer">
-        <el-button
-          @click="
-            addGroupUserBox = false;
-            selectUid = [];
-          "
-          >取 消</el-button
-        >
-        <el-button type="primary" @click="addGroupUser">确 定</el-button>
-      </span>
-    </el-dialog>
+    <Group :visible.sync="createChatBox" :title="dialogTitle" @manageGroup="manageGroup" :isAdd="isAdd" :userIds="userIds"></Group>
     <!-- 设置中心 -->
     <el-dialog
       title="设置"
@@ -543,6 +489,8 @@ import ChatRecord from "./chatRecord";
 import ChatSet from "./chatSet";
 import ChatTop from "./chatTop";
 import VoiceRecorder from "./messageBox/voiceRecorder";
+import Group from "./group/index";
+import Files from "./files/index";
 import webrtc from "./webrtc";
 const getTime = () => {
   return new Date().getTime();
@@ -559,7 +507,9 @@ export default {
     ChatSet,
     ChatTop,
     VoiceRecorder,
-    webrtc
+    webrtc,
+    Group,
+    Files
   },
   props: {
     width: {
@@ -590,7 +540,6 @@ export default {
       // 搜索结果展示
       searchResult: false,
       createChatBox: false,
-      addGroupUserBox: false,
       forwardBox: false,
       noticeBox: false,
       messageBox: false,
@@ -599,16 +548,13 @@ export default {
       VoiceStatus: false,
       contactSetting: {},
       groupUserCount: 0,
+      dialogTitle: "创建群聊",
+      isAdd: true,
+      userIds: [],
       // 公告
       notice: "",
       createChatTitles: ["待选成员", "已选成员"],
       selectUid: [],
-      // 所有成员默认的props
-      defaultProps: {
-        key: "user_id",
-        label: "realname",
-        pinyin: "name_py"
-      },
       contactsProps: {
         key: "id",
         label: "realname"
@@ -640,8 +586,10 @@ export default {
         avatar: user.avatar,
         account: user.account
       },
-      pageSize: 1,
-      listRows: 10,
+      params:{
+        page:1,
+        limit:10,
+      },
       is_group: 0,
       group_id: 0,
       contacts: [],
@@ -1338,6 +1286,19 @@ export default {
             name: "contacts"
           },
           {
+            name: "files",
+            title: "文件",
+            unread: 0,
+            render: menu => {
+              return <i class="el-icon-folder" />;
+            },
+            renderContainer: () => {
+              return (
+                <Files title={this.dialogTitle}></Files>
+              );
+            },
+          },
+          {
             name: "kaiyuan",
             title: "开源",
             unread: 0,
@@ -1541,7 +1502,7 @@ export default {
       // 将未读的总数减去当前选择的聊天
       this.unread -= contact.unread;
       // 聊天记录列表恢复到最初第一页
-      this.pageSize = 1;
+      this.params.page = 1;
       this.displayName = contact.displayName;
       this.oldName = contact.displayName;
       this.currentChat = contact;
@@ -1687,17 +1648,15 @@ export default {
     },
     // 拉取聊天记录
     handlePullMessages(contact, next, instance) {
-      this.$api.imApi.getMessageListAPI({
-        toContactId: contact.id,
-        is_group: contact.is_group,
-        pageSize: this.pageSize,
-        listRows: this.listRows
-      })
+      let params=this.params;
+      params.toContactId=contact.id;
+      params.is_group=contact.is_group;
+      this.$api.imApi.getMessageListAPI(params)
         .then(res => {
-          this.pageSize++;
+          this.params.page++;
           let isEnd = false;
           let messages = res.data;
-          if (messages.length < this.listRows) {
+          if (messages.length < this.params.limit) {
             isEnd = true;
           }
           next(messages, isEnd);
@@ -1727,23 +1686,37 @@ export default {
          dangerouslyUseHTMLString: true
       });
     },
-    // 获取所有人员列表
-    getAllUser(data) {
-      this.$api.imApi.getAllUserAPI(data).then(res => {
-        const data = res.data;
-        this.allUser = data;
-      });
-    },
     // 打开创建团队的窗口
     openCreateGroup() {
-      this.getAllUser({});
+      this.isAdd=true;
+      this.dialogTitle = "创建群聊";
       this.createChatBox = true;
     },
     // 打开添加群成员的窗口
     openAddGroupUser() {
       var user_ids = utils.arrayToString(this.groupUser, "user_id");
-      this.getAllUser({ user_ids: user_ids });
-      this.addGroupUserBox = true;
+      this.isAdd=false;
+      this.userIds=user_ids;
+      this.dialogTitle = "添加群成员";
+      this.createChatBox = true;
+    },
+    // 添加群成员或者创建群聊
+    manageGroup(selectUid,isAdd,groupName) {
+      this.createChatBox = false;
+      if(!isAdd){
+        this.$api.imApi.addGroupUserAPI({ user_ids: selectUid, id: this.group_id });
+      }else{
+        this.$api.imApi.addGroupAPI({ user_ids: selectUid,name:groupName }).then(res => {
+          const data = res.data;
+          const { IMUI } = this.$refs;
+          if (res.code == 0) {
+            // 添加联系人
+            IMUI.appendContact(data);
+            // 切换到该联系人
+            IMUI.changeContact(data.id);
+          }
+        });
+      }
     },
     // 封装循环请求
     fn(formData) {
@@ -1807,27 +1780,6 @@ export default {
         .catch(err => {
           console.log("error", err);
         });
-    },
-    // 添加群成员
-    addGroupUser() {
-      this.addGroupUserBox = false;
-      this.$api.imApi.addGroupUserAPI({ user_ids: this.selectUid, id: this.group_id });
-      this.selectUid = [];
-    },
-    // 创建群聊
-    createGroup() {
-      this.createChatBox = false;
-      this.$api.imApi.addGroupAPI({ user_ids: this.selectUid }).then(res => {
-        const data = res.data;
-        const { IMUI } = this.$refs;
-        if (res.code == 0) {
-          // 添加联系人
-          IMUI.appendContact(data);
-          // 切换到该联系人
-          IMUI.changeContact(data.id);
-        }
-        this.selectUid = [];
-      });
     },
     // 获取群聊成员列表
     getGroupUserList(group_id) {

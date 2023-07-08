@@ -3,24 +3,35 @@
         <el-container>
             <el-aside width="320px">
                 <div class="lz-flex group-box">
-                        <div class="group-box-header">
+                        <div class="group-box-header" v-if="!showSearch">
                             <div>群列表</div>
                             <div>
-                                <el-button plain round>创建群聊</el-button>
+                                <el-button plain circle @click="showSearch=true" icon="el-icon-search" title="搜索"></el-button>
+                                <el-button plain round @click="createChatBox=true;isAdd=true">创建群聊</el-button>
                             </div>
+                        </div>
+                        <div class="group-box-header" v-else>
+                            <el-input
+                            placeholder="请输入关键字搜索"
+                            style="width: 300px"
+                            @keyup.enter.native="handleChange"
+                            v-model="params.keywords">
+                            <el-button slot="prepend" icon="el-icon-back" @click="showSearch=false"></el-button>
+                            <el-button slot="append" icon="el-icon-search" @click="handleChange"></el-button>
+                            </el-input>
                         </div>
                         <div class="group-box-list">
                             <el-scrollbar>
-                                <div v-for="chat in chats" :key="chat.id" class="chat-item"  @click="openGroup(chat)" :class="active==chat.id ? 'active' : ''">
+                                <div v-for="chat in chats" :key="chat.group_id" class="chat-item"  @click="openGroup(chat)" :class="active==chat.group_id ? 'active' : ''">
                                     <div class="chat-avatar">
                                         <img :src="chat.avatar" alt="avatar">
                                     </div>
                                     <div class="chat-content">
                                         <span class="chat-name">{{ chat.name }}</span>
-                                        <p class="chat-message">{{ chat.message }}</p>
+                                        <p class="chat-message c-999"> 创建人：{{ chat.owner_id_info.realname }}</p>
                                     </div>
                                     <div class="chat-time">
-                                        {{ chat.time }}
+                                        {{ chat.reate_time }}
                                     </div>
                                 </div>
                             </el-scrollbar>
@@ -28,7 +39,10 @@
                         <div class="group-box-page" align="center">
                             <el-pagination
                                 background
-                                :total="1000"
+                                :total="total"
+                                @current-change="getGroupList"
+                                :current-page.sync="params.page"
+                                :page-size.sync="params.limit"
                                 layout="total, prev, next , jumper">
                                 </el-pagination>
                         </div>
@@ -38,156 +52,218 @@
                 <div class="lz-flex group-box group-user-box">
                     <div class="group-box-header">
                         <div>群成员</div>
-                        <div>
-                            <el-button plain round>更换群主</el-button>
-                            <el-button type="warning" plain round>群聊监控</el-button>
-                            <el-button type="danger" plain round>解散群聊</el-button>
+                        <div v-if="members.length>0">
+                            <el-button plain round @click="openAddUser">添加成员</el-button>
+                            <el-button type="warning" plain round @click="openMessageBox">群聊监控</el-button>
+                            <el-button type="danger" plain round @click="delGroup">解散群聊</el-button>
                         </div>
                     </div>
                     <div class="group-box-list">
                         <el-scrollbar>
-                            <div  class="member-list">
+                            <div  class="member-list" v-if="members.length>0">
                                 <div v-for="member in members" :key="member.id" class="member-item">
                                     <div class="member-avatar">
-                                        <img :src="member.avatar" alt="avatar">
+                                        <img :src="member.userInfo.avatar" alt="avatar">
                                     </div>
                                     <div class="member-content">
                                         <div class="member-header">
-                                            <span class="member-name">{{ member.name }}</span>
-                                            <span class="member-role">{{ member.role }}</span>
+                                            <span class="member-name">{{ member.userInfo.displayName }}</span>
+                                            <el-tag type="warning"  size="mini" class="mt-3" v-if="member.role==1">群主</el-tag>
+                                            <el-tag type="info" size="mini" class="mt-3" v-if="member.role==2">管理员</el-tag>
+                                            <span class="member-role mt-3" v-if="member.role==3">普通成员</span>
                                         </div>
                                         <div class="member-actions">
-                                        <el-tooltip content="更多操作" placement="top">
-                                            <el-button type="text" icon="el-icon-more"></el-button>
-                                        </el-tooltip>
+                                            <el-dropdown @command="handleCommand(member,$event)">
+                                                <el-button type="text" icon="el-icon-more"></el-button>
+                                                <el-dropdown-menu slot="dropdown">
+                                                    <el-dropdown-item  command="info">查看资料</el-dropdown-item>
+                                                    <el-dropdown-item  command="setManager" v-if="member.role>1"> {{ member.role==2 ? '取消' : '设置'}}管理员</el-dropdown-item>
+                                                    <el-dropdown-item  command="changeOwner" v-if="member.role>1">设置为群主</el-dropdown-item>
+                                                    <el-dropdown-item  command="removeUser" v-if="member.role>1"><span class="c-red">移除成员</span></el-dropdown-item>
+                                                </el-dropdown-menu>
+                                            </el-dropdown>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div v-else>
+                                <el-empty description="请选择群聊"></el-empty>
                             </div>
                         </el-scrollbar>
                     </div>
                 </div>
             </el-main>
         </el-container>
+        <!-- 创建群聊 -->
+        <Group :visible.sync="createChatBox" :title="dialogTitle" @manageGroup="manageGroup" :isAdd="isAdd" :userIds="userIds"></Group>
+        <el-dialog
+            title="消息管理器"
+            :visible.sync="messageBox"
+            :modal="true"
+            width="800px"
+            append-to-body
+            >
+            <ChatRecord :contact="currentChat" :key="componentKey"></ChatRecord>
+        </el-dialog>
     </div>
+
 </template>
 
 <script>
+  import Group from '@/components/message/group/index.vue';
+  import ChatRecord from '@/components/message/chatRecord/index.vue';
+  import * as utils from '@/utils/index';
   export default {
+    components: {
+        Group,
+        ChatRecord
+    },  
     data() {
       return {
+        componentKey:99,
+        messageBox:false,
+        isAdd: true,
+        dialogTitle: '创建群聊',
+        createChatBox:false,
+        userIds:[],
+        showSearch:false,
         value: false,
-        currentPage4: 4,
         active:0,
+        currentChat: {},
+        params:{
+            page:1,
+            limit:20,
+            keywords:''
+        },
+        total:0,
         chats: [
-            {
-            id: 1,
-            name: 'John Doe',
-            avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
-            message: '创建者：张三  群成员：28人',
-            time: '10:30 AM'
-            },
-            {
-            id: 2,
-            name: 'Alice Smith',
-            avatar: 'https://randomuser.me/api/portraits/women/2.jpg',
-            message: '创建者：张三  群成员：28人',
-            time: '11:00 AM'
-            },
-            {
-            id: 3,
-            name: 'Bob Johnson',
-            avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-            message: '创建者：张三  群成员：28人',
-            time: '11:30 AM'
-            },
-            {
-            id: 4,
-            name: 'Bob Johnson',
-            avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-            message: '创建者：张三  群成员：28人.',
-            time: '11:30 AM'
-            },
-            {
-            id: 5,
-            name: 'Bob Johnson',
-            avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-            message: '创建者：张三  群成员：28人.',
-            time: '11:30 AM'
-            },
-            {
-            id: 6,
-            name: 'Bob Johnson',
-            avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-            message: '创建者：张三  群成员：28人.',
-            time: '11:30 AM'
-            },
-            {
-            id: 7,
-            name: 'Bob Johnson',
-            avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-            message: '创建者：张三  群成员：28人.',
-            time: '11:30 AM'
-            },
-            {
-            id: 8,
-            name: 'Bob Johnson',
-            avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-            message: '创建者：张三  群成员：28人.',
-            time: '11:30 AM'
-            }
         ],
-        members: [
-        {
-          id: 1,
-          name: 'John Doe',
-          role: '管理员',
-          avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
-        },
-        {
-          id: 2,
-          name: 'Alice Smith',
-          role: '普通成员',
-          avatar: 'https://randomuser.me/api/portraits/women/2.jpg',
-        },
-        {
-          id: 3,
-          name: 'Bob Johnson',
-          role: '普通成员',
-          avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-        },
-        {
-          id: 4,
-          name: 'Bob Johnson',
-          role: '普通成员',
-          avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-        },
-        {
-          id: 5,
-          name: 'Bob Johnson',
-          role: '普通成员',
-          avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-        },
-        {
-          id: 6,
-          name: 'Bob Johnson',
-          role: '普通成员',
-          avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-        },
-        {
-          id: 7,
-          name: 'Bob Johnson',
-          role: '普通成员',
-          avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
-        }
-        
-      ]
+        members: []
       }
     },
+    mounted() {
+      this.getGroupList();
+    },  
     methods: {
-      openGroup(item) {
-        this.active = item.id;
-      }
+        openMessageBox(){
+            this.componentKey++;
+            this.messageBox = true;
+        },
+        openGroup(item) {
+            this.active = item.group_id;
+            item.id='group-'+item.group_id;
+            item.is_group=1;
+            this.currentChat = item;
+            this.getGroupUser(item.group_id);
+        },
+        getGroupList(){
+            this.$api.groupApi.getGroupList(this.params).then(res=>{
+                if(res.code == 0){
+                    this.chats = res.data;
+                    this.total = res.count;
+                    this.params.page = res.page;
+                }
+            })
+        },
+        getGroupUser(group_id){
+            this.$api.imApi.groupUserListAPI({group_id:'group-'+group_id}).then(res=>{
+                if(res.code == 0){
+                    this.members = res.data;
+                }
+            })
+        },
+        handleChange() {
+            // 更换每页显示条数后，需要重新从第一页开始
+            this.params.page = 1;
+            this.getGroupList();
+        },
+        //   创建群聊或添加成员
+        manageGroup(selectUid,isAdd,groupName){
+            this.createChatBox = false;
+            if(isAdd){
+                this.$api.imApi.addGroupAPI({ user_ids: selectUid,name:groupName }).then(res => {
+                    if (res.code == 0) {
+                        this.$message.success('创建成功'); 
+                        this.params.page = 1;
+                        this.getGroupList();
+                    }
+                });
+            }else{
+                this.$api.groupApi.addGroupUser({ group_id:this.active, user_ids: selectUid }).then(res => {
+                    if (res.code == 0) {
+                        this.$message.success('添加成功'); 
+                        this.getGroupUser(this.active);
+                    }
+                });
+            }
+        },
+        openAddUser(){
+            if(this.active==0){
+                this.$message.warning('请选择群聊');
+                return;
+            }
+            this.createChatBox = true;
+            this.isAdd = false;
+            this.dialogTitle = '添加成员';
+            let user_ids = utils.arrayToString(this.members, "user_id");
+            this.userIds = user_ids;
+        },
+        delGroup(){
+            if(this.active==0){
+                this.$message.warning('请选择群聊');
+                return;
+            }
+            this.$confirm('确定要解散该群聊吗？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(() => {
+                    this.$api.groupApi.delGroup({ group_id:this.active }).then(res => {
+                        if (res.code == 0) {
+                            this.$message.success('解散成功'); 
+                            this.params.page = 1;
+                            this.members = [];
+                            this.getGroupList();
+                        }
+                    });
+                }).catch(() => {
+                this.$message.info('已取消操作');
+            });
+        },
+        handleCommand(item,command){
+            if(command=='info'){
+                this.$user(item.user_id);
+            }else if(command=='setManager'){
+                this.$api.groupApi.setManager({ group_id:this.active,user_id:item.user_id,role:item.role==2?3:2 }).then(res => {
+                    if (res.code == 0) {
+                        this.$message.success(res.msg); 
+                        this.getGroupUser(this.active);
+                    }
+                });
+            }else if(command=='changeOwner'){
+                this.$api.groupApi.changeOwner({ group_id:this.active,user_id:item.user_id }).then(res => {
+                    if (res.code == 0) {
+                        this.$message.success(res.msg); 
+                        this.getGroupUser(this.active);
+                    }
+                });
+            }else if(command=='removeUser'){
+                this.$confirm('确定要移除该成员吗？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                    }).then(() => {
+                        this.$api.groupApi.delGroupUser({ group_id:this.active,user_id:item.user_id }).then(res => {
+                            if (res.code == 0) {
+                                this.$message.success(res.msg); 
+                                this.getGroupUser(this.active);
+                            }
+                        });
+                    }).catch(() => {
+                    this.$message.info('已取消操作');
+                });
+            }
+        }
     }
   }
 </script>
@@ -226,8 +302,8 @@
     .chat-avatar {
         margin-right: 10px;
         img {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
         }
     }
@@ -276,8 +352,8 @@
         .member-avatar {
             margin-right: 10px;
             img {
-                width: 40px;
-                height: 40px;
+                width: 44px;
+                height: 44px;
                 border-radius: 50%;
             }
         }
@@ -305,6 +381,10 @@
         }
     }
 
+}
+
+.mt-3{
+    margin-top:3px;
 }
 
 ::v-deep .el-card__body{
