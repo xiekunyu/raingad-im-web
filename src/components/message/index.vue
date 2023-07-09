@@ -14,7 +14,7 @@
         :avatarCricle="setting.avatarCricle"
         :sendKey="setSendKey"
         :wrapKey="wrapKey"
-        @menu-avatar-click="settingBox=true"
+        @menu-avatar-click="$user(user.id)"
         @change-contact="handleChangeContact"
         @pull-messages="handlePullMessages"
         @message-click="handleMessageClick"
@@ -264,119 +264,12 @@
         </template>
         <!-- 发送按钮左边插槽 -->
         <template #editor-footer>
-          {{ sendTips }}
+          {{ setting.sendKey ==1 ? '使用 Enter 键发送消息' : '使用 Ctrl + Enter 键发送消息' }}
         </template>
       </lemon-imui>
     </div>
     <!-- 创建群聊 -->
     <Group :visible.sync="createChatBox" :title="dialogTitle" @manageGroup="manageGroup" :isAdd="isAdd" :userIds="userIds"></Group>
-    <!-- 设置中心 -->
-    <el-dialog
-      title="设置"
-      :visible.sync="settingBox"
-      :modal="true"
-      width="550px"
-      append-to-body
-    >
-      <el-tabs :tab-position="tabPosition" style="min-height: 300px">
-        <el-tab-pane label="账号设置">
-          <div align="center">
-            <el-avatar :src="user.avatar" :size="50"> </el-avatar>
-            <br /><br />
-            <p>{{ user.displayName }}</p>
-            <br />
-            <p>账号：{{ user.account }}</p>
-            <br />
-            <el-button type="danger" @click="logout">退出登录</el-button>
-          </div>
-        </el-tab-pane>
-        <el-tab-pane label="通用设置">
-          <el-form ref="form" :model="setting" label-width="100px">
-            <el-form-item label="发送消息：">
-              <el-radio-group v-model="setting.sendKey">
-                <el-radio-button label="1">Enter</el-radio-button>
-                <el-radio-button label="2">Ctrl + Enter</el-radio-button>
-              </el-radio-group>
-            </el-form-item>
-            <el-form-item label="系统主题：">
-              <el-radio-group v-model="setting.theme">
-                <el-radio-button label="default"></el-radio-button>
-                <el-radio-button label="blue"></el-radio-button>
-              </el-radio-group>
-            </el-form-item>
-          </el-form>
-          <div class="setting-switch">
-            <el-switch v-model="setting.isVoice"> </el-switch
-            >&emsp;开启新消息声音提醒
-          </div>
-          <div class="setting-switch">
-            <el-switch v-model="setting.avatarCricle"> </el-switch
-            >&emsp;开启聊天圆形头像（需要刷新）
-          </div>
-          <div class="setting-switch">
-            <el-switch v-model="setting.hideMessageName"> </el-switch
-            >&emsp;是否隐藏聊天窗口内的联系人名字
-          </div>
-          <div class="setting-switch">
-            <el-switch v-model="setting.hideMessageTime"> </el-switch
-            >&emsp;是否隐藏聊天窗口内的消息发送时间
-          </div>
-        </el-tab-pane>
-        <el-tab-pane label="关于 IM">
-          <div align="center">
-            <el-avatar :src="$packageData.logo" :size="50"></el-avatar>
-            <br /><br />
-            <p>
-              <span class="main-color"> {{ $packageData.name }} </span>for {{ $packageData.version }}
-            </p>
-          </div>
-          <div class="setting-version">
-            <b> 已经支持功能：</b>
-            <p v-for="item in $packageData.funcList" :key="item.icon"><i :class="item.icon"></i> {{ item.text }}</p>
-          </div>
-        </el-tab-pane>
-        <el-tab-pane label="开源">
-          <div align="center">
-            <el-avatar :src="$packageData.logo" :size="50"></el-avatar>
-            <br /><br />
-            <p>
-              <span class="main-color"> {{ $packageData.name }} </span>for {{ $packageData.version }}
-            </p>
-          </div>
-          <!-- <div class="setting-version">
-            <b> 即将支持功能：</b>
-            <p>1、解散群聊、群公告设置、群功能设置</p>
-          </div> -->
-          <div class="setting-version">
-            <p>
-              前端地址：<a
-                class="main-color"
-                :href="$packageData.frontUrl"
-                target="_blank">[链接] im-chat-front</a>
-            </p>
-            <p>
-              后端地址：<a
-                class="main-color"
-                :href="$packageData.backstageUrl"
-                target="_blank">[链接] im-instant-chat</a>
-            </p>
-          </div>
-          <div class="setting-version" style="color: #a6a6a6">
-            <p>前端技术栈：vue+Lemon-IMUI+element-UI</p>
-            <p>后端技术栈：thinkphp6+workerman</p>
-          </div>
-          <div class="setting-version">
-            <p>
-              QQ交流群：
-              <a
-                class="main-color"
-                :href="$packageData.qqGroupUrl"
-                target="_blank">336921267</a>
-            </p>
-          </div>
-        </el-tab-pane>
-      </el-tabs>
-    </el-dialog>
     <!-- 创建群聊 -->
     <el-dialog
       title="发布公告"
@@ -491,6 +384,7 @@ import ChatTop from "./chatTop";
 import VoiceRecorder from "./messageBox/voiceRecorder";
 import Group from "./group/index";
 import Files from "./files/index";
+import Setting from "./setting/index";
 import webrtc from "./webrtc";
 const getTime = () => {
   return new Date().getTime();
@@ -509,7 +403,8 @@ export default {
     VoiceRecorder,
     webrtc,
     Group,
-    Files
+    Files,
+    Setting
   },
   props: {
     width: {
@@ -567,18 +462,6 @@ export default {
       drawer: false,
       previewUrl: "",
       isEdit: false,
-      settingBox: false,
-      tabPosition: "left",
-      sendTips: "使用 Enter 键发送消息",
-      // 设置
-      setting: {
-        theme: "default",
-        hideMessageName: false,
-        hideMessageTime: false,
-        avatarCricle: false,
-        sendKey: 1,
-        isVoice: true
-      },
       // 当前登录用户
       user: {
         id: user.user_id,
@@ -1010,6 +893,8 @@ export default {
       socketAction: state => state.socketAction,
       contactId: state => state.toContactId,
       contactSync: state => state.contactSync,
+      setting: state => state.setting,
+      userInfo: state => state.userInfo,
     }),
     formatTime() {
       return function(val) {
@@ -1050,22 +935,6 @@ export default {
       const { IMUI } = this.$refs;
       const contacts = IMUI.getContacts();
       this.searchContact(contacts);
-    },
-    "setting.sendKey"(val) {
-      if (val == 1) {
-        this.sendTips = "使用 Enter 键发送消息";
-      } else {
-        this.sendTips = "使用 Ctrl + Enter 键发送消息";
-      }
-    },
-    // 监听设置发送变化需要进行设置更改
-    setting: {
-      handler(newValue, oldValue) {
-        this.$api.imApi.settingAPI(newValue);
-        user.setting = newValue;
-        Lockr.set("UserInfo", user);
-      },
-      deep: true
     },
     // 监听接收socket消息
     socketAction(val) {
@@ -1213,9 +1082,15 @@ export default {
     }
   },
   created() {
-    // 初始化用户设置
-    if (user.setting) {
-      this.setting = eval(user.setting);
+    // 初始化用户
+    let userInfo=this.$store.state.userInfo;
+    if (userInfo) {
+      this.user={
+        id: userInfo.user_id,
+        displayName: userInfo.realname,
+        avatar: userInfo.avatar,
+        account: userInfo.account
+      }
     }
     if (window.Notification) {
       // 浏览器通知--window.Notification
@@ -1299,27 +1174,19 @@ export default {
             },
           },
           {
-            name: "kaiyuan",
-            title: "开源",
+            name: "setting",
+            title: "文件",
             unread: 0,
-            click: () => {
-              window.open(this.$packageData.frontUrl);
-            },
             render: menu => {
-              return <i class="el-icon-connection" />;
-            }
+              return <i class="el-icon-setting" />;
+            },
+            renderContainer: () => {
+              return (
+                <Setting></Setting>
+              );
+            },
+            isBottom: true
           },
-          {
-            name: "mobile",
-            title: "移动端体验",
-            unread: 0,
-            click: () => {
-              window.open('https://im.raingad.com/h5');
-            },
-            render: menu => {
-              return <i class="el-icon-mobile-phone" />;
-            }
-          }
         ];
         if(this.fullScreen){
           menus.push({
@@ -1604,11 +1471,31 @@ export default {
         IMUI.updateMessage(Object.assign(message, replaceMessage));
       }, file);
     },
+    // 禁言时禁止发送消息
+    nospeak(){
+      if(this.is_group==1 || this.currentChat.setting.nospeak>0){
+        if(this.currentChat.setting.nospeak==1 && this.currentChat.role==2){
+          return true;
+        }else if(this.currentChat.setting.nospeak==2 && this.currentChat.role==1){
+          return true;
+        }else{
+          return false;
+        }
+      }else{
+        return true;
+      }
+    },
     // 发送聊天消息
     handleSend(message, next, file) {
       let formdata = new FormData();
       message.is_group = this.is_group;
       const { IMUI } = this.$refs;
+      // 如果开启了群聊禁言
+      console.log(this.currentChat,'currentChat');
+      if (!this.nospeak()) {
+        IMUI.removeMessage(message.id);
+        return this.$message.error("该群已开启禁言！");
+      }
       // 如果是文件选择文件上传接口
       if (file) {
         // 判断文件如果大于5M就删除该聊天消息
@@ -2203,19 +2090,6 @@ export default {
 .group-user {
   min-height: 300px;
   overflow: auto;
-}
-
-.setting-switch {
-  margin: 0 30px 20px;
-}
-
-.setting-version {
-  margin: 10px 20px;
-  line-height: 2;
-}
-
-.main-color {
-  color: #409eff;
 }
 
 .previewBox {

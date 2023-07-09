@@ -20,7 +20,7 @@
       </div>
       <div v-if="data.type == 'image'" class="chat-list-image">
         <el-image
-          style="max-width: 300px; max-height: 200px;"
+          style="max-width: 300px;"
           :src="data.content"
           :z-index="3000"
           :preview-src-list="[data.content]"
@@ -28,7 +28,7 @@
         ></el-image>
       </div>
       <div v-if="data.type == 'video'" class="chat-list-video">
-        <video  style="max-width: 300px; max-height: 200px;" :src="data.content" controls></video>
+        <video  style="max-width: 300px;" :src="data.content" controls></video>
       </div>
       <div v-if="data.type == 'file'" class="chat-list-file">
         <el-card

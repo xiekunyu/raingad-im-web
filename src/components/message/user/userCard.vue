@@ -51,7 +51,7 @@
             </el-main>
             <el-footer class="footer">
               <!-- <el-button round>加好友</el-button> -->
-              <el-button type="primary" v-if="userInfo.user_id!=detail.user_id" round @click="openChat()" style="width:150px">发消息</el-button>
+              <el-button type="primary" v-if="$store.state.userInfo.user_id!=detail.user_id" round @click="openChat()" style="width:150px">发消息</el-button>
               <el-button round v-if="options.isManage" style="width:150px" @click="editUser">编辑资料</el-button>
             </el-footer>
           </el-container>
@@ -60,8 +60,6 @@
   </template>
   
   <script>
-  import Lockr from "lockr";
-  const user = Lockr.get("UserInfo");
   export default {
     name: 'UserCard',
     props: {
@@ -81,13 +79,12 @@
     filters: {
       sex(value) {
         let arr = ['女', '男','未知']
-        return arr[value] || '未知'
+        return arr[value] || '未知';
       },
     },
     data() {
         return {
           detail:{},
-          userInfo: user,
         };
     },
     mounted() {
@@ -95,7 +92,6 @@
     },  
     methods: {
         closeDialog() {
-            // this.dialogIsShow = false
             this.$emit('close')
         },
         getUserDetal(){

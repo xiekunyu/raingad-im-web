@@ -284,4 +284,16 @@ imApi.getUserInfo= (data)  =>{
     })
 }
 
+/**
+ * 获取文件
+ * @param {*} data
+ */
+imApi.getFileList= (data)  =>{
+    return request({
+        url: 'enterprise/files/index',
+        method: 'post',
+        data: data
+    })
+}
+
 export default imApi;

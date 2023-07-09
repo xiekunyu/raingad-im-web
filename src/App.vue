@@ -6,8 +6,23 @@
 </template>
 
 <script>
+import lockr from 'lockr';  
+
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  created() {
+    let userInfo=lockr.get('UserInfo');
+    // 初始化用户信息
+    if(userInfo){
+      this.$store.commit('SET_USERINFO', userInfo);
+    }
+    
+  } 
 }
 </script>
 

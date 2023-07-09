@@ -27,11 +27,23 @@ const state = {
     toContactId: 0,
     unread: 0,
     allContacts: [],
+    setting: {
+        sendKey: "1",
+        theme: "default",
+        isVoice: true,
+        avatarCricle: false,
+        hideMessageName: false,
+        hideMessageTime: false,
+    }
 }
 
 const mutations = {
     SET_USERINFO: (state, userInfo) => {
         state.userInfo = userInfo
+        if(userInfo.setting) {
+            state.setting = userInfo.setting
+        }
+
         localStorage.setItem('loginUserInfo', JSON.stringify(userInfo));
         Lockr.set('UserInfo', userInfo)
     },
@@ -55,6 +67,10 @@ const mutations = {
         state.toContactId = data;
         state.contactSync = Math.random().toString(36).substr(-8);
     },
+    updateSetting(state, data) {
+        state.userInfo.setting = data;
+        state.setting = data;
+    }
 }
 
 const actions = {
