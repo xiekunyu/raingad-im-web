@@ -290,24 +290,6 @@
         <el-button type="primary" @click="publishNotice">确 定</el-button>
       </span>
     </el-dialog>
-    <!-- 预览接口 -->
-    <transition name="fade-user">
-      <div class="previewBox" v-if="drawer">
-        <el-button
-          class="drawer-close"
-          type="danger"
-          @click="drawer = !drawer"
-          icon="el-icon-close"
-          circle
-        ></el-button>
-        <iframe
-          :src="previewUrl"
-          frameborder="0"
-          width="100%"
-          height="100%"
-        ></iframe>
-      </div>
-    </transition>
     <!-- 转发聊天 -->
     <el-dialog
       title="转发"
@@ -363,7 +345,6 @@
         append-to-body destroy-on-close>
         <voice-recorder @send="sendVoice"></voice-recorder>
       </el-dialog>
-    <!-- <preview  :drawer="drawer" :previewUrl="previewUrl" :key="componentKey"></preview> -->
     <Socket ref="socket"></Socket>
     <!-- 视频通话组件 -->
     <webrtc :contact="currentChat" :config="webrtcConfig" :alias="$packageData.name" :userInfo="user" ref="webrtc" :key="componentKey"></webrtc>
@@ -377,7 +358,6 @@ import * as loginApi from "@/api/login";
 import * as utils from "@/utils/index";
 import Lockr from "lockr";
 import Socket from "./socket";
-import preview from "./preview";
 import ChatRecord from "./chatRecord";
 import ChatSet from "./chatSet";
 import ChatTop from "./chatTop";
@@ -396,7 +376,6 @@ export default {
   name: "app",
   components: {
     Socket,
-    preview,
     ChatRecord,
     ChatSet,
     ChatTop,
@@ -460,7 +439,6 @@ export default {
       displayName: "",
       oldName: "",
       drawer: false,
-      previewUrl: "",
       isEdit: false,
       // 当前登录用户
       user: {
@@ -847,7 +825,7 @@ export default {
           text: "下载图片",
           click: (e, instance, hide) => {
             const { message } = instance;
-            this.download(message.content, message.fileName, message.type);
+            utils.download(message.content, message.fileName);
             hide();
           }
         },
@@ -858,7 +836,7 @@ export default {
           text: "下载文件",
           click: (e, instance, hide) => {
             const { message } = instance;
-            this.download(message.content, message.fileName, message.type);
+            utils.download(message.content, message.fileName);
             hide();
           }
         }
@@ -1341,8 +1319,7 @@ export default {
         if (!message.preview) {
           return this.$message.error("没有配置预览接口");
         }
-        this.previewUrl = message.preview;
-        this.drawer = true;
+        this.$preview(message.preview);
       } else {
       }
     },
@@ -1736,17 +1713,6 @@ export default {
         IMUI.updateMessage(data);
       }
     },
-    // 下载文件
-    download(src, name, type) {
-      let a = document.createElement("a");
-      if (type == "image") {
-        a.download = name || "pic";
-      } else {
-        a.download = name || "file";
-      }
-      a.href = src;
-      a.click();
-    },
     // 播放消息声音
     popNotice(message) {
       let that = this;
@@ -2092,20 +2058,6 @@ export default {
   overflow: auto;
 }
 
-.previewBox {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(222, 222, 222, 0.3);
-  z-index: 99;
-}
-.drawer-close {
-  position: absolute;
-  top: 60px;
-  right: 40px;
-}
 .handle {
   cursor: pointer;
 }

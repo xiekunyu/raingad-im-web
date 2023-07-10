@@ -4,6 +4,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import UserCard from '@/components/message/user/index'
 Vue.use(UserCard)
+import Preview from '@/components/message/preview/index.js'
+Vue.use(Preview)
 import LemonIMUI from 'lemon-imui';
 import 'lemon-imui/dist/index.css';
 Vue.use(ElementUI, { size: 'small' })

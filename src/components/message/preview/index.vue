@@ -1,10 +1,7 @@
 <template>
   <div>
         <transition name="fade-user">
-      <div
-        class="previewBox"
-        v-if="myDrawer"
-      >
+      <div class="previewBox">
         <el-button
           class="drawer-close"
           type="danger"
@@ -13,7 +10,7 @@
           circle
         ></el-button>
         <iframe
-          :src="previewUrl"
+          :src="url"
           frameborder="0"
           width="100%"
           height="100%"
@@ -27,26 +24,20 @@
 export default {
   name: "preview",
   props: {
-    drawer: {
-      type: Boolean,
-      default: false
-    },
-    previewUrl:{
+    url:{
        type:String,
        default:''
 		}
   },
   data() {
     return {
-      myDrawer: this.drawer
+
     };
   },
   methods: {
     closeDrawer(){
-      this.myDrawer=false;
+      this.$emit('close');
     }
-  },
-  created() {
   }
 };
 </script>

@@ -69,7 +69,7 @@ export default {
     },
     // 下载文件
     downloadFile(item){
-      download(item.content,item.fileName,item.type);
+      download(item.content,item.fileName);
     }
   },
   created() {

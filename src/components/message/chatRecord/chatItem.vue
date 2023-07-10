@@ -62,19 +62,14 @@
       </div>
       <!-- <div class="chat-list-tools"><span class='el-icon-document-copy' @click="copyText(data.content)" title="复制文本"></span></div> -->
     </div>
-    <preview  :drawer="drawer" :previewUrl="previewUrl" :key="componentKey"></preview>
   </div>
 </template>
 
 <script>
 import { date } from "@/utils/index";
-import preview from "../preview";
 import { getFileSize, getFileExtImg,download } from "@/utils/file";
 export default {
   name: "chatItem",
-  components: {
-    preview
-  },
   props: {
     data: {
       type: Object,
@@ -101,9 +96,6 @@ export default {
   },
   data() {
     return {
-      drawer:false,
-      previewUrl:'',
-      componentKey:1
     };
   },
   methods: {
@@ -117,13 +109,11 @@ export default {
     },
     // 预览文件
     onlinePreview(item){
-      this.drawer=true;
-      this.componentKey+=1;
-      this.previewUrl=item.preview;
+      this.$preview(item.preview);
     },
     // 下载文件
     downloadFile(item){
-      download(item.content,item.fileName,item.type);
+      download(item.content,item.fileName);
     }
   },
   created() {}

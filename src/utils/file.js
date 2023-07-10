@@ -28,11 +28,14 @@ export function getFileExtImg(fileName) {
 }
 
 // 下载文件
-export function download(src, name, type) {
+export function download(src, name) {
     let a = document.createElement("a");
-    if (type == "image") {
+    // 判断文件的后缀
+    let ext=src.split('.').pop();
+    let media=['jpg','jpeg','png','bmp','gif','pdf','mp3','wav','wmv','amr','mp4','3gp','avi','m2v','mkv','mov','webp'];
+    if(media.indexOf(ext) !== -1 ) {
         a.download = name || "pic";
-    } else {
+    }else {
         a.download = name || "file";
     }
     a.href = src;

@@ -11,12 +11,23 @@
             <div class="group-box-list" v-if="fileList.length">
                 <el-scrollbar>
                     <div  class="file-list">
-                        <div v-for="file in fileList" :key="file.file_id" class="file-item">
-                            <div class="file-img">
-                                <el-image fit="contain" class="img" :src="file.extUrl"></el-image>
+                        <el-tooltip v-for="file in fileList" :key="file.file_id" class="item" effect="dark" placement="right">
+                            <template slot="content">
+                                <p class="mb-5">名称：{{ file.name }}.{{ file.ext }}</p>
+                                <p>大小：{{ getFileSize(file.size) }}</p>
+                            </template>
+                            <div class="file-item">
+                                <div class="file-img">
+                                    <el-image fit="contain" class="img" :src="file.extUrl"></el-image>
+                                </div>
+                                <div class="file-name mt-5" align="center">{{ file.name }}.{{ file.ext }}</div>
+                                <div class="file-opt">
+                                    <el-button type="text" size="mini" @click="openFile(file.preview)">查看</el-button>
+                                    <el-button type="text" size="mini" @click="downloadFile(file)">下载</el-button>
+                                </div>
                             </div>
-                            <div class="file-name mt-5" align="center">{{ file.name }}.{{ file.ext }}</div>
-                        </div>
+                            
+                        </el-tooltip>
                     </div>
                 </el-scrollbar>
             </div>
@@ -41,12 +52,22 @@
 </template>
 
 <script>
+import * as FileUtils from '@/utils/file';
+import { download } from '@/utils/file';
   export default {
     props: {
         isAll: {
             type: Number,
             default: 0,
         },
+    },
+    computed:{
+        getFileSize(){
+            return function (size) {
+                return FileUtils.getFileSize(size);
+            }
+            
+        }
     },
     data() {
       return {
@@ -59,7 +80,6 @@
             role: 0,
         },
         total: 0,
-        image: 'https://randomuser.me/api/portraits/men/1.jpg',
         fileType: [
             {
                 id: 0,
@@ -118,6 +138,16 @@
             this.params.limit = val;
             this.getFileList();
         },
+        openFile(url){
+            if(!url){
+                this.$message.error('文件不存在');
+                return;
+            }
+            this.$preview(url);
+        },
+        downloadFile(file){
+            download(file.src,file.name);
+        }
     }
   }
 </script>
@@ -187,31 +217,55 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     padding:20px 0 20px 20px;
-    .file-item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        padding: 10px;
-        width:120px;
-        border: solid 1px #eee;
-        border-radius: 8px;
-        margin-right:20px;
-        margin-bottom:20px;
-        .file-img {
-            .img {
-                width: 120px;
-                height: 120px;
-                border-radius: 8px;
-            }
-        }
-        .file-name {
-           text-align: center;
-        }
-    }
-
 }
 
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    width:120px;
+    border: solid 1px #eee;
+    border-radius: 8px;
+    margin-right:20px;
+    margin-bottom:20px;
+    position: relative;
+    overflow: hidden;
+    .file-img {
+        .img {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+        }
+    }
+    .file-name {
+        text-align: center;
+        text-overflow: ellipsis;
+        width:110px;
+        overflow: hidden;
+        white-space: nowrap;
+
+    }
+    &:hover .file-opt{
+        bottom: 0;
+    }
+    .file-opt{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width:100%;
+        margin-top:10px;
+        position: absolute;
+        bottom: -50px;
+        background: #fff;
+        transition: bottom 0.3s ease-out;
+    }
+}
+
+
+
+    
 ::v-deep .el-card__body{
     padding: 0 !important;
 }
