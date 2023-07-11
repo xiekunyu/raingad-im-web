@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
 import UserCard from '@/components/message/user/index'
 Vue.use(UserCard)
 import Preview from '@/components/message/preview/index.js'

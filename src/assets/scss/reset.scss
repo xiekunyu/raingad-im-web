@@ -1,3 +1,12 @@
+
+:root {
+    --el-color-primary: #409eff;
+    --el-color-success: #67c23a;
+    --el-color-warning: #e6a23c;
+    --el-color-danger: #f56c6c;
+    --el-color-info: #909399;
+  }
+
 * {
     padding: 0;
     margin: 0;
@@ -816,6 +825,22 @@ a.c-white:hover {
 .c-black a:hover,
 a.c-black:hover {
     color: black
+}
+
+.fc-danger {
+color: var(--el-color-danger);
+}
+.fc-warning {
+color: var(--el-color-warning);
+}
+.fc-success {
+color: var(--el-color-success);
+}
+.fc-info {
+color: var(--el-color-info);
+}
+.fc-primary {
+color: var(--el-color-primary);
 }
 
 

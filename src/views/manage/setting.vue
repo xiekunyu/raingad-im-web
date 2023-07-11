@@ -40,6 +40,12 @@
                       <vue-qr ref="qrCode" :text="inviteUrl" width="200" height="200" :logoSrc="logo"></vue-qr>
                   </div>
               </el-form-item>
+              <el-form-item label="运行模式" prop="regtype">
+                  <el-radio-group v-model="sysInfo.runMode">
+                  <el-radio label="1" border>企业模式</el-radio>
+                  <el-radio label="2" border>社区模式</el-radio>
+                  </el-radio-group>
+              </el-form-item>
               <el-form-item label="系统状态" prop="state">
                   <el-switch v-model="sysInfo.state" active-value="1" inactive-value="0"></el-switch>
                   <div v-show="sysInfo.state==0">
@@ -242,6 +248,7 @@ export default {
           description: '',
           logo: '',
           regtype: '1',
+          runMode: '1',
           state:true,
           closeTips:''
         },

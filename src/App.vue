@@ -27,7 +27,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import "assets/scss/element-variables";
 @import "assets/scss/reset";
+
+div {
+  background:var(--color-primary);
+}
   .lemon-container .lemon-container__title{
     border-bottom:solid 1px #e6e6e6 !important
   }

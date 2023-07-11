@@ -48,7 +48,7 @@
           <div class="lemon-contact__inner">
             <p class="lemon-contact__label">
               <span class="lemon-contact__name">
-                <span v-if="Contact.is_online && Contact.is_group==0" class="online-status" title="在线"></span>
+                <OnlineStatus v-if="Contact.is_online && Contact.is_group==0" title="在线"></OnlineStatus> 
                 <el-tag size="mini" v-if="Contact.is_group == 1">群聊</el-tag>
                 {{ Contact.displayName }}
               </span>
@@ -65,7 +65,7 @@
                 <span v-html="Contact.lastContent"></span>
               </span>
               <span
-                class="el-icon-close-notification font-16"
+                class="el-icon-close-notification f-16"
                 v-if="Contact.is_notice == 0"
               ></span>
             </p>
@@ -178,7 +178,7 @@
                   <h4>群公告</h4>
                   <div>
                     <span
-                      class="el-icon-edit font-18 handle"
+                      class="el-icon-edit f-18 cur-handle"
                       @click="noticeBox = true"
                       v-if="contact.role <3 || contact.setting.manage==false"
                     ></span>
@@ -201,13 +201,13 @@
                   <h4>群成员</h4>
                   <div>
                     <span
-                      class="el-icon-circle-plus-outline font-18 handle"
+                      class="el-icon-circle-plus-outline f-18 cur-handle"
                       v-if="contact.role <3 || contact.setting.invite==1"
                       @click="openAddGroupUser"
                     ></span>
                   </div>
                 </div>
-                <hr />
+                <hr/>
                 <div class="group-user-body" :style="'height:calc('+curHeight+' - 230px )'" id="group-user">
                   <el-scrollbar style="height:100%;">
                     <lemon-contact
@@ -291,33 +291,7 @@
       </span>
     </el-dialog>
     <!-- 转发聊天 -->
-    <el-dialog
-      title="转发"
-      :visible.sync="forwardBox"
-      :modal="true"
-      width="612px"
-      append-to-body
-    >
-      <el-transfer
-        filterable
-        :titles="createChatTitles"
-        filter-placeholder="请输入关键词"
-        v-model="selectUid"
-        :props="contactsProps"
-        :data="allUser"
-      >
-      </el-transfer>
-      <span slot="footer" class="dialog-footer">
-        <el-button
-          @click="
-            forwardBox = false;
-            selectUid = [];
-          "
-          >取 消</el-button
-        >
-        <el-button type="primary" @click="forwardUser">确 定</el-button>
-      </span>
-    </el-dialog>
+    <ChooseDialog :visible.sync="forwardBox" title="转发聊天" @selectChat="forwardUser" :allUser="allUser"></ChooseDialog>
     <!-- 消息管理器 -->
     <el-dialog
       title="消息管理器"
@@ -363,8 +337,10 @@ import ChatSet from "./chatSet";
 import ChatTop from "./chatTop";
 import VoiceRecorder from "./messageBox/voiceRecorder";
 import Group from "./group/index";
+import ChooseDialog from "./chooseDialog/index";
 import Files from "./files/index";
 import Setting from "./setting/index";
+import OnlineStatus from "./mini/statusIndicator";
 import webrtc from "./webrtc";
 const getTime = () => {
   return new Date().getTime();
@@ -383,7 +359,9 @@ export default {
     webrtc,
     Group,
     Files,
-    Setting
+    Setting,
+    ChooseDialog,
+    OnlineStatus
   },
   props: {
     width: {
@@ -427,18 +405,11 @@ export default {
       userIds: [],
       // 公告
       notice: "",
-      createChatTitles: ["待选成员", "已选成员"],
-      selectUid: [],
-      contactsProps: {
-        key: "id",
-        label: "realname"
-      },
       // 搜索结果列表
       searchList: [],
       keywords: "",
       displayName: "",
       oldName: "",
-      drawer: false,
       isEdit: false,
       // 当前登录用户
       user: {
@@ -456,8 +427,6 @@ export default {
       contacts: [],
       allUser: [],
       groupUser: [],
-      _beforeUnload_time:0,
-      _gap_time:0,
       // 当前聊天
       currentChat: {},
       // 当前消息
@@ -1116,134 +1085,138 @@ export default {
           var msg = {};
           // 重新渲染消息
           data.forEach((item, index) => {
-            if (item.type) {
-              msg.type = item.type;
-              msg.content = item.lastContent;
-              data[index]['lastContent'] = IMUI.lastContentRender(msg);
-            }
-            if (item.unread && !update) {
-              this.unread += item.unread;
-            }
-        })
-        this.$store.commit('initContacts', data);
+              if (item.type) {
+                msg.type = item.type;
+                msg.content = item.lastContent;
+                data[index]['lastContent'] = IMUI.lastContentRender(msg);
+              }
+              if (item.unread && !update) {
+                this.unread += item.unread;
+              }
+          })
+          this.$store.commit('initContacts', data);
           // 设置置顶人
           this.getChatTop(data);
-
           IMUI.initContacts(data);
+          this.initMenus(IMUI);
+          // 初始化左侧菜单栏
+          
+          // 初始化工具栏
+          IMUI.initEditorTools([
+            {
+              name: "emoji"
+            },
+            {
+              name: "uploadImage",
+              title: "发送图片"
+            },
+            {
+              name: "sendVoice",
+              title: "发送语音",
+              click: () => { this.VoiceStatus = true },
+              render: () => { return <i class="el-icon el-icon-microphone f-18" style="vertical-align: middle;font-weight: 600;"></i> }
+            },
+            {
+              name: "uploadVideo",
+              title: "发送视频",
+              click: () => {
+                var uploadVideo = this.$refs.uploadVideo;
+                uploadVideo.click();
+              },
+              render: () => {
+                return <i class="el-icon el-icon-video-play f-18" style="vertical-align: middle;font-weight: 600;">
+                  <input style="display:none" type="file" accept="video/*" ref="uploadVideo" on-change={e => {
+                    this.uploadVideo(e);
+                  }} /></i>
+              }
+            },
+            {
+              name: "uploadFile",
+              title: "发送文件",
+            }
+          ]);
+          // 初始化表情
+          IMUI.initEmoji(EmojiData);
         });
-        let menus=[
-          {
-            name: "messages"
-          },
-          {
-            name: "contacts"
-          },
-          {
-            name: "files",
-            title: "文件",
-            unread: 0,
-            render: menu => {
-              return <i class="el-icon-folder" />;
-            },
-            renderContainer: () => {
-              return (
-                <Files title={this.dialogTitle}></Files>
-              );
-            },
-          },
-          {
-            name: "setting",
-            title: "文件",
-            unread: 0,
-            render: menu => {
-              return <i class="el-icon-setting" />;
-            },
-            renderContainer: () => {
-              return (
-                <Setting></Setting>
-              );
-            },
-            isBottom: true
-          },
-        ];
-        if(this.fullScreen){
-          menus.push({
-            name: "fullscrren",
-            title: "全屏/窗口",
-            unread: 0,
-            click: () => {
-              if(this.curWidth=="100vw"){
-                this.curWidth="1000px";
-                this.curHeight="640px";
-              }else{
-                this.curWidth="100vw";
-                this.curHeight="100vh";
-              }
-            },
-            render: menu => {
-              return <i class="el-icon-full-screen" />;
-            }
-          });
-        }
-        if(this.user.id>0){
-          menus.push({
-            name: "custom1",
-            title: "后台管理",
-            unread: 0,
-            click: () => {
-              // 如果路由中有manage则关闭
-              if(this.$route.path.indexOf('manage')>-1){
-                this.$emit('close');
-                return;
-              }
-              this.$router.push('/manage/index')
-
-            },
-            render: menu => {
-              return <i class="el-icon-s-operation" />;
-            },
-            isBottom: true
-          });
-        }
-        // 初始化左侧菜单栏
-        IMUI.initMenus(menus);
-        // 初始化工具栏
-        IMUI.initEditorTools([
-          {
-            name: "emoji"
-          },
-          {
-            name: "uploadImage",
-            title: "发送图片"
-          },
-          {
-            name: "sendVoice",
-            title: "发送语音",
-            click: () => { this.VoiceStatus = true },
-            render: () => { return <i class="el-icon el-icon-microphone f-18" style="vertical-align: middle;font-weight: 600;"></i> }
-          },
-          {
-            name: "uploadVideo",
-            title: "发送视频",
-            click: () => {
-              var uploadVideo = this.$refs.uploadVideo;
-              uploadVideo.click();
-            },
-            render: () => {
-              return <i class="el-icon el-icon-video-play f-18" style="vertical-align: middle;font-weight: 600;">
-                <input style="display:none" type="file" accept="video/*" ref="uploadVideo" on-change={e => {
-                  this.uploadVideo(e);
-                }} /></i>
-            }
-          },
-          {
-            name: "uploadFile",
-            title: "发送文件",
-          }
-        ]);
-        // 初始化表情
-        IMUI.initEmoji(EmojiData);
       });
+    },
+    initMenus(IMUI) {
+      let menus=[
+            {
+              name: "messages",
+              unread: this.unread,
+            },
+            {
+              name: "contacts"
+            },
+            {
+              name: "files",
+              title: "文件",
+              unread: 0,
+              render: menu => {
+                return <i class="el-icon-folder" />;
+              },
+              renderContainer: () => {
+                return (
+                  <Files title={this.dialogTitle}></Files>
+                );
+              },
+            },
+            {
+              name: "setting",
+              title: "设置",
+              unread: 0,
+              render: menu => {
+                return <i class="el-icon-setting" />;
+              },
+              renderContainer: () => {
+                return (
+                  <Setting></Setting>
+                );
+              },
+              isBottom: true
+            },
+          ];
+          if(this.fullScreen){
+            menus.push({
+              name: "fullscrren",
+              title: "全屏/窗口",
+              unread: 0,
+              click: () => {
+                if(this.curWidth=="100vw"){
+                  this.curWidth="1000px";
+                  this.curHeight="640px";
+                }else{
+                  this.curWidth="100vw";
+                  this.curHeight="100vh";
+                }
+              },
+              render: menu => {
+                return <i class="el-icon-full-screen" />;
+              }
+            });
+          }
+          if(this.user.id>0){
+            menus.push({
+              name: "manage",
+              title: "后台管理",
+              unread: 0,
+              click: () => {
+                // 如果路由中有manage则关闭
+                if(this.$route.path.indexOf('manage')>-1){
+                  this.$emit('close');
+                  return;
+                }
+                this.$router.push('/manage/index')
+
+              },
+              render: menu => {
+                return <i class="el-icon-s-operation" />;
+              },
+              isBottom: true
+            });
+          }
+          IMUI.initMenus(menus);
     },
     // 获取置顶联系人列表
     getChatTop() {
@@ -1345,6 +1318,8 @@ export default {
       });
       // 将未读的总数减去当前选择的聊天
       this.unread -= contact.unread;
+      const { IMUI } = this.$refs;
+      this.initMenus(IMUI);
       // 聊天记录列表恢复到最初第一页
       this.params.page = 1;
       this.displayName = contact.displayName;
@@ -1362,7 +1337,7 @@ export default {
         this.notice = contact.notice;
       }
       var data = [];
-      const { IMUI } = this.$refs;
+      
       // 获取当前聊天窗口的所有消息
       var messages = IMUI.getMessages(contact.id);
       for (var i = 0; messages.length > i; i++) {
@@ -1601,9 +1576,7 @@ export default {
       return n;
     },
     // 转发消息
-    forwardUser() {
-      var userIds = this.selectUid;
-      this.selectUid = [];
+    forwardUser(userIds) {
       if (userIds.length > 5) {
         return this.$message.error("转发的人数不能超过5人！");
       }
@@ -1853,68 +1826,6 @@ export default {
   justify-content: center;
 }
 
-.online-status {
-  position: relative;
-  top: -1px;
-  left: 1px;
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  vertical-align: middle;
-  border-radius: 50%;
-  position: relative;
-  background-color: #1890ff;
-  margin:auto 5px;
-  &:after {
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    width: 100%;
-    height: 100%;
-    border: 1px solid #1890ff;
-    border-radius: 50%;
-    -webkit-animation: antStatusProcessing 1.2s ease-in-out infinite;
-    animation: antStatusProcessing 1.2s ease-in-out infinite;
-    content: '';
-  }
-}
-
-@-webkit-keyframes inputfade {
-  from {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@-webkit-keyframes antStatusProcessing {
-  0% {
-    -webkit-transform: scale(0.8);
-    transform: scale(0.8);
-    opacity: 0.5;
-  }
-  to {
-    -webkit-transform: scale(2.4);
-    transform: scale(2.4);
-    opacity: 0;
-  }
-}
-@keyframes antStatusProcessing {
-  0% {
-    -webkit-transform: scale(0.8);
-    transform: scale(0.8);
-    opacity: 0.5;
-  }
-  to {
-    -webkit-transform: scale(2.4);
-    transform: scale(2.4);
-    opacity: 0;
-  }
-}
-
 .displayName {
   font-size: 16px;
   visibility: visible;
@@ -1976,10 +1887,6 @@ export default {
 
 .editInput:focus {
   outline: -webkit-focus-ring-color auto 0px;
-}
-
-.article {
-  padding: 15px;
 }
 
 .lemon-last-content {
@@ -2056,33 +1963,5 @@ export default {
 .group-user {
   min-height: 300px;
   overflow: auto;
-}
-
-.handle {
-  cursor: pointer;
-}
-.fc-danger {
-  color: #f56c6c;
-}
-.fc-warning {
-  color: #e6a23c;
-}
-.fc-success {
-  color: #67c23a;
-}
-.fc-info {
-  color: #909399;
-}
-.fc-primary {
-  color: #409eff;
-}
-.font-20 {
-  font-size: 20px;
-}
-.font-18 {
-  font-size: 18px;
-}
-.font-16 {
-  font-size: 16px;
 }
 </style>

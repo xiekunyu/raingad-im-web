@@ -1,60 +1,81 @@
 <template>
     <el-container style="height:100%">
-        <el-aside width="150px" class="lz-flex group-box">
-            <div class="group-box-list">
-                <div v-for="items in fileType" :key="items.id" class="chat-item" @click="openFolder(items)" :class="params.cate==items.id ? 'active' : ''">
-                        {{items.name}}
-                </div>
+        <el-header class="file-header">
+            <div class="file-header-title">文件列表</div>
+            <div class="file-header-search">
+                <el-input
+                placeholder="请输入关键字搜索"
+                prefix-icon="el-icon-search"
+                style="width: 300px"
+                @keyup.enter.native="getFileList"
+                v-model="params.keywords">
+                <el-button slot="append" icon="el-icon-search" @click="getFileList"></el-button>
+                </el-input>
             </div>
-        </el-aside>
-        <el-main class="lz-flex group-box group-user-box no-padding">
-            <div class="group-box-list" v-if="fileList.length">
-                <el-scrollbar>
-                    <div  class="file-list">
-                        <el-tooltip v-for="file in fileList" :key="file.file_id" class="item" effect="dark" placement="right">
-                            <template slot="content">
-                                <p class="mb-5">名称：{{ file.name }}.{{ file.ext }}</p>
-                                <p>大小：{{ getFileSize(file.size) }}</p>
-                            </template>
-                            <div class="file-item">
-                                <div class="file-img">
-                                    <el-image fit="contain" class="img" :src="file.extUrl"></el-image>
-                                </div>
-                                <div class="file-name mt-5" align="center">{{ file.name }}.{{ file.ext }}</div>
-                                <div class="file-opt">
-                                    <el-button type="text" size="mini" @click="openFile(file.preview)">查看</el-button>
-                                    <el-button type="text" size="mini" @click="downloadFile(file)">下载</el-button>
-                                </div>
-                            </div>
-                            
-                        </el-tooltip>
+        </el-header>
+        <el-container>
+            <el-aside width="150px" class="lz-flex group-box">
+                <div class="group-box-list">
+                    <div v-for="items in fileType" :key="items.id" class="chat-item" @click="openFolder(items)" :class="params.cate==items.id ? 'active' : ''">
+                            {{items.name}}
                     </div>
-                </el-scrollbar>
-            </div>
-            <div class="pd-40" v-else>
-                <el-empty></el-empty>
-            </div>
-            <div class="group-box-page" align="center">
-                <el-pagination
-                    background
-                    :hide-on-single-page="true"
-                    @size-change="handleChange"
-                    @current-change="getFileList"
-                    :current-page.sync="params.page"
-                    :page-sizes="[20, 50 ,100 , 200, 300, 400,500]"
-                    :page-size.sync="params.limit"
-                    layout="total, sizes, prev, pager, next, jumper"
-                    :total="total">
-                    </el-pagination>
-            </div>
-        </el-main>
+                </div>
+            </el-aside>
+            <el-main class="lz-flex group-box group-user-box no-padding">
+                <div class="group-box-list" v-if="fileList.length">
+                    <el-scrollbar>
+                        <div  class="file-list">
+                            <el-tooltip v-for="(file,index) in fileList" :key="index"  class="item" effect="dark" placement="right">
+                                <template slot="content">
+                                    <p class="mb-5">名称：{{ file.name }}</p>
+                                    <p>大小：{{ getFileSize(file.size) }}</p>
+                                </template>
+                                <div class="file-item" @dblclick="openFile(file.preview)">
+                                    <div class="file-img">
+                                        <el-image fit="contain" class="img" :src="file.extUrl"></el-image>
+                                    </div>
+                                    <div class="file-name mt-5" align="center">{{ file.name }}</div>
+                                    <div class="file-opt">
+                                        <el-button type="text" size="mini" @click.stop="openFile(file.preview)">查看</el-button>
+                                        <el-button type="text" size="mini" @click.stop="downloadFile(file)">下载</el-button>
+                                        <el-button type="text" size="mini" @click.stop="openDialog(file)">发送</el-button>
+                                    </div>
+                                </div>
+                                
+                            </el-tooltip>
+                        </div>
+                    </el-scrollbar>
+                </div>
+                <div class="pd-40" v-else>
+                    <el-empty></el-empty>
+                </div>
+                <div class="group-box-page" align="center" v-if="!singlePage">
+                    <el-pagination
+                        background
+                        :hide-on-single-page="singlePage"
+                        @size-change="handleChange"
+                        @current-change="getFileList"
+                        :current-page.sync="params.page"
+                        :page-sizes="[20, 50 ,100 , 200, 300, 400,500]"
+                        :page-size.sync="params.limit"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="total">
+                        </el-pagination>
+                </div>
+                <ChooseDialog :visible.sync="visible" title="发送到聊天" :allUser="$store.state.allContacts" @selectChat="sendChat"></ChooseDialog>
+            </el-main>
+        </el-container>
     </el-container>
 </template>
 
 <script>
+import ChooseDialog from '@/components/message/chooseDialog/index';
 import * as FileUtils from '@/utils/file';
-import { download } from '@/utils/file';
+import * as utils from '@/utils/index';
   export default {
+    components: {
+        ChooseDialog
+    },
     props: {
         isAll: {
             type: Number,
@@ -74,12 +95,15 @@ import { download } from '@/utils/file';
         params: {
             page: 1,
             limit: 20,
-            keyword: '',
+            keywords: '',
             cate: 0,
             is_all: this.isAll,
             role: 0,
         },
+        visible: false,
+        singlePage: true,
         total: 0,
+        curFile: {},
         fileType: [
             {
                 id: 0,
@@ -131,6 +155,9 @@ import { download } from '@/utils/file';
             this.$api.imApi.getFileList(this.params).then(res=>{
                 if(res.code == 0){
                     this.fileList = res.data;
+                    this.total = res.count;
+                    this.singlePage = res.count <= this.params.limit ? true : false;
+                    this.params.page = res.page;
                 }
             })
         },
@@ -146,16 +173,91 @@ import { download } from '@/utils/file';
             this.$preview(url);
         },
         downloadFile(file){
-            download(file.src,file.name);
-        }
+            FileUtils.download(file.src,file.name);
+        },
+        openDialog(item){
+            this.visible = true;
+            this.curFile = item;
+        },
+        // 发送到聊天
+        sendChat(userIds){
+            if (userIds.length > 5) {
+                return this.$message.error("转发的人数不能超过5人！");
+            }
+            let user= this.$store.state.userInfo;
+            this.forwardBox = false;
+            let msg = {
+                type: this.curFile.msg_type,
+                content: this.curFile.src,
+                file_name: this.curFile.name,
+                file_size: this.curFile.size,
+                fromUser: {
+                    id: user.user_id,
+                    displayName: user.realname,
+                    avatar: user.avatar,
+                    account: user.account
+                }
+            };
+            var arr = [];
+            userIds.forEach((item)=>{
+                let toContactId = item.toString();
+                let message=JSON.parse(JSON.stringify(msg));
+                message.id = utils.generateRandId();
+                message.status = "successd";
+                message.sendTime = new Date().getTime();
+                message.toContactId = toContactId;
+                message.is_group = 0;
+                if (toContactId.indexOf("group") != -1) {
+                    message.is_group = 1;
+                }
+                arr.push(this.test(message));
+            })
+            // 批量请求
+            Promise.all(arr).then(res => {
+            }).catch(err => {
+                console.log("error", err);
+            });
+            this.$message.success("发送成功！");
+            this.visible = false;
+         },
+         // 封装循环请求
+        fn(formData) {
+            return new Promise((resolve, reject) => {
+                this.$api.imApi.sendMessageAPI(formData)
+                .then(res => {
+                    if (res.code === 0) {
+                    resolve(res);
+                    } else {
+                    this.$message.error(res.msg);
+                    }
+                })
+                .catch(err => {});
+            });
+        },
+        async test(formData) {
+            let n = await this.fn(formData);
+            return n;
+        },
     }
   }
 </script>
 <style scoped lang="scss">
+.file-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height:50px !important;
+    background: #fff;
+    border: solid 1px #e6e6e6;
+    border-bottom: none;
+    .file-header-title{
+        font-weight: 700;
+    }
+}
 .group-box{
     display: flex;
     flex-direction: column;
-    // height: calc(100vh - 104px);
+
     background: #fff;
     border:solid 1px #e6e6e6;
     .group-box-header{
@@ -216,7 +318,7 @@ import { download } from '@/utils/file';
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    padding:20px 0 20px 20px;
+    padding:20px 0 0 20px;
 }
 
 .file-item {
