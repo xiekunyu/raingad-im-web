@@ -48,7 +48,7 @@
           <div class="lemon-contact__inner">
             <p class="lemon-contact__label">
               <span class="lemon-contact__name">
-                <OnlineStatus v-if="Contact.is_online && Contact.is_group==0" title="在线"></OnlineStatus> 
+                <OnlineStatus v-if="Contact.is_online && Contact.is_group==0 && $store.state.globalConfig.chatInfo.online==1" title="在线" type="success"></OnlineStatus> 
                 <el-tag size="mini" v-if="Contact.is_group == 1">群聊</el-tag>
                 {{ Contact.displayName }}
               </span>
@@ -87,8 +87,7 @@
                   <el-tag size="mini" v-if="contact.setting.nospeak == 2"  type="danger">全员禁言中</el-tag>
                 </span>
                 <span class="displayName" v-if="is_group == 0">
-                  <el-tag size="mini" type="success" v-if="contact.is_online">在线</el-tag> 
-                  <el-tag size="mini" type="info" v-if="!contact.is_online">离线 </el-tag> {{contact.displayName}}</span>
+                  <OnlineStatus :type="contact.is_online ? 'success' : 'info'" :pulse="contact.is_online " v-if="$store.state.globalConfig.chatInfo.online" ></OnlineStatus> {{contact.displayName}}</span>
               </span>
 
               <input

@@ -27,6 +27,7 @@ const state = {
     toContactId: 0,
     unread: 0,
     allContacts: [],
+    globalConfig:[], // 全局配置
     setting: {
         sendKey: "1",
         theme: "default",
@@ -70,6 +71,9 @@ const mutations = {
     updateSetting(state, data) {
         state.userInfo.setting = data;
         state.setting = data;
+    },
+    setGlobalConfig(state, data) {
+        state.globalConfig = data;
     }
 }
 

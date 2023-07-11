@@ -21,18 +21,24 @@ export default {
     if(userInfo){
       this.$store.commit('SET_USERINFO', userInfo);
     }
+    this.getSystemInfo();
     
-  } 
+  },
+  methods: {
+    async getSystemInfo(){
+      await this.$api.imApi.getSystemInfo().then(res=>{
+        if(res.code==0){
+          this.$store.commit('setGlobalConfig', res.data);
+        }
+      })
+    }
+  }
 }
 </script>
 
 <style lang="scss">
-@import "assets/scss/element-variables";
-@import "assets/scss/reset";
+@import "assets/scss/style";
 
-div {
-  background:var(--color-primary);
-}
   .lemon-container .lemon-container__title{
     border-bottom:solid 1px #e6e6e6 !important
   }
@@ -40,13 +46,13 @@ div {
     height: 280px !important; 
   }
   .lemon-editor__submit .lemon-button{
-    background: #409EFF;
+    background: var(--el-color-primary);
     color:#fff;
   }
    .lemon-editor__submit .lemon-button:hover{
-    background: #409EEE;
+    background: var(--el-color-primary);
     color:#fff !important;
-    border:solid 1px #409EEE !important;
+    border:solid 1px var(--el-color-primary) !important;
   }
   .lemon-editor__submit button[disabled],.lemon-editor__submit button[disabled]:hover{
     background: #fff;
@@ -83,37 +89,6 @@ div {
     background-color: #e6e6e6;
     border: none;
   }
-
-  // 滚动条美化
-  ::-webkit-scrollbar {
-		  width: 10px;
-		  height: 10px;
-		}
-
-  ::-webkit-scrollbar-track {
-    background-color: #eee;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(185,185,185,0.5);
-    border-radius: 10px;
-  }
-
-  /* Firefox scrollbar */
-  .scrollbar-firefox {
-		  scrollbar-width: thin;
-		  scrollbar-color: #888 #eee;
-		}
-
-		.scrollbar-firefox::-webkit-scrollbar {
-		  width: initial;
-		  height: initial;
-		}
-
-		.scrollbar-firefox::-webkit-scrollbar-thumb {
-		  background-color: #888;
-		  border-radius: 10px;
-		}
 
 
 </style>

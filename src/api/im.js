@@ -296,4 +296,13 @@ imApi.getFileList= (data)  =>{
     })
 }
 
+// 获取系统配置信息
+imApi.getSystemInfo= (data)  =>{
+    return request({
+        url: 'common/pub/getSystemInfo',
+        method: 'post',
+        data: data
+    })
+}
+
 export default imApi;

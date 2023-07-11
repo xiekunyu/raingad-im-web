@@ -11,7 +11,7 @@ import {
 } from '@/utils/auth' // 验权
 
 let loadAsyncRouter = false
-const whiteList = ['/login', '/welcome'] // 不重定向白名单
+const whiteList = ['/login', '/welcome','/404'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
     if (to.meta.disabled) {
         next(false)

@@ -25,9 +25,9 @@
               <el-dropdown @command="handleCommand" trigger="click">
                 <div class="lz-flex lz-align-items-center cur-handle">
                   <span class="avatar">
-                    <img :src="userInfo.avatar" alt="avatar">
+                    <img :src="$store.state.userInfo.avatar" alt="avatar">
                   </span>
-                  <span class="username">{{userInfo.realname}}</span>
+                  <span class="username">{{$store.state.userInfo.realname}}</span>
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </div>
                 <el-dropdown-menu slot="dropdown">
@@ -75,8 +75,6 @@
 <script>
 import { mapGetters, mapMutations, mapState } from "vuex";
 import Message from "@/views/message/Index"; 
-import Lockr from "lockr";
-  const user = Lockr.get("UserInfo");
 export default {
   name: "Index",
   components: {
@@ -84,7 +82,6 @@ export default {
   },
   data() {
     return {
-      userInfo:user,
       dialogTableVisible: false, //消息弹窗是否显示
       unread: 0,
       allContacts: [],
@@ -138,7 +135,7 @@ export default {
     // 退出聊天室
     handleCommand(e) {
       if(e == 'profile'){
-        this.$user(this.userInfo.user_id);
+        this.$user(this.$store.state.userInfo.user_id);
       }else{
         this.$confirm("你确定要退出聊天室吗?", "提示", {
             confirmButtonText: "确定",

@@ -6,7 +6,7 @@
       <audio id="music2">
         <source src="//im.file.raingad.com/static/voice/guaduan.mp3">
       </audio>
-    <video v-show="localStream && is_video" class="localvideo" ref="localvideo" autoplay playsinline></video>
+    <video v-show="localStream && is_video" class="localvideo" ref="localvideo" autoplay playsinline  muted></video>
     <video v-show="remoteStream && is_video" class="remotevideo" ref="remotevideo" autoplay playsinline></video>
     <div>
       <div class="call-user" v-if="caller">
