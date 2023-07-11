@@ -17,6 +17,10 @@ export default {
   },
   created() {
     let userInfo=lockr.get('UserInfo');
+    let Config=lockr.get('globalConfig');
+    if(Config){
+      this.$store.commit('setGlobalConfig', Config);
+    }
     // 初始化用户信息
     if(userInfo){
       this.$store.commit('SET_USERINFO', userInfo);
@@ -25,9 +29,10 @@ export default {
     
   },
   methods: {
-    async getSystemInfo(){
-      await this.$api.imApi.getSystemInfo().then(res=>{
+    getSystemInfo(){
+      this.$api.imApi.getSystemInfo().then(res=>{
         if(res.code==0){
+          lockr.set('globalConfig',res.data);
           this.$store.commit('setGlobalConfig', res.data);
         }
       })
