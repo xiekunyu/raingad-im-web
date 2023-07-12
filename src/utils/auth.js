@@ -26,16 +26,11 @@ export function addAuth(adminToken, sessionId) {
 
 /** 获取授权信息 */
 export function getAuth() {
-    // console.log(Lockr.get('authToken'),123);
-    // console.log(axios.defaults.headers['authToken'],456);
+
     /** 全局路由触发这个方法  如果有缓存暂时在这里交与 */
     if (Lockr.get('authToken') && !axios.defaults.headers['authToken']) {
         cache.updateAxiosCache()
     }
-
-    // if (axios.defaults.headers['authToken']) {
-    //     return true
-    // }
     if (Lockr.get('authToken')) {
         return true
     }

@@ -25,17 +25,9 @@ export default {
     if(userInfo){
       this.$store.commit('SET_USERINFO', userInfo);
     }
-    this.getSystemInfo();
-    
-  },
-  methods: {
-    getSystemInfo(){
-      this.$api.commonApi.getSystemInfo().then(res=>{
-        if(res.code==0){
-          lockr.set('globalConfig',res.data);
-          this.$store.commit('setGlobalConfig', res.data);
-        }
-      })
+    let router=this.$route.path;
+    if(router.indexOf('login')!==-1){
+      this.$store.dispatch('getSystemInfo');
     }
   }
 }
@@ -88,6 +80,7 @@ export default {
   .lemon-contact{
     padding:10px;
   }
+  
 
   hr {
     height: 1px;

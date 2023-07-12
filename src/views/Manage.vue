@@ -6,9 +6,9 @@
         <el-row type="flex" justify="space-between" align="middle" :style="{ height: '60px' }">
           <el-col :span="8" class="logo">
             <div class="image">
-              <img :src="$packageData.logo" alt="logo">
+              <img :src="globalConfig.sysInfo.logo" alt="logo">
             </div>
-            <div class="f-20 ml-5">{{$packageData.name}} 管理中心</div>  
+            <div class="f-20 ml-5">{{globalConfig.sysInfo.name}} 管理中心</div>  
           </el-col>
           <el-col :span="16" class="text-right">
             <div class="user">
@@ -54,7 +54,7 @@
               </el-menu>
             </el-scrollbar>
           </div>
-          <div class="aside-bottom" @click="isCollapse=!isCollapse">
+          <div class="aside-bottom" @click="handleCollapse">
             <span class="el-icon-s-fold f-18"></span>
           </div>
         </el-aside>
@@ -75,6 +75,7 @@
 <script>
 import { mapGetters, mapMutations, mapState } from "vuex";
 import Message from "@/views/message/Index"; 
+import Lockr from "lockr";
 export default {
   name: "Index",
   components: {
@@ -95,6 +96,7 @@ export default {
     ...mapState({
       chatSocket: (state) => state.unread,
       getContacts: (state) => state.allContacts,
+      globalConfig: (state) => state.globalConfig
     }),
     key(){
       return this.$route.path
@@ -117,11 +119,21 @@ export default {
     }
   },
   mounted() {
+    this.isCollapse = Lockr.get('isCollapse') || false;
     this.active = this.$route.path;
     const route = this.$router.options.routes.filter(route => route.name=='manage');
     this.routes = route[0].children;
+    // 监听屏幕宽度变化
+    window.addEventListener("resize", this.handleResize);
   },
   methods: {
+    handleResize(){
+      if(window.innerWidth<900){
+        this.isCollapse = true;
+      }else{
+        this.isCollapse = false;
+      }
+    },
     handleMenuSelect(index) {
       this.active = index
       if(this.$route.path == index) return;
@@ -142,19 +154,24 @@ export default {
             cancelButtonText: "取消",
             type: "warning"
           })
-            .then(() => {
-              this.$store.dispatch("LogOut").then(() => {
-                this.$router.push({ path: "/login" });
-              });
-            })
-            .catch(() => {
-              this.$message({
-                type: "info",
-                message: "已取消退出"
-              });
+          .then(() => {
+            this.$store.dispatch("LogOut").then(() => {
+              this.$router.push({ path: "/login" });
             });
+          })
+          .catch(() => {
+            this.$message({
+              type: "info",
+              message: "已取消退出"
+            });
+          });
         }
+      },
+      handleCollapse(){
+        this.isCollapse = !this.isCollapse;
+        Lockr.set('isCollapse',this.isCollapse);
       }
+
       
   }
 };

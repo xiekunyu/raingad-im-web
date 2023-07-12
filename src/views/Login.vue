@@ -2,7 +2,7 @@
   <div class="login-wrapper" :style="'background-image:url('+ Background +')'">
     <div class="form-box">
       <div class="form-title">
-        <img :src="$packageData.logo" width="100" alt="icon">
+        <img :src="globalConfig.sysInfo.logo ? globalConfig.sysInfo.logo : $packageData.logo" width="100" alt="icon">
         <!-- <p>Raingad-IM 账号登录</p> -->
       </div>
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-width="0px" class="login-form">
@@ -12,7 +12,7 @@
         <el-form-item prop="password">
           <el-input v-model="loginForm.password" type="password" auto-complete="off" placeholder="请输入密码" prefix-icon="el-icon-lock" @keyup.enter.native="handleLogin" />
         </el-form-item>
-        <div class="c-666" style="font-size:12px;">演示账号：13800000002~138000000020，密码:123456</div>
+        <div class="c-666" style="font-size:12px;" v-if="globalConfig.demon_mode">演示账号：13800000002~138000000020，密码:123456</div>
         <el-form-item>
           <el-checkbox v-model="loginForm.rememberMe">记住我</el-checkbox>
         </el-form-item>
@@ -22,7 +22,7 @@
             <span v-else>登 录 中...</span>
           </el-button>
         </el-form-item>
-        <div align="center" class="c-999">{{$packageData.name}} for {{$packageData.version}}</div>
+        <div align="center" class="c-999">{{globalConfig.sysInfo.name}} for {{$packageData.version}}</div>
       </el-form>
     </div>
   </div>
@@ -30,6 +30,7 @@
 
 <script>
 import Background from '../assets/img/login-background.jpg'
+import { mapState } from 'vuex';
 export default {
   name: 'Login',
   data() {
@@ -48,6 +49,11 @@ export default {
       redirect: undefined
     }
   },
+  computed: {
+    ...mapState({
+      globalConfig: state => state.globalConfig
+    })
+  },
   watch: {
     $route: {
       handler: function(route) {
@@ -59,7 +65,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       // 获取1-20的随机数
-      const random = Math.floor(Math.random() * 20 + 2)
+      const random = Math.floor(Math.random() * 19 + 2)
       this.loginForm.username=13800000000+random;
       this.$refs.username.focus()
     })
@@ -70,8 +76,6 @@ export default {
         const data = {
           username: this.loginForm.username,
           password: this.loginForm.password
-          // username: '18080837231',
-          // password: 'lvzhe1218'
         }
         if (valid) {
           this.loading = true

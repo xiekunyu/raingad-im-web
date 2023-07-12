@@ -129,7 +129,7 @@
                 circle
               ></el-button>
             </div>
-            <div class="search-list" v-if="searchResult">
+            <div class="search-list" v-show="searchResult">
               <div
                 v-for="(item, index) in searchList"
                 :key="index"
@@ -342,12 +342,12 @@ import Files from "./files/index";
 import Setting from "./setting/index";
 import OnlineStatus from "./mini/statusIndicator";
 import webrtc from "./webrtc";
+import lockr from "lockr";
 const getTime = () => {
   return new Date().getTime();
 };
 
 const user = Lockr.get("UserInfo");
-
 export default {
   name: "app",
   components: {
@@ -382,6 +382,7 @@ export default {
     let stun= this.$store.state.globalConfig.chatInfo.stun ? this.$store.state.globalConfig.chatInfo.stun : 'stun:stun.callwithus.com';
     return {
       noSimpleTips:'系统已开启单聊权限，或者群已开启禁言，无法发送消息',
+      isFullscreen:false,
       curWidth:this.width,
       curHeight:this.height,
       unread:0,
@@ -811,28 +812,6 @@ export default {
             hide();
           }
         }
-        // {
-        //   click: (e, instance, hide) => {
-        //     const { IMUI, message } = instance;
-        //     hide();
-        //     console.log(message);
-        //     console.log(IMUI.getMessages());
-        //     IMUI.removeMessage(message.id)
-        //     // this.$confirm("确定删除该条消息吗？", "提示", {
-        //     //   confirmButtonText: "确定",
-        //     //   cancelButtonText: "取消",
-        //     //   type: "warning"
-        //     // }).then(() => {
-        //     //   console.log(message.id)
-        //     //   ;
-        //     //   this.$api.imApi.removeMessageAPI({ id: message.id });
-        //     // }).catch(error => {
-        //     //       console.log(error);
-        //     // });;
-        //   },
-        //   color: "red",
-        //   text: "删除"
-        // }
       ]
     };
   },
@@ -853,6 +832,11 @@ export default {
     }
   },
   watch: {
+    isFullscreen(val){
+      Lockr.set('isFullscreen',val);
+      this.curWidth=val?'100vw':this.width;
+      this.curHeight=val?'100vh':this.height;
+    },
     playAudio (val) {
       if (val && this.currentMessage) {
         let message = this.currentMessage;
@@ -1055,6 +1039,10 @@ export default {
     }
   },
   mounted() {
+    // 设置全屏
+    if(this.fullScreen){
+      this.isFullscreen=Lockr.get('isFullscreen');
+    }
     if (this.searchResult) {
       document.addEventListener("click", function(e) {
         if (!that.$refs.configforms.contains(e.target)) {
@@ -1187,13 +1175,7 @@ export default {
               title: "全屏/窗口",
               unread: 0,
               click: () => {
-                if(this.curWidth=="100vw"){
-                  this.curWidth="1000px";
-                  this.curHeight="640px";
-                }else{
-                  this.curWidth="100vw";
-                  this.curHeight="100vh";
-                }
+                this.isFullscreen=!this.isFullscreen;
               },
               render: menu => {
                 return <i class="el-icon-full-screen" />;
@@ -1871,7 +1853,7 @@ export default {
   overflow: auto;
   border: solid 1px #e6e6e6;
   .search-list-item :hover {
-    background: #e6e6e6;
+    background: #f1f1f1;
   }
   .lemon-contact {
     background: #fff;

@@ -7,7 +7,7 @@
               <el-upload ref="upload" class="upload-demo" :multiple="false" :action="getUrl" :show-file-list='false'
                 :data='{type:1}' :headers="getToken" :on-success="handleAvatarSuccess" :auto-upload="false" :on-change="change"
                 :before-upload="before" :http-request="request">
-                <el-image :src="user.avatar" style="width:160px" class="m-20"></el-image>
+                <el-image :src="user.avatar" style="width:160px;border-radius: 8px;overflow: hidden;" class="m-20"></el-image>
                 <el-button size="mini" class="replace-picture-button mab-30">更换头像</el-button>
               </el-upload>
               <el-dialog title="头像剪裁" :close-on-click-modal="false" :visible.sync="cropperDialogVisible" width="580" :append-to-body="true" :show-close="true"
@@ -30,24 +30,24 @@
                     {{user.account}}
                     <span class="fc-primary ml-10 cur-handle" @click="editPass=0;dialog=true">修改</span>
                 </el-form-item>
-                <el-form-item label="姓名" prop="realname" v-if="$store.state.globalConfig.sysInfo.runMode==1">
+                <el-form-item label="姓名" v-if="$store.state.globalConfig.sysInfo.runMode==1">
                     {{user.realname}}
                 </el-form-item>
-                <el-form-item label="昵称" prop="realname" v-else>
-                    <el-input placeholder="请输入昵称" v-model="user.realname"></el-input>
+                <el-form-item label="昵称" v-else>
+                    <el-input placeholder="请输入昵称" v-model="user.realname" maxlength="20" style="width:400px"></el-input>
                 </el-form-item>
-                <el-form-item label="e-mail" prop="email">
-                    <el-input placeholder="请输入邮箱地址" v-model="user.email"></el-input>
+                <el-form-item label="e-mail">
+                    <el-input placeholder="请输入邮箱地址" v-model="user.email" maxlength="120" style="width:400px"></el-input>
                 </el-form-item>
-                <el-form-item label="性别" prop="sex">
+                <el-form-item label="性别">
                     <el-radio-group v-model="user.sex">
                       <el-radio :label="2" border>未知</el-radio>
                       <el-radio :label="1" border>男</el-radio>
                       <el-radio :label="0" border>女</el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <el-form-item label="个性签名" prop="remark">
-                  <el-input type="textarea" :rows="2" v-model="user.motto"></el-input>
+                <el-form-item label="个性签名">
+                  <el-input type="textarea" :rows="3" v-model="user.motto" maxlength="100" style="width:400px" show-word-limit></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm()">保存</el-button>
@@ -99,7 +99,7 @@
                 </el-form>
             </el-dialog>
           <div class="mt-40" align="center">
-            <el-button type="danger" @click="logout">退出登录</el-button>
+            <el-button type="danger" @click="logout"  plain round style="width:150px;">退出登录</el-button>
           </div>
         </el-tab-pane>
         <el-tab-pane label="通用设置" class="pd-20">
@@ -265,8 +265,9 @@ export default {
                 type: "warning",
             })
                 .then(() => {
-                    this.$store.dispatch("logout");
-                    this.$router.push("/login");
+                    this.$store.dispatch("LogOut").then(() => {
+                        this.$router.push("/login");
+                    })
                 })
                 .catch(() => {});
         },
@@ -492,5 +493,9 @@ export default {
 .about-logo {
   text-align: center;
   width:200px;
+}
+::v-deep .el-tabs__nav{
+  margin-top:20px;
+  width:120px;
 }
 </style>

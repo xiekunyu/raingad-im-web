@@ -8,8 +8,7 @@ import {
 import {
     resetRouter
 } from '@/router'
-
-
+import commonApi from '@/api/common'
 
 Vue.use(Vuex)
 
@@ -78,44 +77,27 @@ const actions = {
         dispatch
     }, userInfo) {
         return new Promise((resolve, reject) => {
-            this.$api.commonApi.loginAPI(userInfo).then(res => {
+            commonApi.loginAPI(userInfo).then(res => {
                 const data = res.data || data
                 commit('SET_AUTH', data)
                 commit('SET_USERINFO', data.userInfo)
                 resolve(res)
             }).catch(error => {
-                console.log(error);
                 dispatch('LogOut')
                 reject(error)
             })
         })
     },
-
-    // 获取用户信息
-    GetUserInfo({
-        commit,
-        state
-    }) {
-        return new Promise((resolve, reject) => {
-            // adminUsersReadAPI().then(response => {
-            //     // 邮件信息 走之前的逻辑
-            //     commit('SET_USERINFO', response.data)
-            //     resolve(response)
-            // }).catch(error => {
-            //     reject(error)
-            // })
-        })
-    },
-
     // 登出
     LogOut({
         commit
     }) {
         return new Promise((resolve, reject) => {
-            this.$api.commonApi.logoutAPI().then(() => {
+            commonApi.logoutAPI().then(() => {
                 /** flush 清空localStorage .rm('authToken') 按照key清除 */
                 Lockr.rm('authToken');
                 Lockr.rm('sessionId');
+                Lockr.rm('UserInfo');
                 removeAuth()
                 resetRouter()
                 resolve()
@@ -124,22 +106,20 @@ const actions = {
             })
         })
     },
-    // 获取权限
-    // getAuth({
-    //     commit
-    // }) {
-    //     return new Promise((resolve, reject) => {
-    //         adminIndexAuthListAPI().then((response) => {
-    //             const data = response.data
-    //             Lockr.set('authList', data)
-    //             data.wkFirstModel = data.firstModel
-    //             commit('SET_ALLAUTH', data)
-    //             resolve(data)
-    //         }).catch(error => {
-    //             reject(error)
-    //         })
-    //     })
-    // },
+    getSystemInfo({
+        commit
+    }) {
+        return new Promise((resolve, reject) => {
+            commonApi.getSystemInfo().then(res=>{
+                if(res.code==0){
+                  Lockr.set('globalConfig',res.data);
+                  commit('setGlobalConfig', res.data);
+                }
+              }).catch(error => {
+                reject(error)
+            })
+        })
+    }
 }
 
 export default new Vuex.Store({

@@ -11,7 +11,7 @@
           <div class="bullshit">
             <div class="bullshit-oops">抱歉!</div>
             <div class="bullshit-headline">{{ msg }}</div>
-            <div class="bullshit-info">请检查您输入的网址是否正确，或点击下面的按钮返回首页！</div>
+            <div class="bullshit-info">{{ des }}</div>
             <a class="bullshit-return-home" href="#/">返回首页</a>
           </div>
         </el-col>
@@ -25,9 +25,18 @@ export default {
   name: 'Page404',
   data() {
     return {
-      msg: '当前页面不存在...'
+      msg: '当前页面不存在...',
+      des:""
     }
   },
+  mounted() {
+    // 获取路由的参数
+    let query = this.$route.query;
+    this.msg=query.msg;
+    if(this.msg==''){
+      this.des="请检查您输入的网址是否正确，或点击下面的按钮返回首页！"
+    }
+  }
 }
 </script>
 
