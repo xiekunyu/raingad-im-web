@@ -1,22 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Demo from '@/views/Demo'
 import Home from '@/views/Home'
 import Chat from '@/views/Chat'
 import Login from '@/views/Login'
 import manage from './manage.js'
 Vue.use(Router)
 
-export const constantRouterMap = [{
+export const constantRouterMap = [
+    {
         path: '/',
         name: 'home',
         component: Home,
-        meta: { title: '首页' }
+        meta: { title: '聊天' }
     },
     {
         path: '/chat',
         name: 'chat',
         component: Chat,
-        meta: { title: '聊天' }
+        meta: { title: '聊天演示页' }
+    },
+    {
+        path: '/demo',
+        name: 'demo',
+        component: Demo,
+        meta: { title: '演示页' }
     },
     {
         path: '/login',

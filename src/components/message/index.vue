@@ -14,7 +14,7 @@
         :avatarCricle="setting.avatarCricle"
         :sendKey="setSendKey"
         :wrapKey="wrapKey"
-        @menu-avatar-click="$user(user.id)"
+        @menu-avatar-click="openSetting"
         @change-contact="handleChangeContact"
         @pull-messages="handlePullMessages"
         @message-click="handleMessageClick"
@@ -48,7 +48,7 @@
           <div class="lemon-contact__inner">
             <p class="lemon-contact__label">
               <span class="lemon-contact__name">
-                <OnlineStatus v-if="Contact.is_online && Contact.is_group==0 && $store.state.globalConfig.chatInfo.online==1" title="在线" type="success"></OnlineStatus> 
+                <OnlineStatus v-if="Contact.is_online && Contact.is_group==0 && globalConfig.chatInfo.online==1" title="在线" type="success"></OnlineStatus> 
                 <el-tag size="mini" v-if="Contact.is_group == 1">群聊</el-tag>
                 {{ Contact.displayName }}
               </span>
@@ -87,7 +87,7 @@
                   <el-tag size="mini" v-if="contact.setting.nospeak == 2"  type="danger">全员禁言中</el-tag>
                 </span>
                 <span class="displayName" v-if="is_group == 0">
-                  <OnlineStatus :type="contact.is_online ? 'success' : 'info'" :pulse="contact.is_online " v-if="$store.state.globalConfig.chatInfo.online" ></OnlineStatus> {{contact.displayName}}</span>
+                  <OnlineStatus :type="contact.is_online ? 'success' : 'info'" :pulse="contact.is_online " v-if="globalConfig.chatInfo.online" ></OnlineStatus> {{contact.displayName}}</span>
               </span>
 
               <input
@@ -98,8 +98,10 @@
               />
             </div>
             <div class="message-title-tools">
-              <i class="el-icon-phone-outline mr-10" title="语音通话" v-if="!contact.is_group" @click="called(false)"></i>
-              <i class="el-icon-video-camera mr-10" title="视频通话" v-if="!contact.is_group" @click="called(true)"></i>
+              <template v-if="globalConfig.chatInfo.webrtc">
+                <i class="el-icon-phone-outline mr-10" title="语音通话" v-if="!contact.is_group" @click="called(false)"></i>
+                <i class="el-icon-video-camera mr-10" title="视频通话" v-if="!contact.is_group" @click="called(true)"></i>
+              </template>
               <i class="el-icon-time mr-10" @click="openMessageBox" title="消息管理器"></i>
               <i class="el-icon-more" @click="$user(contact.id)" title="基本资料" v-if="!contact.is_group"></i>
               
@@ -119,7 +121,7 @@
               class="input-with-select"
             >
             </el-input>
-            <div style="margin-left:10px">
+            <div style="margin-left:10px" v-if="globalConfig.chatInfo.groupChat">
               <el-button
                 title="创建群聊"
                 icon="el-icon-plus"
@@ -327,7 +329,6 @@
 <script>
 import { mapState } from "vuex";
 import EmojiData from "@/utils/emoji";
-import * as loginApi from "@/api/login";
 import * as utils from "@/utils/index";
 import Lockr from "lockr";
 import Socket from "./socket";
@@ -378,13 +379,15 @@ export default {
   },
   data() {
     var _this = this;
+    let stun= this.$store.state.globalConfig.chatInfo.stun ? this.$store.state.globalConfig.chatInfo.stun : 'stun:stun.callwithus.com';
     return {
+      noSimpleTips:'系统已开启单聊权限，或者群已开启禁言，无法发送消息',
       curWidth:this.width,
       curHeight:this.height,
       unread:0,
       webrtcConfig:{
           config: { 'iceServers':[{
-	  	    'urls': 'stun:stun.callwithus.com',
+	  	    'urls': stun,
 	  	  }]}
       },
       componentKey: 1,
@@ -841,6 +844,7 @@ export default {
       contactSync: state => state.contactSync,
       setting: state => state.setting,
       userInfo: state => state.userInfo,
+      globalConfig: state => state.globalConfig,
     }),
     formatTime() {
       return function(val) {
@@ -976,7 +980,7 @@ export default {
           if (message.owner_id != this.user.id) {
             IMUI.appendContact(message);
           }
-          loginApi.bindGroupAPI({ client_id: client_id, group_id: message.id });
+          this.$api.commonApi.bindGroupAPI({ client_id: client_id, group_id: message.id });
           break;
         // 设置群管理员
         case "setManager":
@@ -1139,6 +1143,7 @@ export default {
         });
       });
     },
+    // 初始化菜单
     initMenus(IMUI) {
       let menus=[
             {
@@ -1195,7 +1200,8 @@ export default {
               }
             });
           }
-          if(this.user.id>0){
+          // 如果是管理员或者演示模式才显示后台管理
+          if(user.role>0 || this.globalConfig.demon_mode){
             menus.push({
               name: "manage",
               title: "后台管理",
@@ -1363,6 +1369,10 @@ export default {
       instance.closeDrawer();
     },
     uploadVideo (e) {
+      if(!this.globalConfig.chatInfo.simpleChat && this.currentChat.is_group == 0){
+        this.$message.error(this.noSimpleTips);
+        return false;
+      }
       let file = e.srcElement.files[0];
       let url = URL.createObjectURL(file);
       //经测试，发现audio也可获取视频的时长
@@ -1389,6 +1399,10 @@ export default {
     },
     // 发送语音消息
     sendVoice (duration, file) {
+      if(!this.globalConfig.chatInfo.simpleChat && this.currentChat.is_group == 0){
+        this.$message.error(this.noSimpleTips);
+        return false;
+      }
       let message = {
         content: URL.createObjectURL(file),
         fromUser: this.user,
@@ -1438,15 +1452,15 @@ export default {
     },
     // 发送聊天消息
     handleSend(message, next, file) {
-      let formdata = new FormData();
-      message.is_group = this.is_group;
       const { IMUI } = this.$refs;
-      // 如果开启了群聊禁言
-      console.log(this.currentChat,'currentChat');
-      if (!this.nospeak()) {
+      message.is_group = this.is_group;
+      // 如果开启了群聊禁言或者关闭了单聊权限，就不允许发送消息
+      if((!this.globalConfig.chatInfo.simpleChat && this.currentChat.is_group == 0) || !this.nospeak()){
         IMUI.removeMessage(message.id);
-        return this.$message.error("该群已开启禁言！");
+        this.$message.error(this.noSimpleTips);
+        return false;
       }
+      let formdata = new FormData();
       // 如果是文件选择文件上传接口
       if (file) {
         // 判断文件如果大于5M就删除该聊天消息
@@ -1541,9 +1555,16 @@ export default {
     // 添加群成员或者创建群聊
     manageGroup(selectUid,isAdd,groupName) {
       this.createChatBox = false;
+      let num=this.globalConfig.chatInfo.groupUserMax;
       if(!isAdd){
+        if((selectUid.length + this.groupUser.length) > num && num>0){
+          return this.$message.error("群成员不能大于"+num+"人！");
+        }
         this.$api.imApi.addGroupUserAPI({ user_ids: selectUid, id: this.group_id });
       }else{
+        if(selectUid.length > num && num>0){
+          return this.$message.error("群成员不能大于"+num+"人！");
+        }
         this.$api.imApi.addGroupAPI({ user_ids: selectUid,name:groupName }).then(res => {
           const data = res.data;
           const { IMUI } = this.$refs;
@@ -1592,6 +1613,9 @@ export default {
         message.is_group = 0;
         if (toContactId.indexOf("group") != -1) {
           message.is_group = 1;
+        }
+        if(!this.globalConfig.chatInfo.simpleChat && message.is_group==0){
+          continue;
         }
         arr.push(this.test(message));
       }
@@ -1744,6 +1768,11 @@ export default {
       // 组件重置
       this.componentKey += 1;
     },
+    // 打开设置中心
+    openSetting(){
+      const { IMUI } = this.$refs;
+      IMUI.changeMenu("setting");
+    },
     // 退出聊天室
     logout() {
       this.$confirm("你确定要退出聊天室吗?", "提示", {
@@ -1815,14 +1844,6 @@ export default {
     color: #ddd;
     line-height: 50px;
   }
-}
-.cover-text1 {
-  display: flex;
-  display: -webkit-flex;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
 }
 
 .displayName {

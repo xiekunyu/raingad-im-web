@@ -10,38 +10,36 @@
   "license": "Apache2.0",
   "qqGroupUrl": "https://jq.qq.com/?_wv=1027&k=jMQAt9lh",
   "private": true,
-  "funcList":[
+  "funcList": [
     {
-        "icon":"el-icon-chat-line-round",
-        "text":"支持单聊和群聊，支持发送表情、图片、语音、视频和文件消息"
+      "icon": "el-icon-chat-line-round",
+      "text": "支持单聊和群聊，支持发送表情、图片、语音、视频和文件消息"
     },
     {
-      "icon":"el-icon-potato-strips",
-        "text":"单聊支持消息已读未读的状态显示，在线状态显示"
+      "icon": "el-icon-potato-strips",
+      "text": "单聊支持消息已读未读的状态显示，在线状态显示"
     },
     {
-        "icon":"el-icon-user",
-        "text":"群聊创建、删除和群成员管理、群公告、群禁言等"
+      "icon": "el-icon-user",
+      "text": "群聊创建、删除和群成员管理、群公告、群禁言等"
     },
     {
-        "icon":"el-icon-ice-cream-round",
-        "text":"支持置顶联系人，消息免打扰；支持设置新消息声音提醒，浏览器通知"
+      "icon": "el-icon-ice-cream-round",
+      "text": "支持置顶联系人，消息免打扰；支持设置新消息声音提醒，浏览器通知"
     },
     {
-        "icon":"el-icon-video-camera",
-        "text":"支持一对一音视频通话（和移动端不互通）"
+      "icon": "el-icon-video-camera",
+      "text": "支持一对一音视频通话（和移动端不互通）"
     },
     {
-        "icon":"el-icon-milk-tea",
-        "text":"支持文件、图片和绝大部分媒体文件在线预览"
+      "icon": "el-icon-milk-tea",
+      "text": "支持文件、图片和绝大部分媒体文件在线预览"
     },
     {
-        "icon":"el-icon-mobile-phone",
-        "text":"支持移动端（H5和APP），支持简易后台管"
+      "icon": "el-icon-mobile-phone",
+      "text": "支持移动端（H5和APP），支持简易后台管"
     }
-
-],
-  
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -50,6 +48,7 @@
   "dependencies": {
     "axios": "^0.21.4",
     "core-js": "^3.8.3",
+    "cropperjs": "^1.5.13",
     "element-ui": "^2.15.13",
     "js-audio-recorder": "^1.0.7",
     "lemon-imui": "^1.7.7",

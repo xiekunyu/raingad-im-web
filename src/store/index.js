@@ -6,10 +6,6 @@ import {
     removeAuth
 } from '@/utils/auth'
 import {
-    loginAPI,
-    logoutAPI
-} from '@/api/login'
-import {
     resetRouter
 } from '@/router'
 
@@ -40,13 +36,11 @@ const state = {
 
 const mutations = {
     SET_USERINFO: (state, userInfo) => {
+        Lockr.set('UserInfo', userInfo)
         state.userInfo = userInfo
         if(userInfo.setting) {
             state.setting = userInfo.setting
         }
-
-        localStorage.setItem('loginUserInfo', JSON.stringify(userInfo));
-        Lockr.set('UserInfo', userInfo)
     },
     SET_AUTH: (state, data) => {
         const token = data.authToken
@@ -84,7 +78,7 @@ const actions = {
         dispatch
     }, userInfo) {
         return new Promise((resolve, reject) => {
-            loginAPI(userInfo).then(res => {
+            this.$api.commonApi.loginAPI(userInfo).then(res => {
                 const data = res.data || data
                 commit('SET_AUTH', data)
                 commit('SET_USERINFO', data.userInfo)
@@ -118,7 +112,7 @@ const actions = {
         commit
     }) {
         return new Promise((resolve, reject) => {
-            logoutAPI().then(() => {
+            this.$api.commonApi.logoutAPI().then(() => {
                 /** flush 清空localStorage .rm('authToken') 按照key清除 */
                 Lockr.rm('authToken');
                 Lockr.rm('sessionId');

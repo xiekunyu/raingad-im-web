@@ -296,13 +296,21 @@ imApi.getFileList= (data)  =>{
     })
 }
 
-// 获取系统配置信息
-imApi.getSystemInfo= (data)  =>{
+// 上传头像
+imApi.updateUserInfo= (data)  =>{
     return request({
-        url: 'common/pub/getSystemInfo',
+        url: 'enterprise/im/updateUserInfo',
         method: 'post',
         data: data
     })
 }
 
+// 修改账户
+imApi.editAccount= (data)  =>{
+    return request({
+        url: 'enterprise/im/editAccount',
+        method: 'post',
+        data: data
+    })
+}
 export default imApi;

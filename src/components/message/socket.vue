@@ -10,7 +10,6 @@
 
 <script>
     import Vue from 'vue'
-    import {bindClientIdAPI,offlineAPI} from "@/api/login";
     import Lockr from 'lockr'
 
     export default {
@@ -54,7 +53,7 @@
                     // 登录 更新用户列表
                     case 'init':
                         Lockr.set('client_id',data['client_id']);
-                        bindClientIdAPI({client_id: data['client_id'],user_id:userInfo.user_id}).then(res=>{
+                        this.$api.commonApi.bindClientIdAPI({client_id: data['client_id'],user_id:userInfo.user_id}).then(res=>{
                             this.websocketSend({type:"bindUid",user_id:userInfo.user_id});
                             console.log(data['client_id'],'消息服务启动成功');
                         }).catch(error => {
@@ -72,7 +71,7 @@
             },
             websocketClose(e) {  //关闭
                 let userInfo=Lockr.get('UserInfo');
-                offlineAPI({user_id:userInfo.user_id}).then(res=>{
+                this.$api.commonApi.offlineAPI({user_id:userInfo.user_id}).then(res=>{
                     console.log("connection closed (" + e.code + ")");
                 })
             },

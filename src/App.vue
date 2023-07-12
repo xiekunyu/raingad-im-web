@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     getSystemInfo(){
-      this.$api.imApi.getSystemInfo().then(res=>{
+      this.$api.commonApi.getSystemInfo().then(res=>{
         if(res.code==0){
           lockr.set('globalConfig',res.data);
           this.$store.commit('setGlobalConfig', res.data);

@@ -1,7 +1,5 @@
 import router from './router'
-import store from './store'
 import NProgress from 'nprogress' // Progress 进度条
-import axios from 'axios'
 import 'nprogress/nprogress.css' // Progress 进度条样式
 import {
     Message
@@ -9,9 +7,8 @@ import {
 import {
     getAuth
 } from '@/utils/auth' // 验权
-
-let loadAsyncRouter = false
-const whiteList = ['/login', '/welcome','/404'] // 不重定向白名单
+import lockr from 'lockr'
+const whiteList = ['/login'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
     if (to.meta.disabled) {
         next(false)
@@ -20,62 +17,28 @@ router.beforeEach((to, from, next) => {
     NProgress.start()
         /** 请求头包含授权信息 并且 页面必须授权 直接进入 */
     if (getAuth()) {
-        
-        if (whiteList.includes(to.path)) {
+        let demon=lockr.get('globalConfig').demon_mode;
+        let toPath='';
+        if(demon){//如果不是演示模式，就需要直接跳转到聊天页面
+            toPath='/demo';
+        }
+        if (whiteList.includes(to.path) || (to.path=='/' && toPath)) {
             next({
-                path: '/'
+                path: toPath
             })
             NProgress.done()
 
-        } else {
-            // if (!loadAsyncRouter) { // 判断当前用户是否获取权限
-            //     loadAsyncRouter = true
-
-            //     if (store.getters.allAuth) {
-            //         store.dispatch('GenerateRoutes', store.getters.allAuth).then(() => { // 根据auths权限生成可访问的路由表
-            //             router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
-
-            //             if (to.path === '/404') {
-            //                 next({
-            //                     path: to.redirectedFrom || '/',
-            //                     replace: true
-            //                 })
-            //             } else {
-            //                 next({
-            //                     ...to,
-            //                     replace: true
-            //                 })
-            //             }
-            //         })
-            //     } else {
-            //         store.dispatch('getAuth').then(auths => { // 拉取user_info
-            //             store.dispatch('GenerateRoutes', auths).then(() => { // 根据auths权限生成可访问的路由表
-            //                 router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
-            //                 if (to.path === '/404') {
-            //                     next({
-            //                         path: to.redirectedFrom || '/',
-            //                         replace: true
-            //                     })
-            //                 } else {
-            //                     next({
-            //                         ...to,
-            //                         replace: true
-            //                     })
-            //                 }
-            //             })
-            //         }).catch((err) => {
-            //             loadAsyncRouter = false
-            //             store.dispatch('LogOut').then(() => {
-            //                 Message.error(err.msg || '获取用户信息失败')
-            //                 next({
-            //                     path: '/'
-            //                 })
-            //             })
-            //         })
-            //     }
-            // } else {
-            //     next()
-            // }
+        }else if(to.path.indexOf('manage') !== -1){
+            let userInfo=lockr.get('userInfo');
+            // 如果是管理员或者演示模式，就可以进入管理页面
+            if((userInfo && userInfo.role>0) || demon){
+                next()
+            }else{
+                Message.error('您没有权限访问该页面');
+                next(false)
+                NProgress.done()
+            }
+        }else {
             next()
         }
     } else {

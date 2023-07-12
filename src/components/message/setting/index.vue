@@ -2,13 +2,103 @@
     <!-- 设置中心 -->
       <el-tabs tab-position="left" style="height: 100%;">
         <el-tab-pane label="账号设置" class="pd-20">
-          <div align="center">
-            <el-avatar :src="user.avatar" :size="50"> </el-avatar>
-            <br /><br />
-            <p>{{ user.realname }}</p>
-            <br />
-            <p>账号：{{ user.account }}</p>
-            <br />
+          <div class="user-center">
+            <div class="user-avatar">
+              <el-upload ref="upload" class="upload-demo" :multiple="false" :action="getUrl" :show-file-list='false'
+                :data='{type:1}' :headers="getToken" :on-success="handleAvatarSuccess" :auto-upload="false" :on-change="change"
+                :before-upload="before" :http-request="request">
+                <el-image :src="user.avatar" style="width:160px" class="m-20"></el-image>
+                <el-button size="mini" class="replace-picture-button mab-30">更换头像</el-button>
+              </el-upload>
+              <el-dialog title="头像剪裁" :close-on-click-modal="false" :visible.sync="cropperDialogVisible" width="580" :append-to-body="true" :show-close="true"
+                  @closed='$refs.upload.clearFiles()'>
+                  <Cropper :key="componentsKey" :src="cropperImg" :compress="compress" :aspectRatio="aspectRatio" ref="cropper">
+                  </Cropper>
+                  <template #footer>
+                    <el-button @click="cropperDialogVisible=false;$refs.upload.clearFiles()">取 消</el-button>
+                    <el-button type="primary" @click="cropperSave">确 定</el-button>
+                  </template>
+                </el-dialog>
+                <div class="mt-20">
+                  <el-button type="warning" @click="dialog=true;editPass=1">修改密码</el-button>
+                </div>
+                
+            </div>
+            <div class="user-info">
+              <el-form :model="user" ref="userinfo" label-width="100px">
+                <el-form-item label="登陆账号" prop="account">
+                    {{user.account}}
+                    <span class="fc-primary ml-10 cur-handle" @click="editPass=0;dialog=true">修改</span>
+                </el-form-item>
+                <el-form-item label="姓名" prop="realname" v-if="$store.state.globalConfig.sysInfo.runMode==1">
+                    {{user.realname}}
+                </el-form-item>
+                <el-form-item label="昵称" prop="realname" v-else>
+                    <el-input placeholder="请输入昵称" v-model="user.realname"></el-input>
+                </el-form-item>
+                <el-form-item label="e-mail" prop="email">
+                    <el-input placeholder="请输入邮箱地址" v-model="user.email"></el-input>
+                </el-form-item>
+                <el-form-item label="性别" prop="sex">
+                    <el-radio-group v-model="user.sex">
+                      <el-radio :label="2" border>未知</el-radio>
+                      <el-radio :label="1" border>男</el-radio>
+                      <el-radio :label="0" border>女</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="个性签名" prop="remark">
+                  <el-input type="textarea" :rows="2" v-model="user.motto"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="submitForm()">保存</el-button>
+                </el-form-item>
+              </el-form>
+            </div>
+          </div>
+          <el-dialog
+              :title="dialogTitle"
+              :visible.sync="dialog"
+              :modal="true"
+              width="400px"
+              append-to-body
+            >
+                <el-form label-width="100px">
+                    <el-form-item label="当前账号">
+                      {{user.account}}
+                    </el-form-item>
+                    <el-form-item label="验证码">
+                      <el-input
+                          placeholder="请输入验证码"
+                          max-length="6"
+                          style="width: 260px"
+                          v-model="code">
+                          <el-button slot="append" @click="sendCode(true)" :loading="loading">发送验证码</el-button>
+                        </el-input>
+                    </el-form-item>
+                    <el-form-item label="新账号" v-if="!editPass">
+                      <el-input v-model="account" placeholder="请输入新的账号"></el-input>
+                    </el-form-item>
+                    <el-form-item label="新账号验证码" v-if="!editPass">
+                      <el-input
+                          placeholder="请输入新账号验证码"
+                          max-length="6"
+                          style="width: 260px"
+                          v-model="newCode">
+                          <el-button slot="append" @click="sendCode(false)" :loading="loading">发送验证码</el-button>
+                        </el-input>
+                    </el-form-item>
+                    <el-form-item label="新密码" v-if="editPass">
+                      <el-input v-model="password" show-password  placeholder="请输入密码"></el-input>
+                    </el-form-item>
+                    <el-form-item label="重复密码" v-if="editPass">
+                      <el-input v-model="repass" show-password  placeholder="请输入重复输入密码"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="editPassword()">保存</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-dialog>
+          <div class="mt-40" align="center">
             <el-button type="danger" @click="logout">退出登录</el-button>
           </div>
         </el-tab-pane>
@@ -49,7 +139,7 @@
             <el-avatar :src="$packageData.logo" :size="50"></el-avatar>
             <br /><br />
             <p>
-              <span class="main-color"> {{ $packageData.name }} </span>for {{ $packageData.version }}
+              <span class="fc-primary"> {{ $packageData.name }} </span>for {{ $packageData.version }}
             </p>
           </div>
           <div class="setting-version">
@@ -62,7 +152,7 @@
             <el-avatar :src="$packageData.logo" :size="50"></el-avatar>
             <br /><br />
             <p>
-              <span class="main-color"> {{ $packageData.name }} </span>for {{ $packageData.version }}
+              <span class="fc-primary"> {{ $packageData.name }} </span>for {{ $packageData.version }}
             </p>
           </div>
           <!-- <div class="setting-version">
@@ -72,13 +162,13 @@
           <div class="setting-version">
             <p>
               前端地址：<a
-                class="main-color"
+                class="fc-primary"
                 :href="$packageData.frontUrl"
                 target="_blank">[链接] im-chat-front</a>
             </p>
             <p>
               后端地址：<a
-                class="main-color"
+                class="fc-primary"
                 :href="$packageData.backstageUrl"
                 target="_blank">[链接] im-instant-chat</a>
             </p>
@@ -91,7 +181,7 @@
             <p>
               QQ交流群：
               <a
-                class="main-color"
+                class="fc-primary"
                 :href="$packageData.qqGroupUrl"
                 target="_blank">336921267</a>
             </p>
@@ -103,13 +193,36 @@
 import Lockr from "lockr";
 let user = Lockr.get("UserInfo");
 import { mapState } from "vuex";
+import Cropper from "@/components/cropper/index.vue";
+import { Dialog } from "element-ui";
 export default {
     name: "manageGroup",
     props: {
     },
+    components: {
+        Cropper,
+    },
     data() {
         return {
-
+          componentsKey: 1,
+          maxSize: 5,
+          compress: 1,
+          aspectRatio: 1 / 1,
+          cropperDialogVisible: false,
+          cropper: true,
+          cropperImg: '',
+          tempImg: '',
+          dialogVisible: false,
+          dialog: false,
+          dialogTitle: '修改密码',
+          editPass:1,
+          account: '',
+          password: '',
+          repass: '',
+          code: '',
+          newCode:'',
+          loading: false,
+          
         };
     },
     computed: {
@@ -117,17 +230,31 @@ export default {
             setting: (state) => state.setting,
             user: (state) => state.userInfo,
         }),
+        getUrl () {
+          return window.BASE_URL + '/common/upload/uploadAvatar'
+        },
+        getToken () {
+          const authKey = Lockr.get('authToken');
+          return { authToken: authKey }
+        },
     },
     watch: {
         // 监听设置发送变化需要进行设置更改
         setting: {
             handler(newValue, oldValue) {
-                console.log(newValue,'val')
                 this.$api.imApi.settingAPI(newValue);
+                let user = Lockr.get("UserInfo");
                 user.setting = newValue;
                 Lockr.set("UserInfo", user);
             },
             deep: true,
+        },
+        editPass(val){
+          if(val==1){
+            this.dialogTitle = '修改密码';
+          }else{
+            this.dialogTitle = '修改账号';
+          }
         }
     },
     methods: {
@@ -143,11 +270,212 @@ export default {
                 })
                 .catch(() => {});
         },
+        submitForm(){
+          if(this.user.realname == ''){
+            this.$message.error('请输入昵称')
+            return false
+          }
+          let params={
+            realname:this.user.realname,
+            email:this.user.email,
+            sex:this.user.sex,
+            motto:this.user.motto
+          }
+          this.$api.imApi.updateUserInfo(params).then(res=>{
+            if(res.code == 0){
+              this.$message.success('修改成功');
+              let data=JSON.parse(JSON.stringify(this.user))
+              this.$store.commit("SET_USERINFO", data)
+            }
+          })
+
+        },
+        // 是否为图片
+        isImg (fileUrl) {
+          var strRegex = "(.jpg|.png|.gif|.jpeg)$";
+          var re = new RegExp(strRegex);
+          if (re.test(fileUrl.toLowerCase())) {
+            this.fileIsImg = true;
+          } else {
+            this.fileIsImg = false;
+          }
+        },
+        // 选择图片后进行操作
+        change (file) {
+          if (this.cropper && file.status == 'ready') {
+            this.isImg(file.name)
+            if (!this.fileIsImg) {
+              this.$message.error('选择的文件非图像类文件')
+              return false
+            }
+            this.componentsKey++;
+            this.cropperDialogVisible = true
+            this.cropperImg = URL.createObjectURL(file.raw)
+          }
+        },
+        // 选择图片的时候进行验证
+        before (file) {
+          file = this.cropper ? this.cropperUploadFile : file
+          const maxSize = file.size / 1024 / 1024 < this.maxSize;
+          if (!maxSize) {
+            this.$message.warning(`上传文件大小不能超过 ${this.maxSize}MB!`);
+            return false;
+          }
+          this.isImg(file.name)
+          this.tempImg = URL.createObjectURL(file);
+        },
+        // 上传图图片
+        request (param) {
+          const loading = this.$loading({
+            lock: true,
+            text: 'Loading',
+          });
+          const data = new FormData();
+          var file = this.cropper ? this.cropperUploadFile : param.file
+          data.append("file", file);
+          data.append("type", 1);
+          this.$api.commonApi.uploadAvatar(data).then(res => {
+            this.cropperImg = '';
+            loading.close();
+            this.handleAvatarSuccess(res)
+            param.onSuccess(res)
+          }).catch(err => {
+            loading.close();
+            param.onError(err)
+          })
+        },
+        // 保存裁剪图片并上传
+        cropperSave () {
+          var uploadFile = this.$refs.upload.uploadFiles[0].raw
+          this.$refs.cropper.getCropFile(file => {
+            this.cropperUploadFile = file
+            this.$refs.upload.submit()
+            this.cropperDialogVisible = false
+          }, uploadFile.name, uploadFile.type)
+
+        },
+        handleAvatarSuccess (res, file) {
+          let data = this.$store.state.userInfo
+          this.$set(data, 'avatar', res.data)
+          this.$store.commit("SET_USERINFO", data)
+        },
+        // 修改密码
+        editPassword(){
+          if(this.code==''){
+              this.$message({
+                message: '请输入验证码',
+                type: 'warning'
+              });
+              return false;
+          }
+          if(this.eidtPass){
+            if(this.password=='' || this.password.length<6 || this.password.length>16){
+                this.$message({
+                  message: '请输入6-16个字符串的密码',
+                  type: 'warning'
+                });
+                return false;
+            }
+            if(this.password!=this.repass){
+                this.$message({
+                  message: '两次密码不一致',
+                  type: 'warning'
+                });
+                return false;
+            }
+            let params = {
+                user_id:this.currentUser.user_id,
+                password:this.password
+            }
+            this.$api.userApi.editPassword(params).then(res=>{
+                if(res.code==0){
+                  this.dialog = false;
+                  this.password = '';
+                  this.repass = '';
+                  this.$message({
+                      message: res.msg,
+                      type: 'success'
+                  });
+                }
+            })
+          }else{
+            if(this.account==''){
+                this.$message({
+                  message: '请输入账号',
+                  type: 'warning'
+                });
+                return false;
+            }
+            if(this.newCode==''){
+                this.$message({
+                  message: '请输入新账户验证码',
+                  type: 'warning'
+                });
+                return false;
+            }
+            let params = {
+                account:this.account,
+                code:this.code,
+                newCode:this.newCode
+            }
+            this.$api.imApi.editAccount(params).then(res=>{
+                if(res.code==0){
+                  this.dialog = false;
+                  this.account = '';
+                  this.code = '';
+                  this.newCode = '';
+                  this.$message({
+                      message: res.msg,
+                      type: 'success'
+                  });
+                }
+            })
+          }
+          
+        },
+        sendCode(e){
+          let account=e ? this.user.account : this.account;
+          let type = this.editPass ? 3 : 4;
+          this.loading = true;
+          if(account==''){
+            this.$message({
+              message: '请输入新的账号',
+              type: 'warning'
+            });
+            this.loading = false;
+            return false;
+          }
+          this.$api.commonApi.sendCode({type:type,account:account}).then(res=>{
+            this.loading = false;
+              if(res.code==0){
+                this.$message({
+                    message: res.msg,
+                    type: 'success'
+                });
+              }
+            })
+        }
     },
     
 };
 </script>
-<style>
+<style lang="scss" scoped>
+.user-center{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    .user-avatar{
+      width:240px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+    }
+    .user-info{
+      flex:1;
+    }
+}
 .setting-switch {
   margin: 0 30px 20px;
 }
@@ -157,7 +485,7 @@ export default {
   line-height: 2;
 }
 
-.main-color {
+.fc-primary {
   color: #409eff;
 }
 

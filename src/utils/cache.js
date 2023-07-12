@@ -9,7 +9,7 @@ const cache = {
     loadingCache: function() {
         if (Lockr.get('authKey') && !axios.defaults.headers['authKey']) {
             /** 将用户信息放入缓存 */
-            const userInfo = Lockr.get('loginUserInfo')
+            const userInfo = Lockr.get('UserInfo')
             if (userInfo) {
                 store.commit('SET_USERINFO', userInfo)
             }
