@@ -31,8 +31,12 @@
                   <div>{{ detail.account}}</div>
                 </div>
                 <div class="card-row">
-                  <div class="label">姓名</div>
+                  <div class="label">{{ globalConfig.sysInfo.runMode==2 ? '昵称' : '姓名'}}</div>
                   <div>{{ detail.realname}}</div>
+                </div>
+                <div class="card-row" v-if="detail.friend && globalConfig.sysInfo.runMode==2">
+                  <div class="label">备注</div>
+                  <div>{{ detail.friend.nickname || '未设置' }} <i class="el-icon-edit ml-10" title="设置备注" @click="setNickname"></i></div>
                 </div>
                 <div class="card-row">
                   <div class="label">性别</div>
@@ -51,7 +55,8 @@
             </el-main>
             <el-footer class="footer">
               <!-- <el-button round>加好友</el-button> -->
-              <el-button type="primary" v-if="$store.state.userInfo.user_id!=detail.user_id" round @click="openChat()" style="width:150px">发消息</el-button>
+              <el-button type="primary" v-if="userInfo.user_id!=detail.user_id && detail.friend" round @click="openChat()" style="width:150px">发消息</el-button>
+              <el-button type="primary" v-if="globalConfig.sysInfo.runMode==2 && !detail.friend" round @click="addFriend()" style="width:150px">加好友</el-button>
               <el-button round v-if="options.isManage" style="width:150px" @click="editUser">编辑资料</el-button>
             </el-footer>
           </el-container>
@@ -60,6 +65,7 @@
   </template>
   
   <script>
+  import { mapState } from 'vuex';
   export default {
     name: 'UserCard',
     props: {
@@ -75,6 +81,12 @@
                 }
             }
         }
+    },
+    computed: {
+        ...mapState({
+                userInfo: state => state.userInfo,
+                globalConfig: state => state.globalConfig,
+            }),
     },
     filters: {
       sex(value) {
@@ -107,6 +119,62 @@
         },
         editUser(){
           this.$emit('editUser',this.detail)
+        },
+        // 添加好友
+        addFriend(){
+          this.closeDialog();
+          this.$prompt('请填写验证信息，让朋友知道你！', '添加好友', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+          }).then(({ value }) => {
+            if(!value){
+              this.$message.error('请输入验证信息');
+              return false;
+            }
+            this.$api.friendApi.addFriend({user_id:this.detail.user_id,remark:value}).then(res=>{
+              if(res.code == 0){
+                this.$message.success('已发送好友申请');
+              }
+            })
+          }).catch((error) => {
+            this.$message({
+              type: 'warning',
+              message: error
+            });       
+          });
+          
+        },
+        // 设置备注
+        setNickname(){
+          let friend_id=this.detail.friend.friend_user_id ?? '';
+          if(!this.detail.friend){
+            this.$message.error('该用户不是您的好友');
+            return false;
+          }
+          this.closeDialog();
+          let nickname=this.detail.friend.nickname ? this.detail.friend.nickname : this.detail.realname;
+          this.$prompt('请填写备注信息', '设置备注', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            inputValue: nickname
+          }).then(({ value }) => {
+            if(!value){
+              this.$message.error('请输入备注信息');
+              return false;
+            }
+            
+            this.$api.friendApi.setNickname({friend_id:friend_id,nickname:value}).then(res=>{
+              if(res.code == 0){
+                this.$message.success('设置成功');
+                this.detail.realname = value;
+              }
+            })
+          }).catch((error) => {
+            this.$message({
+              type: 'warning',
+              message: error
+            });       
+          });
         }
     }
   }

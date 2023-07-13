@@ -128,7 +128,7 @@
                 circle
               ></el-button>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="addFriend">新朋友</el-dropdown-item>
+                <el-dropdown-item command="addFriend">添加朋友</el-dropdown-item>
                 <el-dropdown-item command="addGroup" v-if="globalConfig.chatInfo.groupChat">创建群聊</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -284,7 +284,7 @@
     </div>
     <!-- 创建群聊 -->
     <Group :visible.sync="createChatBox" :title="dialogTitle" @manageGroup="manageGroup" :isAdd="isAdd" :userIds="userIds"></Group>
-    <!-- 创建群聊 -->
+    <!-- 发布公告 -->
     <el-dialog
       title="发布公告"
       :visible.sync="noticeBox"
@@ -304,6 +304,8 @@
         <el-button type="primary" @click="publishNotice">确 定</el-button>
       </span>
     </el-dialog>
+     <!-- 添加好友 -->
+     <addFriend :visible.sync="addFriendBox"></addFriend>
     <!-- 转发聊天 -->
     <ChooseDialog :visible.sync="forwardBox" title="转发聊天" @selectChat="forwardUser" :allUser="allUser"></ChooseDialog>
     <!-- 消息管理器 -->
@@ -353,9 +355,11 @@ import Group from "./group/index";
 import ChooseDialog from "./chooseDialog/index";
 import Files from "./files/index";
 import Setting from "./setting/index";
+import addFriend from "./friend/add";
 import OnlineStatus from "./mini/statusIndicator";
 import webrtc from "./webrtc";
 import Apply from "./apply/index";
+import InviteImg from '@/assets/img/invite.png'
 const getTime = () => {
   return new Date().getTime();
 };
@@ -372,6 +376,7 @@ export default {
     webrtc,
     Group,
     Files,
+    addFriend,
     Setting,
     ChooseDialog,
     OnlineStatus,
@@ -409,6 +414,7 @@ export default {
       componentKey: 1,
       // 搜索结果展示
       searchResult: false,
+      addFriendBox: false,
       createChatBox: false,
       forwardBox: false,
       noticeBox: false,
@@ -462,7 +468,7 @@ export default {
             hide();
           },
           visible: instance => {
-            return instance.contact.user_id != this.user.id;
+            return instance.contact.user_id != this.user.id && this.globalConfig.sysInfo.runMode==1;
           }
         },
         {
@@ -1100,11 +1106,11 @@ export default {
                 this.unread += item.unread;
               }
           })
-          if(this.globalConfig.sysInfo.runMode==1){
+          if(this.globalConfig.sysInfo.runMode==2){
             const sysContact = {
               id: 'system',
-              displayName: "系统消息",
-              avatar: this.$packageData.logo,
+              displayName: "新邀请",
+              avatar: InviteImg,
               index: "[1]系统消息",
               click(next) {
                 next();
@@ -1116,6 +1122,7 @@ export default {
               lastContent: res.count ? "新的申请" : '',
               unread:res.count,
             };
+            this.unread += res.count;
             data.push({...sysContact});
           }
         
@@ -1789,7 +1796,7 @@ export default {
       if(e=='addGroup'){
         this.openCreateGroup();
       }else{
-        
+        this.addFriendBox=true;
       }
     },
     // 退出聊天室

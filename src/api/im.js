@@ -313,4 +313,13 @@ imApi.editAccount= (data)  =>{
         data: data
     })
 }
+
+// 搜索用户
+imApi.searchUser= (data)  =>{
+    return request({
+        url: 'enterprise/im/searchUser',
+        method: 'post',
+        data: data
+    })
+}
 export default imApi;

@@ -10,22 +10,37 @@
             <div class="apply-list">
                 <div class="apply-list-main">
                     <el-scrollbar>  
-                        <div class="apply-list-item" v-for="(x,index) in list" :key="index">
+                        <div class="apply-list-item" v-for="(x,index) in list" :key="index" >
                             <div class="avatar">
                                 <el-avatar :src="x.create_user_info.avatar"></el-avatar>
                             </div>
                             <div class="main">
-                                <div> <span class="fc-primary">{{x.create_user_info.realname}}</span> 申请添加为好友</div>
+                                <div v-if="!params.is_mine" @click="$user(x.create_user_info.user_id)"> <span class="fc-primary cur-handle">{{x.create_user_info.realname}}</span> 申请添加为好友 
+                                    <el-tag type="success" v-if="x.status==1">已同意</el-tag>
+                                </div>
+                                <div v-if="params.is_mine" @click="$user(x.user_id_info.user_id)"> 请求添加 <span class="fc-primary cur-handle">{{x.user_id_info.realname}}</span> 为好友
+                                    <el-tag type="success" v-if="x.status==1">已同意</el-tag>
+                                </div>
                                 <div class="f-12 c-999">{{x.remark}}</div>
                             </div>
-                            <div class="option">
-                                <el-popconfirm title="您确定接受该好友的申请吗？" @confirm="acceptApply(x.friend_id,true)">
+                            <div class="option" v-if="!params.is_mine">
+                                <el-popconfirm title="您确定接受该好友的申请吗？" v-if="x.status==2" @confirm="acceptApply(x.friend_id,true)">
                                     <el-button slot="reference" type="success" circle plain icon="el-icon-check"></el-button>
                                 </el-popconfirm>
-                                <el-popconfirm class="ml-15" title="您确定拒绝该好友的申请吗？" @confirm="acceptApply(x.friend_id,false)">
+                                <el-popconfirm class="ml-15" title="您确定拒绝该好友的申请吗？" v-if="x.status==2" @confirm="acceptApply(x.friend_id,false)">
                                     <el-button slot="reference" type="danger"  circle plain icon="el-icon-close"></el-button>
                                 </el-popconfirm>
+                                <span class="fc-primary cur-handle" v-if="x.status==1" @click="$store.commit('openChat',x.create_user_info.user_id)">发消息</span>
+                                <el-tag type="danger" v-if="x.status==0">已拒绝</el-tag>
                             </div>
+                            <div class="option" v-else>
+                                <span class="fc-primary cur-handle" v-if="x.status==1" @click="$store.commit('openChat',x.user_id_info.user_id)">发消息</span>
+                                <el-tag type="warning" v-if="x.status==2">待同意</el-tag>
+                                <el-tag type="danger" v-if="x.status==0">已拒绝</el-tag>
+                            </div>
+                        </div>
+                        <div v-if="list.length==0">
+                            <el-empty description="暂无数据"></el-empty>
                         </div>
                     </el-scrollbar>  
                 </div>
@@ -53,121 +68,7 @@ export default {
         return {
             singlePage:true,
             total:0,
-            selectUid: [],
-            list: [
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-                {
-                    friend_id:1,
-                    create_user_info:{
-                        realname:"张三",
-                        avatar:this.$packageData.logo
-                    },
-                    remark:"我是你老大！",
-                },
-            ],
+            list: [],
             activeName: "receive",
             params: {
                 page: 1,
@@ -190,7 +91,11 @@ export default {
           this.getList();
         },
         acceptApply(id,flag){
-            console.log(id,flag)
+            let status = flag ? 1 : 0;
+            this.$api.friendApi.acceptFriend({friend_id:id,status:status}).then(res=>{
+                this.$message.success("操作成功");
+                this.getList();
+            })
         },
         getList(){
             this.$api.friendApi.getApplyList(this.params).then(res=>{

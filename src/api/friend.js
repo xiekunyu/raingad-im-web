@@ -12,10 +12,11 @@ friendApi.getApplyList= (params) =>{
 }
 
 // 添加好友
-friendApi.addFriend =()=>{
+friendApi.addFriend =(params)=>{
     return request({
         url: 'enterprise/friend/add',
-        method: 'post'
+        method: 'post',
+        data: params
     })
 }
 
