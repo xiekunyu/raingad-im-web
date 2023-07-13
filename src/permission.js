@@ -8,7 +8,7 @@ import {
     getAuth
 } from '@/utils/auth' // 验权
 import lockr from 'lockr'
-const whiteList = ['/login'] // 不重定向白名单
+const whiteList = ['/login','/register'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
     if (to.meta.disabled) {
         next(false)
@@ -29,7 +29,7 @@ router.beforeEach((to, from, next) => {
             NProgress.done()
 
         }else if(to.path.indexOf('manage') !== -1){
-            let userInfo=lockr.get('userInfo');
+            let userInfo=lockr.get('UserInfo');
             // 如果是管理员或者演示模式，就可以进入管理页面
             if((userInfo && userInfo.role>0) || demon){
                 next()

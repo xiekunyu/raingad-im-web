@@ -121,7 +121,20 @@
               class="input-with-select"
             >
             </el-input>
-            <div style="margin-left:10px" v-if="globalConfig.chatInfo.groupChat">
+            <div style="margin-left:10px" v-if="globalConfig.sysInfo.runMode==2">
+              <el-dropdown @command="handleCommand">
+                <el-button
+                icon="el-icon-plus"
+                circle
+              ></el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="addFriend">新朋友</el-dropdown-item>
+                <el-dropdown-item command="addGroup" v-if="globalConfig.chatInfo.groupChat">创建群聊</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+              
+            </div>
+            <div style="margin-left:10px" v-if="globalConfig.sysInfo.runMode==1 && globalConfig.chatInfo.groupChat">
               <el-button
                 title="创建群聊"
                 icon="el-icon-plus"
@@ -342,7 +355,7 @@ import Files from "./files/index";
 import Setting from "./setting/index";
 import OnlineStatus from "./mini/statusIndicator";
 import webrtc from "./webrtc";
-import lockr from "lockr";
+import Apply from "./apply/index";
 const getTime = () => {
   return new Date().getTime();
 };
@@ -361,7 +374,8 @@ export default {
     Files,
     Setting,
     ChooseDialog,
-    OnlineStatus
+    OnlineStatus,
+    Apply
   },
   props: {
     width: {
@@ -391,6 +405,7 @@ export default {
 	  	    'urls': stun,
 	  	  }]}
       },
+      curFile:null,
       componentKey: 1,
       // 搜索结果展示
       searchResult: false,
@@ -1085,6 +1100,25 @@ export default {
                 this.unread += item.unread;
               }
           })
+          if(this.globalConfig.sysInfo.runMode==1){
+            const sysContact = {
+              id: 'system',
+              displayName: "系统消息",
+              avatar: this.$packageData.logo,
+              index: "[1]系统消息",
+              click(next) {
+                next();
+              },
+              renderContainer: () => {
+                return <Apply></Apply>;
+              },
+              lastSendTime: res.page,
+              lastContent: res.count ? "新的申请" : '',
+              unread:res.count,
+            };
+            data.push({...sysContact});
+          }
+        
           this.$store.commit('initContacts', data);
           // 设置置顶人
           this.getChatTop(data);
@@ -1236,18 +1270,13 @@ export default {
     // 点击了消息
     handleMessageClick(e, key, message, instance) {
       if (key == "status") {
+        // 重发消息
         instance.updateMessage({
           id: message.id,
-          status: "going",
-          content: "这个功能没做"
-        });
-        setTimeout(() => {
-          instance.updateMessage({
-            id: message.id,
-            status: "failed",
-            content: "还是发送失败，哈哈哈哈！！！"
-          });
-        }, 2000);
+          status: "going"
+        })
+        message.status = "going";
+        this.diySendMessage(message, this.curFile);
         return;
       }else if(key == 'avatar'){
         this.$user(message.fromUser.id);
@@ -1436,6 +1465,7 @@ export default {
     handleSend(message, next, file) {
       const { IMUI } = this.$refs;
       message.is_group = this.is_group;
+      this.curFile=file;
       // 如果开启了群聊禁言或者关闭了单聊权限，就不允许发送消息
       if((!this.globalConfig.chatInfo.simpleChat && this.currentChat.is_group == 0) || !this.nospeak()){
         IMUI.removeMessage(message.id);
@@ -1754,6 +1784,13 @@ export default {
     openSetting(){
       const { IMUI } = this.$refs;
       IMUI.changeMenu("setting");
+    },
+    handleCommand(e){
+      if(e=='addGroup'){
+        this.openCreateGroup();
+      }else{
+        
+      }
     },
     // 退出聊天室
     logout() {

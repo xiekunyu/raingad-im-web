@@ -69,7 +69,7 @@
                     <el-form-item label="验证码">
                       <el-input
                           placeholder="请输入验证码"
-                          max-length="6"
+                          maxlength="6"
                           style="width: 260px"
                           v-model="code">
                           <el-button slot="append" @click="sendCode(true)" :loading="loading">发送验证码</el-button>
@@ -81,7 +81,7 @@
                     <el-form-item label="新账号验证码" v-if="!editPass">
                       <el-input
                           placeholder="请输入新账号验证码"
-                          max-length="6"
+                          maxlength="6"
                           style="width: 260px"
                           v-model="newCode">
                           <el-button slot="append" @click="sendCode(false)" :loading="loading">发送验证码</el-button>
@@ -437,24 +437,20 @@ export default {
         sendCode(e){
           let account=e ? this.user.account : this.account;
           let type = this.editPass ? 3 : 4;
-          this.loading = true;
           if(account==''){
             this.$message({
               message: '请输入新的账号',
               type: 'warning'
             });
-            this.loading = false;
             return false;
           }
-          this.$api.commonApi.sendCode({type:type,account:account}).then(res=>{
-            this.loading = false;
-              if(res.code==0){
-                this.$message({
-                    message: res.msg,
-                    type: 'success'
-                });
-              }
-            })
+          this.loading = true;
+          this.$store.dispatch('sendCode',{type:type,account:account}).then(res=>{
+            this.$message.success('发送成功');
+            this.loading=false;
+          }).catch(()=>{
+            this.loading=false;
+          })
         }
     },
     

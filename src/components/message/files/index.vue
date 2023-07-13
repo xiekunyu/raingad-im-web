@@ -15,7 +15,7 @@
 <script>
 import fileItems from "./items.vue";
 export default {
-    name: "manageGroup",
+    name: "files",
     components: {
         fileItems,
     },  
@@ -48,7 +48,7 @@ export default {
 <style lang="scss" scoped>
 .slider-aside {
     height:50px !important;
-    background-color: #efefef;
+    background-color: #f9f9f9;
 }
 .tab-diy{
     width:250px;

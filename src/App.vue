@@ -25,10 +25,12 @@ export default {
     if(userInfo){
       this.$store.commit('SET_USERINFO', userInfo);
     }
-    let router=this.$route.path;
-    if(router.indexOf('login')!==-1){
-      this.$store.dispatch('getSystemInfo');
-    }
+    this.$store.dispatch('getSystemInfo').then(res=>{
+      if(res.data.sysInfo.state==0){
+          this.$router.push({path:'/404',query:{msg:res.data.sysInfo.closeTips}});
+          return 
+      }
+    });
   }
 }
 </script>

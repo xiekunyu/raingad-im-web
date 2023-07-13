@@ -1,6 +1,6 @@
 <template>
   <div class="chat-list-item">
-    <div class="chat-list-avatar">
+    <div class="chat-list-avatar" @click="$user(data.fromUser.id)">
       <el-avatar shape="square" size="medium" :src="data.fromUser.avatar"></el-avatar>
     </div>
     <div class="chat-list-body">

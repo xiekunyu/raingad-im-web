@@ -61,6 +61,15 @@ commonApi.getSystemInfo= (data)  =>{
     })
 }
 
+// 注册用户
+commonApi.register= (data)  =>{
+    return request({
+        url: 'common/pub/register',
+        method: 'post',
+        data: data
+    })
+}
+
 // 上传头像
 commonApi.uploadAvatar= (data)  =>{
     return request({

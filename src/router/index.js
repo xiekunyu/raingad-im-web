@@ -4,6 +4,7 @@ import Demo from '@/views/Demo'
 import Home from '@/views/Home'
 import Chat from '@/views/Chat'
 import Login from '@/views/Login'
+import Register from '@/views/Register'
 import manage from './manage.js'
 Vue.use(Router)
 
@@ -31,6 +32,12 @@ export const constantRouterMap = [
         name: 'login',
         component: Login,
         meta: { title: '登录' }
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: Register,
+        meta: { title: '注册' }
     },
     {
         path: '*',

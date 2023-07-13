@@ -213,6 +213,7 @@
                       filterable
                       allow-create
                       default-first-option
+                      style="width: 480px"
                       placeholder="请输入允许上传的文件格式">
                       <el-option
                       v-for="item in options"

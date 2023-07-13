@@ -114,7 +114,19 @@ const actions = {
                 if(res.code==0){
                   Lockr.set('globalConfig',res.data);
                   commit('setGlobalConfig', res.data);
+                  resolve(res)
                 }
+              }).catch(error => {
+                reject(error)
+            })
+        })
+    },
+    sendCode({
+        commit
+    }, data) {
+        return new Promise((resolve, reject) => {
+            commonApi.sendCode(data).then(res=>{
+                resolve(res)
               }).catch(error => {
                 reject(error)
             })
