@@ -1,9 +1,11 @@
 # IM即时聊天
 
 #### 介绍
-IM前端代码，需要配合后端使用，本软件主要用于学习交流，开发的初衷旨在快速建立企业内部通讯系统，不能用于商业用途。
+Raingad-IM是一个开源的即时通信demo，需要前后端配合使用，主要用于学习交流，为大家提供即时通讯的开发思路，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统、内网交流、社区交流。
 
-后端传送门：https://gitee.com/raingad/im-instant-chat
+前端地址：https://gitee.com/raingad/im-chat-front
+
+后端地址：https://gitee.com/raingad/im-instant-chat
 
 体验地址：http://im.raingad.com/index.html
 
@@ -11,43 +13,40 @@ IM前端代码，需要配合后端使用，本软件主要用于学习交流，
 
 尾号2、3、4......18、19、20 都是
 
-账号：13800000020  密码：123456
+账号：13800000020  密码：123456 
 
 #### 支持功能
 
-1. 单聊和群聊，新增消息管理器
+ 1. 支持单聊和群聊，支持发送表情、图片、语音、视频和文件消息
 
-2. 支持发送表情、图片、语音、视频和文件消息
+ 2. 单聊支持消息已读未读的状态显示，在线状态显示
 
-3. 单聊支持消息已读未读的状态显示
+ 3. 群聊创建、删除和群成员管理、群公告、群禁言等
 
-4. 支持设置新消息声音提醒，浏览器通知
+ 4. 支持置顶联系人，消息免打扰；支持设置新消息声音提醒，浏览器通知
 
-5. 支持部分Lemon-imui内功能设置
+ 5. 支持一对一音视频通话（和移动端不互通）
 
-6. 支持文件、图片和绝大部分媒体文件在线预览
+ 6. 支持文件、图片和绝大部分媒体文件在线预览
 
-7. 群聊创建、删除和群成员管理、群公告、群禁言等
+ 7. 支持移动端（H5和APP），支持简易后台管理
 
-8. 可以置顶联系人，所有联系人可以设置消息免打扰
-   
-9. 全新支持增加音视频通话(一对一)
+ 8. 全新支持企业模式和社区模式，社区模式支持添加好友功能
 
 
 > 移动端版本已经上线，请关注演示地址内的链接。
 
-#### 部分截图
-![聊天界面](src/assets/img/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20221030112251.png)
-
-![语音视频消息卡片](src/assets/img/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20221030112556.png)
-
-![音视频通话](src/assets/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20221030110657.jpg)
-
-![音视频通话](src/assets/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20221030110701.jpg)
-
-![音视频通话](src/assets/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20221030110704.jpg)
 
 #### 最新更新
+**2023年7月14日**
+1. 支持简易后台管理
+2. 全新支持企业模式和社区模式，可自由切换
+3. 新增阿里云、七牛云、腾讯云等对象储存
+4. 新增群头像自动生成
+5. 新增人员资料查看
+6. 新增文件管理，可以快速发送到聊天。
+7. 修复若干BUG
+
 **2023年6月22日**
 新增移动端1对1音视频通话，不和web端互通
 新增发起群聊、群管理、联系人搜索等
@@ -79,7 +78,7 @@ IM前端代码，需要配合后端使用，本软件主要用于学习交流，
 
 后端技术栈：`thinkphp6+workerman+redis`
 
-前端技术栈：`vue+Lemon-IMUI+element-UI`
+前端技术栈：`vue2+Lemon-IMUI+element-UI`
 
 
 #### 安装教程
@@ -177,4 +176,29 @@ this.$refs.webrtc.called(true);
 创作不易，点个star吧
 
 [QQ 交流群：336921267](https://jq.qq.com/?_wv=1027&k=jMQAt9lh).
+
+#### 部分截图
+![聊天界面](src/assets/img/qunliao.png)
+
+![语音视频消息卡片](src/assets/img/shipinxmsg.png)
+
+![音视频通话](src/assets/img/webrtccall.jpg)
+
+![音视频通话](src/assets/img/webrtc.jpg)
+
+![新朋友](src/assets/img/newfriend.png)
+
+![资料修改](src/assets/img/setting.png)
+
+![资料](src/assets/img/usercard.png)
+
+![后台首页](src/assets/img/manage.png)
+
+![后台设置](src/assets/img/managesetting.png)
+
+![用户管理](src/assets/img/users.png)
+
+![群聊管理](src/assets/img/groups.png)
+
+![文件管理](src/assets/img/files.png)
 

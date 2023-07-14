@@ -25,7 +25,7 @@
       </el-col>
       <el-col :span="8">
         <el-card shadow="hover" header="关于项目" class="item-background mb-20">
-          <p>{{ $packageData.name }}是一个<b class="c-red">开源的即时通信demo，主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统，或者用于内网交流。不建议用于商业用途，如确有需要商用，请自行开发完善，并注明相关的版权问题。</p>
+          <p>{{ $packageData.name }}是一个<b class="c-red">开源的即时通信demo，主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统、内网交流、社区交流。不建议用于商业用途，如确有需要商用，请联系作者授权，自行开发代码量必须要高于原代码量的30%以上，并注明相关的版权问题。</p>
           <div class="mt-15 ml-15 mb-15">
             前端地址：<a :href="$packageData.frontUrl" target="_blank"><el-image
                 :src="$packageData.frontUrl + '/badge/star.svg?theme=white'" alt="star"></el-image></a>
@@ -38,7 +38,7 @@
       </el-col>
       <el-col :span="6">
         <el-card shadow="hover" class="mb-20" header="数据概览">
-          <div class="mb-15">用户总数：20</div> 
+          <div class="mb-15">用户总数：xxxx</div> 
           <div class="mb-15">群聊总数：xxxx</div> 
           <div class="mb-15">文件总数：xxxx</div> 
         </el-card>

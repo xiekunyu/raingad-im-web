@@ -272,8 +272,8 @@
             v-if="message.fromUser.id == user.id && message.is_group == 0"
             style="visibility: visible"
           >
-            <span v-if="!message.is_read"> 未读 </span>
-            <span v-if="message.is_read" style="color: green"> 已读 </span>
+            <span v-if="!message.is_read && message.status=='succeed'"> 未读 </span>
+            <span v-if="message.is_read && message.status=='succeed'" class="fc-success"> 已读 </span>
           </span>
         </template>
         <!-- 发送按钮左边插槽 -->
@@ -643,7 +643,7 @@ export default {
           text: "消息免打扰",
           visible: instance => {
             return (
-              instance.contact.is_notice == 1
+              instance.contact.is_notice == 1 && instance.contact.id !='system'
             );
           }
         },
@@ -661,7 +661,7 @@ export default {
           text: "取消免打扰",
           visible: instance => {
             return (
-              instance.contact.is_notice == 0
+              instance.contact.is_notice == 0 && instance.contact.id !='system'
             );
           }
         },
@@ -684,6 +684,39 @@ export default {
             const { IMUI, contact } = instance;
             hide();
             _this
+              .$confirm("确定删除该好友吗？", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+              })
+              .then(() => {
+                _this.$api.friendApi.delFriend({ id: contact.id }).then(res => {
+                  if (res.code == 0) {
+                    _this.$message({
+                      type: "success",
+                      message: "删除成功!"
+                    });
+                    _this.removeContact(contact.id);
+                  }
+                });
+              }).catch(() => {
+              });;
+          },
+          icon: "el-icon-delete",
+          color: "red",
+          text: "删除好友",
+          visible: instance => {
+            return (
+              _this.globalConfig.sysInfo.runMode==2 &&
+              instance.contact.is_group == 0
+            );
+          }
+        },
+        {
+          click(e, instance, hide) {
+            const { IMUI, contact } = instance;
+            hide();
+            _this
               .$confirm("确定删除该群聊吗？", "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
@@ -695,6 +728,7 @@ export default {
                   type: "success",
                   message: "删除成功!"
                 });
+              }).catch(() => {
               });
           },
           icon: "el-icon-delete",
@@ -718,11 +752,16 @@ export default {
                 type: "warning"
               })
               .then(() => {
-                _this.$api.imApi.removeUserAPI({ id: contact.id, user_id: _this.user.id });
-                _this.$message({
-                  type: "success",
-                  message: "退出成功!"
+                _this.$api.imApi.removeUserAPI({ id: contact.id, user_id: _this.user.id }).then(res => {
+                  if (res.code == 0) {
+                    _this.$message({
+                      type: "success",
+                      message: "退出成功!"
+                    });
+                    _this.removeContact(contact.id);
+                  }
                 });
+              }).catch(() => {
               });
           },
           icon: "el-icon-remove-outline",
@@ -1000,9 +1039,7 @@ export default {
           });
           break;
         case "removeGroup":
-          IMUI.removeContact(message.group_id);
-          if (IMUI.currentContactId == message.group_id)
-            IMUI.changeContact(null);
+          this.removeContact(message.group_id);
           break;
         // 发布公告
         case "setNotice":
@@ -1033,6 +1070,10 @@ export default {
             id: message.group_id,
             setting: message.setting
           });
+          break;
+        case 'appendContact':
+          IMUI.appendContact(message);
+          break;
       }
     }
   },
@@ -1090,51 +1131,8 @@ export default {
         IMUI.setLastContentRender("video", message => {
           return `[视频]`;
         });
-        // 获取联系人列表
-        this.$api.imApi.getContactsAPI().then(res => {
-          const data = res.data;
-          this.contacts = data;
-          var msg = {};
-          // 重新渲染消息
-          data.forEach((item, index) => {
-              if (item.type) {
-                msg.type = item.type;
-                msg.content = item.lastContent;
-                data[index]['lastContent'] = IMUI.lastContentRender(msg);
-              }
-              if (item.unread && !update) {
-                this.unread += item.unread;
-              }
-          })
-          if(this.globalConfig.sysInfo.runMode==2){
-            const sysContact = {
-              id: 'system',
-              displayName: "新邀请",
-              avatar: InviteImg,
-              index: "[1]系统消息",
-              click(next) {
-                next();
-              },
-              renderContainer: () => {
-                return <Apply></Apply>;
-              },
-              lastSendTime: res.page,
-              lastContent: res.count ? "新的申请" : '',
-              unread:res.count,
-            };
-            this.unread += res.count;
-            data.push({...sysContact});
-          }
-        
-          this.$store.commit('initContacts', data);
-          // 设置置顶人
-          this.getChatTop(data);
-          IMUI.initContacts(data);
-          this.initMenus(IMUI);
-          // 初始化左侧菜单栏
-          
-          // 初始化工具栏
-          IMUI.initEditorTools([
+        // 初始化工具栏
+        IMUI.initEditorTools([
             {
               name: "emoji"
             },
@@ -1167,8 +1165,50 @@ export default {
               title: "发送文件",
             }
           ]);
-          // 初始化表情
-          IMUI.initEmoji(EmojiData);
+        // 初始化表情
+        IMUI.initEmoji(EmojiData);
+        // 获取联系人列表
+        this.$api.imApi.getContactsAPI().then(res => {
+          const data = res.data;
+          this.contacts = data;
+          var msg = {};
+          // 重新渲染消息
+          data.forEach((item, index) => {
+              if (item.type) {
+                msg.type = item.type;
+                msg.content = item.lastContent;
+                data[index]['lastContent'] = IMUI.lastContentRender(msg);
+              }
+              if (item.unread && !update) {
+                this.unread += item.unread;
+              }
+          })
+          if(this.globalConfig.sysInfo.runMode==2){
+            const sysContact = {
+              id: 'system',
+              displayName: "新邀请",
+              avatar: InviteImg,
+              index: "[1]系统消息",
+              click(next) {
+                next();
+              },
+              renderContainer: () => {
+                return <Apply></Apply>;
+              },
+              lastSendTime: res.page,
+              lastContent: res.page ? "新的申请" : '',
+              unread:parseInt(res.count),
+              is_notice:1
+            };
+            this.unread += res.count;
+            data.push({...sysContact});
+          }
+          this.$store.commit('initContacts', data);
+          // 设置置顶人
+          this.getChatTop(data);
+          IMUI.initContacts(data);
+          // 初始化左侧菜单栏
+          this.initMenus(IMUI);
         });
       });
     },
@@ -1437,6 +1477,14 @@ export default {
       this.VoiceStatus = false;
       this.diySendMessage(message, file);
     },
+    removeContact(id){
+      const { IMUI } = this.$refs;
+      const contact = IMUI.getCurrentContact();
+      if(contact.id == id){
+        IMUI.changeContact(null);
+      }
+      IMUI.removeContact(id);
+    },
     //自定义消息的发送
     diySendMessage (message, file) {
       const { IMUI } = this.$refs;
@@ -1474,7 +1522,7 @@ export default {
       message.is_group = this.is_group;
       this.curFile=file;
       // 如果开启了群聊禁言或者关闭了单聊权限，就不允许发送消息
-      if((!this.globalConfig.chatInfo.simpleChat && this.currentChat.is_group == 0) || !this.nospeak()){
+      if((!this.globalConfig.chatInfo.simpleChat && this.currentChat.is_group == 0) || (this.is_group && !this.nospeak())){
         IMUI.removeMessage(message.id);
         this.$message.error(this.noSimpleTips);
         return false;
@@ -1491,29 +1539,30 @@ export default {
         formdata.append("message", JSON.stringify(message));
         this.$api.imApi.sendFileAPI(formdata)
           .then(res => {
-            IMUI.updateMessage(res.data);
-            next();
-          })
-          .catch(error => {
-            if(error.code==401){//已开启禁言
-              IMUI.removeMessage(message.id);
+            if(res.code==0){
+              IMUI.setEditorValue("");
+              IMUI.updateMessage(res.data);
+              next();
             }else{
               next({ status: "failed" });
             }
+          })
+          .catch(error => {
+            next({ status: "failed" });
           });
       } else {
         this.$api.imApi.sendMessageAPI(message)
           .then(res => {
-            IMUI.setEditorValue("");
-            IMUI.updateMessage(res.data);
-            next();
-          })
-          .catch(error => {
-            if(error.code==401){//已开启禁言
-              IMUI.removeMessage(message.id);
+            if(res.code==0){
+              IMUI.setEditorValue("");
+              IMUI.updateMessage(res.data);
+              next();
             }else{
               next({ status: "failed" });
             }
+          })
+          .catch(error => {
+              next({ status: "failed" });
           });
       }
     },
@@ -1760,7 +1809,7 @@ export default {
       const { IMUI } = this.$refs;
       const contact = IMUI.getCurrentContact();
       // 如果收到消息是当前窗口的聊天，需要将消息修改为已读
-      if (contact.id == message.toContactId) {
+      if (contact.id == message.toContactId && contact.id != 'system') {
         var data = [];
         data.push(message);
         this.$api.imApi.setMsgIsReadAPI({
@@ -1773,6 +1822,7 @@ export default {
         // 如果不是自己的消息，需要将未读数加1
         if (this.user.id != message.fromUser.id) {
           this.unread++;
+          this.initMenus(INUI);
         }
       }
       
@@ -1781,6 +1831,7 @@ export default {
         message.toContactId=message.toUser;
       }
       IMUI.appendMessage(message, true);
+      
     },
     openMessageBox() {
       this.messageBox = true;

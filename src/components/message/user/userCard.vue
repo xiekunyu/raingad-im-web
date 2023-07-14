@@ -55,7 +55,7 @@
             </el-main>
             <el-footer class="footer">
               <!-- <el-button round>加好友</el-button> -->
-              <el-button type="primary" v-if="userInfo.user_id!=detail.user_id && detail.friend" round @click="openChat()" style="width:150px">发消息</el-button>
+              <el-button type="primary" v-if="userInfo.user_id!=detail.user_id && (detail.friend || globalConfig.sysInfo.runMode==1)" round @click="openChat()" style="width:150px">发消息</el-button>
               <el-button type="primary" v-if="globalConfig.sysInfo.runMode==2 && !detail.friend" round @click="addFriend()" style="width:150px">加好友</el-button>
               <el-button round v-if="options.isManage" style="width:150px" @click="editUser">编辑资料</el-button>
             </el-footer>
@@ -162,18 +162,13 @@
               this.$message.error('请输入备注信息');
               return false;
             }
-            
             this.$api.friendApi.setNickname({friend_id:friend_id,nickname:value}).then(res=>{
               if(res.code == 0){
                 this.$message.success('设置成功');
                 this.detail.realname = value;
               }
             })
-          }).catch((error) => {
-            this.$message({
-              type: 'warning',
-              message: error
-            });       
+          }).catch(() => {      
           });
         }
     }

@@ -10,6 +10,12 @@
             <div class="apply-list">
                 <div class="apply-list-main">
                     <el-scrollbar>  
+                        <el-alert
+                            show-icon
+                            class="mt-10 mb-10"
+                            title="未处理的邀请消息会在每次初始化或者页面刷新时会重新提示！"
+                            type="warning">
+                        </el-alert>
                         <div class="apply-list-item" v-for="(x,index) in list" :key="index" >
                             <div class="avatar">
                                 <el-avatar :src="x.create_user_info.avatar"></el-avatar>
@@ -128,6 +134,7 @@ export default {
     display: flex;
     flex-direction: column;
     height:100%;
+    background: #fff !important;
     .apply-list-main{
         flex:1;
         overflow: auto;

@@ -35,33 +35,43 @@
             target="_blank">Lemon-IMUI手册</a></el-button>
       </div>
     </div>
+    <el-alert
+    class="mt-15 mb-15"
+      show-icon
+      title="目前已经支持社区模式了，就是可以添加、删除好友那种，体验社区模式需要自己部署哦！大家点个star吧！"
+      type="success">
+    </el-alert>
 
     <div class="tip">
       <h3 class="mb-5"><b>介绍</b></h3>
       <p>
-        1、{{ $packageData.name }}是一个<b class="c-red">开源的即时通信demo，主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统，或者用于内网交流。不建议用于商业用途，如确有需要商用，请自行开发完善，并注明相关的版权问题。
+        1、{{ $packageData.name }}是一个<b class="c-red">开源的即时通信demo，主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统、内网交流、社区交流。不建议用于商业用途，如确有需要商用，请联系作者授权，自行开发代码量必须要高于原代码量的30%以上，并注明相关的版权问题
       </p>
       <p>
         2、支持发送表情、图片、语音、视频和文件消息，支持单聊、群聊、群管理、1对1音视频通话（移动端目前仅支持H5和安卓APP，IOS没条件测试，和web端不相通，独立使用）具体功能可以看项目主页。
       </p>
+      <p>
+        3、目前仅开源了网页端(vue2+lemon-imui+element-ui)和后台接口（TP6+workerman），可以用于对接企业应用等内部聊天，内网私有聊天室,社区聊天等等。
+      </p>
+      <p>
+        4、移动端（uniapp开发，支持H5+APP）代码未开源，基础功能都有，目前仅支持企业模式，社区模式正在开发中，如有需要请查看底部说明。
+      </p>
     </div>
 
-    <div class="warning">
-      <h3 class="mb-5"><b>TIPS</b></h3>
-      <p>1、目前仅开源了网页端(lemon-imui+element-ui)和后台接口（TP6+workerman），可以用于对接企业应用等内部聊天，内网私有聊天室。</p>
-      <p>2、非社区版，不能加好友等，暂时没有后台管理，正在计划开发中，增加一些简单的管理功能，比如加、减人等。</p>
-      <p>3、移动端代码未开源，如有需要请查看底部说明。</p>
-    </div>
+    
 
     <!-- 消息 -->
     <div class="demo-btn">
       <div class="flex-box-center  mb-15" @click="showMessageBox()">
         <el-badge :value="unread" :max="99" :hidden="unread ? false : true" class="item">
-          <el-button>打开消息盒子</el-button>
+          <el-button>窗口模式</el-button>
         </el-badge>
       </div>
       <div class="mb-15 mr-20" @click="$router.push({path:'/chat'})">
         <el-button>纯享模式</el-button>
+      </div>
+      <div class="mb-15 mr-20" @click="$router.push({path:'/manage/index'})">
+        <el-button>管理后台</el-button>
       </div>
       <div class=" mb-15 mr-20">
         <el-tooltip placement="right-start" effect="light">
@@ -94,6 +104,17 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="tip">
+      <h3 class="mb-5"><b>功能</b></h3>
+      <div>
+        <p v-for="item in $packageData.funcList" :key="item.icon"><i :class="item.icon"></i> {{ item.text }}</p>
+      </div>
+      <h3 class="mb-5 mt-5"><b>计划</b></h3>
+      <p>
+        完善手机端，增加功能公开群聊功能，申请加群等功能。
+      </p>
     </div>
 
     <div class="warning">

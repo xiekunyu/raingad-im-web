@@ -34,7 +34,7 @@
           </el-button>
           
         </el-form-item>
-        <el-form-item>
+        <el-form-item v-if="globalConfig.sysInfo.regtype==1">
           <el-button size="small" style="width:100%;" plain @click="$router.push('/register')">
             注册
           </el-button>
