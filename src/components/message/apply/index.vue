@@ -18,7 +18,8 @@
                         </el-alert>
                         <div class="apply-list-item" v-for="(x,index) in list" :key="index" >
                             <div class="avatar">
-                                <el-avatar :src="x.create_user_info.avatar"></el-avatar>
+                                <el-avatar v-if="!params.is_mine" :src="x.create_user_info.avatar"></el-avatar>
+                                <el-avatar v-if="params.is_mine" :src="x.user_id_info.avatar"></el-avatar>
                             </div>
                             <div class="main">
                                 <div v-if="!params.is_mine" @click="$user(x.create_user_info.user_id)"> <span class="fc-primary cur-handle">{{x.create_user_info.realname}}</span> 申请添加为好友 

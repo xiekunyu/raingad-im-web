@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Demo from '@/views/Demo'
 import Home from '@/views/Home'
-import Chat from '@/views/Chat'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 import manage from './manage.js'
@@ -18,7 +17,7 @@ export const constantRouterMap = [
     {
         path: '/chat',
         name: 'chat',
-        component: Chat,
+        component: Home,
         meta: { title: '聊天演示页' }
     },
     {
