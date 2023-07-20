@@ -261,10 +261,32 @@ export function hoursTimeFormat(t) {
     return timeFormat(t, format);
 }
 
-export function timeFormat(t) {
-    var time = parseInt(t / 1000);
-    return isToday(t) ? date("H:i", time) : date("Y/m/d", time);
-}
+// export function timeFormat(t) {
+//     var time = parseInt(t / 1000);
+//     return isToday(t) ? date("H:i", time) : date("Y/m/d", time);
+// }
+
+export function timeFormat(timestamp) {
+    const now = new Date();
+    const datetime = new Date(timestamp);
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const yesterday = new Date(today - 24 * 60 * 60 * 1000);
+    const weekStart = new Date(today - (today.getDay() - 1) * 24 * 60 * 60 * 1000);
+    const yearStart = new Date(now.getFullYear(), 0, 1);
+    if ( datetime >= today) {
+        return date('H:i', timestamp / 1000)
+    } else if (datetime >= yesterday && datetime < today) {
+        return '昨天'
+    } else if (datetime >= weekStart && datetime < yesterday) {
+        const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+        const weekday = weekdays[datetime.getDay()];
+        return weekday;
+    }else if (datetime >= yearStart && datetime < weekStart) {
+        return date('m-d', timestamp / 1000)
+    } else {
+        return date('Y-m-d', timestamp / 1000)
+    }
+  }
 
 /**
  * 和PHP一样的时间戳格式化函数

@@ -173,7 +173,7 @@ import * as utils from '@/utils/index';
             this.$preview(url);
         },
         downloadFile(file){
-            FileUtils.download(file.src,file.name);
+            file.download ? window.location=file.download : '';
         },
         openDialog(item){
             this.visible = true;

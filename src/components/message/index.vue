@@ -400,7 +400,7 @@ export default {
     var _this = this;
     let stun= this.$store.state.globalConfig.chatInfo.stun ? this.$store.state.globalConfig.chatInfo.stun : 'stun:stun.callwithus.com';
     return {
-      noSimpleTips:'系统已开启单聊权限，或者群已开启禁言，无法发送消息',
+      noSimpleTips:'系统已关闭单聊，或者群已开启禁言，无法发送消息',
       isFullscreen:false,
       curWidth:this.width,
       curHeight:this.height,
@@ -857,8 +857,9 @@ export default {
           text: "下载图片",
           click: (e, instance, hide) => {
             const { message } = instance;
-            utils.download(message.content, message.fileName);
             hide();
+            message.download ? window.location=message.download : '';
+            
           }
         },
         {
@@ -868,7 +869,7 @@ export default {
           text: "下载文件",
           click: (e, instance, hide) => {
             const { message } = instance;
-            utils.download(message.content, message.fileName);
+            window.open(message.download);
             hide();
           }
         }
@@ -1427,7 +1428,8 @@ export default {
       instance.closeDrawer();
     },
     uploadVideo (e) {
-      if(!this.globalConfig.chatInfo.simpleChat && this.currentChat.is_group == 0){
+      // 如果开启了群聊禁言或者关闭了单聊权限，就不允许发送消息
+      if((!this.globalConfig.chatInfo.simpleChat && this.is_group == 0) || !this.nospeak()){
         this.$message.error(this.noSimpleTips);
         return false;
       }
@@ -1457,7 +1459,8 @@ export default {
     },
     // 发送语音消息
     sendVoice (duration, file) {
-      if(!this.globalConfig.chatInfo.simpleChat && this.currentChat.is_group == 0){
+      // 如果开启了群聊禁言或者关闭了单聊权限，就不允许发送消息
+      if((!this.globalConfig.chatInfo.simpleChat && this.is_group == 0) || !this.nospeak()){
         this.$message.error(this.noSimpleTips);
         return false;
       }
@@ -1504,7 +1507,7 @@ export default {
     },
     // 禁言时禁止发送消息
     nospeak(){
-      if(this.is_group==1 || this.currentChat.setting.nospeak>0){
+      if(this.is_group==1 && this.currentChat.setting.nospeak>0){
         if(this.currentChat.setting.nospeak==1 && this.currentChat.role==2){
           return true;
         }else if(this.currentChat.setting.nospeak==2 && this.currentChat.role==1){
@@ -1522,7 +1525,7 @@ export default {
       message.is_group = this.is_group;
       this.curFile=file;
       // 如果开启了群聊禁言或者关闭了单聊权限，就不允许发送消息
-      if((!this.globalConfig.chatInfo.simpleChat && this.currentChat.is_group == 0) || (this.is_group && !this.nospeak())){
+      if((this.globalConfig.chatInfo.simpleChat!=1 && this.is_group == 0) || !this.nospeak()){
         IMUI.removeMessage(message.id);
         this.$message.error(this.noSimpleTips);
         return false;
@@ -1531,9 +1534,9 @@ export default {
       // 如果是文件选择文件上传接口
       if (file) {
         // 判断文件如果大于5M就删除该聊天消息
-        if (file.size > 5242880) {
+        if (file.size > (this.globalConfig.fileUpload.size * 1024 * 1024)) {
           IMUI.removeMessage(message.id);
-          return this.$message.error("上传的内容不等大于5MB！");
+          return this.$message.error("上传的内容不等大于"+this.globalConfig.fileUpload.size+"MB！");
         }
         formdata.append("file", file);
         formdata.append("message", JSON.stringify(message));

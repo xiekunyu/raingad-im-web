@@ -20,6 +20,7 @@
               <el-button slot="append" @click="sendCode()" :loading="coding">发送验证码</el-button>
             </el-input>
         </el-form-item>
+        <div class="c-666" style="font-size:12px;" v-if="globalConfig.demon_mode">演示账号：13800000002~13800000020，密码:123456</div>
         <el-form-item>
           <div class="remenber">
             <el-checkbox v-model="loginForm.rememberMe">记住我</el-checkbox>
