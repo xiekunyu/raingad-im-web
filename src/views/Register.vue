@@ -7,8 +7,11 @@
         <div> </div>
       </div>
       <el-form ref="regForm" :model="regForm" :rules="loginRules" label-width="0px" class="login-form">
-        <el-form-item prop="username">
-          <el-input ref="username" v-model="regForm.username" type="text" auto-complete="off" placeholder="请输入账号" prefix-icon="el-icon-user" />
+        <el-form-item prop="account">
+          <el-input ref="account" v-model="regForm.account" type="text" auto-complete="off" placeholder="请输入账号:手机/邮箱" prefix-icon="el-icon-user" />
+        </el-form-item>
+        <el-form-item prop="realname">
+          <el-input ref="realname" v-model="regForm.realname" type="text" auto-complete="off" placeholder="请输入用户名/昵称" prefix-icon="el-icon-user" />
         </el-form-item>
         <el-form-item prop="code">
           <el-input
@@ -46,14 +49,27 @@ export default {
     return {
       Background,
       regForm: {
-        username: '',
+        account: '',
+        realname: '',
         password: '',
         repass: '',
         code: ''
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
-        password: [{ required: true, trigger: 'blur', message: '密码不能为空' }]
+            account: [
+               { required: true, message: '请输入手机号或邮箱', trigger: 'blur' },
+               { min: 4, max: 32, message: '长度在 4 到 32 个字符', trigger: 'blur' },
+               { type: 'email', message: '请输入正确的手机号或邮箱', trigger: 'blur', validator: this.validateContact },
+               { type: 'phone', message: '请输入正确的手机号或邮箱', trigger: 'blur', validator: this.validateContact }
+            ],
+            realname: [
+               { required: true, message: '请输入用户名/昵称', trigger: 'blur' },
+               { min: 2, max: 16, message: '长度在 2 到 16 个字符', trigger: 'blur' }
+            ],
+            password: [
+               { required: true, message: '请输入密码', trigger: 'blur' },
+               { min: 6, max: 16, message: '长度在 6 到 16 个字符', trigger: 'blur' }
+            ],
       },
       loading: false,
       redirect: undefined
@@ -76,6 +92,15 @@ export default {
     
   },
   methods: {
+    validateContact(rule, value, callback) {
+         if (!value) {
+            callback();
+         } else if (/^1[3456789]\d{9}$/.test(value) || /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value)) {
+            callback();
+         } else {
+            callback(new Error('请输入正确的手机号或邮箱'));
+         }
+      },
     handleRegist() {
       this.$refs.regForm.validate(valid => {
         if(this.regForm.password != this.regForm.repass){
@@ -83,12 +108,12 @@ export default {
           return false
         }
         const data = {
-          username: this.regForm.username,
+          account: this.regForm.account,
+          realname: this.regForm.realname,
           password: this.regForm.password,
           code: this.regForm.code,
           inviteCode: this.$route.query.inviteCode ?? ''
         }
-        console.log(data);
         if (valid) {
           this.loading = true
           this.$api.commonApi.register(data).then(res => {
@@ -100,17 +125,19 @@ export default {
           }).catch(err => {
             this.loading = false
           })
+        }else{
+          return this.$message.error('请检查输入项');
         }
       })
     },
     sendCode(){
-      if(!this.regForm.username){
+      if(!this.regForm.account){
         this.$message.error('请输入账号');
         return;
       }
       this.coding=true;
       let data={
-        account:this.regForm.username,
+        account:this.regForm.account,
         type:2
       }
       this.$store.dispatch('sendCode',data).then(res=>{

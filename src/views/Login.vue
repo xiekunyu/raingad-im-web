@@ -6,8 +6,8 @@
         <!-- <p>Raingad-IM 账号登录</p> -->
       </div>
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-width="0px" class="login-form">
-        <el-form-item prop="username">
-          <el-input ref="username" v-model="loginForm.username" type="text" auto-complete="off" placeholder="请输入账号" prefix-icon="el-icon-user" />
+        <el-form-item prop="account">
+          <el-input ref="account" v-model="loginForm.account" type="text" auto-complete="off" placeholder="请输入账号" prefix-icon="el-icon-user" />
         </el-form-item>
         <el-form-item prop="password" v-show="!forget">
           <el-input v-model="loginForm.password" type="password" auto-complete="off" placeholder="请输入密码" prefix-icon="el-icon-lock" @keyup.enter.native="handleLogin" />
@@ -57,13 +57,13 @@ export default {
       Background,
       forget:false,
       loginForm: {
-        username: '',
+        account: '',
         password: '',
         code:'',
         rememberMe: true
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
+        account: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
         password: [{ required: true, trigger: 'blur', message: '密码不能为空' }]
       },
       loading: false,
@@ -94,18 +94,18 @@ export default {
       // 如果是演示模式、获取1-20的随机数填充账号密码
       if(this.globalConfig.demon_mode){
         const random = Math.floor(Math.random() * 19 + 2)
-        this.loginForm.username=13800000000+random;
+        this.loginForm.account=13800000000+random;
         this.loginForm.password='123456';
-        this.$refs.username.focus()
+        this.$refs.account.focus()
       };
 
       // 如果有记住密码、则填充
       const LoginAccount = Lockr.get('LoginAccount');
       if(LoginAccount){
-        this.loginForm.username=LoginAccount.username;
+        this.loginForm.account=LoginAccount.account;
         this.loginForm.password=LoginAccount.password;
         this.loginForm.rememberMe=true;
-        this.$refs.username.focus()
+        this.$refs.account.focus()
       };
       
     })
@@ -120,7 +120,7 @@ export default {
       }
       this.$refs.loginForm.validate(valid => {
         const data = {
-          username: this.loginForm.username,
+          account: this.loginForm.account,
           password: this.loginForm.password,
           code:this.loginForm.code
         }
@@ -143,13 +143,13 @@ export default {
       })
     },
     sendCode(){
-      if(!this.loginForm.username){
+      if(!this.loginForm.account){
         this.$message.error('请输入账号');
         return;
       }
       this.coding=true;
       let data={
-        account:this.loginForm.username,
+        account:this.loginForm.account,
         type:1
       }
       this.$store.dispatch('sendCode',data).then(res=>{
