@@ -90,9 +90,21 @@
                   <el-switch v-model="chatInfo.webrtc" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">开启后，可以进行音视频通话，仅支持1对1音视频</span>
                   <div v-show="chatInfo.webrtc==1">
-                      <span class="c-999 f-12">stun服务器</span> 
-                      <el-input type="text"  placeholder="请输入stun服务器" v-model="chatInfo.stun" class="ml-10" style="width:300px"></el-input>
-                      <span class="ml-10 c-999 f-12">音视频通话需要有Stun服务器才可以进行</span>
+                    <div class="mt-15">
+                        <span class="c-999 f-12">stun服务器</span> 
+                        <el-input type="text"  placeholder="请输入stun服务器" v-model="chatInfo.stun" class="ml-10" style="width:300px"></el-input>
+                        <span class="ml-10 c-999 f-12">音视频通话需要有Stun服务器才可以进行</span>
+                    </div>
+                    <div class="mt-15">
+                        <span class="c-999 f-12">stun用户名</span> 
+                        <el-input type="text"  placeholder="请输入stun用户名" v-model="chatInfo.stunUser" class="ml-10" style="width:300px"></el-input>
+                        <span class="ml-10 c-999 f-12">如果是公开的则可以不填写</span>
+                    </div>
+                    <div class="mt-15">
+                        <span class="c-999 f-12">stun密码</span> 
+                        <el-input type="text"  placeholder="请输入stun服务器密码" v-model="chatInfo.stunPass" class="ml-10" style="width:300px"></el-input>
+                        <span class="ml-10 c-999 f-12">如果是公开的则可以不填写</span>
+                    </div>
                   </div>
               </el-form-item>
               <el-form-item>
@@ -109,6 +121,13 @@
               <el-form-item label="端口号" prop="port">
                 <el-input-number v-model="smtp.port" :min="0" :max="99999"></el-input-number>
               </el-form-item>
+              <el-form-item label="加密方式" prop="security">
+                  <el-radio-group v-model="smtp.security">
+                  <el-radio label="ssl" border>SSL</el-radio>
+                  <el-radio label="tls" border>TLS</el-radio>
+                  </el-radio-group>
+              </el-form-item>
+              
               <el-form-item label="发件人邮箱"  prop="addr">
                   <el-input v-model="smtp.addr" placeholder="请输入发件人的邮箱"></el-input>
               </el-form-item>
@@ -261,11 +280,14 @@ export default {
           msgClear: true,
           msgClearDay: 0,
           webrtc:true,
-          stun:''
+          stun:'',
+          stunUser:'',
+          stunPass:''
         },
         smtp:{
             host:'',
             port:465,
+            security:'ssl',
             addr:'',
             pass:'',
             sign:''
