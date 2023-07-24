@@ -314,6 +314,15 @@ imApi.editAccount= (data)  =>{
     })
 }
 
+// 修改密码
+imApi.editpassword= (data)  =>{
+    return request({
+        url: 'enterprise/im/editpassword',
+        method: 'post',
+        data: data
+    })
+}
+
 // 搜索用户
 imApi.searchUser= (data)  =>{
     return request({

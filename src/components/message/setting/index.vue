@@ -385,10 +385,10 @@ export default {
                 return false;
             }
             let params = {
-                user_id:this.currentUser.user_id,
-                password:this.password
+                password:this.password,
+                code:this.code
             }
-            this.$api.userApi.editPassword(params).then(res=>{
+            this.$api.imApi.editPassword(params).then(res=>{
                 if(res.code==0){
                   this.dialog = false;
                   this.password = '';
