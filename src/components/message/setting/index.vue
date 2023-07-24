@@ -20,7 +20,7 @@
                   </template>
                 </el-dialog>
                 <div class="mt-20">
-                  <el-button type="warning" @click="dialog=true;editPass=1">修改密码</el-button>
+                  <el-button type="warning" @click="editInfo(1)">修改密码</el-button>
                 </div>
                 
             </div>
@@ -28,7 +28,7 @@
               <el-form :model="user" ref="userinfo" label-width="100px">
                 <el-form-item label="登陆账号" prop="account">
                     {{user.account}}
-                    <span class="fc-primary ml-10 cur-handle" @click="editPass=0;dialog=true">修改</span>
+                    <span class="fc-primary ml-10 cur-handle" @click="editInfo(0)">修改</span>
                 </el-form-item>
                 <el-form-item label="姓名" v-if="$store.state.globalConfig.sysInfo.runMode==1">
                     {{user.realname}}
@@ -360,6 +360,10 @@ export default {
           this.$set(data, 'avatar', res.data)
           this.$store.commit("SET_USERINFO", data)
         },
+        editInfo(edit){
+          this.dialog=true;
+          this.editPass=edit;
+        },
         // 修改密码
         editPassword(){
           if(this.code==''){
@@ -369,7 +373,7 @@ export default {
               });
               return false;
           }
-          if(this.eidtPass){
+          if(this.editPass){
             if(this.password=='' || this.password.length<6 || this.password.length>16){
                 this.$message({
                   message: '请输入6-16个字符串的密码',

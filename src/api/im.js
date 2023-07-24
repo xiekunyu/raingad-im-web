@@ -315,7 +315,7 @@ imApi.editAccount= (data)  =>{
 }
 
 // 修改密码
-imApi.editpassword= (data)  =>{
+imApi.editPassword= (data)  =>{
     return request({
         url: 'enterprise/im/editpassword',
         method: 'post',
