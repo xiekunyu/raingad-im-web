@@ -1825,7 +1825,7 @@ export default {
         // 如果不是自己的消息，需要将未读数加1
         if (this.user.id != message.fromUser.id) {
           this.unread++;
-          this.initMenus(INUI);
+          this.initMenus(IMUI);
         }
       }
       
