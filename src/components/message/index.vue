@@ -360,6 +360,7 @@ import OnlineStatus from "./mini/statusIndicator";
 import webrtc from "./webrtc";
 import Apply from "./apply/index";
 import InviteImg from '@/assets/img/invite.png'
+import ScreenShot from "js-web-screen-shot";
 const getTime = () => {
   return new Date().getTime();
 };
@@ -1132,10 +1133,17 @@ export default {
         IMUI.setLastContentRender("video", message => {
           return `[视频]`;
         });
-        // 初始化工具栏
-        IMUI.initEditorTools([
+        let tools=[
             {
               name: "emoji"
+            },
+            {
+              name: "screenShot",
+              title: "发送截屏",
+              click: () => { this.shotScreen() },
+              render: () => { 
+                return <i class="el-icon el-icon-scissors f-18" style="vertical-align: middle;font-weight: 600;"></i> 
+              }
             },
             {
               name: "uploadImage",
@@ -1165,7 +1173,9 @@ export default {
               name: "uploadFile",
               title: "发送文件",
             }
-          ]);
+          ];
+        // 初始化工具栏
+        IMUI.initEditorTools(tools);
         // 初始化表情
         IMUI.initEmoji(EmojiData);
         // 获取联系人列表
@@ -1212,6 +1222,62 @@ export default {
           this.initMenus(IMUI);
         });
       });
+    },
+    shotScreen(){
+        new ScreenShot({
+            enableWebRtc: true,  //是否启用webrtc
+            level:999999,  //层级级别
+            completeCallback: this.callback,
+            closeCallback: this.closeShotScreen,
+        });
+    },
+    closeShotScreen(){
+      console.log("关闭截图")
+    },
+    callback(base64data) {
+        let image = new Image();
+        image.src = base64data.base64;
+        image.onload = () => {
+          let canvas = this.convertImageToCanvas(image);
+          let url = canvas.toDataURL("image/jpeg");
+          let bytes = window.atob(url.split(",")[1]);  //通过atob将base64进行编码
+          //处理异常，将ASCII码小于0的转换为大于0,进行二进制转换
+          let buffer = new ArrayBuffer(bytes.length);
+          let uint = new Uint8Array(buffer);  //生成一个8位数的数组
+          for (let i = 0; i < bytes.length; i++) {
+            uint[i] = bytes.charCodeAt(i);  //根据长度返回相对应的Unicode 编码
+          }
+          //Blob对象
+        let file= new File([buffer], 'screenShot'+utils.generateRandId()+'.jpg' , { type: "image/jpeg"}); //type为图片的格式
+        this.$confirm('<img src='+image.src+' style="width:390px;height:100%;max-height:360px;object-fit:contain">', '发送截图', {
+          dangerouslyUseHTMLString: true,
+          confirmButtonText: '发送',
+          showCancelButton: true,
+          callback:(action, instance)=>{
+            if(action=='confirm'){
+              let message = {
+                content: URL.createObjectURL(file),
+                fromUser: this.user,
+                id: utils.generateRandId(),
+                sendTime: getTime(),
+                status: 'going',
+                toContactId: this.currentChat.id,
+                type: 'image'
+              }
+              this.diySendMessage(message, file);
+            }else{
+              instance.close();
+            }
+          } 
+        });
+      };
+    },
+    convertImageToCanvas(image) {
+      let canvas = document.createElement("canvas");
+      canvas.width = image.width;
+      canvas.height = image.height;
+      canvas.getContext("2d").drawImage(image, 0, 0);
+      return canvas;
     },
     // 初始化菜单
     initMenus(IMUI) {
@@ -1459,6 +1525,7 @@ export default {
     },
     // 发送语音消息
     sendVoice (duration, file) {
+      console.log("🚀 ~ file: index.vue:1516 ~ sendVoice ~ file:", file)
       // 如果开启了群聊禁言或者关闭了单聊权限，就不允许发送消息
       if((!this.globalConfig.chatInfo.simpleChat && this.is_group == 0) || !this.nospeak()){
         this.$message.error(this.noSimpleTips);
