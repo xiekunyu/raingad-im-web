@@ -55,6 +55,7 @@
     "cropperjs": "^1.5.13",
     "element-ui": "^2.15.13",
     "js-audio-recorder": "^1.0.7",
+    "js-web-screen-shot": "^1.9.8-rc.3",
     "lemon-imui": "^1.7.7",
     "lockr": "^0.8.5",
     "nprogress": "^0.2.0",
