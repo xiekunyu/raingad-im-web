@@ -17,6 +17,7 @@
         data() {
             return {
                 websocket: null,
+                pingInterval:30
             }
         },
         methods: {
@@ -37,6 +38,7 @@
                 //ws地址
                 const WS_URI = this.getWsUrl();
                 this.websocket = new WebSocket(WS_URI);
+                this.heart();
                 this.websocket.onmessage = this.websocketOnMessage;
                 this.websocket.onclose = this.websocketClose;
                 Vue.prototype.$websocket = this.websocket;
@@ -64,6 +66,15 @@
                         this.$store.commit('catchSocketAction', data);
                         break;
                 }
+            },
+            heart(){
+                setInterval(() => {
+                    this.pingInterval-=2;
+                    if(this.pingInterval<=0){
+                        this.websocketSend({type:'ping'});
+                        this.pingInterval=30;
+                    }
+                }, 2000);
             },
             websocketSend(agentData) {//数据发送
                 var data=JSON.stringify(agentData);
