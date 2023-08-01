@@ -132,7 +132,7 @@
                   <el-input v-model="smtp.addr" placeholder="请输入发件人的邮箱"></el-input>
               </el-form-item>
               <el-form-item label="发件人密码" prop="pass">
-                  <el-input v-model="smtp.pass" show-password  placeholder="请输入发件人的面"></el-input>
+                  <el-input v-model="smtp.pass" show-password  placeholder="请输入发件人的密码"></el-input>
               </el-form-item>
               <el-form-item label="发件人签名" prop="sign">
                   <el-input v-model="smtp.sign" placeholder="请输入发件人签名"></el-input>
