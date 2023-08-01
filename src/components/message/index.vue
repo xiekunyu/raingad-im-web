@@ -1850,9 +1850,12 @@ export default {
     // 播放消息声音
     popNotice(message) {
       let that = this;
+      const { IMUI } = this.$refs;
       if (Notification.permission == "granted") {
+        let name=message.fromUser.displayName || message.fromUser.realname;
+        let content=IMUI.lastContentRender(message);
         let notification = new Notification("收到一条新消息", {
-          body: message.fromUser.displayName + "：" + message.content,
+          body: name + "：" + content,
           icon: message.fromUser.avatar
         });
         notification.onclick = function(e) {
