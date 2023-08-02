@@ -26,6 +26,18 @@ imApi.sendMessageAPI= (data)  =>{
 }
 
 /**
+ * 发送webrtc音视频消息
+ * @param {*} data
+ */
+imApi.sendToMsg= (data)  =>{
+    return request({
+        url: 'enterprise/im/sendToMsg',
+        method: 'post',
+        data: data
+    })
+}
+
+/**
  * 发送聊天消息
  * @param {*} data
  */

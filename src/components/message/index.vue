@@ -99,8 +99,8 @@
             </div>
             <div class="message-title-tools">
               <template v-if="globalConfig.chatInfo.webrtc">
-                <i class="el-icon-phone-outline mr-10" title="语音通话" v-if="!contact.is_group" @click="called(false)"></i>
-                <i class="el-icon-video-camera mr-10" title="视频通话" v-if="!contact.is_group" @click="called(true)"></i>
+                <i class="el-icon-phone-outline mr-10" title="语音通话" v-if="!contact.is_group" @click="called(0)"></i>
+                <i class="el-icon-video-camera mr-10" title="视频通话" v-if="!contact.is_group" @click="called(1)"></i>
               </template>
               <i class="el-icon-time mr-10" @click="openMessageBox" title="消息管理器"></i>
               <i class="el-icon-more" @click="$user(contact.id)" title="基本资料" v-if="!contact.is_group"></i>
@@ -337,7 +337,7 @@
       </el-dialog>
     <Socket ref="socket"></Socket>
     <!-- 视频通话组件 -->
-    <webrtc :contact="currentChat" :config="webrtcConfig" :alias="$packageData.name" :userInfo="user" ref="webrtc" :key="componentKey"></webrtc>
+    <webrtc :contact="currentChat" :config="webrtcConfig" :alias="$packageData.name" :userInfo="user" ref="webrtc" :key="componentKey" @message="rtcMsg"></webrtc>
   </div>
 </template>
 
@@ -411,6 +411,11 @@ export default {
 	  	    'urls': stun,
 	  	  }]}
       },
+      // webrtcConfig:{ 'iceServers':[{ urls: "stun:stun.l.google.com:19302" }]},
+      wsData:null,
+      main_id:'',
+      caller:'',
+      is_video:1,
       curFile:null,
       componentKey: 1,
       // 搜索结果展示
@@ -1076,6 +1081,25 @@ export default {
         case 'appendContact':
           IMUI.appendContact(message);
           break;
+        case 'webrtc':
+          // 接收到webrtc消息
+          if(this.wsData && this.wsData.id!=message.id){
+            this.$api.imApi.sendToMsg({
+              toContactId:message.fromUser.user_id,
+              type:message.extends.type,
+              event:'busy',
+              status:message.extends.status,
+              code:907,
+              id:message.id,
+              msg_id:message.msg_id,
+            })
+          }else{
+            this.wsData=message;
+            this.main_id=message.id;
+            this.caller=message.fromUser;
+            this.$refs.webrtc.webrtcAction(JSON.parse(JSON.stringify(message)));
+          }
+          break;
       }
     }
   },
@@ -1120,6 +1144,8 @@ export default {
   methods: {
     called(is_video){
       this.webrtcBox=true;
+      this.is_video=is_video;
+      this.caller=this.currentChat;
       this.$refs.webrtc.called(is_video);
     },
     // 初始化聊天
@@ -1922,6 +1948,64 @@ export default {
       }else{
         this.addFriendBox=true;
       }
+    },
+    // 接收webrtc组件的消息
+    rtcMsg(e){
+      console.log("🚀 ~ file: index.vue:1949 ~ rtcMsg ~ e:", e)
+        let iceCandidate = '';
+				let msg_id='';
+        let main_id=this.main_id;
+				if(this.wsData){
+					msg_id=this.wsData.msg_id ?? '';
+				}
+				let api=true;
+				switch(e.event){
+          case "calling":
+            this.main_id=utils.generateRandId();
+            main_id=this.main_id;
+            break;
+					case 'hangup':
+            this.wsData='';
+            this.main_id='';
+						if(e.code==907){
+							this.$message.error('对方忙线中');
+						}
+						if(!e.isbtn){
+							api=false;
+						}
+						break;
+					case 'iceCandidate':
+						console.log('监听同步ice')
+						let niceCandidate = {}
+						niceCandidate['candidate'] = e['iceCandidate']['candidate']
+						niceCandidate['sdpMLineIndex'] = e['iceCandidate']['sdpMLineIndex']
+						niceCandidate['sdpMid'] = e['iceCandidate']['sdpMid']
+						iceCandidate=JSON.stringify(niceCandidate)
+						break;
+					case "mediaDevices":
+						api=false;
+						break;
+				}
+				if(api){
+					this.$api.imApi.sendToMsg({
+						id:main_id,
+						msg_id:msg_id,
+						toContactId:this.caller.id,
+						type:this.is_video ? 1 : 0,
+						event:e.event,
+						status:e.status ?? '',
+						code:e.code ?? '',
+						callTime:e.callTime ?? '',
+						sdp:e.sdp ?? '',
+						iceCandidate:iceCandidate,
+					}).then(res=>{
+            if(res.code==0){
+              if(e.event=='calling'){
+                this.wsData=res.data;
+              }
+            }
+          })
+				}
     },
     // 退出聊天室
     logout() {
