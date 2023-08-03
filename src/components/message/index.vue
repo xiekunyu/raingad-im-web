@@ -399,21 +399,20 @@ export default {
   },
   data() {
     var _this = this;
-    let stun= this.$store.state.globalConfig.chatInfo.stun ? this.$store.state.globalConfig.chatInfo.stun : 'stun:stun.callwithus.com';
+    let webrtcConfig= this.$store.state.globalConfig.chatInfo;
     return {
       noSimpleTips:'系统已关闭单聊，或者群已开启禁言，无法发送消息',
       isFullscreen:false,
       curWidth:this.width,
       curHeight:this.height,
       unread:0,
-      webrtcConfig:{
-          config: { 'iceServers':[{
-	  	    'urls': stun,
-	  	  }]}
-      },
-      // webrtcConfig:{ 'iceServers':[{ urls: "stun:stun.l.google.com:19302" }]},
+      // webrtcConfig:{
+      //     config: { 'iceServers':[{
+	  	//     'urls': stun,
+	  	//   }]}
+      // },
+      webrtcConfig:webrtcConfig,
       wsData:null,
-      main_id:'',
       caller:'',
       is_video:1,
       curFile:null,
@@ -1082,6 +1081,19 @@ export default {
           IMUI.appendContact(message);
           break;
         case 'webrtc':
+          // 如果收到自己的消息，并且是其他端处理操作，则静默挂断
+          if(message.fromUser.id==this.user.id){
+            let e=message.extends;
+            // 如果是当前设备发出的消息则不处理
+            if(e.isMobile==0 || e.event=='calling'){
+              return;
+            }
+            if(e.event=="otherOpt"){
+              this.wsData=null;
+              this.$refs.webrtc.hangup(false);
+            }
+            return;
+          }
           // 接收到webrtc消息
           if(this.wsData && this.wsData.id!=message.id){
             this.$api.imApi.sendToMsg({
@@ -1094,10 +1106,13 @@ export default {
               msg_id:message.msg_id,
             })
           }else{
-            this.wsData=message;
-            this.main_id=message.id;
-            this.caller=message.fromUser;
-            this.$refs.webrtc.webrtcAction(JSON.parse(JSON.stringify(message)));
+            if(message.extends.event=='calling'){
+              this.wsData=message;
+              this.caller=message.fromUser;
+            }
+            if(this.wsData && this.wsData.id==message.id){
+              this.$refs.webrtc.webrtcAction(JSON.parse(JSON.stringify(message)));
+            }
           }
           break;
       }
@@ -1951,22 +1966,20 @@ export default {
     },
     // 接收webrtc组件的消息
     rtcMsg(e){
-      console.log("🚀 ~ file: index.vue:1949 ~ rtcMsg ~ e:", e)
         let iceCandidate = '';
 				let msg_id='';
-        let main_id=this.main_id;
+        let main_id='';
 				if(this.wsData){
 					msg_id=this.wsData.msg_id ?? '';
+          main_id=this.wsData.id ?? '';
 				}
 				let api=true;
 				switch(e.event){
           case "calling":
-            this.main_id=utils.generateRandId();
-            main_id=this.main_id;
+            main_id=utils.generateRandId();
             break;
 					case 'hangup':
             this.wsData='';
-            this.main_id='';
 						if(e.code==907){
 							this.$message.error('对方忙线中');
 						}
