@@ -72,7 +72,6 @@ export default {
       remoteVideo: "",   //远程视频的DOM
       remoteStream: null, // 远端视频流
       localStream: null,  // 本地视频流
-      conn: null,         //当前数据连接
       caller: null,       //来电用户
       is_video: 1,        //是否为视频通话
       isReceived: false,  //是否为接听者
@@ -87,9 +86,7 @@ export default {
   },
   mounted() {
     this.localVideo = this.$refs.localvideo;
-    this.remoteVideo = this.$refs.remotevideo;
-    
-      
+    this.remoteVideo = this.$refs.remotevideo; 
   },
   methods: {
     // 初始化webrtc
@@ -108,8 +105,8 @@ export default {
             ],
           };
         this.pc = new RTCPeerConnection(config);
+        // 接收视频流
         this.pc.ontrack = (event) => {
-          console.log(event,'接收视频流');
           if(this.localVideo){
             this.remoteStream = event.streams[0];
             this.remoteVideo.srcObject = event.streams[0];
@@ -121,7 +118,7 @@ export default {
         });
         this.localVideo.srcObject = this.localStream;
     },
-    // 视频电话初始化本地视频
+    // 初始化本地媒体
     initLocalStream(call_id, is_video) {
       this.offerParams = is_video ? {
 				  offerToRecieveAudio: 1,
@@ -149,8 +146,9 @@ export default {
           }, 1000)
         // 接听电话
         } else {
-          // 告诉对方已经接听电话
+          // 初始化完成后告诉对方已经接听电话
           this.$emit('message',{ event: 'acceptRtc',code:904});
+          this.startTime();
         }
       },(err) => {
         this.hangup(true);
@@ -160,21 +158,20 @@ export default {
     },
     // 拨打电话
     called(is_video) {
-      this.is_video = is_video;
-      this.caller = this.contact;
       // 如果状态不为0则不允许拨打电话
-      if (this.status) {
+      if (this.status || this.caller) {
         return false;
       }
+      this.is_video = is_video;
+      this.caller = this.contact;
       this.initLocalStream(true, is_video);
       this.playMusicCall('state');
     },
     // 接听电话
     answer() {
+        this.status = 2;
         this.initLocalStream(false, this.is_video);
         this.playMusicCall('close');
-        this.startTime();
-        this.status = 2;
     },
     // 处理接收到的消息
     // 开始通话计时
@@ -199,15 +196,6 @@ export default {
       if(this.status!=2){
         this.playMusicCall('close');
       }
-      if (this.status) {
-        this.status = 0;         //重置通话状态
-        this.closeLocalMedia();  //关闭本地媒体
-        this.remoteStream=null;  //关闭远程媒体
-        this.playMusicHandup();  // 播放挂断音
-        this.isReceived = false; //重置是否为接听者
-        this.callTime=0;         //重置通话时间
-        this.caller = null;      //重置通话对象
-      }
       // 通话取消
       let code=902;
       // 通话中挂断
@@ -220,7 +208,17 @@ export default {
       }else if(this.status==4 ){
         code=907
       }
+      if (this.status) {
+        this.status = 0;         //重置通话状态
+        this.closeLocalMedia();  //关闭本地媒体
+        this.remoteStream=null;  //关闭远程媒体
+        this.playMusicHandup();  // 播放挂断音
+        this.isReceived = false; //重置是否为接听者
+        this.caller = null;      //重置通话对象
+      }
       this.$emit('message',{event:'hangup',code:code,isbtn:btn,callTime:this.callTime});
+      //重置通话时间
+      this.callTime=0; 
     },
     // 关闭本地媒体
     closeLocalMedia() {
@@ -312,7 +310,6 @@ export default {
             type: 'answer',
             sdp:  e.sdp
           }));
-          console.log('设置对方answer描述')
           break;	
         case "iceCandidate":
           setTimeout(() => {
@@ -329,7 +326,6 @@ export default {
             type: 'offer',
             sdp: e.sdp
           }));
-          console.log('设置对方offer描述')
           this.createAnswer()
           break;
         
@@ -339,7 +335,6 @@ export default {
     createOffer() {
       this.pc.createOffer(this.offerParams).then((offer) => {
         this.pc.setLocalDescription(offer);
-        console.log('设置本地offer方描述')
         // 发送offer请求
           this.$emit('message',{
             event: 'offer',
@@ -351,7 +346,6 @@ export default {
     createAnswer() {
       this.pc.createAnswer(this.offerParams).then((answer) => {
         this.pc.setLocalDescription(answer);
-        console.log('设置本地answer')
         // 发送回答请求
         this.$emit('message',{
           event: 'answer',
@@ -375,11 +369,12 @@ export default {
     // 播放响铃
     playMusicCall(type) {
       var audio = document.getElementById("music1");
+      if(type === "close"){
+        return audio.pause(); // 暂停
+      } 
       if (type === "state") {
         audio.loop = true;
-      }else if(type === "close"){
-        return audio.pause(); // 暂停
-      } else {
+      }else {
         audio.loop = false;
       }
       if (audio.paused) {

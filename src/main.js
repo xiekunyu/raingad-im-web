@@ -28,8 +28,10 @@ Vue.prototype.$packageData = packageData;
 
 import LemonMessageVoice from "./components/message/messageType/voice";
 import LemonMessageVideo from "./components/message/messageType/video";
+import LemonMessageWebrtc from "./components/message/messageType/webrtc";
 Vue.component(LemonMessageVideo.name, LemonMessageVideo);
 Vue.component(LemonMessageVoice.name, LemonMessageVoice);
+Vue.component(LemonMessageWebrtc.name, LemonMessageWebrtc);
 import Api from "@/api/index.js"
 Vue.prototype.$api = Api
 

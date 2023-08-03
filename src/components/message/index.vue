@@ -413,6 +413,7 @@ export default {
       // },
       webrtcConfig:webrtcConfig,
       wsData:null,
+      webrtcLock:false,
       caller:'',
       is_video:1,
       curFile:null,
@@ -1084,12 +1085,21 @@ export default {
           // 如果收到自己的消息，并且是其他端处理操作，则静默挂断
           if(message.fromUser.id==this.user.id){
             let e=message.extends;
+            // 挂断的情况下解锁webrtc
+            if(['902','903','905','906','907'].includes(e.code)){
+              this.wsData.content=message.content;
+              IMUI.updateMessage(this.wsData);
+              this.webrtcLock=false;
+            }
             // 如果是当前设备发出的消息则不处理
             if(e.isMobile==0 || e.event=='calling'){
               return;
             }
             if(e.event=="otherOpt"){
+              this.wsData.content="已在其他端处理";
+              IMUI.updateMessage(this.wsData);
               this.wsData=null;
+              this.caller='';
               this.$refs.webrtc.hangup(false);
             }
             return;
@@ -1107,10 +1117,18 @@ export default {
             })
           }else{
             if(message.extends.event=='calling'){
+              this.recieveMsg(message);
               this.wsData=message;
               this.caller=message.fromUser;
+            }else if(message.extends.event=='offer' || message.extends.event=='answer'){
+              //其他端在通话中，锁定webrtc，禁止通话
+              this.webrtcLock=true;
             }
             if(this.wsData && this.wsData.id==message.id){
+              if(message.extends.event=='hangup'){
+                this.wsData.content=message.content;
+                IMUI.updateMessage(this.wsData);
+              }
               this.$refs.webrtc.webrtcAction(JSON.parse(JSON.stringify(message)));
             }
           }
@@ -1158,6 +1176,10 @@ export default {
   },
   methods: {
     called(is_video){
+      if(this.webrtcLock){
+        this.$message.error("其他端正在通话中");
+        return;
+      }
       this.webrtcBox=true;
       this.is_video=is_video;
       this.caller=this.currentChat;
@@ -1173,6 +1195,9 @@ export default {
         });
         IMUI.setLastContentRender("video", message => {
           return `[视频]`;
+        });
+        IMUI.setLastContentRender("webrtc", message => {
+          return `[音视频通话]`;
         });
         let tools=[
             {
@@ -1464,7 +1489,8 @@ export default {
           return this.$message.error("没有配置预览接口");
         }
         this.$preview(message.preview);
-      } else {
+      } else if(message.type=='webrtc'){
+        this.called(parseFloat(message.extends.type));
       }
     },
     playVoice (message, instance) {
@@ -1566,7 +1592,6 @@ export default {
     },
     // 发送语音消息
     sendVoice (duration, file) {
-      console.log("🚀 ~ file: index.vue:1516 ~ sendVoice ~ file:", file)
       // 如果开启了群聊禁言或者关闭了单聊权限，就不允许发送消息
       if((!this.globalConfig.chatInfo.simpleChat && this.is_group == 0) || !this.nospeak()){
         this.$message.error(this.noSimpleTips);
@@ -1909,9 +1934,7 @@ export default {
           window.focus();
           notification.close();
         };
-        console.log("浏览器通知！");
       } else {
-        console.log("声音通知！");
         const audio = document.getElementById("chatAudio");
         // 从头播放
         audio.currentTime = 0;
@@ -1979,16 +2002,16 @@ export default {
             main_id=utils.generateRandId();
             break;
 					case 'hangup':
-            this.wsData='';
 						if(e.code==907){
 							this.$message.error('对方忙线中');
 						}
 						if(!e.isbtn){
 							api=false;
+              this.wsData='';
 						}
+            this.webrtcLock=false; //解除通话锁定
 						break;
 					case 'iceCandidate':
-						console.log('监听同步ice')
 						let niceCandidate = {}
 						niceCandidate['candidate'] = e['iceCandidate']['candidate']
 						niceCandidate['sdpMLineIndex'] = e['iceCandidate']['sdpMLineIndex']
@@ -2015,6 +2038,7 @@ export default {
             if(res.code==0){
               if(e.event=='calling'){
                 this.wsData=res.data;
+                this.recieveMsg(res.data);
               }
             }
           })
