@@ -99,8 +99,8 @@
             </div>
             <div class="message-title-tools">
               <template v-if="globalConfig.chatInfo.webrtc">
-                <i class="el-icon-phone-outline mr-10" title="语音通话" v-if="!contact.is_group" @click="called(0)"></i>
-                <i class="el-icon-video-camera mr-10" title="视频通话" v-if="!contact.is_group" @click="called(1)"></i>
+                <i class="el-icon-phone-outline mr-10" title="语音通话" v-if="!contact.is_group && parseInt(globalConfig.chatInfo.webrtc)" @click="called(0)"></i>
+                <i class="el-icon-video-camera mr-10" title="视频通话" v-if="!contact.is_group && parseInt(globalConfig.chatInfo.webrtc)" @click="called(1)"></i>
               </template>
               <i class="el-icon-time mr-10" @click="openMessageBox" title="消息管理器"></i>
               <i class="el-icon-more" @click="$user(contact.id)" title="基本资料" v-if="!contact.is_group"></i>
@@ -1085,21 +1085,27 @@ export default {
           // 如果收到自己的消息，并且是其他端处理操作，则静默挂断
           if(message.fromUser.id==this.user.id){
             let e=message.extends;
+            let wsData=Lockr.get('wsData');
             // 挂断的情况下解锁webrtc
-            if(['902','903','905','906','907'].includes(e.code)){
-              this.wsData.content=message.content;
-              IMUI.updateMessage(this.wsData);
+            if([902,903,905,906,907].includes(parseInt(e.code))){
+              wsData.content=message.content;
+              IMUI.updateMessage(wsData);
               this.webrtcLock=false;
             }
             // 如果是当前设备发出的消息则不处理
             if(e.isMobile==0 || e.event=='calling'){
+              if(e.event=='calling'){
+                Lockr.set('wsData',message);
+                this.recieveMsg(message);
+              }
               return;
             }
             if(e.event=="otherOpt"){
-              this.wsData.content="已在其他端处理";
-              IMUI.updateMessage(this.wsData);
+              wsData.content=message.content;
+              IMUI.updateMessage(wsData);
               this.wsData=null;
               this.caller='';
+              this.webrtcLock=false;
               this.$refs.webrtc.hangup(false);
             }
             return;
@@ -1119,16 +1125,18 @@ export default {
             if(message.extends.event=='calling'){
               this.recieveMsg(message);
               this.wsData=message;
+              Lockr.set('wsData',message);
               this.caller=message.fromUser;
             }else if(message.extends.event=='offer' || message.extends.event=='answer'){
               //其他端在通话中，锁定webrtc，禁止通话
               this.webrtcLock=true;
+            }else if(message.extends.event=='hangup'){
+              let wsData=Lockr.get('wsData');
+              wsData.content=message.content;
+              IMUI.updateMessage(wsData);
+              this.webrtcLock=false;
             }
             if(this.wsData && this.wsData.id==message.id){
-              if(message.extends.event=='hangup'){
-                this.wsData.content=message.content;
-                IMUI.updateMessage(this.wsData);
-              }
               this.$refs.webrtc.webrtcAction(JSON.parse(JSON.stringify(message)));
             }
           }
@@ -1176,6 +1184,9 @@ export default {
   },
   methods: {
     called(is_video){
+      if(!parseInt(this.globalConfig.chatInfo.webrtc)){
+        return this.$message.error("当前系统未开启音视频通话功能");
+      }
       if(this.webrtcLock){
         this.$message.error("其他端正在通话中");
         return;
@@ -2007,8 +2018,8 @@ export default {
 						}
 						if(!e.isbtn){
 							api=false;
-              this.wsData='';
 						}
+            this.wsData='';
             this.webrtcLock=false; //解除通话锁定
 						break;
 					case 'iceCandidate':
@@ -2038,8 +2049,12 @@ export default {
             if(res.code==0){
               if(e.event=='calling'){
                 this.wsData=res.data;
+                Lockr.set('wsData',res.data);
                 this.recieveMsg(res.data);
               }
+            }
+            if(res.data.extends.code=='907'){
+              this.$message.error('对方不在线');
             }
           })
 				}

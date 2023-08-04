@@ -29,6 +29,9 @@ export default {
                   },
                   {
                     "el-icon-video-camera" : props.extends.type == 1,
+                  },
+                  {
+                    "rotate180" : this.$attrs.reverse
                   }
                 ]}></div> &nbsp;
                 <div>

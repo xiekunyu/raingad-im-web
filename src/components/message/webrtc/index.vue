@@ -215,6 +215,8 @@ export default {
         this.playMusicHandup();  // 播放挂断音
         this.isReceived = false; //重置是否为接听者
         this.caller = null;      //重置通话对象
+        this.voiceStatus=true;
+        this.videoStatus=true;
       }
       this.$emit('message',{event:'hangup',code:code,isbtn:btn,callTime:this.callTime});
       //重置通话时间
