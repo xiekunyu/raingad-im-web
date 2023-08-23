@@ -454,7 +454,7 @@ export default {
         // return isJPG && isLt2M;
       },
       change(file,fileList) {
-        this.sysInfo.logo = URL.createObjectURL(file.raw);
+        // this.sysInfo.logo = URL.createObjectURL(file.raw);
       },
       copyUrl(){
         this.$clipboard(this.inviteUrl)

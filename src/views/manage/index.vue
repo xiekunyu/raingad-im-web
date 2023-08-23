@@ -2,7 +2,7 @@
   <div class="pd-20">
     <el-row :gutter="20">
       
-      <el-col :span="10">
+      <el-col :span="10" v-if="globalConfig && globalConfig.demon_mode">
         <el-card shadow="hover" header="欢迎" class="mb-20">
           <div class="welcome">
             <div class="logo">
@@ -23,7 +23,7 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="8">
+      <el-col :span="8" v-if="globalConfig && globalConfig.demon_mode">
         <el-card shadow="hover" header="关于项目" class="item-background mb-20">
           <p>{{ $packageData.name }}是一个<b class="c-red">开源的即时通信demo，主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统、内网交流、社区交流。不建议用于商业用途，如确有需要商用，请联系作者授权，自行开发代码量必须要高于原代码量的30%以上，并注明相关的版权问题。</p>
           <div class="mt-15 ml-15 mb-15">
@@ -36,7 +36,7 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="6" v-if="globalConfig && globalConfig.demon_mode">
         <el-card shadow="hover" class="mb-20" header="数据概览">
           <div class="mb-15">用户总数：xxxx</div> 
           <div class="mb-15">群聊总数：xxxx</div> 
@@ -80,8 +80,14 @@
 </template>
   
 <script>
+import { mapState } from "vuex";
 export default {
     components: {
+    },
+    computed: {
+      ...mapState({
+        globalConfig: state => state.globalConfig
+      })
     },
     data() {
       return {

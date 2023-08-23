@@ -19,6 +19,7 @@ export default {
     let userInfo=lockr.get('UserInfo');
     let Config=lockr.get('globalConfig');
     if(Config){
+      document.title = Config.sysInfo.name;
       this.$store.commit('setGlobalConfig', Config);
     }
     // 初始化用户信息
@@ -31,7 +32,12 @@ export default {
           return 
       }
     });
-  }
+  },
+  watch: {
+    "$store.state.globalConfig" (val) {
+      document.title = val.sysInfo.name;
+    }
+  },
 }
 </script>
 

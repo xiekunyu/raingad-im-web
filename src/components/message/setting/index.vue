@@ -134,7 +134,7 @@
             >&emsp;是否隐藏聊天窗口内的消息发送时间
           </div>
         </el-tab-pane>
-        <el-tab-pane label="关于 IM" class="pd-20">
+        <el-tab-pane label="关于 IM" class="pd-20" v-if="parseInt(globalConfig.demon_mode)==1">
           <div class="about-logo">
             <el-avatar :src="$packageData.logo" :size="50"></el-avatar>
             <br /><br />
@@ -147,7 +147,7 @@
             <p v-for="item in $packageData.funcList" :key="item.icon"><i :class="item.icon"></i> {{ item.text }}</p>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="开源" class="pd-20">
+        <el-tab-pane label="开源" class="pd-20" v-if="parseInt(globalConfig.demon_mode)==1">
           <div  class="about-logo">
             <el-avatar :src="$packageData.logo" :size="50"></el-avatar>
             <br /><br />
@@ -229,6 +229,7 @@ export default {
         ...mapState({
             setting: (state) => state.setting,
             user: (state) => state.userInfo,
+            globalConfig: state => state.globalConfig
         }),
         getUrl () {
           return window.BASE_URL + '/common/upload/uploadAvatar'

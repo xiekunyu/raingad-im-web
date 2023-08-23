@@ -35,11 +35,12 @@
             target="_blank">Lemon-IMUI手册</a></el-button>
       </div>
     </div>
+
     <el-alert
     class="mt-15 mb-15"
       show-icon
-      title="目前已经支持社区模式了，就是可以添加、删除好友那种，体验社区模式需要自己部署哦！大家点个star吧！"
-      type="success">
+      title="请仔细阅读一下文档！（目前已知问题webrtc一对一音视频通话只能在局域网使用，stun服务器的问题）。"
+      type="info">
     </el-alert>
 
     <div class="tip">
