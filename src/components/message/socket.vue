@@ -47,6 +47,7 @@
             websocketOnMessage(e) { //数据接收
                 const data = JSON.parse(e.data);
                 let userInfo=Lockr.get('UserInfo');
+                let token=Lockr.get('authToken');
                 switch (data['type']) {
                     // 服务端ping客户端
                     case 'ping':
@@ -56,7 +57,7 @@
                     case 'init':
                         Lockr.set('client_id',data['client_id']);
                         this.$api.commonApi.bindClientIdAPI({client_id: data['client_id'],user_id:userInfo.user_id}).then(res=>{
-                            this.websocketSend({type:"bindUid",user_id:userInfo.user_id});
+                            this.websocketSend({type:"bindUid",user_id:userInfo.user_id,token:token});
                             console.log(data['client_id'],'消息服务启动成功');
                         }).catch(error => {
                             console.log('连接失败');

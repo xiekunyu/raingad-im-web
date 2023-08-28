@@ -70,7 +70,7 @@ service.interceptors.request.use(
         const authToken = Lockr.get('authToken');
         if (sessionId && authToken) {
             config.headers['sessionId'] = sessionId;
-            config.headers['authToken'] = authToken;
+            config.headers['Authorization'] = authToken;
         }
         const flag = config.headers['Content-Type'] && config.headers['Content-Type'].indexOf('application/json') !== -1
         if (!flag) {
