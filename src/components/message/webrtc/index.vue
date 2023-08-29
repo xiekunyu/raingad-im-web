@@ -128,8 +128,8 @@ export default {
 				  offerToRecieveVideo: 0
 			  }
       let video=is_video==1 ? true : false;
-      var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-      getUserMedia({ video: video, audio: {echoCancellation: true} }, (stream) => {
+      var getUserMedias = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+      getUserMedias({ video: video, audio: {echoCancellation: true} }, (stream) => {
         this.initPeer(stream);
         // 拨打电话
         if (call_id) {

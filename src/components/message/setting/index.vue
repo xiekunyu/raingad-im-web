@@ -66,7 +66,12 @@
                     <el-form-item label="当前账号">
                       {{user.account}}
                     </el-form-item>
-                    <el-form-item label="验证码">
+                    <el-alert
+                      class="mb-20"
+                      title="验证账户的真实性，绑定后请使用新账户来重新登录！"
+                      type="warning">
+                    </el-alert>
+                    <el-form-item label="验证码" v-if="user.is_auth">
                       <el-input
                           placeholder="请输入验证码"
                           maxlength="6"
@@ -74,6 +79,9 @@
                           v-model="code">
                           <el-button slot="append" @click="sendCode(true)" :loading="loading">发送验证码</el-button>
                         </el-input>
+                    </el-form-item>
+                    <el-form-item label="原密码" v-if="editPass &&  (!globalConfig.sysInfo.regauth || !user.is_auth)">
+                      <el-input v-model="originalPassword"  show-password placeholder="请输入原来的密码"></el-input>
                     </el-form-item>
                     <el-form-item label="新账号" v-if="!editPass">
                       <el-input v-model="account" placeholder="请输入新的账号"></el-input>
@@ -216,6 +224,7 @@ export default {
           dialog: false,
           dialogTitle: '修改密码',
           editPass:1,
+          originalPassword:'',
           account: '',
           password: '',
           repass: '',
@@ -367,7 +376,7 @@ export default {
         },
         // 修改密码
         editPassword(){
-          if(this.code==''){
+          if(this.code=='' && this.user.is_auth){
               this.$message({
                 message: '请输入验证码',
                 type: 'warning'
@@ -389,9 +398,17 @@ export default {
                 });
                 return false;
             }
+            if(!this.originalPassword){
+                this.$message({
+                  message: '请输入原密码',
+                  type: 'warning'
+                });
+                return false;
+            }
             let params = {
                 password:this.password,
-                code:this.code
+                code:this.code,
+                originalPassword:this.originalPassword
             }
             this.$api.imApi.editPassword(params).then(res=>{
                 if(res.code==0){
@@ -434,6 +451,9 @@ export default {
                       message: res.msg,
                       type: 'success'
                   });
+                  this.$store.dispatch("LogOut").then(() => {
+                        this.$router.push("/login");
+                    })
                 }
             })
           }

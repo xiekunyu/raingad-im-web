@@ -50,7 +50,7 @@
               <span class="lemon-contact__name">
                 <OnlineStatus v-if="Contact.is_online && Contact.is_group==0 && globalConfig.chatInfo.online==1" title="在线" type="success"></OnlineStatus> 
                 <el-tag size="mini" v-if="Contact.is_group == 1">群聊</el-tag>
-                {{ Contact.displayName }}
+                {{ Contact.displayName }} 
               </span>
               <span
                 class="lemon-contact__time"
@@ -88,6 +88,8 @@
                 </span>
                 <span class="displayName" v-if="is_group == 0">
                   <OnlineStatus :type="contact.is_online ? 'success' : 'info'" :pulse="contact.is_online " v-if="globalConfig.chatInfo.online" ></OnlineStatus> {{contact.displayName}}</span>
+                  <span v-if="globalConfig.sysInfo.ipregion && contact.last_login_ip" class="c-999 f-12 ml-5">
+                    <span v-if="globalConfig.chatInfo.online && !contact.is_online">(离线)</span>{{ contact.last_login_ip }} {{ contact.location }}</span> 
               </span>
 
               <input

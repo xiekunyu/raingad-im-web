@@ -46,7 +46,7 @@
                   <div class="label">邮箱</div>
                   <div>{{ detail.email || "未设置"}}</div>
                 </div>
-                <div class="card-row">
+                <div class="card-row" v-if="globalConfig.sysInfo.ipregion && isFriend">
                   <div class="label">IP</div>
                   <div v-if="detail.last_login_ip">{{ detail.last_login_ip || "未知"}} （{{detail.location || "未知"}}）</div>
                   <div v-else>未知</div>
@@ -55,7 +55,7 @@
             </el-main>
             <el-footer class="footer">
               <!-- <el-button round>加好友</el-button> -->
-              <el-button type="primary" v-if="userInfo.user_id!=detail.user_id && (detail.friend || globalConfig.sysInfo.runMode==1)" round @click="openChat()" style="width:150px">发消息</el-button>
+              <el-button type="primary" v-if="isFriend" round @click="openChat()" style="width:150px">发消息</el-button>
               <el-button type="primary" v-if="globalConfig.sysInfo.runMode==2 && !detail.friend" round @click="addFriend()" style="width:150px">加好友</el-button>
               <el-button round v-if="options.isManage" style="width:150px" @click="editUser">编辑资料</el-button>
             </el-footer>
@@ -87,6 +87,9 @@
                 userInfo: state => state.userInfo,
                 globalConfig: state => state.globalConfig,
             }),
+        isFriend(){
+          return this.userInfo.user_id!=this.detail.user_id && (this.detail.friend || this.globalConfig.sysInfo.runMode==1);
+        }
     },
     filters: {
       sex(value) {

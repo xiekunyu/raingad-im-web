@@ -76,6 +76,39 @@
             </template>
          </el-table-column>
          <el-table-column
+            prop="create_time"
+            label="注册时间"
+            width="140">
+            <template slot-scope="scope">
+               <el-popover
+                  placement="top-start"
+                  title="位置信息"
+                  width="250"
+                  trigger="hover">
+                  IP: {{scope.row.register_ip}} <br> 
+                  位置：{{scope.row.reg_location || '--'}}
+                  <span slot="reference">{{scope.row.create_time}}</span>
+               </el-popover>
+            </template>
+         </el-table-column>
+
+         <el-table-column
+            prop="last_login_time"
+            label="最后登录时间"
+            width="140">
+            <template slot-scope="scope">
+               <el-popover
+                  placement="top-start"
+                  title="位置信息"
+                  width="250"
+                  trigger="hover">
+                  IP: {{scope.row.last_login_ip}} <br> 
+                  位置：{{scope.row.location || '--'}}
+                  <span slot="reference">{{scope.row.last_login_time}}</span>
+               </el-popover>
+            </template>
+         </el-table-column>
+         <el-table-column
             prop="remark"
             label="备注"
             min-width="300">
@@ -93,12 +126,12 @@
          <el-table-column
             fixed="right"
             label="操作"
-            width="160">
+            width="130">
             <template slot-scope="scope">
                <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
                <el-button @click="editUser(scope.row)" type="text" size="small" v-if="scope.row.user_id>1">编辑</el-button>
                <el-button @click="editPass(scope.row)" type="text" size="small">改密</el-button>
-               <el-button @click="delUser(scope.row)" type="text" size="small" v-if="scope.row.user_id>1"><span class="c-red">删除</span></el-button>
+               <!-- <el-button @click="delUser(scope.row)" type="text" size="small" v-if="scope.row.user_id>1"><span class="c-red">删除</span></el-button> -->
             </template>
          </el-table-column>
       </el-table>

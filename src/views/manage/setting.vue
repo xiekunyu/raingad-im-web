@@ -40,6 +40,20 @@
                       <vue-qr ref="qrCode" :text="inviteUrl" width="200" height="200" :logoSrc="logo"></vue-qr>
                   </div>
               </el-form-item>
+              <el-form-item label="注册认证" prop="regauth">
+                  <el-radio-group v-model="sysInfo.regauth">
+                  <el-radio label="0" border>关闭</el-radio>
+                  <el-radio label="1" border>手机号</el-radio>
+                  <el-radio label="2" border>邮箱</el-radio>
+                  <el-radio label="3" border>手机号+邮箱</el-radio>
+                  </el-radio-group>
+              </el-form-item>
+              <el-form-item label="开启IP定位" prop="ipregion">
+                  <el-radio-group v-model="sysInfo.ipregion">
+                  <el-radio label="0" border>关闭</el-radio>
+                  <el-radio label="1" border>开启</el-radio>
+                  </el-radio-group>
+              </el-form-item>
               <el-form-item label="运行模式" prop="regtype">
                   <el-radio-group v-model="sysInfo.runMode">
                   <el-radio label="1" border>企业模式</el-radio>
@@ -113,7 +127,13 @@
           </el-form>
         </el-tab-pane>
         <el-tab-pane>
-          <span slot="label"><i class="el-icon-message"></i> 邮件SMTP设置</span>
+          <span slot="label"><i class="el-icon-message"></i> 邮件短信设置</span>
+          <div class="m-20">
+            <el-alert
+              title="系统支持短信验证码，请到项目：[根目录/config/sms.php] 中配置短信开放平台的参数，支持阿里云、腾讯云、七牛云、又拍云、Ucloud和华为云。"
+              type="warning">
+            </el-alert>
+          </div>
           <el-form :model="smtp" :rules="smtpRules" ref="smtp" label-width="120px"  style="width:500px">
               <el-form-item label="邮件服务器" prop="host">
                   <el-input v-model="smtp.host" placeholder="请输入邮件服务器，如：smtp.mail.qq.com"></el-input>
@@ -146,7 +166,7 @@
                   </el-input>
               </el-form-item>
           </el-form>
-
+          
         </el-tab-pane>
         <el-tab-pane>
           <span slot="label"><i class="el-icon-upload"></i> 文件上传设置</span>
@@ -268,6 +288,8 @@ export default {
           description: '',
           logo: '',
           regtype: '1',
+          regauth: '2',
+          ipregion: '1',
           runMode: '1',
           state:true,
           closeTips:''

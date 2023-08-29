@@ -30,16 +30,12 @@
         <el-button type="warning" plain size="mini" round><a :href="$packageData.qqGroupUrl"
             target="_blank">QQ交流群:336921267</a></el-button>
       </div>
-      <div class="ml-15 mb-15">
-        <el-button plain size="mini" round><a href="http://june000.gitee.io/lemon-im"
-            target="_blank">Lemon-IMUI手册</a></el-button>
-      </div>
     </div>
 
     <el-alert
     class="mt-15 mb-15"
       show-icon
-      title="请仔细阅读一下文档！（目前已知问题webrtc一对一音视频通话只能在局域网使用，stun服务器的问题）。"
+      title="请仔细阅读一下文档！（webrtc一对一音视频通话需要自己搭建turn服务器，本文底部有搭建链接）。"
       type="info">
     </el-alert>
 
@@ -55,7 +51,7 @@
         3、目前仅开源了网页端(vue2+lemon-imui+element-ui)和后台接口（TP6+workerman），可以用于对接企业应用等内部聊天，内网私有聊天室,社区聊天等等。
       </p>
       <p>
-        4、移动端（uniapp开发，支持H5+APP）代码未开源，基础功能都有，和web功能几乎无差异，除了个人设置，如有需要请查看底部说明。
+        4、移动端（uniapp开发，支持H5+APP）<b class="c-red">代码未开源</b>，和web功能几乎无差异，如有需要请查看底部说明。
       </p>
     </div>
 
@@ -140,17 +136,29 @@
     </p>
     <div class="tip">
       <h3 class="mb-5"><b>服务介绍</b></h3>
-      <p>开源不易，同时如果需要以下功能，作者提供付费服务，进群后咨询作者！（作者8年phper，前端水平一般，不接外包，除非是天价！）</p>
-      <p>1. 协助部署：200元/次（提供技术指导，需要自行安装好运行环境，最好是宝塔面板）</p>
-      <p>2. uniapp移动端源码：388元/套。(全开源，仅提供源码，有源码结构文档，不提供专业指导和部署)</p>
+      <p>开源不易，同时如果需要以下功能，作者提供付费服务，进群后咨询作者！</p>
+      <p class="m-5"><b>（作者8年phper，前端水平一般，不接外包，除非价格确实高，功能也不难！）</b></p>
+      <p>1. 协助部署：<b>200元/次</b>（提供技术指导，需要自行安装好运行环境，最好是宝塔面板）</p>
+      <p>2. uniapp移动端源码：<b> 388元/套。</b>(全开源，仅提供源码，有源码结构文档，不提供专业指导和部署)</p>
     </div>
 
-        <!-- 其他项目 -->
+    <!-- 其他项目 -->
     <div class="other-pro">
       <h2>其他项目</h2>
       <br>
       <div class="mb-15">
         <el-link type="primary" href="https://gitee.com/raingad/j-preview">纯JS文件预览插件</el-link>
+      </div>
+    </div>
+
+    <div class="other-pro">
+      <h2>其他资料</h2>
+      <br>
+      <div class="mb-15">
+        <el-link type="primary" href="http://june000.gitee.io/lemon-im">Lemon-IMUI使用文档</el-link>
+      </div>
+      <div class="mb-15">
+        <el-link type="primary" href="https://blog.csdn.net/ruiye99/article/details/130992960">WebRTC 网络中继 Coturn 服务安装及部署</el-link>
       </div>
     </div>
 

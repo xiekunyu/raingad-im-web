@@ -13,7 +13,7 @@
         <el-form-item prop="realname">
           <el-input ref="realname" v-model="regForm.realname" type="text" auto-complete="off" placeholder="请输入用户名/昵称" prefix-icon="el-icon-user" />
         </el-form-item>
-        <el-form-item prop="code">
+        <el-form-item prop="code" v-if="globalConfig.sysInfo.regauth!=0">
           <el-input
               placeholder="请输入验证码"
               maxlength="6"
@@ -57,10 +57,7 @@ export default {
       },
       loginRules: {
             account: [
-               { required: true, message: '请输入手机号或邮箱', trigger: 'blur' },
-               { min: 4, max: 32, message: '长度在 4 到 32 个字符', trigger: 'blur' },
-               { type: 'email', message: '请输入正确的手机号或邮箱', trigger: 'blur', validator: this.validateContact },
-               { type: 'phone', message: '请输入正确的手机号或邮箱', trigger: 'blur', validator: this.validateContact }
+               { min: 4, max: 32, message: '长度在 4 到 32 个字符', trigger: 'blur' }
             ],
             realname: [
                { required: true, message: '请输入用户名/昵称', trigger: 'blur' },
@@ -89,7 +86,33 @@ export default {
     }
   },
   mounted() {
-    
+    let regauth=this.globalConfig.sysInfo.regauth ?? 0;
+    let msg='请输入账号：4-32个字符';
+    switch(regauth){
+      case 1:
+        msg='请输入正确的手机号';
+        break;
+      case 2:
+        msg='请输入正确的邮箱';
+        break;
+      case 3:
+        msg='请输入正确的手机号或者邮箱';
+        break;
+      default:
+        msg='请输入账号';
+    }
+    let req={ required: true, message: msg, trigger: 'blur' };
+    this.loginRules.account.push(req)
+    let email={ type: 'email', message: msg, trigger: 'blur', validator: this.validateContact };
+    let mobile={ type: 'phone', message: msg, trigger: 'blur', validator: this.validateContact };
+    if(regauth==1){
+      this.loginRules.account.push(mobile)
+    }else if(regauth==2){
+      this.loginRules.account.push(email)
+    }else if(regauth==3){
+      this.loginRules.account.push(email)
+      this.loginRules.account.push(mobile)
+    }
   },
   methods: {
     validateContact(rule, value, callback) {
