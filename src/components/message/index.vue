@@ -1028,6 +1028,21 @@ export default {
         case "isRead":
           this.setLocalMsgIsRead(message);
           break;
+        //某个人阅读了所有消息
+        case "readAll":
+          let messages = IMUI.getMessages(message.toContactId);
+            messages.forEach(item => {
+              if (item.is_read == 0) {
+                const data = {
+                  id: item.id,
+                  is_read: 1,
+                  status: "succeed",
+                  content: item.content + " "
+                };
+                IMUI.updateMessage(data);
+              }
+            });
+          break;
         // 新增加了群聊
         case "addGroup":
           if (message.owner_id != this.user.id) {
@@ -1718,6 +1733,12 @@ export default {
     // 拉取聊天记录
     handlePullMessages(contact, next, instance) {
       let params=this.params;
+      // 获取当前聊天的最上面一条消息，并将id传入后端获取比改id要小的消息，page永远设置为1.
+      let message=instance.getMessages(contact.id);
+      if(message.length>0){
+        params.last_id=message[0].msg_id;
+        params.page=1;
+      }
       params.toContactId=contact.id;
       params.is_group=contact.is_group;
       this.$api.imApi.getMessageListAPI(params)

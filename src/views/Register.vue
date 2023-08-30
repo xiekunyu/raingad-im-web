@@ -8,7 +8,7 @@
       </div>
       <el-form ref="regForm" :model="regForm" :rules="loginRules" label-width="0px" class="login-form">
         <el-form-item prop="account">
-          <el-input ref="account" v-model="regForm.account" type="text" auto-complete="off" placeholder="请输入账号:手机/邮箱" prefix-icon="el-icon-user" />
+          <el-input ref="account" v-model="regForm.account" type="text" auto-complete="off" placeholder="请输入账号:手机/邮箱" prefix-icon="el-icon-user"  @input="handleInput" />
         </el-form-item>
         <el-form-item prop="realname">
           <el-input ref="realname" v-model="regForm.realname" type="text" auto-complete="off" placeholder="请输入用户名/昵称" prefix-icon="el-icon-user" />
@@ -115,6 +115,10 @@ export default {
     }
   },
   methods: {
+    handleInput(value) {
+      const filteredValue = value.replace(/[\u4e00-\u9fa5]/g, '');
+      this.regForm.account = filteredValue;
+    },
     validateContact(rule, value, callback) {
          if (!value) {
             callback();
