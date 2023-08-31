@@ -105,7 +105,9 @@
                 <i class="el-icon-video-camera mr-10" title="视频通话" v-if="!contact.is_group && parseInt(globalConfig.chatInfo.webrtc)" @click="called(1)"></i>
               </template>
               <i class="el-icon-time mr-10" @click="openMessageBox" title="消息管理器"></i>
+              <i class="iconfont icon-ico mr-10 f-22" @click="groupQrShow=true" title="群二维码" v-if="contact.is_group"></i>
               <i class="el-icon-more" @click="$user(contact.id)" title="基本资料" v-if="!contact.is_group"></i>
+              <i class="el-icon-more" @click="openGroupSetting(false)" title="群管理" v-if="contact.is_group && currentChat.role==1"></i>
               
             </div>
           </div>
@@ -337,6 +339,7 @@
         append-to-body destroy-on-close>
         <voice-recorder @send="sendVoice"></voice-recorder>
       </el-dialog>
+    <group-qr :contact="currentChat"  :visible.sync="groupQrShow"></group-qr>
     <Socket ref="socket"></Socket>
     <!-- 视频通话组件 -->
     <webrtc :contact="currentChat" :config="webrtcConfig" :alias="$packageData.name" :userInfo="user" ref="webrtc" :key="componentKey" @message="rtcMsg"></webrtc>
@@ -354,6 +357,7 @@ import ChatSet from "./chatSet";
 import ChatTop from "./chatTop";
 import VoiceRecorder from "./messageBox/voiceRecorder";
 import Group from "./group/index";
+import groupQr from "./group/qr";
 import ChooseDialog from "./chooseDialog/index";
 import Files from "./files/index";
 import Setting from "./setting/index";
@@ -378,6 +382,7 @@ export default {
     VoiceRecorder,
     webrtc,
     Group,
+    groupQr,
     Files,
     addFriend,
     Setting,
@@ -408,11 +413,6 @@ export default {
       curWidth:this.width,
       curHeight:this.height,
       unread:0,
-      // webrtcConfig:{
-      //     config: { 'iceServers':[{
-	  	//     'urls': stun,
-	  	//   }]}
-      // },
       webrtcConfig:webrtcConfig,
       wsData:null,
       webrtcLock:false,
@@ -430,6 +430,7 @@ export default {
       webrtcBox: false,
       groupSetting: false,
       VoiceStatus: false,
+      groupQrShow: false,
       contactSetting: {},
       groupUserCount: 0,
       dialogTitle: "创建群聊",
@@ -1917,6 +1918,15 @@ export default {
       }
       this.isEdit = false;
     },
+    openGroupSetting(contact) {
+      this.groupSetting = true;
+      if(contact){
+        this.contactSetting = contact;
+      }else{
+        this.contactSetting = this.currentChat;
+      }
+      this.componentKey ++;
+    },
     // 关闭搜索结果
     closeSearch() {
       var that = this;
@@ -2081,6 +2091,9 @@ export default {
             }
           })
 				}
+    },
+    groupQr(){
+
     },
     // 退出聊天室
     logout() {

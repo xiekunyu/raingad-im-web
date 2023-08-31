@@ -61,6 +61,7 @@
     "nprogress": "^0.2.0",
     "v-clipboard": "^2.2.3",
     "vue": "^2.6.14",
+    "vue-canvas-poster": "^1.2.1",
     "vue-qr": "^4.0.9",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
