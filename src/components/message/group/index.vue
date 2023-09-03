@@ -50,6 +50,10 @@ export default {
             type: String,
             default: '612px',
         },
+        group_id:{
+            type: String,
+            default: '',
+        }
     },
     data() {
         return {
@@ -73,6 +77,9 @@ export default {
             if(this.userIds.length>0){
                 params.user_ids = this.userIds;
             }
+            if(this.group_id){
+                params.group_id = this.group_id;
+            }
             this.getAllUser(params);
         },
         closeDialog() {
@@ -80,6 +87,13 @@ export default {
             this.selectUid = [];
         },
         manageGroup() {
+            if(this.group_id){
+                // 添加成员
+                if (this.selectUid.length != 1) {
+                    this.$message.error("只能选择一位成员！");
+                    return;
+                }
+            }
             if(!this.isAdd) {
                 // 添加成员
                 if (this.selectUid.length < 1) {
@@ -98,7 +112,7 @@ export default {
                     return;
                 }
             }
-            this.$emit("manageGroup", this.selectUid,this.isAdd,this.groupName);
+            this.$emit("manageGroup", this.selectUid,this.isAdd,this.groupName,this.group_id);
         },
         // 获取所有人员列表
         getAllUser(data) {

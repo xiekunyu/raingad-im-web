@@ -1792,7 +1792,7 @@ export default {
       this.createChatBox = true;
     },
     // 添加群成员或者创建群聊
-    manageGroup(selectUid,isAdd,groupName) {
+    manageGroup(selectUid,isAdd,groupName,group_id) {
       this.createChatBox = false;
       let num=this.globalConfig.chatInfo.groupUserMax;
       if(!isAdd){

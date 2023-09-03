@@ -39,6 +39,13 @@
       type="info">
     </el-alert>
 
+    <el-alert
+    class="mt-15 mb-15"
+      show-icon
+      title="请注意！3.0 以上版本改了很多内容，不兼容之前的版本，旧版本无法升级，如需使用只能全部替换3.0版本。"
+      type="error">
+    </el-alert>
+
     <div class="tip">
       <h3 class="mb-5"><b>介绍</b></h3>
       <p>
@@ -51,7 +58,7 @@
         3、目前仅开源了网页端(vue2+lemon-imui+element-ui)和后台接口（TP6+workerman），可以用于对接企业应用等内部聊天，内网私有聊天室,社区聊天等等。
       </p>
       <p>
-        4、移动端（uniapp开发，支持H5+APP）<b class="c-red">代码未开源</b>，和web功能几乎无差异，如有需要请查看底部说明。
+        4、移动端（uniapp开发，支持H5+APP）<b class="c-red">代码未开源</b>，和web功能几乎无差异，如有需要<b class="c-red cur-handle" @click="scrollTo()">请查看底部说明 <el-link type="primary">[GO]</el-link></b>。
       </p>
     </div>
 
@@ -120,13 +127,14 @@
       </p>
       <h3 class="mb-5 mt-5"><b>计划</b></h3>
       <p>
-        继续优化，增加功能公开群聊功能，申请加群等功能。
+        继续优化，完善功能！
       </p>
     </div>
 
     <div class="warning">
       <p>
-        详细的使用方法在源码中基本上都有备注，如果您觉得这个项目对您有帮助，欢迎star，如果有问题可以加QQ群交流，如果您有更好的建议，欢迎提出。如果觉得项目不错，不如请作者喝杯奶茶吧~
+        详细的使用方法在源码中基本上都有备注，如果您觉得这个项目对您有帮助，欢迎star，如果有问题可以加QQ群交流，如果您有更好的建议，欢迎提出。
+        <br> <b>如果觉得项目不错，不如请作者喝杯奶茶吧~</b>
       </p>
       
     </div>
@@ -201,6 +209,10 @@ export default {
       this.dialogTableVisible
         ? (this.dialogTableVisible = false)
         : (this.dialogTableVisible = true);
+    },
+    scrollTo(){
+      // 滚动到底部
+      window.scrollTo(0,document.body.scrollHeight);
     }
   },
 };

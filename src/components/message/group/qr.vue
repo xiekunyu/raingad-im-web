@@ -15,7 +15,7 @@
         </el-image>
 
         <div align="center" class="mt-20"><el-button @click="saveBase64Image">保存到电脑</el-button></div>
-        <vue-canvas-poster :widthPixels="1000" :painting="painting" @success="success" @fail="fail"></vue-canvas-poster>
+        <vue-canvas-poster :widthPixels="1000" :painting="painting" @success="success" @fail="fail" style="display: none;"></vue-canvas-poster>
         </el-dialog>
 </template>
 <script>
