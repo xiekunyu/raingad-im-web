@@ -43,14 +43,14 @@ export default {
             default: () => [],
         },
         isAdd: {
-            type: Boolean,
-            default: true,
+            type: Number,
+            default: 0,
         },
         width: {
             type: String,
             default: '612px',
         },
-        group_id:{
+        groupId:{
             type: String,
             default: '',
         }
@@ -77,8 +77,8 @@ export default {
             if(this.userIds.length>0){
                 params.user_ids = this.userIds;
             }
-            if(this.group_id){
-                params.group_id = this.group_id;
+            if(this.groupId && this.isAdd==2){
+                params.group_id = this.groupId;
             }
             this.getAllUser(params);
         },
@@ -87,32 +87,33 @@ export default {
             this.selectUid = [];
         },
         manageGroup() {
-            if(this.group_id){
-                // 添加成员
-                if (this.selectUid.length != 1) {
-                    this.$message.error("只能选择一位成员！");
-                    return;
-                }
+            switch(this.isAdd){
+                case 0:
+                    // 添加成员
+                    if (this.selectUid.length < 1) {
+                        this.$message.error("请选择要添加的成员");
+                        return;
+                    }
+                    break;
+                case 1:
+                    // 创建群聊
+                    if (this.selectUid.length < 2) {
+                        this.$message.error("群聊人数不能少于2人");
+                        return;
+                    }
+                    if(this.groupName == "" || this.groupName.length<2 || this.groupName.length>20) {
+                        this.$message.error("请输入正确的群聊名称");
+                        return;
+                    }
+                    break;
+                case 2:
+                    if (this.selectUid.length != 1) {
+                        this.$message.error("只能选择一位成员！");
+                        return;
+                    }
+                    break;
             }
-            if(!this.isAdd) {
-                // 添加成员
-                if (this.selectUid.length < 1) {
-                    this.$message.error("请选择要添加的成员");
-                    return;
-                }
-                
-            }else{
-                // 创建群聊
-                if (this.selectUid.length < 2) {
-                    this.$message.error("群聊人数不能少于2人");
-                    return;
-                }
-                if(this.groupName == "" || this.groupName.length<2 || this.groupName.length>20) {
-                    this.$message.error("请输入正确的群聊名称");
-                    return;
-                }
-            }
-            this.$emit("manageGroup", this.selectUid,this.isAdd,this.groupName,this.group_id);
+            this.$emit("manageGroup", this.selectUid,this.isAdd,this.groupName);
         },
         // 获取所有人员列表
         getAllUser(data) {

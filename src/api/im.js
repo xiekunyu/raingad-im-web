@@ -259,6 +259,18 @@ imApi.getGroupInfoAPI= (data)  =>{
     })
 }
 
+/**
+ * 转让群主
+ * @param {*} data
+ */
+imApi.changeOwnerAPI= (data)  =>{
+    return request({
+        url: 'enterprise/group/changeOwner',
+        method: 'post',
+        data: data
+    })
+}
+
 
 /**
  * 设置消息免打扰

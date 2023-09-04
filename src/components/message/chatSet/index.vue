@@ -39,6 +39,12 @@
               </el-radio-group>
             </div>
           </div>
+          <div class="setting-item">
+            <div class="setting-title">转让群主：</div>
+            <div class="setting-option">
+              <el-button size="mini" @click="changeOwner">转让</el-button>
+            </div>
+          </div>
           
   </div>
 </template>
@@ -61,6 +67,9 @@ export default {
   methods: {
     groupSetting(){
       this.$api.imApi.groupSettingAPI({id:this.contact.id,setting:this.setting})
+    },
+    changeOwner(){
+      this.$emit('changeOwner',this.contact.id);
     }
   },
   created(){

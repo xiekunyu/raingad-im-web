@@ -83,8 +83,8 @@
                   @click="isEdit = true"
                 >
                   <el-tag size="mini">群聊</el-tag> {{ contact.displayName }}<span class="mr-5">({{ groupUserCount }})</span>
-                  <el-tag size="mini" v-if="contact.setting.nospeak == 1"  type="warning">仅群管理员可发言</el-tag>
-                  <el-tag size="mini" v-if="contact.setting.nospeak == 2"  type="danger">全员禁言中</el-tag>
+                  <el-tag size="mini" v-if="contact.setting && contact.setting.nospeak == 1"  type="warning">仅群管理员可发言</el-tag>
+                  <el-tag size="mini" v-if="contact.setting && contact.setting.nospeak == 2"  type="danger">全员禁言中</el-tag>
                 </span>
                 <span class="displayName" v-if="is_group == 0">
                   <OnlineStatus :type="contact.is_online ? 'success' : 'info'" :pulse="contact.is_online " v-if="globalConfig.chatInfo.online" ></OnlineStatus> {{contact.displayName}}</span>
@@ -101,13 +101,13 @@
             </div>
             <div class="message-title-tools">
               <template v-if="globalConfig.chatInfo.webrtc">
-                <i class="el-icon-phone-outline mr-10" title="语音通话" v-if="!contact.is_group && parseInt(globalConfig.chatInfo.webrtc)" @click="called(0)"></i>
-                <i class="el-icon-video-camera mr-10" title="视频通话" v-if="!contact.is_group && parseInt(globalConfig.chatInfo.webrtc)" @click="called(1)"></i>
+                <i class="el-icon-phone-outline ml-10" title="语音通话" v-if="!contact.is_group && parseInt(globalConfig.chatInfo.webrtc)" @click="called(0)"></i>
+                <i class="el-icon-video-camera ml-10" title="视频通话" v-if="!contact.is_group && parseInt(globalConfig.chatInfo.webrtc)" @click="called(1)"></i>
               </template>
-              <i class="el-icon-time mr-10" @click="openMessageBox" title="消息管理器"></i>
-              <i class="iconfont icon-ico mr-10 f-22" @click="groupQrShow=true" title="群二维码" v-if="contact.is_group"></i>
-              <i class="el-icon-more" @click="$user(contact.id)" title="基本资料" v-if="!contact.is_group"></i>
-              <i class="el-icon-more" @click="openGroupSetting(false)" title="群管理" v-if="contact.is_group && currentChat.role==1"></i>
+              <i class="el-icon-time ml-10" @click="openMessageBox" title="消息管理器"></i>
+              <i class="iconfont icon-ico ml-10 f-22" @click="groupQrShow=true" title="群二维码" v-if="contact.is_group"></i>
+              <i class="el-icon-more ml-10" @click="$user(contact.id)" title="基本资料" v-if="!contact.is_group"></i>
+              <i class="el-icon-more ml-10" @click="openGroupSetting(false)" title="群管理" v-if="contact.is_group && currentChat.role==1"></i>
               
             </div>
           </div>
@@ -287,7 +287,7 @@
       </lemon-imui>
     </div>
     <!-- 创建群聊 -->
-    <Group :visible.sync="createChatBox" :title="dialogTitle" @manageGroup="manageGroup" :isAdd="isAdd" :userIds="userIds"></Group>
+    <Group :visible.sync="createChatBox" :title="dialogTitle" @manageGroup="manageGroup" :isAdd="isAdd" :userIds="userIds"  :groupId="group_id"></Group>
     <!-- 发布公告 -->
     <el-dialog
       title="发布公告"
@@ -332,7 +332,7 @@
       width="500px"
       append-to-body
     >
-      <ChatSet :contact="contactSetting" :key="componentKey"></ChatSet>
+      <ChatSet :contact="contactSetting" :key="componentKey" @changeOwner="changeOwner"></ChatSet>
     </el-dialog>
     <!-- 语音录制 -->
     <el-dialog title="语音录制" custom-class="no-padding" :visible.sync="VoiceStatus" :modal="true" width="500px"
@@ -434,7 +434,7 @@ export default {
       contactSetting: {},
       groupUserCount: 0,
       dialogTitle: "创建群聊",
-      isAdd: true,
+      isAdd: 1,
       userIds: [],
       // 公告
       notice: "",
@@ -456,7 +456,7 @@ export default {
         limit:10,
       },
       is_group: 0,
-      group_id: 0,
+      group_id: '',
       contacts: [],
       allUser: [],
       groupUser: [],
@@ -678,20 +678,6 @@ export default {
           click(e, instance, hide) {
             const { IMUI, contact } = instance;
             hide();
-            _this.groupSetting = true;
-            _this.contactSetting = contact;
-            _this.componentKey ++;
-          },
-          icon: "el-icon-setting",
-          text: "群管理",
-          visible: instance => {
-            return instance.contact.role == 1 && instance.contact.is_group == 1;
-          }
-        },
-        {
-          click(e, instance, hide) {
-            const { IMUI, contact } = instance;
-            hide();
             _this
               .$confirm("确定删除该好友吗？", "提示", {
                 confirmButtonText: "确定",
@@ -726,23 +712,19 @@ export default {
             const { IMUI, contact } = instance;
             hide();
             _this
-              .$confirm("确定删除该群聊吗？", "提示", {
+              .$confirm("确定解散该群聊吗？", "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"
               })
               .then(() => {
                 _this.$api.imApi.removeGrouprAPI({ id: contact.id });
-                _this.$message({
-                  type: "success",
-                  message: "删除成功!"
-                });
               }).catch(() => {
               });
           },
           icon: "el-icon-delete",
           color: "red",
-          text: "删除群聊",
+          text: "解散群聊",
           visible: instance => {
             return (
               instance.contact.owner_id == _this.user.id &&
@@ -1779,28 +1761,34 @@ export default {
     },
     // 打开创建团队的窗口
     openCreateGroup() {
-      this.isAdd=true;
+      this.isAdd=1;
       this.dialogTitle = "创建群聊";
+      this.createChatBox = true;
+    },
+    // 打开选择新群主的窗口
+    changeOwner() {
+      this.isAdd=2;
+      this.dialogTitle = "转让群聊";
       this.createChatBox = true;
     },
     // 打开添加群成员的窗口
     openAddGroupUser() {
       var user_ids = utils.arrayToString(this.groupUser, "user_id");
-      this.isAdd=false;
+      this.isAdd=0;
       this.userIds=user_ids;
       this.dialogTitle = "添加群成员";
       this.createChatBox = true;
     },
     // 添加群成员或者创建群聊
-    manageGroup(selectUid,isAdd,groupName,group_id) {
+    manageGroup(selectUid,isAdd,groupName) {
       this.createChatBox = false;
       let num=this.globalConfig.chatInfo.groupUserMax;
-      if(!isAdd){
+      if(isAdd==0){
         if((selectUid.length + this.groupUser.length) > num && num>0){
           return this.$message.error("群成员不能大于"+num+"人！");
         }
         this.$api.imApi.addGroupUserAPI({ user_ids: selectUid, id: this.group_id });
-      }else{
+      }else if(isAdd==1){
         if(selectUid.length > num && num>0){
           return this.$message.error("群成员不能大于"+num+"人！");
         }
@@ -1814,6 +1802,24 @@ export default {
             IMUI.changeContact(data.id);
           }
         });
+      }else{
+          //转让群聊
+          this.$api.imApi.changeOwnerAPI({ user_id: selectUid[0], id: this.group_id }).then(res => {
+            const { IMUI } = this.$refs;
+            if (res.code == 0) {
+              this.$message({
+                type: "success",
+                message:res.msg
+              });
+              this.groupSetting=false;
+              IMUI.updateContact({
+                id: this.group_id,
+                role: 3,
+                owner_id: selectUid[0]
+              });
+              IMUI.changeContact(null);
+            }
+          });
       }
     },
     // 封装循环请求
@@ -2305,5 +2311,10 @@ export default {
 .group-user {
   min-height: 300px;
   overflow: auto;
+}
+</style>
+<style>
+.lemon-editor__tool{
+  border-top: solid 1px #e6e6e6;
 }
 </style>
