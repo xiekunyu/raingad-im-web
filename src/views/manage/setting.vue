@@ -388,7 +388,7 @@ export default {
     computed: {
       getToken () {
         const authKey = Lockr.get('authToken');
-        return { authToken: authKey }
+        return { Authorization: authKey }
       },
       getUrl () {
         return window.BASE_URL + '/common/upload/uploadImage'

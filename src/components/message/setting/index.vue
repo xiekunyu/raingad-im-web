@@ -245,7 +245,7 @@ export default {
         },
         getToken () {
           const authKey = Lockr.get('authToken');
-          return { authToken: authKey }
+          return { Authorization: authKey }
         },
     },
     watch: {
