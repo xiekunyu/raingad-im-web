@@ -149,7 +149,7 @@
         },
         // 设置备注
         setNickname(){
-          let friend_id=this.detail.friend.friend_user_id ?? '';
+          let friend_id=this.detail.friend.friend_id ?? '';
           if(!this.detail.friend){
             this.$message.error('该用户不是您的好友');
             return false;
