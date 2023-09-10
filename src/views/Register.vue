@@ -88,7 +88,7 @@ export default {
   mounted() {
     let regauth=this.globalConfig.sysInfo.regauth ?? 0;
     let msg='请输入账号：4-32个字符';
-    switch(regauth){
+    switch(parseInt(regauth)){
       case 1:
         msg='请输入正确的手机号';
         break;
@@ -99,7 +99,7 @@ export default {
         msg='请输入正确的手机号或者邮箱';
         break;
       default:
-        msg='请输入账号';
+        msg='请输入正确的账号';
     }
     let req={ required: true, message: msg, trigger: 'blur' };
     this.loginRules.account.push(req)

@@ -219,6 +219,7 @@
  </template>
  
  <script>
+ import { mapState } from 'vuex';
    export default {
      data() {
        return {
@@ -246,10 +247,7 @@
          },
          rules:{
             account: [
-               { required: true, message: '请输入手机号或邮箱', trigger: 'blur' },
-               { min: 4, max: 32, message: '长度在 4 到 32 个字符', trigger: 'blur' },
-               { type: 'email', message: '请输入正确的手机号或邮箱', trigger: 'blur', validator: this.validateContact },
-               { type: 'phone', message: '请输入正确的手机号或邮箱', trigger: 'blur', validator: this.validateContact }
+               { min: 4, max: 32, message: '长度在 4 到 32 个字符', trigger: 'blur' }
             ],
             realname: [
                { required: true, message: '请输入用户名称', trigger: 'blur' },
@@ -269,6 +267,11 @@
          currentUser:{},
        }
      },
+     computed: {
+      ...mapState({
+         globalConfig: state => state.globalConfig
+      })
+   },
      watch: {
       dialogVisible(New) {
          if (!New) {
@@ -277,8 +280,37 @@
       }
      },
      mounted() {
-      this.detail=this.originDetail;
-      this.getUserList();
+         this.detail=this.originDetail;
+         this.getUserList();
+         let regauth=this.globalConfig.sysInfo.regauth ?? 0;
+         let msg='请输入账号：4-32个字符';
+         switch(parseInt(regauth)){
+            case 1:
+               msg='请输入正确的手机号';
+               break;
+            case 2:
+               msg='请输入正确的邮箱';
+               break;
+            case 3:
+               msg='请输入正确的手机号或者邮箱';
+               break;
+            default:
+               msg='请输入正确的账号';
+               break;
+               
+         }
+         let req={ required: true, message: msg, trigger: 'blur' };
+         this.rules.account.push(req)
+         let email={ type: 'email', message: msg, trigger: 'blur', validator: this.validateContact };
+         let mobile={ type: 'phone', message: msg, trigger: 'blur', validator: this.validateContact };
+         if(regauth==1){
+            this.rules.account.push(mobile)
+         }else if(regauth==2){
+            this.rules.account.push(email)
+         }else if(regauth==3){
+            this.rules.account.push(email)
+            this.rules.account.push(mobile)
+         }
      },
      methods: {
       // 获取用户列表

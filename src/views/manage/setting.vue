@@ -97,7 +97,7 @@
                   <div v-show="chatInfo.msgClear==1">
                       <span class="c-999 f-12">消息最大保留天数</span> 
                       <el-input v-model="chatInfo.msgClearDay" type="text" class="ml-10" style="width:120px"></el-input>
-                      <span class="ml-10 c-999 f-12">系统在每日凌晨2点自动清理消息</span>
+                      <span class="ml-10 c-999 f-12">系统在每日凌晨2点自动清理该天数以前的消息</span>
                   </div>
               </el-form-item>
               <el-form-item label="音视频通话" prop="webrtc">

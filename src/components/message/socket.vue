@@ -79,7 +79,16 @@
             },
             websocketSend(agentData) {//数据发送
                 var data=JSON.stringify(agentData);
-                this.websocket.send(data);
+                if(this.checkStatus){
+                    this.websocket.send(data);
+                }
+            },
+            checkStatus(){
+                if(!this.websocket || [2,3].includes(this.websocket.readyState)){
+                    console.log("未链接！")
+                    return false;
+                }
+                return true;
             },
             websocketClose(e) {  //关闭
                 let userInfo=Lockr.get('UserInfo');

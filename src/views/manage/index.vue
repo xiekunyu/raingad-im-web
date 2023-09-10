@@ -53,7 +53,7 @@
         </div>
         <el-alert
             type="warning"
-            title="系统服务使用要求运行的PHP的版本必须是默认的，并且可以直接执行PHP命令。如果启动不成功可能是某些函数被禁用或者runtime的目录没有写入权限。"
+            title="系统服务使用要求运行的PHP的版本必须是默认的，并且可以直接执行PHP命令。如果启动失败可能是某些函数被禁用或者runtime的目录没有写入权限，可以在终端中运行 ‘php think task start’ 来调试程序的错误。"
             show-icon
             :closable="false">
           </el-alert>
@@ -62,7 +62,7 @@
           <div class="el-icon-alarm-clock"> {{x.started}} </div>
           <div class="c-green" v-if="x.status=='active'">运行中</div>
           <div class="c-red" v-else>未启动</div>
-          <el-button size="mini"  type="text" @click="showLog(x.name)" v-if="taskStatus" class="ml-10">日志</el-button>
+          <el-button size="mini"  type="text" @click="showLog(x.name)" class="ml-10">日志</el-button>
         </div>
         <el-dialog width="900px" title="运行日志" :visible.sync="dialogTableVisible">
           <el-button @click="clearTaskLog">清除进程日志</el-button>
