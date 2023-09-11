@@ -46,26 +46,12 @@
                 const WS_URI = this.getWsUrl();
                 this.websocket = new WebSocket(WS_URI);
                 this.start();
-                this.connectNum = 1;
+
                 this.is_open_socket = true;
                 this.websocket.onmessage = this.websocketOnMessage;
                 this.websocket.onclose = this.websocketClose;
-                this.websocket.onerror = this.websocketError;
                 Vue.prototype.$websocket = this.websocket;
-
-            },
-            websocketError(){
-                this.is_open_socket = false;
-				clearInterval(this.heartbeatInterval)
-				clearInterval(this.reconnectTimeOut)
-				if (this.connectNum < 6) {
-					this.manMade == false
-					this.reconnect();
-					this.connectNum += 1
-				} else {
-                    this.$store.state.wsStatus = false;
-					this.connectNum = 1
-				}
+                this.$store.state.wsStatus = true;
             },
             websocketOnMessage(e) { //数据接收
                 const data = JSON.parse(e.data);
@@ -92,15 +78,20 @@
                 }
             },
             websocketClose(e) {  //关闭
-                clearInterval(this.heartbeatInterval)
-                clearInterval(this.reconnectTimeOut)
+                console.log("websocket连接关闭")
                 this.is_open_socket = false;
-                if (this.connectNum < 6) {
-                    this.reconnect();
-                } else {
+				clearInterval(this.heartbeatInterval)
+				clearInterval(this.reconnectTimeOut)
+				if (this.connectNum < 3) {
+					this.manMade = false
+					this.reconnect();
+					this.connectNum += 1
+                    return;
+				} else {
                     this.$store.state.wsStatus = false;
-                    this.connectNum = 1
-                }
+					this.connectNum = 1;
+                    this.websocket = null
+				}
                 let userInfo=Lockr.get('UserInfo');
                 this.$api.commonApi.offlineAPI({user_id:userInfo.user_id}).then(res=>{
                     console.log("connection closed (" + e.code + ")");
@@ -130,10 +121,10 @@
                 if (!this.is_open_socket) {
                     return
                 }
-                this.manMade == true;
                 this.websocket.close();
             },
             reconnect(){
+                console.log("正在重连...");
                 //停止发送心跳
                 clearInterval(this.heartbeatInterval)
                 //如果不是人为关闭的话，进行重连

@@ -115,6 +115,11 @@
 
         <!-- 最近联系人列表顶部插槽 不滚动-->
         <template #sidebar-message-fixedtop="instance">
+          <div class="lz-flex no-internet pd-10 mb-10 lz-space-between lz-align-items-center" v-if="!wsStatus">
+            <div class="el-icon-info" ></div>
+            <div>当前网络无法实时接收消息</div>
+            <div class="el-icon-refresh cur-handle" @click="reconnect" title="重新链接"></div>
+          </div>
           <div class="contact-fixedtop-box">
             <el-input
               placeholder="搜索联系人"
@@ -167,6 +172,7 @@
               </div>
             </div>
           </div>
+
         </template>
         <!-- 最近联系人列表顶部插槽，滚动 -->
         <template #sidebar-message-top="instance">
@@ -870,6 +876,7 @@ export default {
   computed: {
     // 监听全局socket消息状态
     ...mapState({
+      wsStatus: state => state.wsStatus,
       socketAction: state => state.socketAction,
       contactId: state => state.toContactId,
       contactSync: state => state.contactSync,
@@ -884,6 +891,10 @@ export default {
     }
   },
   watch: {
+    wsStatus(val) {
+      console.log("🚀 ~ file: index.vue:895 ~ wsStatus ~ val:", val)
+      
+    },
     isFullscreen(val){
       Lockr.set('isFullscreen',val);
       this.curWidth=val?'100vw':this.width;
@@ -2098,8 +2109,11 @@ export default {
           })
 				}
     },
-    groupQr(){
-
+    reconnect(){
+      this.$refs.socket.initWebSocket();
+    },
+    closeSocket(){
+      this.$refs.socket.close();
     },
     // 退出聊天室
     logout() {
@@ -2316,5 +2330,9 @@ export default {
 <style>
 .lemon-editor__tool{
   border-top: solid 1px #e6e6e6;
+}
+.no-internet{
+  background-color: #fef0f0;
+  color: #f56c6c;
 }
 </style>
