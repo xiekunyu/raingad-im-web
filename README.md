@@ -3,17 +3,20 @@
 #### 介绍
 Raingad-IM是一个开源的即时通信demo，需要前后端配合使用，主要用于学习交流，为大家提供即时通讯的开发思路，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统、内网交流、社区交流。
 
-前端地址：https://gitee.com/raingad/im-chat-front
+|  类型 | 链接 |
+| --------- | ---- |
+| 前端源码    | https://gitee.com/raingad/im-chat-front |
+| 后端源码 | https://gitee.com/raingad/im-instant-chat |
+| web端演示 | http://im.raingad.com/index.html |
+| 移动端H5演示 | http://im.raingad.com/h5 |
+| 安卓APP演示 | https://emoji.raingad.com/file/raingad.apk |
 
-后端地址：https://gitee.com/raingad/im-instant-chat
 
-体验地址：http://im.raingad.com/index.html
-
-账号：13800000002  密码：123456
+体验账号：13800000002  密码：123456
 
 尾号2、3、4......18、19、20 都是
 
-账号：13800000020  密码：123456 
+体验账号：13800000020  密码：123456 
 
 #### 支持功能
 
@@ -34,12 +37,10 @@ Raingad-IM是一个开源的即时通信demo，需要前后端配合使用，主
  8. 全新支持企业模式和社区模式，社区模式支持注册、添加好友功能
 
 
-> 移动端版本已经上线，请关注演示地址内的链接。
-
-
 #### 最新更新
 **v-3.0.0** (2023年9月4日) 
-<font color="red">不兼容之前的版本！！！</font>
+
+!!! **<font color="red">不兼容之前的版本！！！</font>**
 1. 全新升级，不兼容之前版本.
 2. 修改登录方式，新增JWT token登录，不再服务器缓存登录信息，节约服务器资源。
 3. 新增聊天内容加密，聊天数据更安全，请仔细阅读 `.example.env` 里面的配置.

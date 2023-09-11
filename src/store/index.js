@@ -23,6 +23,7 @@ const state = {
     unread: 0,
     allContacts: [],
     globalConfig:[], // 全局配置
+    wsStatus:true, // websocket状态
     setting: {
         sendKey: "1",
         theme: "default",

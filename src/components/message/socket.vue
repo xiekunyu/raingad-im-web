@@ -16,8 +16,15 @@
         name: "socket",
         data() {
             return {
+                is_open_socket:false,
                 websocket: null,
-                pingInterval:30
+                pingInterval:30,
+                connectNum:1,
+                manMade:true,
+                //心跳检测
+		        timeout : 30000,//多少秒执行检测
+		        heartbeatInterval : null, //检测服务器端是否还活着
+		        reconnectTimeOut : null, //重连之后多久再次重连
             }
         },
         methods: {
@@ -38,11 +45,27 @@
                 //ws地址
                 const WS_URI = this.getWsUrl();
                 this.websocket = new WebSocket(WS_URI);
-                this.heart();
+                this.start();
+                this.connectNum = 1;
+                this.is_open_socket = true;
                 this.websocket.onmessage = this.websocketOnMessage;
                 this.websocket.onclose = this.websocketClose;
+                this.websocket.onerror = this.websocketError;
                 Vue.prototype.$websocket = this.websocket;
 
+            },
+            websocketError(){
+                this.is_open_socket = false;
+				clearInterval(this.heartbeatInterval)
+				clearInterval(this.reconnectTimeOut)
+				if (this.connectNum < 6) {
+					this.manMade == false
+					this.reconnect();
+					this.connectNum += 1
+				} else {
+                    this.$store.state.wsStatus = false;
+					this.connectNum = 1
+				}
             },
             websocketOnMessage(e) { //数据接收
                 const data = JSON.parse(e.data);
@@ -68,14 +91,27 @@
                         break;
                 }
             },
-            heart(){
-                setInterval(() => {
-                    this.pingInterval-=2;
-                    if(this.pingInterval<=0){
-                        this.websocketSend({type:'ping'});
-                        this.pingInterval=30;
-                    }
-                }, 2000);
+            websocketClose(e) {  //关闭
+                clearInterval(this.heartbeatInterval)
+                clearInterval(this.reconnectTimeOut)
+                this.is_open_socket = false;
+                if (this.connectNum < 6) {
+                    this.reconnect();
+                } else {
+                    this.$store.state.wsStatus = false;
+                    this.connectNum = 1
+                }
+                let userInfo=Lockr.get('UserInfo');
+                this.$api.commonApi.offlineAPI({user_id:userInfo.user_id}).then(res=>{
+                    console.log("connection closed (" + e.code + ")");
+                })
+            },
+            start() {
+                this.heartbeatInterval = setInterval(() => {
+                    this.websocketSend({
+                        "type": "ping"
+                    });
+                }, this.timeout)
             },
             websocketSend(agentData) {//数据发送
                 var data=JSON.stringify(agentData);
@@ -90,11 +126,23 @@
                 }
                 return true;
             },
-            websocketClose(e) {  //关闭
-                let userInfo=Lockr.get('UserInfo');
-                this.$api.commonApi.offlineAPI({user_id:userInfo.user_id}).then(res=>{
-                    console.log("connection closed (" + e.code + ")");
-                })
+            close() {
+                if (!this.is_open_socket) {
+                    return
+                }
+                this.manMade == true;
+                this.websocket.close();
+            },
+            reconnect(){
+                //停止发送心跳
+                clearInterval(this.heartbeatInterval)
+                //如果不是人为关闭的话，进行重连
+                if (!this.is_open_socket && this.manMade == false ) {
+                    console.log("5秒后重新连接...")
+                    this.reconnectTimeOut = setInterval(() => {
+                        this.initWebSocket();
+                    }, 5000)
+                }
             },
             playAudio () {
                 const audio = document.getElementById('chatAudio');
