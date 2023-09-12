@@ -46,7 +46,7 @@
                   <div class="label">邮箱</div>
                   <div>{{ detail.email || "未设置"}}</div>
                 </div>
-                <div class="card-row" v-if="globalConfig.sysInfo.ipregion && isFriend">
+                <div class="card-row" v-if="parseInt(globalConfig.sysInfo.ipregion) && isFriend">
                   <div class="label">IP</div>
                   <div v-if="detail.last_login_ip">{{ detail.last_login_ip || "未知"}} （{{detail.location || "未知"}}）</div>
                   <div v-else>未知</div>

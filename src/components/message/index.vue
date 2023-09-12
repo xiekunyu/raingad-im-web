@@ -88,7 +88,7 @@
                 </span>
                 <span class="displayName" v-if="is_group == 0">
                   <OnlineStatus :type="contact.is_online ? 'success' : 'info'" :pulse="contact.is_online " v-if="globalConfig.chatInfo.online" ></OnlineStatus> {{contact.displayName}}</span>
-                  <span v-if="globalConfig.sysInfo.ipregion && contact.last_login_ip" class="c-999 f-12 ml-5">
+                  <span v-if="parseInt(globalConfig.sysInfo.ipregion) && contact.last_login_ip" class="c-999 f-12 ml-5">
                     <span v-if="globalConfig.chatInfo.online && !contact.is_online">(离线)</span>{{ contact.last_login_ip }} {{ contact.location }}</span> 
               </span>
 
@@ -2027,6 +2027,14 @@ export default {
       if(this.user.id==message.toContactId){
         // 这里需要将原来的发送对象的id换回来，哈哈哈
         message.toContactId=message.toUser;
+      }
+      if(message.toContactId=='system'){
+        IMUI.updateContact({
+          id: message.toContactId,
+          lastContent: IMUI.lastContentRender(message),
+          lastSendTime: message.sendTime,
+          unread:'+1'
+        });
       }
       IMUI.appendMessage(message, true);
       
