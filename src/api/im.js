@@ -26,6 +26,18 @@ imApi.sendMessageAPI= (data)  =>{
 }
 
 /**
+ * 转发聊天消息
+ * @param {*} data
+ */
+imApi.forwardMessageAPI= (data)  =>{
+    return request({
+        url: 'enterprise/im/forwardMessage',
+        method: 'post',
+        data: data
+    })
+}
+
+/**
  * 发送webrtc音视频消息
  * @param {*} data
  */

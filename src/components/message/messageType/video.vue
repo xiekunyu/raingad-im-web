@@ -26,7 +26,6 @@ export default {
                     <i class="el-icon-picture-outline"></i>
                   </div>
                  </el-image>
-                  {props.extends.duration}
                   <div class="video-shadow">
                   <div class="el-icon el-icon-video-play c-white f-28 video-icon"></div>
                   </div>

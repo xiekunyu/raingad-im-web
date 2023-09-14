@@ -1833,24 +1833,6 @@ export default {
           });
       }
     },
-    // 封装循环请求
-    fn(formData) {
-      return new Promise((resolve, reject) => {
-        this.$api.imApi.sendMessageAPI(formData)
-          .then(res => {
-            if (res.code === 0) {
-              resolve(res);
-            } else {
-              this.$message.error(res.msg);
-            }
-          })
-          .catch(err => {});
-      });
-    },
-    async test(formData) {
-      let n = await this.fn(formData);
-      return n;
-    },
     // 转发消息
     forwardUser(userIds) {
       if (userIds.length > 5) {
@@ -1858,44 +1840,7 @@ export default {
       }
       this.forwardBox = false;
       var message = this.currentMessage;
-      var arr = [];
-      for (var i = 0; i < userIds.length; i++) {
-        var toContactId = userIds[i].toString();
-        message.id = utils.generateRandId();
-        message.status = "successd";
-        message.sendTime = getTime();
-        message.toContactId = toContactId;
-        message.fromUser = this.user;
-        message.is_group = 0;
-        if (toContactId.indexOf("group") != -1) {
-          message.is_group = 1;
-        }
-        if(!this.globalConfig.chatInfo.simpleChat && message.is_group==0){
-          continue;
-        }
-        arr.push(this.test(message));
-      }
-      // 批量请求
-      Promise.all(arr)
-        .then(res => {
-          const { IMUI } = this.$refs;
-          for (var i = 0; i < res.length; i++) {
-            var data = res[i].data;
-            if (data.is_group == 0) {
-              data.toContactId = parseInt(data.toContactId);
-            }
-            // 添加消息
-            IMUI.appendMessage(data);
-            // 自己发送消息，修改未读数
-            IMUI.updateContact({
-              id: data.toContactId,
-              unread: 0
-            });
-          }
-        })
-        .catch(err => {
-          console.log("error", err);
-        });
+      this.$api.imApi.forwardMessageAPI({user_ids:userIds,msg_id:message.msg_id});
     },
     // 获取群聊成员列表
     getGroupUserList(group_id) {
