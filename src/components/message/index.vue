@@ -549,7 +549,20 @@ export default {
           click: (e, instance, hide) => {
             const { IMUI, contact } = instance;
             hide();
-            this.$user(contact.user_id);
+            let friend=this.getContact(contact.user_id);
+            let curContact=IMUI.getCurrentContact();
+            // 如果是管理员，或者群聊开启了资料查看才能打开详情
+            if(curContact.setting.profile==1 || curContact.role<3 || friend || contact.user_id==this.user.id){
+              this.$user(contact.user_id);
+            }else{
+              this.$message.error('已开启隐私，无法查看资料');
+            }
+          },
+          visible: instance => {
+            // 不是自己才可以查看资料
+            return (
+              instance.contact.user_id != this.user.id
+            );
           }
         },
         {
@@ -776,7 +789,8 @@ export default {
       contextmenu: [
         {
           click: (e, instance, hide) => {
-            const { IMUI, message } = instance;
+            const { IMUI } = instance;
+            const message=JSON.parse(JSON.stringify(instance.message)) ;
             this.$api.imApi.undoMessageAPI({ id: message.id })
               .then(res => {
                 const data = {
@@ -791,6 +805,7 @@ export default {
                           v-show={message.type == "text"}
                           style="color:#409EFF;cursor:pointer"
                           content={message.content}
+                          data={message.type}
                           on-click={e => {
                             IMUI.setEditorValue(
                               e.target.getAttribute("content")
@@ -803,7 +818,7 @@ export default {
                     </div>
                   ),
                   toContactId: message.toContactId,
-                  sendTime: getTime()
+                  sendTime: message.sendTime
                 };
                 IMUI.updateMessage(data);
               })
@@ -813,9 +828,15 @@ export default {
             hide();
           },
           visible: instance => {
+            const { IMUI, message } = instance;
+            let role=3;
+            if(instance.message.is_group==1){
+              let contact= IMUI.getCurrentContact();
+              role=contact.role;
+            }
             return (
-              instance.message.fromUser.id == this.user.id &&
-              getTime() - instance.message.sendTime < 120000
+              (instance.message.fromUser.id == this.user.id &&
+              getTime() - instance.message.sendTime < 120000) || role<3
             );
           },
           text: "撤回消息"
@@ -970,6 +991,9 @@ export default {
           break;
         // 撤回消息
         case "undoMessage":
+          if(message.from_user==this.user.id && message.isMobile==0 && getTime()-message.sendTime<120000){
+            return false;
+          }
           IMUI.updateMessage(message);
           break;
         // 设置置顶

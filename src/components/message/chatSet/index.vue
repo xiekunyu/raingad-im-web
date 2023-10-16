@@ -30,6 +30,16 @@
             </div>
           </div>
           <div class="setting-item">
+            <div class="setting-title">群成员隐私：</div>
+            <div class="setting-option">
+              <el-switch v-model="setting.profile"  :active-value="'1'" :inactive-value="'0'"  @change="groupSetting"> </el-switch>
+            </div>
+            <div class="setting-description">
+              <div class="des-title">允许添加群成员为好友</div>
+              <div class="des-comment">启用后，成员可以互相查看资料并添加为好友或发消息</div>
+            </div>
+          </div>
+          <div class="setting-item">
             <div class="setting-title">群禁言：</div>
             <div class="setting-option">
               <el-radio-group v-model="setting.nospeak" size="mini"  @change="groupSetting">
