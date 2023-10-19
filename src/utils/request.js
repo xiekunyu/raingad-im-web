@@ -133,7 +133,7 @@ service.interceptors.response.use(
         if (error.response) {
             const response = error.response
             if (response.status == 500) {
-                errorMessage('网络错误，请检查您的网络')
+                errorMessage('服务器返回错误，请检查！')
             } else if (response.data && response.data.msg) {
                 errorMessage(response.data.msg)
             }
