@@ -1,6 +1,6 @@
 {
   "name": "Raingad-IM",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "一款基于vue2.0的即时聊天工具",
   "logo": "https://im.file.raingad.com/logo/logo.png",
   "frontUrl": "https://gitee.com/raingad/im-chat-front",

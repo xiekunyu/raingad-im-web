@@ -821,9 +821,16 @@ export default {
                   sendTime: message.sendTime
                 };
                 IMUI.updateMessage(data);
+                const msgs=IMUI.getMessages(message.toContactId);
+                if(message.id==msgs[msgs.length-1].id){
+                  IMUI.updateContact({
+                    id: message.toContactId,
+                    lastContent: "你撤回了一条消息"
+                  });
+                }
               })
               .catch(error => {
-                this.$message.error("发生错误");
+                this.$message.error("发生错误"+error);
               });
             hide();
           },
@@ -995,6 +1002,14 @@ export default {
             return false;
           }
           IMUI.updateMessage(message);
+          // 验证是否是最后一条消息
+          const msgs=IMUI.getMessages(message.toContactId);
+          if(message.id==msgs[msgs.length-1].id){
+            IMUI.updateContact({
+              id: message.toContactId,
+              lastContent: "对方撤回了一条消息"
+            });
+          }
           break;
         // 设置置顶
         case "setChatTop":
