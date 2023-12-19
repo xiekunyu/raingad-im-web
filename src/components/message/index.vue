@@ -973,6 +973,10 @@ export default {
             id:message.id,
             is_online:message.is_online
           })
+          // 如果是下线,并且和通话的是用一个人,就将通话锁定关闭
+          if(!message.is_online && this.webrtcLock==message.id){
+            this.webrtcLock=false;
+          }
           break;
         case "offline":
           if(message.id==this.user.id && message.client_id!=client_id && !message.isMobile){
@@ -1179,7 +1183,7 @@ export default {
               this.caller=message.fromUser;
             }else if(message.extends.event=='offer' || message.extends.event=='answer'){
               //其他端在通话中，锁定webrtc，禁止通话
-              this.webrtcLock=true;
+              this.webrtcLock=message.fromUser.user_id;
             }else if(message.extends.event=='hangup'){
               let wsData=Lockr.get('wsData');
               wsData.content=message.content;
@@ -1570,6 +1574,7 @@ export default {
     },
     // 切换聊天窗口时要检测那些消息未读
     handleChangeContact(contact, instance) {
+      console.log("🚀 ~ file: index.vue:1577 ~ handleChangeContact ~ contact:", contact)
       instance.updateContact({
         id: contact.id,
         unread: 0
@@ -1765,6 +1770,7 @@ export default {
     },
     // 拉取聊天记录
     handlePullMessages(contact, next, instance) {
+      console.log("🚀 ~ file: index.vue:1773 ~ handlePullMessages ~ contact:", contact)
       let params=this.params;
       // 获取当前聊天的最上面一条消息，并将id传入后端获取比改id要小的消息，page永远设置为1.
       let message=instance.getMessages(contact.id);
