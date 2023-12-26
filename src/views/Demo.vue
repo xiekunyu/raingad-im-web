@@ -37,7 +37,7 @@
       show-icon
       :closable="false"
       title="请仔细阅读一下文档！（webrtc一对一音视频通话需要自己搭建turn服务器，本文底部有搭建链接，通话中稳定但有一定的BUG）。"
-      type="info">
+      type="warning">
     </el-alert>
 <!-- 
     <el-alert

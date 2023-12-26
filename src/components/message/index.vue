@@ -49,7 +49,7 @@
             <p class="lemon-contact__label">
               <span class="lemon-contact__name">
                 <OnlineStatus v-if="Contact.is_online && Contact.is_group==0 && globalConfig.chatInfo.online==1" title="在线" type="success"></OnlineStatus> 
-                <el-tag size="mini" v-if="Contact.is_group == 1">群聊</el-tag>
+                <!-- <el-tag size="mini" v-if="Contact.is_group == 1">群聊</el-tag> -->
                 {{ Contact.displayName }} 
               </span>
               <span
@@ -82,7 +82,8 @@
                   v-if="is_group == 1"
                   @click="isEdit = true"
                 >
-                  <el-tag size="mini">群聊</el-tag> {{ contact.displayName }}<span class="mr-5">({{ groupUserCount }})</span>
+                  <!-- <el-tag size="mini">群聊</el-tag> -->
+                   {{ contact.displayName }}<span class="mr-5">({{ groupUserCount }})</span>
                   <el-tag size="mini" v-if="contact.setting && contact.setting.nospeak == 1"  type="warning">仅群管理员可发言</el-tag>
                   <el-tag size="mini" v-if="contact.setting && contact.setting.nospeak == 2"  type="danger">全员禁言中</el-tag>
                 </span>
@@ -104,7 +105,6 @@
                 <i class="el-icon-phone-outline ml-10" title="语音通话" v-if="!contact.is_group && parseInt(globalConfig.chatInfo.webrtc)" @click="called(0)"></i>
                 <i class="el-icon-video-camera ml-10" title="视频通话" v-if="!contact.is_group && parseInt(globalConfig.chatInfo.webrtc)" @click="called(1)"></i>
               </template>
-              <i class="el-icon-time ml-10" @click="openMessageBox" title="消息管理器"></i>
               <i class="iconfont icon-ico ml-10 f-22" @click="groupQrShow=true" title="群二维码" v-if="contact.is_group"></i>
               <i class="el-icon-more ml-10" @click="$user(contact.id)" title="基本资料" v-if="!contact.is_group"></i>
               <i class="el-icon-more ml-10" @click="openGroupSetting(false)" title="群管理" v-if="contact.is_group && currentChat.role==1"></i>
@@ -258,7 +258,9 @@
                         }}</span>
                       </div>
                       <div class="user-role">
-                        <i
+                        <el-tag type="danger" size="mini" v-if="item.role == 1">群主</el-tag>
+                        <el-tag type="warning" size="mini" v-if="item.role == 2">管理员</el-tag>
+                        <!-- <i
                           class="el-icon-user-solid fc-danger"
                           title="创建者"
                           v-if="item.role == 1"
@@ -267,7 +269,7 @@
                           class="el-icon-user-solid fc-warning"
                           title="管理员"
                           v-if="item.role == 2"
-                        ></i>
+                        ></i> -->
                       </div>
                     </lemon-contact>
                   </el-scrollbar>
@@ -1303,6 +1305,17 @@ export default {
             {
               name: "uploadFile",
               title: "发送文件",
+            },
+            {
+              name:"msgBox",
+              title:"消息管理器",
+              click:()=>{
+                this.messageBox = true;
+                // 组件重置
+                this.componentKey += 1;
+              },
+              render: () => { return <i class="el-icon el-icon-time f-18" style="vertical-align: middle;"></i> },
+              isRight: true
             }
           ];
         // 初始化工具栏
@@ -1574,7 +1587,6 @@ export default {
     },
     // 切换聊天窗口时要检测那些消息未读
     handleChangeContact(contact, instance) {
-      console.log("🚀 ~ file: index.vue:1577 ~ handleChangeContact ~ contact:", contact)
       instance.updateContact({
         id: contact.id,
         unread: 0
@@ -1770,7 +1782,6 @@ export default {
     },
     // 拉取聊天记录
     handlePullMessages(contact, next, instance) {
-      console.log("🚀 ~ file: index.vue:1773 ~ handlePullMessages ~ contact:", contact)
       let params=this.params;
       // 获取当前聊天的最上面一条消息，并将id传入后端获取比改id要小的消息，page永远设置为1.
       let message=instance.getMessages(contact.id);
@@ -2295,7 +2306,10 @@ export default {
           line-height: 10px;
         }
         .user-name {
-          width: 110px;
+          width: 100px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
         }
         .user-role {
           width: 20px;

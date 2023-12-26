@@ -64,6 +64,10 @@ export default {
     color:#aaa;
     border:solid 1px #aaa;
   }
+  .el-tag--mini{
+    padding: 2px !important;
+    line-height: 1 !important;
+  }
   body,html,#app{
     height: 100%;
     width:100%

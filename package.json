@@ -1,6 +1,6 @@
 {
   "name": "Raingad-IM",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "一款基于vue2.0的即时聊天工具",
   "logo": "https://im.file.raingad.com/logo/logo.png",
   "frontUrl": "https://gitee.com/raingad/im-chat-front",
@@ -29,7 +29,7 @@
     },
     {
       "icon": "el-icon-video-camera",
-      "text": "支持一对一音视频通话（已打通web端和移动端）"
+      "text": "支持一对一音视频通话（已打通web端和移动端，小程序不支持）"
     },
     {
       "icon": "el-icon-milk-tea",
