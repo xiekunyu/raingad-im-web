@@ -91,6 +91,11 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
+      // 获取url的参数
+      let token=this.$route.query.token;
+      if(token){
+        return this.dologin({token:token});
+      }
       // 如果是演示模式、获取1-20的随机数填充账号密码
       if(this.globalConfig.demon_mode){
         const random = Math.floor(Math.random() * 19 + 2)
@@ -130,17 +135,20 @@ export default {
           Lockr.rm('LoginAccount');
         }
         if (valid) {
-          this.loading = true
+          this.dologin(data);
+        }
+      })
+    },
+    dologin(data){
+      this.loading = true
           this.$store
           .dispatch('Login', data)
           .then(res => {
             window.location.reload();
           })
-          .catch(() => {
-           this.loading = false
-          })
-        }
-      })
+        .catch(() => {
+          this.loading = false
+        })
     },
     sendCode(){
       if(!this.loginForm.account){
