@@ -506,6 +506,17 @@ export default {
           }
         },
         {
+          text: "@TA",
+          click: (e, instance, hide) => {
+            const { IMUI, contact } = instance;
+            IMUI.setUserTag(contact.userInfo);
+            hide();
+          },
+          visible: instance => {
+            return instance.contact.user_id != this.user.id;
+          }
+        },
+        {
           text: "设置管理员",
           click: (e, instance, hide) => {
             const { IMUI, contact } = instance;
@@ -859,6 +870,17 @@ export default {
             );
           },
           text: "撤回消息"
+        },
+        {
+          text: "@TA",
+          click: (e, instance, hide) => {
+            const { IMUI, message } = instance;
+            IMUI.setUserTag(message.fromUser);
+            hide();
+          },
+          visible: instance => {
+            return instance.message.fromUser.id != this.user.id && instance.message.is_group==1;
+          }
         },
         {
           text: "转发",
