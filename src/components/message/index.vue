@@ -14,6 +14,7 @@
         :avatarCricle="setting.avatarCricle"
         :sendKey="setSendKey"
         :wrapKey="wrapKey"
+        :latelyContacts="latelyContact"
         @menu-avatar-click="openSetting"
         @change-contact="handleChangeContact"
         @pull-messages="handlePullMessages"
@@ -31,6 +32,7 @@
         </template>
                 <!-- 最近联系人列表插槽 -->
         <template #sidebar-message="Contact">
+          <div class="lemon-contact-item" :class="Contact.is_top==1 ? 'bg-gray': ''">
             <span class="lemon-badge lemon-contact__avatar">
             <span
               class="lemon-avatar"
@@ -41,7 +43,8 @@
             /></span>
             <span
               class="lemon-badge__label"
-              v-if="Contact.unread > 0 && Contact.is_notice == 1"
+              :class="!Contact.is_notice ? 'bage-gray':''"
+              v-if="Contact.unread > 0"
               >{{ Contact.unread }}</span
             >
           </span>
@@ -49,7 +52,6 @@
             <p class="lemon-contact__label">
               <span class="lemon-contact__name">
                 <OnlineStatus v-if="Contact.is_online && Contact.is_group==0 && globalConfig.chatInfo.online==1" title="在线" type="success"></OnlineStatus> 
-                <!-- <el-tag size="mini" v-if="Contact.is_group == 1">群聊</el-tag> -->
                 {{ Contact.displayName }} 
               </span>
               <span
@@ -59,9 +61,7 @@
             </p>
             <p class="lemon-contact__content lemon-last-content">
               <span class="lastContent">
-                <span v-if="Contact.is_notice == 0 && Contact.unread > 0"
-                  >[{{ Contact.unread }}条未读]</span
-                >
+                <span class="c-red" v-if="Contact.is_at > 0">[有{{ Contact.is_at }}人@我] </span>
                 <span v-html="Contact.lastContent"></span>
               </span>
               <span
@@ -70,7 +70,7 @@
               ></span>
             </p>
           </div>
-          
+        </div>
         </template>
         <!-- 消息窗口顶部的插槽 -->
         <template #message-title="contact" style="color: red">
@@ -172,7 +172,7 @@
               </div>
             </div>
           </div>
-
+          <im-tab :values="tabList" :height="40" @change="changeTab"></im-tab>
         </template>
         <!-- 最近联系人列表顶部插槽，滚动 -->
         <template #sidebar-message-top="instance">
@@ -290,7 +290,12 @@
         </template>
         <!-- 发送按钮左边插槽 -->
         <template #editor-footer>
-          {{ setting.sendKey ==1 ? '使用 Enter 键发送消息' : '使用 Ctrl + Enter 键发送消息' }}
+          <div class="lz-flex lz-space-between lz-align-items-center">
+            <div class="at-item cur-handle mr-10" v-if="currentChat.is_at" @click="openMsgBox()">有{{currentChat.is_at }}人提到你</div>
+            <!-- 占位 -->
+            <div> </div>
+            <div>{{ setting.sendKey ==1 ? '使用 Ctrl + Enter 换行' : '使用 Ctrl + Enter 发送消息' }}</div>
+          </div>
         </template>
       </lemon-imui>
     </div>
@@ -329,7 +334,7 @@
       append-to-body
     >
     
-      <ChatRecord :contact="currentChat" :key="componentKey"></ChatRecord>
+      <ChatRecord :contact="currentChat" :condition="ChatRecordMap" :key="componentKey"></ChatRecord>
     </el-dialog>
     <!-- 消息管理器 -->
     <!-- 群设置中心 -->
@@ -371,6 +376,7 @@ import Files from "./files/index";
 import Setting from "./setting/index";
 import addFriend from "./friend/add";
 import OnlineStatus from "./mini/statusIndicator";
+import imTab from "./mini/im-tab";
 import webrtc from "./webrtc";
 import Apply from "./apply/index";
 import InviteImg from '@/assets/img/invite.png'
@@ -396,6 +402,7 @@ export default {
     Setting,
     ChooseDialog,
     OnlineStatus,
+    imTab,
     Apply
   },
   props: {
@@ -421,6 +428,7 @@ export default {
       curWidth:this.width,
       curHeight:this.height,
       unread:0,
+      atUnread:0,
       webrtcConfig:webrtcConfig,
       wsData:null,
       webrtcLock:false,
@@ -439,6 +447,7 @@ export default {
       groupSetting: false,
       VoiceStatus: false,
       groupQrShow: false,
+      ChatRecordMap:{},
       contactSetting: {},
       groupUserCount: 0,
       dialogTitle: "创建群聊",
@@ -472,9 +481,17 @@ export default {
       currentChat: {},
       // 当前消息
       currentMessage: {},
+      // 最近联系人
+      lastMessages:[],
       // 置顶列表
       chatTopList: [],
       playAudio: null,
+      activeTab:0,
+      tabList: [
+        { name: "所有", count: 0 },
+        { name: "未读", count: 0 },
+        { name: "@我", count: 0 }
+      ],
       // 群成员邮件菜单
       groupMenu: [
         {
@@ -620,11 +637,6 @@ export default {
                   id: contact.id,
                   is_top: 1
                 });
-                contact.is_top = 1;
-                const hasContact=_this.chatTopList.filter(item => item.id == contact.id);
-                if(!hasContact.length){
-                  _this.chatTopList.push(contact);
-                }
               }
             });
             hide();
@@ -648,8 +660,6 @@ export default {
                   id: contact.id,
                   is_top: 0
                 });
-                // 删除置顶聊天列表人员
-                utils.delArrValue(this.chatTopList, "id", contact.id);
               }
             });
             hide();
@@ -921,10 +931,6 @@ export default {
     }
   },
   watch: {
-    wsStatus(val) {
-      console.log("🚀 ~ file: index.vue:895 ~ wsStatus ~ val:", val)
-      
-    },
     isFullscreen(val){
       Lockr.set('isFullscreen',val);
       this.curWidth=val?'100vw':this.width;
@@ -948,14 +954,18 @@ export default {
       }
 
     },
-    // 全局调用发送消息
+    // 
     contactSync (val) {
       this.$emit('newChat', val);
       const { IMUI } = this.$refs;
       IMUI.changeContact(this.contactId);
     },
     unread (val) {
+      this.tabList[1].count = val;
       this.$store.commit('updateUnread', val);
+    },
+    atUnread (val) {
+      this.tabList[2].count = val;
     },
     // 监听联系人搜索
     keywords() {
@@ -987,7 +997,6 @@ export default {
                 this.$router.push({ path: "/login" });
             });
           }
-          
           break;
         // 接收消息
         case "simple":
@@ -995,8 +1004,21 @@ export default {
           // 如果是自己发送的消息则不需要提示
           if (message.fromUser.id != this.user.id) {
             var contact = this.getContact(message.toContactId);
+            // 如果不是当前聊天对象，并且被@到，就要@的未读数量  
+            if(message.is_group==1 && message.toContactId!=this.currentChat.id){
+              let at=0;
+              // 如果at参数包含了我自己，就要增加@的数量
+              if(message.at.includes(this.user.id)){
+                at=1;
+              }
+              this.$refs.IMUI.updateContact({
+                id: message.toContactId,
+                is_at:contact.is_at+at
+              });
+              this.atUnread+=at;
+            }
             // 如果开启了声音才播放
-            if (this.setting.isVoice && contact.is_notice == 1) {
+            if (this.setting.isVoice && contact.is_notice == 1 && message.toContactId!=this.currentChat.id) {
               this.popNotice(message);
             }
           }
@@ -1023,15 +1045,6 @@ export default {
             id: message.id,
             is_top: message.is_top
           });
-          if(message.is_top==1){
-            const contact = this.getContact(message.id);
-            const hasContact=this.chatTopList.filter(item => item.id == message.id);
-            if(!hasContact.length){
-              this.chatTopList.push(contact);
-            }
-          }else{
-            utils.delArrValue(this.chatTopList, "id", message.id);
-          }
           break;
         // 设置消息免打扰
         case "setIsNotice":
@@ -1252,6 +1265,30 @@ export default {
       this.caller=this.currentChat;
       this.$refs.webrtc.called(is_video);
     },
+    // 切换聊天列表
+    changeTab(item,index){
+      this.activeTab=index;
+    },
+    // 初始化最近联系人
+    latelyContact(contact) {
+      let data=[];
+      if(this.activeTab==1){
+        data = contact.filter(item => item.unread>0);
+      }else if(this.activeTab==2){
+        data = contact.filter(item => item.is_at>0);
+      }else{
+        data = contact.filter(item => item.lastContent);
+      }
+      // 先进行时间排序
+      data.sort((a1, a2) => {
+        return a2.lastSendTime - a1.lastSendTime;
+      });
+      // 将is_top的数据放到前面来，置顶
+      data.sort((a1, a2) => {
+        return a2.is_top - a1.is_top;
+      });
+      return data;
+    },
     // 初始化聊天
     getSimpleChat(update) {
       this.$nextTick(() => {
@@ -1310,6 +1347,7 @@ export default {
               name:"msgBox",
               title:"消息管理器",
               click:()=>{
+                this.ChatRecordMap={};
                 this.messageBox = true;
                 // 组件重置
                 this.componentKey += 1;
@@ -1337,6 +1375,9 @@ export default {
               if (item.unread && !update) {
                 this.unread += item.unread;
               }
+              if (item.is_at) {
+                this.atUnread += item.is_at;
+              }
           })
           if(this.globalConfig.sysInfo.runMode==2){
             const sysContact = {
@@ -1359,9 +1400,8 @@ export default {
             data.push({...sysContact});
           }
           this.$store.commit('initContacts', data);
-          // 设置置顶人
-          this.getChatTop(data);
           IMUI.initContacts(data);
+          this.lastMessages=IMUI.lastMessages;
           // 初始化左侧菜单栏
           this.initMenus(IMUI);
         });
@@ -1497,17 +1537,6 @@ export default {
           }
           IMUI.initMenus(menus);
     },
-    // 获取置顶联系人列表
-    getChatTop() {
-      var list = this.contacts;
-      var topList = [];
-      for (var i = 0; i < list.length; i++) {
-        if (list[i].is_top == 1) {
-          topList.push(list[i]);
-        }
-      }
-      this.chatTopList = topList;
-    },
     // 获取联系人
     getContact(id) {
       const { IMUI } = this.$refs;
@@ -1600,9 +1629,14 @@ export default {
       this.displayName = contact.displayName;
       this.oldName = contact.displayName;
       this.currentChat = contact;
-      // 如果是群聊，拉取群成员列表，如果刚才拉取过，现在就不用拉取了
-      if (contact.is_group == 1 && this.group_id != contact.id) {
-        this.getGroupUserList(contact.id);
+      // 如果是群聊，获取群成员列表
+      if (contact.is_group == 1) {
+        // 如果刚才拉取过，并且没有切换过群聊，现在就不用拉取了，直接设置@的成员列表
+        if(this.group_id != contact.id){
+          this.getGroupUserList(contact.id);
+        }else{
+          this.setAtUserList(this.groupUser);
+        }
       }
       //切换聊天后全局设置是否是群聊或者单聊
       this.is_group = contact.is_group;
@@ -1610,6 +1644,9 @@ export default {
       if (this.is_group == 1) {
         this.group_id = contact.id;
         this.notice = contact.notice;
+      }else{
+        // 如果不是群聊，清空@成员列表
+        IMUI.setAtUserList([],false);
       }
       var data = [];
       
@@ -1637,6 +1674,21 @@ export default {
         });
       }
       instance.closeDrawer();
+    },
+    // 设置@的群成员
+    setAtUserList (data) {
+      let atUserList=[];
+          let isAuth=false;
+          data.forEach(item => {
+            if(item.user_id!=this.user.id){
+              atUserList.push(item.userInfo);
+            }else{
+              if(item.role<3){
+                isAuth=true;
+              }
+            }
+          });
+          this.$refs.IMUI.setAtUserList(atUserList,isAuth);
     },
     uploadVideo (e) {
       // 如果开启了群聊禁言或者关闭了单聊权限，就不允许发送消息
@@ -1818,6 +1870,19 @@ export default {
         }
       });
     },
+    // 打开消息管理器并筛选被@的数据
+    openMsgBox(){
+      this.ChatRecordMap={is_at:1};
+      this.messageBox = true;
+      this.componentKey += 1;
+      this.$refs.IMUI.updateContact({
+        id: this.currentChat.id,
+        is_at: 0
+      });
+      let readAt=this.currentChat.is_at;
+      this.atUnread-=readAt;
+      this.currentChat.is_at=0;
+    },
     // 查看
     openNotice() {
       var notice="<div style='white-space: pre;'>"+this.notice+"</div>"
@@ -1904,8 +1969,9 @@ export default {
         group_id: group_id
       }).then(res => {
         if (res.code == 0) {
-          var data = res.data;
+          let data = res.data;
           this.groupUser = data;
+          this.setAtUserList(data);
           this.groupUserCount = data.length;
         }
       });
@@ -2203,7 +2269,7 @@ export default {
 }
 
 .contact-fixedtop-box {
-  margin: 15px 10px;
+  margin: 15px 10px 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2338,7 +2404,13 @@ export default {
   min-height: 300px;
   overflow: auto;
 }
+
+.lemon-contact-item{
+  padding:10px;
+}
+.at-item{background-color: #fff;border-radius:30px;color:#18bc37;padding:6px 8px;border:solid 1px;}
 </style>
+<!-- 兼容lemon样式 -->
 <style>
 .lemon-editor__tool{
   border-top: solid 1px #e6e6e6;
@@ -2346,5 +2418,29 @@ export default {
 .no-internet{
   background-color: #fef0f0;
   color: #f56c6c;
+}
+.lemon-contact{
+  padding: 0;
+}
+.lemon-contact--active .bg-gray{
+  background: #d9d9d9;
+}
+.bg-gray{
+  background-color: #e7e7e7;
+}
+.lemon-wrapper--theme-blue .lemon-contact--active .bg-gray{
+  background: #e7e7e7 !important;
+}
+.lemon-wrapper--theme-blue .bg-gray{
+  background-color: #efefef !important;
+}
+.bage-gray{
+  background-color: #ccc;
+}
+.lemon-editor__tip{
+  flex:1
+}
+.lemon-contact.lemon-contact--name-center{
+padding:10px;
 }
 </style>

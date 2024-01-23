@@ -157,6 +157,10 @@ export default {
     contact: {
       type: Object,
       default: {} //定义参数默认值
+    },
+    condition: {
+      type: Object,
+      default: {}
     }
   },
   computed: {
@@ -230,6 +234,7 @@ export default {
     }
   },
   created() {
+    this.params = Object.assign(this.params, this.condition);
     this.getMessage();
   },
   mounted() {}
