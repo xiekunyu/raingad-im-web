@@ -67,8 +67,8 @@
       <p>
         3、目前仅开源了网页端(vue2+lemon-imui+element-ui)和后台接口（TP6+workerman），可以用于对接企业应用等内部聊天，内网私有聊天室,社区聊天等等。
       </p>
-      <p>
-        4、移动端（uniapp开发，支持H5+APP）<b class="c-red">代码未开源</b>，和web功能几乎无差异，如有需要<b class="c-red cur-handle" @click="scrollTo()">请查看底部说明 <el-link type="primary">[GO]</el-link></b>。
+      <p @click="scrollTo()" class="cur-handle">
+        4、移动端（uniapp开发，支持H5+APP）<b class="c-red">可捐赠相应金额获得源码</b>，和web功能几乎无差异，如有需要<b class="c-red cur-handle">请查看底部说明 <el-link type="primary">[GO]</el-link></b>。
       </p>
     </div>
 
@@ -159,6 +159,8 @@
       <p>1. 服务端协助部署：<b>200元/次</b>（提供远程 [todesk] 技术指导，赠送API文档。需要自行安装好运行环境，最好是宝塔面板）</p>
       <p>2. uniapp移动端源码：<b> 488元/套。</b>(全开源，仅提供源码，赠送API文档（README.md文件中有链接），不提供专业指导和部署，源码仅供学习使用，不可对源码进行二次售卖)</p>
       <p>3. webRTC中继服务器：<b>200元/次</b>（原则上参考底部的教程链接来自行安装，确需服务，可联系作者协助，此服务跟部署服务端是分开的，毕竟这个东西不是自己的产品）</p>
+      <p>4. 团队安心包：<b><a :href="$packageData.qqGroupUrl"
+            target="_blank" style="color:#409EFF">进群咨询作者</a></b> ，包含上述3项服务，以及安卓APP和H5打包（需要提供Hbuilder的Dcloud账号，可以打包3次），需要提供相应的服务器、域名、证书等，APP还需要提供应用名称和LOGO（如果没有可以代为生成）</p>
     </div>
 
     <!-- 其他项目 -->
@@ -175,6 +177,9 @@
       <br>
       <div class="mb-15">
         <el-link type="primary" href="http://june000.gitee.io/lemon-im">Lemon-IMUI使用文档</el-link>
+      </div>
+      <div class="mb-15">
+        <el-link type="primary" href="https://www.npmjs.com/package/chatarea">聊天输入框插件【chatarea】</el-link>
       </div>
       <div class="mb-15">
         <el-link type="primary" href="https://blog.csdn.net/ruiye99/article/details/130992960">WebRTC 网络中继 Coturn 服务安装及部署</el-link>

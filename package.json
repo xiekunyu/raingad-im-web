@@ -1,6 +1,6 @@
 {
   "name": "Raingad-IM",
-  "version": "3.2.4",
+  "version": "4.0.0",
   "description": "一款基于vue2.0的即时聊天工具",
   "logo": "https://im.file.raingad.com/logo/logo.png",
   "frontUrl": "https://gitee.com/raingad/im-chat-front",
@@ -21,7 +21,7 @@
     },
     {
       "icon": "el-icon-user",
-      "text": "群聊创建、删除和群成员管理、群公告、群禁言等"
+      "text": "群聊创建、删除和群成员管理、群公告、群禁言、@群成员等"
     },
     {
       "icon": "el-icon-ice-cream-round",
@@ -37,7 +37,7 @@
     },
     {
       "icon": "el-icon-mobile-phone",
-      "text": "支持移动端（H5、APP和小程序，部分功能不兼容），支持简易后台管理"
+      "text": "支持移动端（由uniapp开发，可打包H5、APP和小程序），支持简易后台管理"
     },
     {
       "icon": "el-icon-coffee-cup",

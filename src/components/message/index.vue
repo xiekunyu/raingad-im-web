@@ -33,7 +33,7 @@
                 <!-- 最近联系人列表插槽 -->
         <template #sidebar-message="Contact">
           <div class="lemon-contact-item" :class="Contact.is_top==1 ? 'bg-gray': ''">
-            <span class="lemon-badge lemon-contact__avatar">
+            <el-badge :value="Contact.unread" :max="99" :is-dot="Contact.is_notice==0" :hidden="Contact.unread<=0" class="lemon-badge lemon-contact__avatar">
             <span
               class="lemon-avatar"
               v-bind:class="{ 'lemon-avatar--circle': setting.avatarCricle }"
@@ -41,13 +41,7 @@
             >
               <img :src="Contact.avatar"
             /></span>
-            <span
-              class="lemon-badge__label"
-              :class="!Contact.is_notice ? 'bage-gray':''"
-              v-if="Contact.unread > 0"
-              >{{ Contact.unread }}</span
-            >
-          </span>
+          </el-badge>
           <div class="lemon-contact__inner">
             <p class="lemon-contact__label">
               <span class="lemon-contact__name">
@@ -1394,7 +1388,7 @@ export default {
                 msg.content = item.lastContent;
                 data[index]['lastContent'] = IMUI.lastContentRender(msg);
               }
-              if (item.unread && !update) {
+              if (item.unread && !update && item.is_notice==1) {
                 this.unread += item.unread;
               }
               if (item.is_at) {
@@ -1643,7 +1637,9 @@ export default {
         unread: 0
       });
       // 将未读的总数减去当前选择的聊天
-      this.unread -= contact.unread;
+      if(contact.is_notice==1){
+        this.unread -= contact.unread;
+      }
       const { IMUI } = this.$refs;
       this.initMenus(IMUI);
       // 聊天记录列表恢复到最初第一页
@@ -1907,11 +1903,11 @@ export default {
     },
     // 查看
     openNotice() {
-      var notice="<div style='white-space: pre;'>"+this.notice+"</div>"
+      var notice="<div style='white-space: break-spaces;'>"+this.notice+"</div>"
       this.$alert(notice, "群公告", {
         confirmButtonText: "确定",
          dangerouslyUseHTMLString: true
-      });
+      }).then(() => {}).catch(() => {});;
     },
     // 打开创建团队的窗口
     openCreateGroup() {
@@ -2108,7 +2104,11 @@ export default {
       }else{
         // 如果不是自己的消息，需要将未读数加1
         if (this.user.id != message.fromUser.id) {
-          this.unread++;
+          let formContact=this.getContact(message.toContactId);
+          // 有消息提醒才会增加未读数
+          if(formContact.is_notice==1){
+            this.unread++;
+          }
           this.initMenus(IMUI);
         }
       }
@@ -2431,6 +2431,9 @@ export default {
   padding:10px;
 }
 .at-item{background-color: #fff;border-radius:30px;color:#18bc37;padding:6px 8px;border:solid 1px;}
+.el-badge  ::v-deep .el-badge__content{
+  background-color: #f5222d;
+}
 </style>
 <!-- 兼容lemon样式 -->
 <style>
