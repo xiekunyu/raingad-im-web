@@ -1556,12 +1556,7 @@ export default {
     // 获取联系人
     getContact(id) {
       const { IMUI } = this.$refs;
-      const contactList = IMUI.getContacts();
-      for (var i = 0; i < contactList.length; i++) {
-        if (contactList[i].id == id) {
-          return contactList[i];
-        }
-      }
+     return IMUI.findContact(id);
     },
     wrapKey(e){
       return this.setting.sendKey == 1 ? (e.keyCode == 13 && e.ctrlKey) : (e.keyCode == 13 && !e.ctrlKey && !e.shiftKey);
