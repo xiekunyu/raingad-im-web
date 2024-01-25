@@ -2307,9 +2307,14 @@ export default {
   .search-list-item :hover {
     background: #f1f1f1;
   }
+  
   .lemon-contact {
     background: #fff;
   }
+}
+
+.search-list-item ::v-deep .lemon-contact{
+  padding:10px
 }
 
 .chat-top-list {
