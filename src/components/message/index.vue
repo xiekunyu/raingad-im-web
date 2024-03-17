@@ -1515,7 +1515,7 @@ export default {
                 return <i class="el-icon-mobile" />;
               },
               click: () => {
-                window.open(window.BASE_URL+'/downapp','_blank');
+                window.open(window.BASE_URL+'downapp','_blank');
               },
               isBottom: true
             },

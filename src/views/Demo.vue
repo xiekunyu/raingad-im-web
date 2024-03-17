@@ -165,7 +165,7 @@
       <p>4. 技术指导服务：<b><a :href="$packageData.qqGroupUrl"
             target="_blank" style="color:#409EFF">进群联系作者</a></b> ，或者加作者QQ：<b>1072129059</b>，包含远程指导，代码解析，开发思路等，付费之日起一个月内有效。</p>
       <p>5. 团队安心包：<b><a :href="$packageData.qqGroupUrl"
-            target="_blank" style="color:#409EFF">进群咨询作者</a></b> ，包含上述前3项服务，以及安卓APP和H5打包（需要提供Hbuilder的Dcloud账号，可以打包3次），需要提供相应的服务器、域名、证书等，APP还需要提供应用名称和LOGO（如果没有可以代为生成）</p>
+            target="_blank" style="color:#409EFF">进群咨询作者</a></b> ，包含上述前3项服务，以及安卓APP和H5打包（需要提供Hbuilder的Dcloud账号，总共可以打包3次），需要提供相应的服务器、域名、证书等，APP还需要提供应用名称和LOGO（如果没有可以代为生成）</p>
       <p class="m-5" align="center"><b class="c-red">价格或服务内容可能会有变动，以咨询作者时给的服务方案为准！</b></p>
     </div>
 
@@ -237,7 +237,7 @@ export default {
       window.scrollTo(0,document.body.scrollHeight);
     },
     downApp(){
-      window.open(window.BASE_URL + '/downapp');
+      window.open(window.BASE_URL + 'downapp');
     }
   },
 };

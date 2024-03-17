@@ -45,16 +45,9 @@ const confirmMessage = debounce(1000, (message) => {
 })
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-    // 创建axios实例
-let hrefs = []
-if (window.location.href.indexOf('index.html') != -1) {
-    hrefs = window.location.href.split('index.html')
-} else {
-    hrefs = window.location.href.split('#')
-}
-const baseURL = hrefs.length > 0 ? hrefs[0] : window.location.href
-    // baseURL + 'index.php/' 默认请求地址
-    // process.env.BASE_API 自定义请求地址
+
+const baseURL = window.location.protocol+'//'+window.location.host;
+// process.env.BASE_API 自定义请求地址
 const devUrl=window.location.protocol+'//'+process.env.VUE_APP_BASE_API;
 
 window.BASE_URL = process.env.NODE_ENV === 'production' ? baseURL + '/' : devUrl

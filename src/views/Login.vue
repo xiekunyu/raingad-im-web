@@ -171,7 +171,7 @@ export default {
       })
     },
     downapp(){
-      window.open(window.BASE_URL+'/downapp')
+      window.open(window.BASE_URL+'downapp')
     }
   }
 }
