@@ -1125,10 +1125,15 @@ export default {
           if (message.group_id == this.group_id) {
             this.getGroupUserList(message.group_id);
           }
-          IMUI.updateContact({
-            id: message.group_id,
-            avatar: message.avatar
-          });
+          // 如果移除人员是本人则删除联系人
+          if(val.type=='removeUser' && message.user_id==this.user.id){
+            this.removeContact(message.group_id);
+          }else{
+            IMUI.updateContact({
+              id: message.group_id,
+              avatar: message.avatar
+            });
+          }
           break;
         case "removeGroup":
           this.removeContact(message.group_id);
@@ -1501,6 +1506,18 @@ export default {
                   <Files title={this.dialogTitle}></Files>
                 );
               },
+            },
+            {
+              name: "mobile",
+              title: "客户端下载",
+              unread: 0,
+              render: menu => {
+                return <i class="el-icon-mobile" />;
+              },
+              click: () => {
+                window.open(window.BASE_URL+'/downapp','_blank');
+              },
+              isBottom: true
             },
             {
               name: "setting",

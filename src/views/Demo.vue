@@ -81,13 +81,13 @@
           <el-button>窗口模式</el-button>
         </el-badge>
       </div>
-      <div class="mb-15 mr-20" @click="$router.push({path:'/chat'})">
+      <div class="mb-15 mr-15" @click="$router.push({path:'/chat'})">
         <el-button>纯享模式</el-button>
       </div>
-      <div class="mb-15 mr-20" @click="$router.push({path:'/manage/index'})">
+      <div class="mb-15 mr-15" @click="$router.push({path:'/manage/index'})">
         <el-button>管理后台</el-button>
       </div>
-      <div class=" mb-15 mr-20">
+      <div class=" mb-15 mr-15">
         <el-tooltip placement="right-start" effect="light">
           <div slot="content"><el-image style="width:200px" src="https://emoji.raingad.com/file/h5.png"></el-image></div>
           <el-button><a :href="$packageData.mobileUrl"
@@ -95,13 +95,16 @@
         </el-tooltip>
         
       </div>
-      <div class="mb-15">
+      <div class="mb-15 mr-15">
         <el-tooltip placement="right-start" effect="light">
           <div slot="content"><el-image style="width:200px" src="https://emoji.raingad.com/file/app.png"></el-image></div>
           <el-button><a href="https://emoji.raingad.com/file/raingad.apk"
                     target="_blank">安卓APP体验</a></el-button>
         </el-tooltip>
         
+      </div>
+      <div class="mb-15">
+        <el-button @click="downApp" ><a  target="_blank">win套壳版</a></el-button>
       </div>
     </div>
     
@@ -232,6 +235,9 @@ export default {
     scrollTo(){
       // 滚动到底部
       window.scrollTo(0,document.body.scrollHeight);
+    },
+    downApp(){
+      window.open(window.BASE_URL + '/downapp');
     }
   },
 };

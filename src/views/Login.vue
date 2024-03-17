@@ -3,7 +3,7 @@
     <div class="form-box">
       <div class="form-title">
         <img :src="globalConfig.sysInfo.logo ? globalConfig.sysInfo.logo : $packageData.logo" width="100" alt="icon">
-        <!-- <p>Raingad-IM 账号登录</p> -->
+        <p class="mt-10 f-20">{{globalConfig.sysInfo.name}}</p>
       </div>
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-width="0px" class="login-form">
         <el-form-item prop="account">
@@ -41,6 +41,9 @@
           </el-button>
         </el-form-item>
         <div align="center" class="c-999">{{globalConfig.sysInfo.name}} for {{$packageData.version}}</div>
+        <el-button  plain style="width:100%;" class="mt-10" @click="downapp()">
+            <span>下载客户端</span>
+         </el-button>
       </el-form>
     </div>
   </div>
@@ -166,6 +169,9 @@ export default {
       }).catch(()=>{
         this.coding=false;
       })
+    },
+    downapp(){
+      window.open(window.BASE_URL+'/downapp')
     }
   }
 }
