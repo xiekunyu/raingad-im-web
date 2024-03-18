@@ -70,6 +70,9 @@
       <p @click="scrollTo()" class="cur-handle">
         4、移动端（uniapp开发，支持H5+APP）<b class="c-red">可捐赠相应金额获得源码</b>，和web功能几乎无差异，如有需要<b class="c-red cur-handle">请查看底部说明 <el-link type="primary">[GO]</el-link></b>。
       </p>
+      <p @click="scrollTo()" class="cur-handle">
+        5、目前有前端vue+electron技术可以打包为桌面端APP，源码和打包收费，请加群联系作者。
+      </p>
     </div>
 
     
@@ -104,7 +107,7 @@
         
       </div>
       <div class="mb-15">
-        <el-button @click="downApp" ><a  target="_blank">win套壳版</a></el-button>
+        <el-button @click="downApp" ><a  target="_blank">客户端下载</a></el-button>
       </div>
     </div>
     
@@ -162,10 +165,8 @@
       <p>1. 服务端协助部署：<b>200元/次</b>（提供远程 [todesk] 技术指导，赠送API文档。需要自行安装好运行环境，最好是宝塔面板）</p>
       <p>2. uniapp移动端源码：<b style="text-decoration:line-through;">原价600元/套</b><b class="c-red"> 优惠价488元/套。</b>(源码无加密，仅提供源码，赠送API文档（README.md文件中有链接），<b>不提供专业指导和部署 </b>，源码仅供学习使用，不可对源码进行二次售卖)</p>
       <p>3. webRTC中继服务器：<b>200元/次</b>（原则上参考底部的教程链接来自行安装，确需服务，可联系作者协助，此服务跟部署服务端是分开的，毕竟这个东西不是自己的产品）</p>
-      <p>4. 技术指导服务：<b><a :href="$packageData.qqGroupUrl"
-            target="_blank" style="color:#409EFF">进群联系作者</a></b> ，或者加作者QQ：<b>1072129059</b>，包含远程指导，代码解析，开发思路等，付费之日起一个月内有效。</p>
-      <p>5. 团队安心包：<b><a :href="$packageData.qqGroupUrl"
-            target="_blank" style="color:#409EFF">进群咨询作者</a></b> ，包含上述前3项服务，以及安卓APP和H5打包（需要提供Hbuilder的Dcloud账号，总共可以打包3次），需要提供相应的服务器、域名、证书等，APP还需要提供应用名称和LOGO（如果没有可以代为生成）</p>
+      <p>4. 技术指导服务：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群联系作者</a></b> ，或者加作者QQ：<b>1072129059</b>，包含远程指导，代码解析，开发思路等，付费之日起一个月内有效。</p>
+      <p>5. 团队安心包：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群咨询作者</a></b> ，包含上述前3项服务，以及安卓APP和H5打包（需要提供Hbuilder的Dcloud账号，总共可以打包3次），需要提供相应的服务器、域名、证书等，APP还需要提供应用名称和LOGO（如果没有可以代为生成）</p>
       <p class="m-5" align="center"><b class="c-red">价格或服务内容可能会有变动，以咨询作者时给的服务方案为准！</b></p>
     </div>
 

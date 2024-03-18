@@ -10,7 +10,7 @@ Raingad-IM是一个开源的即时通信demo，需要前后端配合使用，主
 | web端演示 | http://im.raingad.com/index.html |
 | 移动端H5演示 | http://im.raingad.com/h5 |
 | 安卓APP演示 | https://emoji.raingad.com/file/raingad.apk |
-
+| 桌面端 | 请进前端演示页下载 |
 
 体验账号：13800000002  密码：123456
 

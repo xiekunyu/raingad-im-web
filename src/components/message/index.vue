@@ -189,8 +189,8 @@
         </template>
         <!-- 群组聊天展示的抽屉 -->
         <template #message-side="contact">
-          <div class="slot-group-list" v-if="contact.is_group == 1">
-            <div class="group-side-box">
+          <div class="slot-group-list lemon-wrapper" :class="setting.theme=='blue' ? 'lemon-wrapper--theme-blue' : ''" v-if="contact.is_group == 1">
+            <div class="group-side-box lemon-container">
               <div class="group-notice">
                 <div class="group-side-title">
                   <h4>群公告</h4>
@@ -226,7 +226,7 @@
                   </div>
                 </div>
                 <hr/>
-                <div class="group-user-body" :style="'height:calc('+curHeight+' - 230px )'" id="group-user">
+                <div class="group-user-body" :style="[{height:'calc(' + curHeight + ' - 230px)',background:(setting.theme=='blue') ? '#ffffff' : '#f4f4f4'}]"  id="group-user">
                   <el-scrollbar style="height:100%;">
                     <lemon-contact
                       class="user-list"
@@ -2398,6 +2398,9 @@ export default {
     }
     .group-user-body {
       min-height: 410px;
+      .lemon-contact{
+        background: none ;
+      }
       .user-list {
         display: flex;
         flex-direction: row;
@@ -2405,7 +2408,6 @@ export default {
         flex-wrap: nowrap;
         justify-content: flex-start;
         padding: 5px;
-        background: #fff;
         .user-avatar {
           margin: 3px 8px 0 0;
           line-height: 10px;

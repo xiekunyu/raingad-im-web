@@ -151,9 +151,9 @@ export default {
           this.startTime();
         }
       },(err) => {
-        this.hangup(true);
         let text= is_video==1 ? '视频' : '语音';
         this.$message.error('请连接'+text+'设备，并开启'+text+'权限');
+        this.hangup(false);
       });
     },
     // 拨打电话
