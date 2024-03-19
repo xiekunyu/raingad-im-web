@@ -39,15 +39,6 @@
       title="请仔细阅读一下文档！（webrtc一对一音视频通话需要自己搭建turn服务器，本文底部有搭建链接，通话中稳定但有一定的BUG）。"
       type="warning">
     </el-alert>
-<!-- 
-    <el-alert
-    class="mt-15 mb-15"
-      show-icon
-      :closable="false"
-      title="请注意！3.0 以上版本改了很多内容，不兼容之前的版本，旧版本无法升级，如需使用只能全部替换3.0版本。"
-      type="warning">
-    </el-alert> -->
-
     <el-alert
     class="mt-15 mb-15"
       show-icon
@@ -56,27 +47,25 @@
       type="error">
     </el-alert>
 
-    <div class="tip">
-      <h3 class="mb-5"><b>介绍</b></h3>
-      <p>
-        1、{{ $packageData.name }}是一个<b class="c-red">开源的即时通信demo（存在一定的BUG），主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统、内网交流、社区交流。不建议用于商业用途，如确有需要商用，请联系作者授权，自行开发代码量必须要高于原代码量的30%以上，并注明相关的版权问题。
-      </p>
-      <p>
-        2、支持发送表情、图片、语音、视频和文件消息，支持单聊、群聊、群管理、1对1音视频通话（移动端目前仅支持H5和安卓APP，IOS没条件测试）具体功能可以看项目主页。
-      </p>
-      <p>
-        3、目前仅开源了网页端(vue2+lemon-imui+element-ui)和后台接口（TP6+workerman），可以用于对接企业应用等内部聊天，内网私有聊天室,社区聊天等等。
-      </p>
-      <p @click="scrollTo()" class="cur-handle">
-        4、移动端（uniapp开发，支持H5+APP）<b class="c-red">可捐赠相应金额获得源码</b>，和web功能几乎无差异，如有需要<b class="c-red cur-handle">请查看底部说明 <el-link type="primary">[GO]</el-link></b>。
-      </p>
-      <p @click="scrollTo()" class="cur-handle">
-        5、目前有前端vue+electron技术可以打包为桌面端APP，源码和打包收费，请加群联系作者。
-      </p>
-    </div>
+  <el-tabs v-model="activeName" type="card" @tab-click="handleClick" class="mb-20"> 
+    <el-tab-pane label="程序介绍">
+      <div class="tip">
+          <p class="mb-5" v-for="(item,index) in introduce"><i :class="item.icon"></i> <span v-html="item.text"></span></p>
+      </div>
+    </el-tab-pane>
+    <el-tab-pane label="支持功能">
+      <div class="success">
+        <p class="mb-5"  v-for="item in $packageData.funcList"><i :class="item.icon"></i>  <span v-html="item.text"></span></p>
+      </div>
+    </el-tab-pane>
+    <el-tab-pane label="技术栈">
+      <div class="info">
+          <p class="mb-5"  v-for="(item,index) in techStack"  ><i :class="item.icon"></i> <span v-html="item.text"></span></p>
+      </div>
+    </el-tab-pane>
+  </el-tabs>
 
-    
-
+  <div class="mb-15"><b style="font-size:20px">体验</b></div>
     <!-- 消息 -->
     <div class="demo-btn">
       <div class="flex-box-center  mb-15" @click="showMessageBox()">
@@ -113,7 +102,7 @@
     
     
     <div class="contact-main">
-      <div class="title"><b style="font-size:24px">联系人</b>（仅展示部分用于演示）</div>
+      <div class="title"><b style="font-size:20px">联系人</b>（仅展示部分用于演示）</div>
       <div class="contact-box" v-for="x in allContacts" :key="x.id" v-if="x.is_group == 0 && x.id<6">
         <div class="contact-item">
           <el-avatar :src="x.avatar"></el-avatar>
@@ -125,49 +114,36 @@
         </div>
       </div>
     </div>
-
-    <div class="tip">
-      <h3 class="mb-5"><b>功能</b></h3>
-      <div>
-        <p v-for="item in $packageData.funcList" :key="item.icon"><i :class="item.icon"></i> {{ item.text }}</p>
-      </div>
-      <h3 class="mb-5 mt-5"><b>模式介绍</b></h3>
-      <p>
-        1、企业模式：类似于企业微信，初始化联系人是加载企业内的所有人员，无须加好友可以直接进行对话、创建群聊等，适用于企业内部通讯。
-      </p>
-      <p>
-        2、社区模式：类似于微信或QQ，需要添加好友才能进行对话，适用于社区交流。社区模式支持加好友、删除好友、改备注等功能。
-      </p>
-      <p>
-        3、选择适合自己项目的模式，然后在后台设置即可。社区模式体验需要自行搭建部署哦，可以在项目地址中看到相关的截图。
-      </p>
-      <h3 class="mb-5 mt-5"><b>计划</b></h3>
-      <p>
-        继续优化，完善功能！
-      </p>
-    </div>
-
-    <div class="warning">
-      <p>
-        详细的使用方法在源码中基本上都有备注，如果您觉得这个项目对您有帮助，欢迎star，如果有问题可以加QQ群交流，如果您有更好的建议，欢迎提出。
-        <br> <b>如果觉得项目不错，不如请作者喝杯奶茶吧~</b>
-      </p>
-      
-    </div>
-    <p>
-        <el-image class="mr-40 mb-20" style="width:300px;" src="https://emoji.raingad.com/file/wx.jpg"></el-image>
-        <el-image class="" style="width:280px;" src="https://emoji.raingad.com/file/zfb.jpg"></el-image>
-    </p>
-    <div class="tip">
+   
+    <div class="tip mb-20">
       <h3 class="mb-5"><b>服务介绍</b></h3>
+      <p>
+        详细的使用方法在源码中基本上都有备注，如果您觉得这个项目对您有帮助，欢迎star，如果有问题可以加QQ群交流，如果您有更好的建议，欢迎提出。 <b>如果觉得项目不错，不如请作者喝杯奶茶吧~</b>
+      </p>
+      <p class="mt-10">
+          <el-image class="mr-40 mb-20" style="width:300px;" src="https://emoji.raingad.com/file/wx.jpg"></el-image>
+          <el-image class="" style="width:280px;" src="https://emoji.raingad.com/file/zfb.jpg"></el-image>
+      </p>
       <p>开源不易，如果需要以下功能，捐赠相应金额，作者可提供服务，进群后咨询作者！或者进群后直接扫码支付，联系群主提供支付凭证即可！</p>
       <p class="m-5"><b>（作者8年phper，前端水平一般，不接外包，除非价格确实高，功能也不难！）</b></p>
-      <p>1. 服务端协助部署：<b>200元/次</b>（提供远程 [todesk] 技术指导，赠送API文档。需要自行安装好运行环境，最好是宝塔面板）</p>
-      <p>2. uniapp移动端源码：<b style="text-decoration:line-through;">原价600元/套</b><b class="c-red"> 优惠价488元/套。</b>(源码无加密，仅提供源码，赠送API文档（README.md文件中有链接），<b>不提供专业指导和部署 </b>，源码仅供学习使用，不可对源码进行二次售卖)</p>
-      <p>3. webRTC中继服务器：<b>200元/次</b>（原则上参考底部的教程链接来自行安装，确需服务，可联系作者协助，此服务跟部署服务端是分开的，毕竟这个东西不是自己的产品）</p>
-      <p>4. 技术指导服务：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群联系作者</a></b> ，或者加作者QQ：<b>1072129059</b>，包含远程指导，代码解析，开发思路等，付费之日起一个月内有效。</p>
-      <p>5. 团队安心包：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群咨询作者</a></b> ，包含上述前3项服务，以及安卓APP和H5打包（需要提供Hbuilder的Dcloud账号，总共可以打包3次），需要提供相应的服务器、域名、证书等，APP还需要提供应用名称和LOGO（如果没有可以代为生成）</p>
-      <p class="m-5" align="center"><b class="c-red">价格或服务内容可能会有变动，以咨询作者时给的服务方案为准！</b></p>
+      <p>1. 服务端协助部署：<b>200元/次</b>（仅提供服务端远程 [todesk] 技术指导，需要提供纯净的centOS服务器一台）</p>
+      <p>2. uniapp移动端源码：<b style="text-decoration:line-through;">原价600元/套</b><b class="c-red"> 优惠价488元/套。</b>(源码无加密，仅提供源码，<b>不提供专业指导和部署 </b>)</p>
+      <p>3. 桌面端源码：<b style="text-decoration:line-through;">原价600元/套</b><b class="c-red"> 优惠价488元/套。</b>（使用vue+electron前端技术打包，和web端功能一样，支持后台运行和消息通知，暂不不支持截屏。赠送打包一次，单次打包200元/次）</p>
+      <p>4. webRTC中继服务器：<b>200元/次</b>（原则上参考底部的教程链接来自行安装，确需服务，也可联系作者协助）</p>
+      <p>5. 技术指导服务：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群联系作者</a></b> ，或者加作者QQ：<b>1072129059</b>，包含远程指导，代码解析，开发思路等，付费之日起一个月内有效。</p>
+      <p>6. 团队安心包：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群联系作者</a></b> ，包含上述前4项服务，根据需求选择，以及安卓APP和H5打包（需要提供Hbuilder的Dcloud账号，总共可以打包3次），需要提供相应的服务器、域名、证书等，APP还需要提供应用名称和LOGO（如果没有可以代为生成）</p>
+      <p>7、其他未列出的服务，请咨询作者！</p>
+    </div>
+
+    <div class="danger mb-20" >
+      <h3 class="mb-5"><b>注意事项</b></h3>
+      <p class="m-5">
+        1、凡是捐赠达到200元以上即可赠送API文档，包含：接口说明、安装教程、常见问题的解决方法等。<br>
+        2、源码作者不保证无任何问题，可能存在兼容性问题或者一些小的BUG，需要自行优化升级，望悉知。<br>
+        3、捐赠获得的源码仅供学习或二次开发使用，不可对源码进行二次售卖。<br>
+        4、请勿将源码用于违法活动，如有发现，报警处理！<br>
+        5、价格或服务内容可能会有变动，以咨询作者时给的服务方案为准！
+      </p>
     </div>
 
     <!-- 其他项目 -->
@@ -210,6 +186,47 @@ export default {
       dialogTableVisible: false, //消息弹窗是否显示
       unread: 0,
       allContacts: [],
+      activeName: '0',
+      techStack: [
+        {
+          icon: 'el-icon-cpu',
+          text: "后端：TP6+Mysql+workerman+webRTC中继服务。 <b class='c-success'>[开源]</b>"
+        },
+        {
+          icon: 'el-icon-news',
+          text: "前端：vue2+element-ui+lemon-imui。 <b class='c-success'>[开源]</b>"
+        },
+        {
+          icon: 'el-icon-mobile',
+          text: "移动端：uniapp for vue3+pinia。支持编译为小程序+h5+APP。<b class='c-red'>[捐赠获取]</b>"
+        },
+        {
+          icon: 'el-icon-monitor',
+          text: "桌面端：vue2(web端修改版)+electron。<b class='c-red'>[捐赠获取]</b>"
+        }
+      ],
+      introduce:[
+        {
+          icon:'el-icon-chat-dot-square',
+          text:this.$packageData.name+"是一个<b class='c-red'>开源的即时通信demo（存在一定的BUG），主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统、内网交流、社区交流。"
+        },
+        {
+          icon:'el-icon-cpu',
+          text:"不建议用于商业用途，如确有需要商用，请联系作者授权，自行开发代码量必须要高于原代码量的30%以上，并注明相关的版权问题。"
+        },
+        {
+          icon: 'el-icon-office-building',
+          text: '支持企业模式：类似于企业微信，初始化联系人是加载企业内的所有人员，无须加好友可以直接进行对话、创建群聊等，适用于企业内部通讯。'
+        },
+        {
+          icon: 'el-icon-chat-line-round',
+          text: '支持社区模式：类似于微信或QQ，需要添加好友才能进行对话，适用于社区交流。社区模式支持加好友、删除好友、改备注等功能。'
+        },
+        {
+          icon: 'el-icon-discover',
+          text: '选择适合自己项目的模式，然后在后台设置即可。社区模式体验需要自行搭建部署哦，可以在项目地址中看到相关的截图。'
+        }
+      ]
     };
   },
   computed: {
@@ -228,6 +245,9 @@ export default {
     },
   },
   methods: {
+    handleClick(tab, event) {
+      console.log(tab, event);
+    },
     showMessageBox() {
       this.dialogTableVisible
         ? (this.dialogTableVisible = false)
@@ -287,8 +307,18 @@ export default {
     background-color: #ecf8ff;
     border-radius: 4px;
     border-left: 5px solid #50bfff;
-    margin: 20px 0;
+    p {
+      font-size: 14px;
+      color: #5e6d82;
+      line-height: 1.8;
+    }
+  }
 
+  .danger{
+    padding: 8px 16px;
+    background-color: #fef0f0;
+    border-radius: 4px;
+    border-left: 5px solid #f56c6c;
     p {
       font-size: 14px;
       color: #5e6d82;
@@ -298,16 +328,40 @@ export default {
 
   .warning{
     padding: 8px 16px;
-    background-color: #fff6f7;
+    background-color: #fdf6ec;
     border-radius: 4px;
-    border-left: 5px solid #fe6c6f;
-    margin: 20px 0;
+    border-left: 5px solid #E6A23C;
     p {
       font-size: 14px;
       color: #5e6d82;
       line-height: 1.8;
     }
   }
+
+  .success{
+    padding: 8px 16px;
+    background-color: #f0f9eb;
+    border-radius: 4px;
+    border-left: 5px solid #67c23a;
+    p {
+      font-size: 14px;
+      color: #5e6d82;
+      line-height: 1.8;
+    }
+  }
+
+  .info{
+    padding: 8px 16px;
+    background-color: #f4f4f5;
+    border-radius: 4px;
+    border-left: 5px solid #909399;
+    p {
+      font-size: 14px;
+      color: #5e6d82;
+      line-height: 1.8;
+    }
+  }
+
 
   .contact-main {
     .contact-box {
