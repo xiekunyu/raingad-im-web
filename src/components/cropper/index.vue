@@ -40,7 +40,7 @@
 					dragMode: 'move',
 					responsive: false,
 					aspectRatio: this.aspectRatio,
-					preview: this.$refs.preview
+					preview: this.$refs.preview,
 				})
 			},
 			setAspectRatio(aspectRatio){
@@ -55,7 +55,10 @@
 				}, type, this.compress)
 			},
 			getCropFile(cb, fileName='fileName.jpg', type='image/jpeg'){
-				this.crop.getCroppedCanvas().toBlob((blob) => {
+				this.crop.getCroppedCanvas({
+							width:240, // 输出图像的宽度
+							height: 240 // 输出图像的高度
+						}).toBlob((blob) => {
 					let file = new File([blob], fileName, {type: type})
 					cb(file)
 				}, type, this.compress)

@@ -10,7 +10,7 @@
                 <el-image :src="user.avatar" style="width:160px;border-radius: 8px;overflow: hidden;" class="m-20"></el-image>
                 <el-button size="mini" class="replace-picture-button mab-30">更换头像</el-button>
               </el-upload>
-              <el-dialog title="头像剪裁" :close-on-click-modal="false" :visible.sync="cropperDialogVisible" width="580" :append-to-body="true" :show-close="true"
+              <el-dialog title="头像剪裁" :close-on-click-modal="false" :visible.sync="cropperDialogVisible" width="580px" :append-to-body="true" :show-close="true"
                   @closed='$refs.upload.clearFiles()'>
                   <Cropper :key="componentsKey" :src="cropperImg" :compress="compress" :aspectRatio="aspectRatio" ref="cropper">
                   </Cropper>

@@ -1,10 +1,10 @@
 <template>
   <div class="webrtc-box" v-show="status">
     <audio id="music1">
-        <source src="//im.file.raingad.com/static/voice/calling.mp3">
+        <source src="@/assets/voice/calling.mp3">
       </audio>
       <audio id="music2">
-        <source src="//im.file.raingad.com/static/voice/guaduan.mp3">
+        <source src="@/assets/voice/guaduan.mp3">
       </audio>
     <video v-show="localStream && is_video" class="localvideo" ref="localvideo" autoplay playsinline  muted></video>
     <video v-show="remoteStream && is_video" class="remotevideo" ref="remotevideo" autoplay playsinline></video>
@@ -24,18 +24,18 @@
       </div>
       <div class="calling-button">
         <div class="button" v-if="caller && status==3" >
-          <img class="image" src="https://im.file.raingad.com/static/image/jieting.png" @click="answer()"/>
+          <img class="image" src="@/assets/img/webrtc/jieting.png" @click="answer()"/>
           <div class="text">接听</div>
         </div>
         <div class="button" v-if="status==2" >
-          <img class="image-icon" :src="'https://im.file.raingad.com/static/image/voice'+(voiceStatus ? '' : '-off')+'.png'" @click="switchVoice()"/>
+          <img class="image-icon" :src="voiceStatus ? voiceIcon : voiceOffIcon" @click="switchVoice()"/>
         </div>
         <div class="button" v-if="caller && status!=0" >
-          <img class="image" src="https://im.file.raingad.com/static/image/guaduan.png" @click="hangup(true)"/>
+          <img class="image" src="@/assets/img/webrtc/guaduan.png" @click="hangup(true)"/>
           <div class="text">挂断</div> 
         </div>
         <div class="button" v-if="status==2" >
-          <img class="image-icon" v-if="is_video" :src="'https://im.file.raingad.com/static/image/camera'+(videoStatus ? '' : '-off')+'.png'" @click="switchVideo()"/>
+          <img class="image-icon" v-if="is_video" :src="videoStatus ? videoIcon : videoOffIcon" @click="switchVideo()"/>
           <div class="image-icon" v-else></div>
         </div>
       </div>
@@ -44,6 +44,7 @@
 </template>
   
 <script>
+
 export default {
   name: "webrtc",
   props: {
@@ -66,6 +67,10 @@ export default {
   },
   data() {
     return {
+      voiceIcon:require('@/assets/img/webrtc/voice.png'),
+      voiceOffIcon:require('@/assets/img/webrtc/voice-off.png'),
+      videoIcon:require('@/assets/img/webrtc/camera.png'),
+      videoOffIcon:require('@/assets/img/webrtc/camera-off.png'),
       pc: null,           //peer实例
       status: 0,          //状态0，默认，1：拨号中，2通话中，3来电中
       localVideo: "",    //本地视频的DOM
@@ -151,13 +156,15 @@ export default {
           this.startTime();
         }
       },(err) => {
-        let text= is_video==1 ? '视频' : '语音';
+        let text= is_video==1 ? '摄像头' : '麦克风';
         this.$message.error('请连接'+text+'设备，并开启'+text+'权限');
+        this.caller=null;
         this.hangup(false);
       });
     },
     // 拨打电话
     called(is_video) {
+      console.log(this.status,this.caller);
       // 如果状态不为0则不允许拨打电话
       if (this.status || this.caller) {
         return false;
