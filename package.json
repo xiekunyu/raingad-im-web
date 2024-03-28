@@ -1,6 +1,6 @@
 {
   "name": "Raingad-IM",
-  "version": "4.0.4",
+  "version": "4.1.0",
   "description": "一款基于vue2.0的即时聊天工具",
   "logo": "https://im.file.raingad.com/logo/logo.png",
   "frontUrl": "https://gitee.com/raingad/im-chat-front",
@@ -57,7 +57,7 @@
     "js-audio-recorder": "^1.0.7",
     "js-web-screen-shot": "^1.9.8-rc.3",
     "lemon-imui": "^1.7.7",
-    "lemon-imui-rx": "^1.8.2",
+    "lemon-imui-rx": "^1.8.6",
     "lockr": "^0.8.5",
     "nprogress": "^0.2.0",
     "v-clipboard": "^2.2.3",
