@@ -26,7 +26,7 @@
           <div>
             <div class="cover">
               <i class="lemon-icon-message"></i>
-              <p><b>即时聊天 Raingad</b> IM</p>
+              <p><b>{{globalConfig.sysInfo.name ?? ''}}</b></p>
             </div>
           </div>
         </template>
