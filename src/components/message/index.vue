@@ -1298,7 +1298,7 @@ export default {
       }else if(this.activeTab==2){
         data = contact.filter(item => item.is_at>0);
       }else{
-        data = contact.filter(item => item.lastContent);
+        data = contact.filter(item => item.lastContent || item.unread>0);
       }
       // 先进行时间排序
       data.sort((a1, a2) => {
