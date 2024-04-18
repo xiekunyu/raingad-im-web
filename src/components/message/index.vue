@@ -1277,6 +1277,9 @@ export default {
       if(!parseInt(this.globalConfig.chatInfo.webrtc)){
         return this.$message.error("当前系统未开启音视频通话功能");
       }
+      if(!this.globalConfig.chatInfo.simpleChat){
+        return this.$message.error("当前系统已关闭单聊功能");
+      }
       if(this.webrtcLock){
         this.$message.error("其他端正在通话中");
         return;

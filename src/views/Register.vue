@@ -8,7 +8,7 @@
       </div>
       <el-form ref="regForm" :model="regForm" :rules="loginRules" label-width="0px" class="login-form">
         <el-form-item prop="account">
-          <el-input ref="account" v-model="regForm.account" type="text" auto-complete="off" placeholder="请输入账号:手机/邮箱" prefix-icon="el-icon-user"  @input="handleInput" />
+          <el-input ref="account" v-model="regForm.account" type="text" auto-complete="off" :placeholder="placeholder" prefix-icon="el-icon-user"  @input="handleInput" />
         </el-form-item>
         <el-form-item prop="realname">
           <el-input ref="realname" v-model="regForm.realname" type="text" auto-complete="off" placeholder="请输入用户名/昵称" prefix-icon="el-icon-user" />
@@ -48,6 +48,7 @@ export default {
   data() {
     return {
       Background,
+      placeholder: '请输入账号：4-32个字符',
       regForm: {
         account: '',
         realname: '',
@@ -106,10 +107,13 @@ export default {
     let email={ type: 'email', message: msg, trigger: 'blur', validator: this.validateContact };
     let mobile={ type: 'phone', message: msg, trigger: 'blur', validator: this.validateContact };
     if(regauth==1){
+      this.placeholder='请输入手机号';
       this.loginRules.account.push(mobile)
     }else if(regauth==2){
+      this.placeholder='请输入邮箱账号';
       this.loginRules.account.push(email)
     }else if(regauth==3){
+      this.placeholder='请输入手机号/邮箱';
       this.loginRules.account.push(email)
       this.loginRules.account.push(mobile)
     }

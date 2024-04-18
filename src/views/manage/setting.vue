@@ -347,7 +347,7 @@ export default {
         rules: {
           name: [
             { required: true, message: '请输入系统名称', trigger: 'blur' },
-            { min: 4, max: 32, message: '长度在 4 到 32 个字符', trigger: 'blur' }
+            { min: 2, max: 32, message: '长度在 2 到 32 个字符', trigger: 'blur' }
           ],
           description: [
             { required: true, message: '请输入系统描述', trigger: 'blur' }
