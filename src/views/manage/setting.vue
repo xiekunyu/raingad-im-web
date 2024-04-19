@@ -233,10 +233,10 @@
                   </div>
                   
                   <div>
-                    <span  class="mr-10 c-999 f-12">bucket</span> <el-input placeholder="请输入腾讯云平台的bucket" v-model="fileUpload.qiniu.bucket"></el-input>
+                    <span  class="mr-10 c-999 f-12">bucket</span> <el-input placeholder="请输入腾讯云平台的bucket" v-model="fileUpload.qcloud.bucket"></el-input>
                   </div>
                   <div>
-                    <span class="mr-10 c-999 f-12">cdn</span> <el-input placeholder="请输入腾讯云平台的域名" v-model="fileUpload.qiniu.cdn"></el-input>
+                    <span class="mr-10 c-999 f-12">cdn</span> <el-input placeholder="请输入腾讯云平台的域名" v-model="fileUpload.qcloud.cdn"></el-input>
                   </div>
               </el-form-item>
               <el-form-item label="文件预览地址" prop="preview">
