@@ -1597,6 +1597,13 @@ export default {
         this.diySendMessage(message, this.curFile);
         return;
       }else if(key == 'avatar'){
+        if(message.is_group==1 && this.currentChat.setting.profile==0 && this.currentChat.role>2){
+          this.$message.error('已开启隐私，无法查看资料');
+          return;
+        }
+        if(message.fromUser.id!=this.user.id){
+          return;
+        }
         this.$user(message.fromUser.id);
         return;
       }
@@ -1804,7 +1811,7 @@ export default {
     // 禁言时禁止发送消息
     nospeak(){
       if(this.is_group==1 && this.currentChat.setting.nospeak>0){
-        if(this.currentChat.setting.nospeak==1 && this.currentChat.role==2){
+        if(this.currentChat.setting.nospeak==1 && this.currentChat.role<3){
           return true;
         }else if(this.currentChat.setting.nospeak==2 && this.currentChat.role==1){
           return true;
