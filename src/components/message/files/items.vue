@@ -191,6 +191,7 @@ import * as utils from '@/utils/index';
                 content: this.curFile.src,
                 file_name: this.curFile.name,
                 file_size: this.curFile.size,
+                file_id: this.curFile.file_id,
                 fromUser: {
                     id: user.user_id,
                     displayName: user.realname,
