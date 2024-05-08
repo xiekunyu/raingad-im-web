@@ -154,9 +154,9 @@ this.$refs.webrtc.called(true);
 
 如果有什么问题，请留言，或者加入我们的QQ群！
 
-创作不易，点个star吧
+创作不易，点个star吧，【请先点Star后才可以申请加入交流群，否则不予通过】
 
-[QQ 交流群：336921267](https://jq.qq.com/?_wv=1027&k=jMQAt9lh).
+[QQ 交流群：336921267](https://jq.qq.com/?_wv=1027&k=jMQAt9lh) 
 
 ### 部分截图
 ![聊天界面](src/assets/img/qunliao.png)
