@@ -36,7 +36,7 @@
     class="mt-15 mb-15"
       show-icon
       :closable="false"
-      title="请仔细阅读一下文档！（webrtc一对一音视频通话需要自己搭建turn服务器，本文底部有搭建链接，通话中稳定但有一定的BUG）。"
+      title="请仔细阅读一下文档！进群请先Star项目。（webrtc一对一音视频通话需要自己搭建turn服务器，本文底部有搭建链接，通话中稳定但有一定的BUG）。"
       type="warning">
     </el-alert>
     <el-alert
@@ -130,9 +130,9 @@
       <p>2. uniapp移动端源码：<b style="text-decoration:line-through;">原价600元/套</b><b class="c-red"> 优惠价488元/套。</b>(源码无加密，仅提供源码，<b>不提供专业指导和部署 </b>)</p>
       <p>3. 桌面端源码：<b style="text-decoration:line-through;">原价600元/套</b><b class="c-red"> 优惠价488元/套。</b>（使用vue+electron前端技术打包，和web端功能一样，支持后台运行和消息通知，暂不不支持截屏。赠送打包一次，单次打包200元/次）</p>
       <p>4. webRTC中继服务器：<b>200元/次</b>（原则上参考底部的教程链接来自行安装，确需服务，也可联系作者协助）</p>
-      <p>5. 技术指导服务：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群联系作者</a></b> ，或者加作者QQ：<b>1072129059</b>，包含远程指导，代码解析，开发思路等，付费之日起一个月内有效。</p>
+      <p>5. 技术指导服务：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群联系作者</a></b> ，包含远程指导，代码解析，开发思路等，付费之日起一个月内有效。</p>
       <p>6. 团队安心包：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群联系作者</a></b> ，包含上述前4项服务，根据需求选择，以及安卓APP和H5打包（需要提供Hbuilder的Dcloud账号，总共可以打包3次），需要提供相应的服务器、域名、证书等，APP还需要提供应用名称和LOGO（如果没有可以代为生成）</p>
-      <p>7、其他未列出的服务，请咨询作者！</p>
+      <p>7、其他未列出的服务，请进群咨询作者！<b class="c-red"> 进群请先Star项目，任何一个都可以，未star不予通过</b></p>
     </div>
 
     <div class="danger mb-20" >
@@ -159,7 +159,7 @@
       <h2>其他资料</h2>
       <br>
       <div class="mb-15">
-        <el-link type="primary" href="http://june000.gitee.io/lemon-im">Lemon-IMUI使用文档</el-link>
+        <el-link type="primary" href="https://lemon.raingad.com">Lemon-IMUI使用文档</el-link>
       </div>
       <div class="mb-15">
         <el-link type="primary" href="https://www.npmjs.com/package/chatarea">聊天输入框插件【chatarea】</el-link>
