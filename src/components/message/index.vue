@@ -1407,6 +1407,7 @@ export default {
             const sysContact = {
               id: 'system',
               displayName: "新邀请",
+              name_py:'xinyaoqing',
               avatar: InviteImg,
               index: "[1]系统消息",
               click(next) {
