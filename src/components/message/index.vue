@@ -1176,7 +1176,11 @@ export default {
             lastContent: '',
           })
           if(message.group_id==this.currentChat.id){
-            IMUI.changeContact(null)
+            IMUI.changeContact(null);
+            // 清空后重新切换到群聊
+            setTimeout(()=>{
+              IMUI.changeContact(message.group_id);
+            },100)
           }
           break;
         // 发布公告
