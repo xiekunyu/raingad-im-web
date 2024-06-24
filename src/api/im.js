@@ -260,6 +260,18 @@ imApi.groupSettingAPI= (data)  =>{
 }
 
 /**
+ * 清理群聊消息
+ * @param {*} data
+ */
+imApi.clearMessageAPI= (data)  =>{
+    return request({
+        url: 'enterprise/group/clearMessage',
+        method: 'post',
+        data: data
+    })
+}
+
+/**
  * 群聊基本信息
  * @param {*} data
  */

@@ -286,6 +286,10 @@
         <template #editor-footer>
           <div class="lz-flex lz-space-between lz-align-items-center">
             <div class="at-item cur-handle mr-10" v-if="currentChat.is_at" @click="openMsgBox()">有{{currentChat.is_at }}人提到你</div>
+            <div class="message-quote cur-handle mr-10 lz-flex lz-space-between lz-align-items-center" v-if="quote">
+              <div class="text-overflow">{{ quote.content }}</div>
+              <div class="el-icon-close" @click="closeQuote()"></div>
+            </div>
             <!-- 占位 -->
             <div> </div>
             <div>{{ setting.sendKey ==1 ? '使用 Ctrl + Enter 换行' : '使用 Ctrl + Enter 发送消息' }}</div>
@@ -486,6 +490,7 @@ export default {
         { name: "未读", count: 0 },
         { name: "@我", count: 0 }
       ],
+      quote:'',
       // 群成员邮件菜单
       groupMenu: [
         {
@@ -890,6 +895,30 @@ export default {
           }
         },
         {
+          text: "引用",
+          click: (e, instance, hide) => {
+            let msg = instance.message;
+            let regex = /<[^>]+>/g; // 定义正则表达式，匹配所有的HTML标签
+            let content=msg.content.replace(regex, '');
+            if(msg.type!='text'){
+              content = utils.getMsgType(msg.type);
+            }
+            let quote={
+              msg_id:msg.msg_id,
+              content:msg.fromUser.displayName+'：'+content,
+              user_id:msg.fromUser.id,
+              realname:msg.fromUser.displayName
+            };
+            this.quote=quote;
+            // 如果是群聊.需要@人员
+            if(this.is_group && quote.user_id!=this.user.id){
+              const { IMUI } = this.$refs;
+              IMUI.setUserTag(msg.fromUser);
+            }
+            hide();
+          }
+        },
+        {
           visible: instance => {
             return instance.message.type == "text";
           },
@@ -1137,6 +1166,18 @@ export default {
           break;
         case "removeGroup":
           this.removeContact(message.group_id);
+          break;
+        // 清空群聊消息
+        case "clearMessage":
+          IMUI.clearMessages(message.group_id);
+          this.groupSetting=false;
+          IMUI.updateContact({
+            id: message.group_id,
+            lastContent: '',
+          })
+          if(message.group_id==this.currentChat.id){
+            IMUI.changeContact(null)
+          }
           break;
         // 发布公告
         case "setNotice":
@@ -1834,6 +1875,10 @@ export default {
         this.$message.error(this.noSimpleTips);
         return false;
       }
+      if(this.quote){
+        message.pid=this.quote.msg_id;
+        message.extends=this.quote;
+      }
       let formdata = new FormData();
       // 如果是文件选择文件上传接口
       if (file) {
@@ -1862,6 +1907,7 @@ export default {
           .then(res => {
             if(res.code==0){
               IMUI.setEditorValue("");
+              this.closeQuote();
               IMUI.updateMessage(res.data);
               next();
             }else{
@@ -2235,6 +2281,9 @@ export default {
     closeSocket(){
       this.$refs.socket.close();
     },
+    closeQuote(){
+      this.quote='';
+    },
     // 退出聊天室
     logout() {
       this.$confirm("你确定要退出聊天室吗?", "提示", {
@@ -2463,6 +2512,18 @@ export default {
 .at-item{background-color: #fff;border-radius:30px;color:#18bc37;padding:6px 8px;border:solid 1px;}
 .el-badge  ::v-deep .el-badge__content{
   background-color: #f5222d;
+}
+.message-quote{
+	padding:4px;
+	font-size:12px;
+	background-color: #e3e3e3;
+  border-radius: 4px;
+	.text-overflow{
+		overflow: hidden !important;
+		text-overflow: ellipsis;
+		white-space: nowrap !important;
+		width:200px;
+	}
 }
 </style>
 <!-- 兼容lemon样式 -->

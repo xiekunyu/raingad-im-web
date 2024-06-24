@@ -50,9 +50,10 @@
             </div>
           </div>
           <div class="setting-item">
-            <div class="setting-title">转让群主：</div>
+            <div class="setting-title">其他操作：</div>
             <div class="setting-option">
-              <el-button size="mini" @click="changeOwner">转让</el-button>
+              <el-button size="mini" @click="changeOwner">转让群主</el-button>
+              <el-button size="mini" type="danger" @click="clearMessage">清空聊天记录</el-button>
             </div>
           </div>
           
@@ -80,6 +81,22 @@ export default {
     },
     changeOwner(){
       this.$emit('changeOwner',this.contact.id);
+    },
+    clearMessage(){
+      this.$confirm("确定情况该群组的所有聊天记录吗?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$api.imApi.clearMessageAPI({id:this.contact.id});
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消"
+          });
+        });
     }
   },
   created(){

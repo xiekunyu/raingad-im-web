@@ -437,3 +437,61 @@ export function generateRandId(){
 	  });
 	  return uuid;
 }
+
+// 获取指定id设备的视频流  
+export function getInitStream(source, audio){  
+    return new Promise((resolve, _reject) => {  
+      // 获取指定窗口的媒体流  
+      // 此处遵循的是webRTC的接口类型  
+      navigator.mediaDevices  
+        .getUserMedia({  
+          audio: audio  
+            ? {  
+                mandatory: {  
+                  chromeMediaSource: "desktop",  
+                },  
+              }  
+            : false,  
+          video: {  
+            mandatory: {  
+              chromeMediaSource: "desktop",  
+              chromeMediaSourceId: source.id,  
+            },  
+          },  
+        })  
+        .then((stream) => {  
+          resolve(stream);  
+        })  
+        .catch((error) => {  
+          console.log(error);  
+          resolve(null);  
+        });  
+    }) 
+}
+
+// 获取消息类型
+export function getMsgType(type, callVideo){
+    let msgName='[暂不支持的消息类型]';
+        switch(type){
+            case 'image':
+                msgName='[图片]';
+                break;
+            case 'voice':
+                msgName='[语音]';
+                break;
+            case 'video':
+                msgName='[视频]';
+                break;
+            case 'file':
+                msgName='[文件]';
+                break;
+            case 'webrtc':
+                if(callVideo){
+                    msgName='[正在请求与您视频通话]';
+                }else{
+                    msgName='[正在请求与您语音通话]';
+                }
+                break;
+        }
+        return msgName;
+   }
