@@ -920,6 +920,33 @@ export default {
         },
         {
           visible: instance => {
+            return instance.message.type == "image";
+          },
+          text: "复制图片",
+          click: async (e, instance, hide) => {
+            hide();
+            try {
+              const { message } = instance;
+              const response = await fetch(message.download);
+              const blob = await response.blob();
+
+              // 创建新的Blob对象并指定正确的MIME类型
+              const newBlob = new Blob([blob], { type: 'image/png' });
+
+              const item = new ClipboardItem({ "image/png": newBlob });
+              await navigator.clipboard.write([item]);
+              this.$message({
+                type: "success",
+                message: "图片复制成功!"
+              });
+            } catch (error) {
+              this.$message.error("复制图片失败: " + error);
+            }
+            
+          }
+        },
+        {
+          visible: instance => {
             return instance.message.type == "text";
           },
           text: "复制文字",
@@ -1907,11 +1934,12 @@ export default {
             next({ status: "failed" });
           });
       } else {
+        // 关闭引用
+        this.closeQuote();
         this.$api.imApi.sendMessageAPI(message)
           .then(res => {
             if(res.code==0){
               IMUI.setEditorValue("");
-              this.closeQuote();
               IMUI.updateMessage(res.data);
               next();
             }else{
