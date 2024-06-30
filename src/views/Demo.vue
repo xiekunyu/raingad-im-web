@@ -127,12 +127,12 @@
       <p>开源不易，如果需要以下功能，捐赠相应金额，作者可提供服务，进群后咨询作者！或者进群后直接扫码支付，联系群主提供支付凭证即可！</p>
       <p class="m-5"><b>（作者8年phper，前端水平一般，不接外包。但是有开发团队资源，功能和价格合适可接！）</b></p>
       <p>1. 服务端协助部署：<b>200元/次</b>（仅提供服务端远程 [todesk] 技术指导，需要提供纯净的centOS服务器一台）</p>
-      <p>2. uniapp移动端源码：<b style="text-decoration:line-through;">原价600元/套</b><b class="c-red"> 优惠价488元/套。</b>(源码无加密，仅提供源码，<b>不提供专业指导和部署 </b>)</p>
-      <p>3. 桌面端源码：<b style="text-decoration:line-through;">原价600元/套</b><b class="c-red"> 优惠价488元/套。</b>（使用vue+electron前端技术打包，和web端功能一样，支持后台运行和消息通知，暂不不支持截屏。赠送打包一次，单次打包200元/次）</p>
+      <p>2. uniapp移动端源码：<b style="text-decoration:line-through;">原价600元/套</b><b class="c-red"> 限时优惠价488元/套。</b>(源码无加密，仅提供源码，<b>不提供专业指导和部署 </b>)</p>
+      <p>3. 桌面端源码：<b style="text-decoration:line-through;">原价600元/套</b><b class="c-red"> 限时优惠价488元/套。</b>（使用vue+electron前端技术打包，和web端功能一样，支持后台运行和消息通知。赠送打包一次，单次打包200元/次）</p>
       <p>4. webRTC中继服务器：<b>200元/次</b>（原则上参考底部的教程链接来自行安装，确需服务，也可联系作者协助）</p>
       <p>5. 技术指导服务：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群联系作者</a></b> ，包含远程指导，代码解析，开发思路等，付费之日起一个月内有效。</p>
-      <p>6. 团队安心包：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群联系作者</a></b> ，包含上述前4项服务，根据需求选择，以及安卓APP和H5打包（需要提供Hbuilder的Dcloud账号），需要提供相应的服务器、域名、证书等，APP还需要提供应用名称和LOGO（如果没有可以代为生成）</p>
-      <p>7、其他未列出的服务，请进群咨询作者！<b class="c-red"> 进群请先Star项目，任何一个都可以，未star不予通过</b></p>
+      <p>6. 团队安心包：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群联系作者</a></b> ，包含上述前4项服务，根据需求选择，以及安卓APP和H5打包（需要提供Dcloud账号【打包】、服务器、域名、证书等，APP还需要提供应用名称和LOGO）</p>
+      <p>7、其他未列出的服务，请进群咨询作者！<b class="c-red"> 进群请先star项目，任何一个都可以，未star不予通过</b></p>
     </div>
 
     <div class="danger mb-20" >
@@ -142,7 +142,7 @@
         2、源码作者不保证无任何问题，可能存在兼容性问题或者一些小的BUG，需要自行优化升级，望悉知。<br>
         3、捐赠获得的源码仅供学习或二次开发使用，不可对源码进行二次售卖。<br>
         4、请勿将源码用于违法活动，如有发现，报警处理！<br>
-        5、价格或服务内容可能会有变动，<b>随着功能的增加，价格会上涨</b>，以咨询作者时给的服务方案为准！
+        5、价格或服务内容可能会有变动，<b class="c-red">随着功能的增加，价格会上涨</b>，以咨询作者时给的服务方案为准！
       </p>
     </div>
 
