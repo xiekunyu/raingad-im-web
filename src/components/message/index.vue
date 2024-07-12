@@ -39,13 +39,13 @@
               v-bind:class="{ 'lemon-avatar--circle': setting.avatarCricle }"
               style="width: 40px; height: 40px; line-height: 40px; font-size: 20px;"
             >
-              <img :src="Contact.avatar"
-            /></span>
+              <img :src="Contact.avatar"/>
+            </span>
+            <span class="online-status"  v-if="Contact.is_online && Contact.is_group==0 && globalConfig.chatInfo.online==1" title="在线"></span>
           </el-badge>
           <div class="lemon-contact__inner">
             <p class="lemon-contact__label">
               <span class="lemon-contact__name">
-                <OnlineStatus v-if="Contact.is_online && Contact.is_group==0 && globalConfig.chatInfo.online==1" title="在线" type="success"></OnlineStatus> 
                 {{ Contact.displayName }} 
               </span>
               <span
