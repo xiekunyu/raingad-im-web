@@ -36,36 +36,42 @@
     class="mt-15 mb-15"
       show-icon
       :closable="false"
-      title="请仔细阅读一下文档！进群请先Star项目。（webrtc一对一音视频通话需要自己搭建turn服务器，本文底部有搭建链接，通话中稳定但有一定的BUG）。"
-      type="warning">
+      title="请仔细阅读一下文档！进群请先Star项目。本项目是一款开源的即时通信demo（存在一定的BUG），主要用于学习交流，为大家提供即时通讯的开发思路。"
+      type="info">
     </el-alert>
     <el-alert
     class="mt-15 mb-15"
       show-icon
       :closable="false"
       title="该项目服务端和web端都属于全开源项目，仅用于个人学习，任何个人和单位不得对源码进行售卖；捐赠后获得的移动端源码也仅供学习使用，不可对源码进行二次售卖。"
-      type="error">
+      type="warning">
     </el-alert>
-
+    <el-alert
+      class="mt-15 mb-15"
+        show-icon
+        :closable="false"
+        title="免责声明：请勿将源码用于木马、病毒、色情、赌博、诈骗等违反国家法律法规行业，如有发现我会协助相关行政执法机关清查！"
+        type="error">
+      </el-alert>
   <el-tabs v-model="activeName" type="card" @tab-click="handleClick" class="mb-20"> 
     <el-tab-pane label="程序介绍">
       <div class="tip">
-          <p class="mb-5" v-for="(item,index) in introduce"><i :class="item.icon"></i> <span v-html="item.text"></span></p>
+          <p class="mb-5" v-for="(item,index) in introduce" :key="index"><i :class="item.icon"></i> <span v-html="item.text"></span></p>
       </div>
     </el-tab-pane>
     <el-tab-pane label="支持功能">
       <div class="success">
-        <p class="mb-5"  v-for="item in $packageData.funcList"><i :class="item.icon"></i>  <span v-html="item.text"></span></p>
+        <p class="mb-5"  v-for="(item,index) in $packageData.funcList" :key="index"><i :class="item.icon"></i>  <span v-html="item.text"></span></p>
       </div>
     </el-tab-pane>
     <el-tab-pane label="技术栈">
       <div class="info">
-          <p class="mb-5"  v-for="(item,index) in techStack"  ><i :class="item.icon"></i> <span v-html="item.text"></span></p>
+          <p class="mb-5"  v-for="(item,index) in techStack"   :key="index"><i :class="item.icon"></i> <span v-html="item.text"></span></p>
       </div>
     </el-tab-pane>
   </el-tabs>
 
-  <div class="mb-15"><b style="font-size:20px">体验</b></div>
+  <div class="mb-15"><b style="font-size:20px">功能演示</b></div>
     <!-- 消息 -->
     <div class="demo-btn">
       <div class="flex-box-center  mb-15" @click="showMessageBox()">
@@ -126,13 +132,16 @@
       </p>
       <p>开源不易，如果需要以下功能，捐赠相应金额，作者可提供服务，进群后咨询作者！或者进群后直接扫码支付，联系群主提供支付凭证即可！</p>
       <p class="m-5"><b>（作者8年phper，前端水平一般，不接外包。但是有开发团队资源，功能和价格合适可接！）</b></p>
-      <p>1. 服务端协助部署：<b>200元/次</b>（仅提供服务端远程 [todesk] 技术指导，需要提供纯净的centOS服务器一台）</p>
-      <p>2. uniapp移动端源码：<b style="text-decoration:line-through;">原价600元/套</b><b class="c-red"> 限时优惠价488元/套。</b>(源码无加密，仅提供源码，<b>不提供专业指导和部署 </b>)</p>
-      <p>3. 桌面端源码：<b style="text-decoration:line-through;">原价600元/套</b><b class="c-red"> 限时优惠价488元/套。</b>（使用vue+electron前端技术打包，和web端功能一样，支持后台运行和消息通知。赠送打包一次，单次打包200元/次）</p>
-      <p>4. webRTC中继服务器：<b>200元/次</b>（原则上参考底部的教程链接来自行安装，确需服务，也可联系作者协助）</p>
-      <p>5. 技术指导服务：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群联系作者</a></b> ，包含远程指导，代码解析，开发思路等，付费之日起一个月内有效。</p>
-      <p>6. 团队安心包：<b><a :href="$packageData.qqGroupUrl" target="_blank" style="color:#409EFF">进群联系作者</a></b> ，包含上述前4项服务，根据需求选择，以及安卓APP和H5打包（需要提供Dcloud账号【打包】、服务器、域名、证书等，APP还需要提供应用名称和LOGO）</p>
+      <el-link class="mt-10 mb-10" type="primary" :href="$packageData.qqGroupUrl" target="_blank">---------------进群联系作者-------------</el-link>
+      <p>1. 服务端协助部署：仅提供服务端远程 [todesk] 技术指导，需要提供纯净的centOS服务器一台。</p>
+      <p>2. uniapp移动端源码(源码无加密，仅提供源码，<b>不提供专业指导和部署 </b>)</p>
+      <p>3. 桌面端源码：使用vue+electron前端技术打包，和web端功能一样，支持后台运行和消息通知。赠送打包一次，单次打包200元/次。</p>
+      <p>4. webRTC中继服务器：原则上参考底部的教程链接来自行安装，确需服务，也可联系作者协助。</p>
+      <p>5. 技术指导服务：包含远程指导，代码解析，开发思路等，付费之日起一个月内有效。</p>
+      <p>6. 团队安心包：包含上述前4项服务，根据需求选择，以及安卓APP和H5打包（需要提供Dcloud账号【打包】、服务器、域名、证书等，APP还需要提供应用名称和图标）</p>
       <p>7、其他未列出的服务，请进群咨询作者！<b class="c-red"> 进群请先star项目，任何一个都可以，未star不予通过</b></p>
+
+
     </div>
 
     <div class="danger mb-20" >
@@ -141,8 +150,7 @@
         1、凡是捐赠达到200元以上即可赠送API文档，包含：接口说明、安装教程、常见问题的解决方法等。<br>
         2、源码作者不保证无任何问题，可能存在兼容性问题或者一些小的BUG，需要自行优化升级，望悉知。<br>
         3、捐赠获得的源码仅供学习或二次开发使用，不可对源码进行二次售卖。<br>
-        4、请勿将源码用于违法活动，如有发现，报警处理！<br>
-        5、价格或服务内容可能会有变动，<b class="c-red">随着功能的增加，价格会上涨</b>，以咨询作者时给的服务方案为准！
+        4、价格或服务内容可能会有变动，<b class="c-red">随着功能的增加，价格会上涨</b>，以咨询作者时给的服务方案为准！
       </p>
     </div>
 
