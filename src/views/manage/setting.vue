@@ -57,7 +57,7 @@
               <el-form-item label="运行模式" prop="regtype">
                   <el-radio-group v-model="sysInfo.runMode">
                   <el-radio label="1" border>企业模式</el-radio>
-                  <el-radio label="2" border>社区模式</el-radio>
+                  <el-radio label="2" border>社交模式</el-radio>
                   </el-radio-group>
               </el-form-item>
               <el-form-item label="系统状态" prop="state">
@@ -128,12 +128,11 @@
         </el-tab-pane>
         <el-tab-pane>
           <span slot="label"><i class="el-icon-message"></i> 邮件短信设置</span>
-          <div class="m-20">
-            <el-alert
+          <el-alert
+            class="mb-20"
               title="系统支持短信验证码，请到项目：[根目录/config/sms.php] 中配置短信开放平台的参数，支持阿里云、腾讯云、七牛云、又拍云、Ucloud和华为云。"
               type="warning">
-            </el-alert>
-          </div>
+          </el-alert>
           <el-form :model="smtp" :rules="smtpRules" ref="smtp" label-width="120px"  style="width:500px">
               <el-form-item label="邮件服务器" prop="host">
                   <el-input v-model="smtp.host" placeholder="请输入邮件服务器，如：smtp.mail.qq.com"></el-input>
@@ -243,7 +242,7 @@
                   <el-input v-model="fileUpload.preview"  placeholder="请输入文件预览的地址，若无则使用默认预览工具"></el-input>
               </el-form-item>
               <el-form-item label="文件大小限制"  prop="size">
-                <el-input-number v-model="fileUpload.size" :min="0" :max="100" label=""></el-input-number> <span class="ml-10 c-999 f-12">MB</span>
+                <el-input-number v-model="fileUpload.size" :min="0" :max="500" label=""></el-input-number> <span class="ml-10 c-999 f-12">MB</span>
               </el-form-item>
               <el-form-item label="文件格式限制" prop="fileExt">
                   <el-select
@@ -255,8 +254,8 @@
                       style="width: 480px"
                       placeholder="请输入允许上传的文件格式">
                       <el-option
-                      v-for="item in options"
-                      :key="item"
+                      v-for="(item,index) in options"
+                      :key="index"
                       :label="item"
                       :value="item">
                       </el-option>
@@ -266,6 +265,71 @@
                   <el-button type="primary" @click="submitForm('fileUpload')">保存</el-button>
               </el-form-item>
           </el-form>
+        </el-tab-pane>
+        <el-tab-pane>
+          <span slot="label"><i class="el-icon-discover"></i> 探索设置</span>
+          <el-alert
+              class="mb-15"
+                show-icon
+                :closable="false"
+                title="应用内的链接一定要是 '/' 开头，外部URL需要带协议头，以 '/' 结尾；图标、名称、链接为必填项，如果没填写则无法保存。"
+                type="warning">
+          </el-alert>
+          
+          <el-form :model="compass" :rules="compassRules" ref="compass" label-width="120px">
+              <el-form-item label="开启探索">
+                  <el-switch v-model="compass.status" active-value="1" inactive-value="0"></el-switch>
+                  <span class="ml-10 c-999 f-12">关闭后，不显示探索页面</span>
+              </el-form-item>
+              <el-form-item label="展示模式">
+                  <el-radio-group v-model="compass.mode">
+                  <el-radio label="1" border>列表模式</el-radio>
+                  <el-radio label="2" border>宫格模式</el-radio>
+                  </el-radio-group>
+              </el-form-item>
+              <el-form-item label="应用列表" >
+                <div class="lz-flex lz-align-items-center lz-align-content-center">
+                    <div class="ml-10" style="width:60px">图标</div>
+                    <div style="width:130px">名称</div>
+                    <div style="width:130px">类型</div>
+                    <div style="width:310px">链接</div>
+                    <div style="width:80px">排序</div>
+                    <div style="width:60px">状态</div>
+                    <div style="width:60px">操作</div>
+                </div>
+              </el-form-item>
+              <el-form-item prop="list" v-for="(item,index) in compass.list" :key="index">
+                <div class="lz-flex lz-align-items-center lz-align-content-center">
+                  <el-upload
+                        class="avatar-uploader mr-10"
+                        :headers="getToken"
+                        :action="getUrl"
+                        :show-file-list="false"
+                        :on-success="iconUploadSuccess.bind(null,index)"
+                        style="width:50px;height:50px">
+                        <img v-if="item.icon" :src="item.icon" style="width:50px;height:50px;" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon" style="width:50px;height:50px;line-height: 50px;" ></i>
+                        <el-input v-model="item.icon" style="display: none;"></el-input>
+                  </el-upload>
+                  <el-input class="mr-10" v-model="item.name" style="width:120px"></el-input>
+                  <el-select class="mr-10" v-model="item.type" style="width:120px" placeholder="请选择应用类型">
+                    <el-option label="应用内" value="1"></el-option>
+                    <el-option label="外部URL" value="2"></el-option>
+                  </el-select>
+                  <el-input class="mr-10" v-model="item.url" style="width:300px"></el-input>
+                  <el-input class="mr-10" v-model="item.order" style="width:80px"></el-input>
+                  <el-switch v-model="item.status" active-value="1" inactive-value="0" style="width:60px"></el-switch>
+                  <el-button type="danger" icon="el-icon-minus" circle @click="delAppItem(item)"></el-button>
+                </div>
+              </el-form-item>
+              <el-form-item align="center">
+                <el-button type="primary" icon="el-icon-plus" @click="addAppItem">添加应用</el-button>
+              </el-form-item>
+              <el-form-item>
+                  <el-button type="primary" @click="submitForm('compass')">保存</el-button>
+              </el-form-item>
+          </el-form>
+          
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -313,6 +377,11 @@ export default {
             addr:'',
             pass:'',
             sign:''
+        },
+        compass:{
+          status:'1',
+          mode:'1',
+          list:[]
         },
         fileUpload:{
             disk:'local',
@@ -382,6 +451,11 @@ export default {
           fileExt:[
             { required: true, message: '请输入文件格式限制', trigger: 'blur' }
           ]
+        },
+        compassRules:{
+          compassMode:[
+            { required: true, message: '请选择展示模式', trigger: 'blur' }
+          ],
         }
       };
     },
@@ -416,6 +490,9 @@ export default {
                 case 'fileUpload':
                 if(item.value) this.fileUpload=item.value;
                   break;
+                case 'compass':
+                if(item.value) this.compass=item.value;
+                  break;
               }
             }) 
           }
@@ -439,6 +516,12 @@ export default {
                   case 'fileUpload':
                     params.value=this.fileUpload;
                     break;
+                  case 'compass':
+                    let compass=this.compass;
+                    let newList=compass.list.filter(item => item.name!='' && item.icon!='' && item.url!='');
+                    compass.list=newList;
+                    params.value=compass;
+                    break;
               }
               this.$api.configApi.setConfig(params).then(res=>{
                 if(res.code==0){
@@ -458,8 +541,10 @@ export default {
         this.$refs[formName].resetFields();
       },
       uploadSuccess(res, file) {
-        console.log(res)
         this.sysInfo.logo = res.data;
+      },
+      iconUploadSuccess(index, res, file) {
+        this.compass.list[index].icon = res.data;
       },
       beforeAvatarUpload(file) {
         // const isJPG = file.type === 'image/jpeg';
@@ -520,6 +605,28 @@ export default {
           this.loadding=false;       
         });
         
+      },
+      // 添加应用
+      addAppItem(){
+        let list=this.compass.list;
+        list.push({
+          id: 1,
+          url: "",
+          icon: "",
+          name: "",
+          type: '2',
+          badge: 0,
+          order: 0,
+          status: '1'
+        });
+        this.compass.list=list;
+      },
+      // 删除应用
+      delAppItem(item){
+        var index = this.compass.list.indexOf(item)
+        if (index !== -1) {
+          this.compass.list.splice(index, 1)
+        }
       }
     }
   }

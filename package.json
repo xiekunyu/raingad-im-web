@@ -1,6 +1,6 @@
 {
   "name": "Raingad-IM",
-  "version": "4.2.1",
+  "version": "5.0.0",
   "description": "一款基于vue2.0的即时聊天工具",
   "logo": "https://im.file.raingad.com/logo/logo.png",
   "frontUrl": "https://gitee.com/raingad/im-chat-front",
@@ -41,7 +41,7 @@
     },
     {
       "icon": "el-icon-coffee-cup",
-      "text": "全新支持企业模式和社区模式，社区模式支持注册、添加好友功能"
+      "text": "全新支持企业模式和社交模式，社交模式支持注册、添加好友功能"
     }
   ],
   "scripts": {
