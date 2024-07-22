@@ -379,4 +379,13 @@ imApi.searchUser= (data)  =>{
         data: data
     })
 }
+
+// 搜索用户
+imApi.userList= (data)  =>{
+    return request({
+        url: 'enterprise/im/userList',
+        method: 'post',
+        data: data
+    })
+}
 export default imApi;

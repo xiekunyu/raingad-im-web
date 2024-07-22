@@ -36,6 +36,10 @@ Vue.component(LemonMessageVoice.name, LemonMessageVoice);
 Vue.component(LemonMessageWebrtc.name, LemonMessageWebrtc);
 Vue.component(LemonMessageFile.name, LemonMessageFile);
 Vue.component(LemonMessageText.name, LemonMessageText);
+
+import elClickoutside from './directive/elclickoutside.js'
+Vue.directive('elclickoutside', elClickoutside)
+
 import Api from "@/api/index.js"
 Vue.prototype.$api = Api
 

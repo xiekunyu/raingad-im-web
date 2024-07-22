@@ -100,22 +100,52 @@
                       <span class="ml-10 c-999 f-12">系统在每日凌晨2点自动清理该天数以前的消息</span>
                   </div>
               </el-form-item>
+              <el-form-item label="自动添加客服" prop="autoAddUser">
+                <el-switch v-model="chatInfo.autoAddUser.status" active-value="1" inactive-value="0"></el-switch>
+                <span class="ml-10 c-999 f-12">开启后，用户注册之后自动设置为专属客服。</span>
+                <div class="lz-flex mt-10" v-show="chatInfo.autoAddUser.status=='1'">
+                  <span class="c-999 f-12">客服人员：</span> 
+                  <user-select :width="'300px'"  v-model="chatInfo.autoAddUser.user_items" @change="changeUser"></user-select>
+                  <span class="ml-10 c-999 f-12">如果选择多个则循环设置</span>
+                </div>
+              </el-form-item>
+              <el-form-item label="自动加入群聊" prop="autoAddGroup">
+                <el-switch v-model="chatInfo.autoAddGroup.status" active-value="1" inactive-value="0"></el-switch>
+                <span class="ml-10 c-999 f-12">开启后，用户注册之后自动加入群聊。</span>
+                <div v-show="chatInfo.autoAddGroup.status=='1'">
+                  <div class="mt-10">
+                    <span class="c-999 f-12">群聊名称</span> 
+                    <el-input type="text"  placeholder="请输入群聊名称" v-model="chatInfo.autoAddGroup.name" class="ml-10" style="width:180px"></el-input>
+                    <span class="ml-10 c-999 f-12">自动生成群聊名称</span>
+                  </div>
+                  <div class="lz-flex mt-10">
+                     <span class="c-999 f-12">默认群主：</span> 
+                     <user-select :width="'180px'" :radio="true" v-model='chatInfo.autoAddGroup.owner_uid' @change="changeOwner" ></user-select>
+                     <span class="ml-10 c-999 f-12">如果选择多个则循环设置</span>
+                  </div>
+                  <div class="mt-10">
+                    <span class="c-999 f-12">群聊成员上限</span> 
+                    <el-input v-model="chatInfo.autoAddGroup.userMax" type="text" class="ml-10" style="width:120px"></el-input>
+                    <span class="ml-10 c-999 f-12">达到上限后自动创建新群聊</span>
+                  </div>
+                </div>
+              </el-form-item>
               <el-form-item label="音视频通话" prop="webrtc">
                   <el-switch v-model="chatInfo.webrtc" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">开启后，可以进行音视频通话，仅支持1对1音视频</span>
                   <div v-show="chatInfo.webrtc==1">
                     <div class="mt-15">
-                        <span class="c-999 f-12">stun服务器</span> 
+                        <span class="c-999 f-12">turn服务器</span> 
                         <el-input type="text"  placeholder="请输入stun服务器" v-model="chatInfo.stun" class="ml-10" style="width:300px"></el-input>
                         <span class="ml-10 c-999 f-12">音视频通话需要有Stun服务器才可以进行</span>
                     </div>
                     <div class="mt-15">
-                        <span class="c-999 f-12">stun用户名</span> 
+                        <span class="c-999 f-12">turn用户名</span> 
                         <el-input type="text"  placeholder="请输入stun用户名" v-model="chatInfo.stunUser" class="ml-10" style="width:300px"></el-input>
                         <span class="ml-10 c-999 f-12">如果是公开的则可以不填写</span>
                     </div>
                     <div class="mt-15">
-                        <span class="c-999 f-12">stun密码</span> 
+                        <span class="c-999 f-12">turn密码</span> 
                         <el-input type="text"  placeholder="请输入stun服务器密码" v-model="chatInfo.stunPass" class="ml-10" style="width:300px"></el-input>
                         <span class="ml-10 c-999 f-12">如果是公开的则可以不填写</span>
                     </div>
@@ -339,9 +369,11 @@
 import Lockr from 'lockr'
 import VueQr from 'vue-qr';
 import logo from '@/assets/img/logo.png';
+import userSelect from '@/components/userSelect/index';
 export default {
     components: {
-        VueQr
+        VueQr,
+        userSelect
     },
     data() {
       return {
@@ -368,7 +400,19 @@ export default {
           webrtc:true,
           stun:'',
           stunUser:'',
-          stunPass:''
+          stunPass:'',
+          autoAddGroup:{
+            status:0,
+            userMax:'',
+            owner_uid:'',
+            owner_info:[],
+            name:''
+          },
+          autoAddUser:{
+            status:0,
+            user_ids:[],
+            user_items:[]
+          }
         },
         smtp:{
             host:'',
@@ -479,19 +523,19 @@ export default {
             res.data.forEach(item=>{
               switch(item.name){
                 case 'sysInfo':
-                  if(item.value) this.sysInfo=item.value;
+                  if(item.value) this.sysInfo=Object.assign(this.sysInfo,item.value);
                   break;
                 case 'chatInfo':
-                  if(item.value) this.chatInfo=item.value;
+                  if(item.value) this.chatInfo=Object.assign(this.chatInfo,item.value);
                   break;
                 case 'smtp':
-                if(item.value) this.smtp=item.value;
+                if(item.value) this.smtp=Object.assign(this.smtp,item.value);
                   break;
                 case 'fileUpload':
-                if(item.value) this.fileUpload=item.value;
+                if(item.value) this.fileUpload=Object.assign(this.fileUpload,item.value);
                   break;
                 case 'compass':
-                if(item.value) this.compass=item.value;
+                if(item.value) this.compass=Object.assign(this.compass,item.value);
                   break;
               }
             }) 
@@ -523,6 +567,7 @@ export default {
                     params.value=compass;
                     break;
               }
+              // console.log(params);return;
               this.$api.configApi.setConfig(params).then(res=>{
                 if(res.code==0){
                     this.$message({
@@ -627,6 +672,14 @@ export default {
         if (index !== -1) {
           this.compass.list.splice(index, 1)
         }
+      },
+      changeUser(values,item){
+        this.chatInfo.autoAddUser.user_ids=values;
+        this.chatInfo.autoAddUser.user_items=item;
+      },
+      changeOwner(values,item){
+        this.chatInfo.autoAddGroup.owner_uid=values;
+        this.chatInfo.autoAddGroup.owner_info=item;
       }
     }
   }
