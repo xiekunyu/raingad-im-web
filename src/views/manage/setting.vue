@@ -103,10 +103,17 @@
               <el-form-item label="自动添加客服" prop="autoAddUser">
                 <el-switch v-model="chatInfo.autoAddUser.status" active-value="1" inactive-value="0"></el-switch>
                 <span class="ml-10 c-999 f-12">开启后，用户注册之后自动设置为专属客服。</span>
-                <div class="lz-flex mt-10" v-show="chatInfo.autoAddUser.status=='1'">
-                  <span class="c-999 f-12">客服人员：</span> 
-                  <user-select :width="'300px'"  v-model="chatInfo.autoAddUser.user_items" @change="changeUser"></user-select>
-                  <span class="ml-10 c-999 f-12">如果选择多个则循环设置</span>
+                <div class="mt-10" v-show="chatInfo.autoAddUser.status=='1'">
+                  <div class="lz-flex">
+                    <span class="c-999 f-12">客服人员：</span> 
+                    <user-select :width="'300px'"  v-model="chatInfo.autoAddUser.user_items" @change="changeUser"></user-select>
+                    <span class="ml-10 c-999 f-12">如果选择多个则循环设置</span>
+                  </div>
+                  <div class="mt-10">
+                    <span class="c-999 f-12">欢迎语</span> 
+                    <el-input v-model="chatInfo.autoAddUser.welcome" type="text" class="ml-10" style="width:300px"></el-input>
+                    <span class="ml-10 c-999 f-12">通过客服自动发送给新注册的人员</span>
+                  </div>
                 </div>
               </el-form-item>
               <el-form-item label="自动加入群聊" prop="autoAddGroup">
@@ -121,11 +128,11 @@
                   <div class="lz-flex mt-10">
                      <span class="c-999 f-12">默认群主：</span> 
                      <user-select :width="'180px'" :radio="true" v-model='chatInfo.autoAddGroup.owner_uid' @change="changeOwner" ></user-select>
-                     <span class="ml-10 c-999 f-12">如果选择多个则循环设置</span>
+                     <span class="ml-10 c-999 f-12">选择后将自动设置为群主</span>
                   </div>
                   <div class="mt-10">
-                    <span class="c-999 f-12">群聊成员上限</span> 
-                    <el-input v-model="chatInfo.autoAddGroup.userMax" type="text" class="ml-10" style="width:120px"></el-input>
+                    <span class="c-999 f-12">群聊成员上限：</span> 
+                    <el-input-number v-model="chatInfo.autoAddGroup.userMax" :min="5" :max="1000"></el-input-number>
                     <span class="ml-10 c-999 f-12">达到上限后自动创建新群聊</span>
                   </div>
                 </div>
@@ -352,7 +359,7 @@
                   <el-button type="danger" icon="el-icon-minus" circle @click="delAppItem(item)"></el-button>
                 </div>
               </el-form-item>
-              <el-form-item align="center">
+              <el-form-item>
                 <el-button type="primary" icon="el-icon-plus" @click="addAppItem">添加应用</el-button>
               </el-form-item>
               <el-form-item>

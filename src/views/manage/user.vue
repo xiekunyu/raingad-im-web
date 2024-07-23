@@ -168,6 +168,9 @@
               <el-form-item label="e-mail" prop="email">
                   <el-input placeholder="请输入邮箱地址" v-model="detail.email"></el-input>
               </el-form-item>
+              <el-form-item label="专属客服" prop="cs_uid">
+               <user-select :width="'180px'" :radio="true" v-model='detail.cs_uid'></user-select>
+              </el-form-item>
               <el-form-item label="性别" prop="sex">
                   <el-radio-group v-model="detail.sex">
                      <el-radio :label="2" border>未知</el-radio>
@@ -220,9 +223,13 @@
  
  <script>
  import { mapState } from 'vuex';
+ import userSelect from '@/components/userSelect/index';
    export default {
-     data() {
-       return {
+      components: {
+         userSelect
+      },
+      data() {
+        return {
          total: 0,
          params:{
              page:1,
