@@ -1046,7 +1046,7 @@ export default {
       this.searchContact(contacts);
     },
     // 监听接收socket消息
-    socketAction(val) {
+    async socketAction(val) {
       let message = val.data;
       const { IMUI } = this.$refs;
       let client_id=Lockr.get('client_id');
@@ -1075,7 +1075,7 @@ export default {
         case "group":
           // 如果是自己发送的消息则不需要提示
           if (message.fromUser.id != this.user.id) {
-            var contact = this.getContact(message.toContactId);
+            let contact = await this.getContact(message.toContactId);
             // 如果不是当前聊天对象，并且被@到，就要@的未读数量  
             if(message.is_group==1 && message.toContactId!=this.currentChat.id){
               let at=0;
@@ -1647,9 +1647,19 @@ export default {
           IMUI.initMenus(menus);
     },
     // 获取联系人
-    getContact(id) {
+    async getContact(id) {
       const { IMUI } = this.$refs;
-     return IMUI.findContact(id);
+      let contact=IMUI.findContact(id);
+      // 如果没有该联系人，需要新增，相当于临时会话
+      if(!contact){
+        await this.$api.imApi.contactInfo({user_id:id}).then(res=>{
+          if(res.code==0){
+            contact=res.data
+            IMUI.appendContact(res.data);
+          }
+        })
+      }
+      return contact;
     },
     wrapKey(e){
       return this.setting.sendKey == 1 ? (e.keyCode == 13 && e.ctrlKey) : (e.keyCode == 13 && !e.ctrlKey && !e.shiftKey);
@@ -2189,7 +2199,7 @@ export default {
       }
     },
     // 接收消息重新渲染
-    recieveMsg(message) {
+    async recieveMsg(message) {
       const { IMUI } = this.$refs;
       const contact = IMUI.getCurrentContact();
       // 如果收到消息是当前窗口的聊天，需要将消息修改为已读
@@ -2205,7 +2215,7 @@ export default {
       }else{
         // 如果不是自己的消息，需要将未读数加1
         if (this.user.id != message.fromUser.id) {
-          let formContact=this.getContact(message.toContactId);
+          let formContact=await this.getContact(message.toContactId);
           // 有消息提醒才会增加未读数
           if(formContact.is_notice==1){
             this.unread++;
@@ -2227,7 +2237,6 @@ export default {
         });
       }
       IMUI.appendMessage(message, true);
-      
     },
     openMessageBox() {
       this.messageBox = true;

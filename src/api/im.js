@@ -380,10 +380,19 @@ imApi.searchUser= (data)  =>{
     })
 }
 
-// 搜索用户
+//用户列表和搜索
 imApi.userList= (data)  =>{
     return request({
         url: 'enterprise/im/userList',
+        method: 'post',
+        data: data
+    })
+}
+
+// 获取联系人信息
+imApi.contactInfo= (data)  =>{
+    return request({
+        url: 'enterprise/im/getContactInfo',
         method: 'post',
         data: data
     })

@@ -84,20 +84,24 @@
                   <span class="ml-10 c-999 f-12">关闭后，用户将无法创建群聊</span>
               </el-form-item>
               <el-form-item label="群聊最多人数" prop="groupChat">
-                <el-input v-model="chatInfo.groupUserMax" type="text" class="ml-10" style="width:120px"></el-input>
-                  <span class="ml-10 c-999 f-12">人，0表示不限制</span>
+                <el-input-number class="ml-10" v-model="chatInfo.groupUserMax" :min="0" :max="1000"></el-input-number>
+                <span class="ml-10 c-999 f-12">人，0表示不限制，不建议超过500人</span>
               </el-form-item>
               <el-form-item label="开启在线状态" prop="online">
                   <el-switch v-model="chatInfo.online" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">开启后，用户可以看到联系人的在线状态</span>
+              </el-form-item>
+              <el-form-item label="消息发送频率" prop="groupChat">
+                <el-input-number class="ml-10" v-model="chatInfo.sendInterval" :min="0" :max="1000"></el-input-number>
+                <span class="ml-10 c-999 f-12">秒，0表示不限制，防止用户刷消息</span>
               </el-form-item>
               <el-form-item label="消息自动清理"  prop="msgClear">
                   <el-switch v-model="chatInfo.msgClear" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">开启后，将会自动删除系统内的聊天记录</span>
                   <div v-show="chatInfo.msgClear==1">
                       <span class="c-999 f-12">消息最大保留天数</span> 
-                      <el-input v-model="chatInfo.msgClearDay" type="text" class="ml-10" style="width:120px"></el-input>
-                      <span class="ml-10 c-999 f-12">系统在每日凌晨2点自动清理该天数以前的消息</span>
+                      <el-input-number class="ml-10" v-model="chatInfo.msgClearDay" :min="0" :max="1000"></el-input-number>
+                      <span class="ml-10 c-999 f-12">系统在每日凌晨2点自动清理该天数以前的消息，每个会话只保留最后一条。</span>
                   </div>
               </el-form-item>
               <el-form-item label="自动添加客服" prop="autoAddUser">
@@ -128,12 +132,12 @@
                   <div class="lz-flex mt-10">
                      <span class="c-999 f-12">默认群主：</span> 
                      <user-select :width="'180px'" :radio="true" v-model='chatInfo.autoAddGroup.owner_uid' @change="changeOwner" ></user-select>
-                     <span class="ml-10 c-999 f-12">选择后将自动设置为群主</span>
+                     <span class="ml-10 c-999 f-12">选择后将自动设置为默认群主</span>
                   </div>
                   <div class="mt-10">
                     <span class="c-999 f-12">群聊成员上限：</span> 
                     <el-input-number v-model="chatInfo.autoAddGroup.userMax" :min="5" :max="1000"></el-input-number>
-                    <span class="ml-10 c-999 f-12">达到上限后自动创建新群聊</span>
+                    <span class="ml-10 c-999 f-12">达到上限后自动创建新的群聊</span>
                   </div>
                 </div>
               </el-form-item>
@@ -408,6 +412,7 @@ export default {
           stun:'',
           stunUser:'',
           stunPass:'',
+          sendInterval:'',
           autoAddGroup:{
             status:0,
             userMax:'',
