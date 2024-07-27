@@ -28,7 +28,7 @@
 <script>
 
 import WkSelectDropdown from './src/SelectDropdown.vue'
-import WkUser from './src/WkUser.vue'
+import WkUser from './src/user.vue'
 
 import Emitter from 'element-ui/lib/mixins/emitter'
 import { valueEquals } from 'element-ui/lib/utils/util'

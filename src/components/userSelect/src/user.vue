@@ -30,7 +30,7 @@
 <script type="text/javascript">
 import { valueEquals } from 'element-ui/lib/utils/util'
 import { deepClone } from '@/utils'
-import avatarList from '@/components/Avater/index'
+import avatarList from '@/components/avatar/index'
 
 export default {
   name: 'WkUser', // 新建 user
