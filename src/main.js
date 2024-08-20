@@ -5,8 +5,8 @@ import UserCard from '@/components/message/user/index'
 Vue.use(UserCard)
 import Preview from '@/components/message/preview/index.js'
 Vue.use(Preview)
-import LemonIMUI from 'lemon-imui-rx';
-import 'lemon-imui-rx/dist/index.css';
+import LemonIMUI from '@/components/lemon-imui/index.umd.min.js';
+import '@/components/lemon-imui/index.css';
 Vue.use(ElementUI, { size: 'small' })
 Vue.use(LemonIMUI);
 import router from './router'
