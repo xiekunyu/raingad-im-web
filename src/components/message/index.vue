@@ -1779,6 +1779,9 @@ export default {
           messages[i].is_read == 0 &&
           messages[i].fromUser.id != this.user.id
         ) {
+          messages[i]['contactInfo'] = {};
+          messages[i]['fromUser'] = {};
+          messages[i]['extends'] = {};
           data.push(messages[i]);
         }
       }
@@ -1789,11 +1792,8 @@ export default {
           toContactId: contact.id,
           messages: data,
           fromUser: contact.id
-        }).then(res => {
-          if (res.code == 0) {
-            this.setLocalMsgIsRead(data);
-          }
-        });
+        })
+        this.setLocalMsgIsRead(data);
       }
       instance.closeDrawer();
     },
@@ -1814,7 +1814,7 @@ export default {
     },
     uploadVideo (e) {
       // 如果开启了群聊禁言或者关闭了单聊权限，就不允许发送消息
-      if((!this.globalConfig.chatInfo.simpleChat && this.is_group == 0) || !this.nospeak()){
+      if(!this.nospeak()){
         this.$message.error(this.noSimpleTips);
         return false;
       }
@@ -1910,7 +1910,7 @@ export default {
       message.is_group = this.is_group;
       this.curFile=file;
       // 如果开启了群聊禁言或者关闭了单聊权限，就不允许发送消息
-      if((this.globalConfig.chatInfo.simpleChat!=1 && this.is_group == 0) || !this.nospeak()){
+      if(!this.nospeak()){
         IMUI.removeMessage(message.id);
         this.$message.error(this.noSimpleTips);
         return false;
