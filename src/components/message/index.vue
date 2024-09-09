@@ -15,6 +15,7 @@
         :sendKey="setSendKey"
         :wrapKey="wrapKey"
         :latelyContacts="latelyContact"
+        @is-bottom="eventBottom"
         @menu-avatar-click="openSetting"
         @change-contact="handleChangeContact"
         @pull-messages="handlePullMessages"
@@ -459,6 +460,7 @@ export default {
       displayName: "",
       oldName: "",
       isEdit: false,
+      isBottom:true,
       // 当前登录用户
       user: {
         id: user.user_id,
@@ -2234,7 +2236,7 @@ export default {
           unread:'+1'
         });
       }
-      IMUI.appendMessage(message, true);
+      IMUI.appendMessage(message, this.isBottom);
     },
     openMessageBox() {
       this.messageBox = true;
@@ -2322,6 +2324,9 @@ export default {
     },
     closeQuote(){
       this.quote='';
+    },
+    eventBottom(isBottom){
+      this.isBottom=isBottom;
     },
     // 退出聊天室
     logout() {
