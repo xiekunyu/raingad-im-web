@@ -422,7 +422,7 @@ export default {
     var _this = this;
     let webrtcConfig= this.$store.state.globalConfig.chatInfo;
     return {
-      noSimpleTips:'系统已关闭单聊，或者群已开启禁言，无法发送消息',
+      noSimpleTips:'群已开启禁言，无法发送消息',
       isFullscreen:false,
       curWidth:this.width,
       curHeight:this.height,
