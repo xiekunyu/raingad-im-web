@@ -1780,8 +1780,6 @@ export default {
           messages[i].fromUser.id != this.user.id
         ) {
           messages[i]['contactInfo'] = {};
-          messages[i]['fromUser'] = {};
-          messages[i]['extends'] = {};
           data.push(messages[i]);
         }
       }
