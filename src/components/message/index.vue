@@ -1966,6 +1966,8 @@ export default {
       if(message.length>0){
         params.last_id=message[0].msg_id;
         params.page=1;
+      }else{
+        params.last_id=0;
       }
       params.toContactId=contact.id;
       params.is_group=contact.is_group;
