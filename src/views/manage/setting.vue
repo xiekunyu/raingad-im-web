@@ -95,6 +95,10 @@
                 <el-input-number class="ml-10" v-model="chatInfo.sendInterval" :min="0" :max="1000"></el-input-number>
                 <span class="ml-10 c-999 f-12">秒，0表示不限制，防止用户刷消息</span>
               </el-form-item>
+              <el-form-item label="消息撤回时间" prop="groupChat">
+                <el-input-number class="ml-10" v-model="chatInfo.redoTime" :min="0" :max="86400"></el-input-number>
+                <span class="ml-10 c-999 f-12">秒，0表示不支持撤回</span>
+              </el-form-item>
               <el-form-item label="消息自动清理"  prop="msgClear">
                   <el-switch v-model="chatInfo.msgClear" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">开启后，将会自动删除系统内的聊天记录</span>
@@ -413,6 +417,7 @@ export default {
           stunUser:'',
           stunPass:'',
           sendInterval:'',
+          redoTime:120,
           autoAddGroup:{
             status:0,
             userMax:'',
