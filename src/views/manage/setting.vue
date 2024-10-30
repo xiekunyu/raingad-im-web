@@ -99,13 +99,17 @@
                 <el-input-number class="ml-10" v-model="chatInfo.redoTime" :min="0" :max="86400"></el-input-number>
                 <span class="ml-10 c-999 f-12">秒，0表示不支持撤回</span>
               </el-form-item>
+              <el-form-item label="消息双向删除" prop="dbDelMsg">
+                  <el-switch v-model="chatInfo.dbDelMsg" active-value="1" inactive-value="0"></el-switch>
+                  <span class="ml-10 c-999 f-12">开启后，用户删除消息会删除双方，群聊仅限删除自己的</span>
+              </el-form-item>
               <el-form-item label="消息自动清理"  prop="msgClear">
                   <el-switch v-model="chatInfo.msgClear" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">开启后，将会自动删除系统内的聊天记录</span>
                   <div v-show="chatInfo.msgClear==1">
                       <span class="c-999 f-12">消息最大保留天数</span> 
                       <el-input-number class="ml-10" v-model="chatInfo.msgClearDay" :min="0" :max="1000"></el-input-number>
-                      <span class="ml-10 c-999 f-12">系统在每日凌晨2点自动清理该天数以前的消息，每个会话只保留最后一条。</span>
+                      <span class="ml-10 c-999 f-12">系统在每日凌晨2点自动清理该天数以前的消息</span>
                   </div>
               </el-form-item>
               <el-form-item label="自动添加客服" prop="autoAddUser">
@@ -418,6 +422,7 @@ export default {
           stunPass:'',
           sendInterval:'',
           redoTime:120,
+          dbDelMsg:false,
           autoAddGroup:{
             status:0,
             userMax:'',
