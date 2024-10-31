@@ -112,6 +112,18 @@ imApi.undoMessageAPI= (data)  =>{
 }
 
 /**
+ * 删除消息
+ * @param {*} data
+ */
+imApi.delMessageAPI= (data)  =>{
+    return request({
+        url: 'enterprise/im/delMessage',
+        method: 'post',
+        data: data
+    })
+}
+
+/**
  * 撤回消息
  * @param {*} data
  */

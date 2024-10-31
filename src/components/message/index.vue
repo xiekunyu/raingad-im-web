@@ -77,10 +77,14 @@
                   v-if="is_group == 1"
                   @click="isEdit = true"
                 >
-                  <!-- <el-tag size="mini">群聊</el-tag> -->
+                  <el-tag size="mini" v-if="is_group ==2">BOT</el-tag>
                    {{ contact.displayName }}<span class="mr-5">({{ groupUserCount }})</span>
                   <el-tag size="mini" v-if="contact.setting && contact.setting.nospeak == 1"  type="warning">仅群管理员可发言</el-tag>
                   <el-tag size="mini" v-if="contact.setting && contact.setting.nospeak == 2"  type="danger">全员禁言中</el-tag>
+                </span>
+                <span class="displayName" v-if="is_group == 2">
+                  <el-tag size="mini">BOT</el-tag>
+                   {{ contact.displayName }}
                 </span>
                 <span class="displayName" v-if="is_group == 0">
                   <OnlineStatus :type="contact.is_online ? 'success' : 'info'" :pulse="contact.is_online " v-if="globalConfig.chatInfo.online" ></OnlineStatus> {{contact.displayName}}</span>
@@ -100,7 +104,7 @@
                 <i class="el-icon-phone-outline ml-10" title="语音通话" v-if="!contact.is_group && parseInt(globalConfig.chatInfo.webrtc)" @click="called(0)"></i>
                 <i class="el-icon-video-camera ml-10" title="视频通话" v-if="!contact.is_group && parseInt(globalConfig.chatInfo.webrtc)" @click="called(1)"></i>
               </template>
-              <i class="iconfont icon-ico ml-10 f-22" @click="groupQrShow=true" title="群二维码" v-if="contact.is_group"></i>
+              <i class="iconfont icon-ico ml-10 f-22" @click="groupQrShow=true" title="群二维码" v-if="contact.is_group==1"></i>
               <i class="el-icon-more ml-10" @click="$user(contact.id)" title="基本资料" v-if="!contact.is_group"></i>
               <i class="el-icon-more ml-10" @click="openGroupSetting(false)" title="群管理" v-if="contact.is_group && currentChat.role==1"></i>
               
@@ -654,7 +658,7 @@ export default {
             hide();
           },
           visible: instance => {
-            return instance.contact.is_top == 0;
+            return instance.contact.is_top == 0 && instance.contact.is_group<2;
           }
         },
         {
@@ -677,7 +681,7 @@ export default {
             hide();
           },
           visible: instance => {
-            return instance.contact.is_top == 1;
+            return instance.contact.is_top == 1 && instance.contact.is_group<2;
           }
         },
         
@@ -695,7 +699,7 @@ export default {
           text: "消息免打扰",
           visible: instance => {
             return (
-              instance.contact.is_notice == 1 && instance.contact.id !='system'
+              instance.contact.is_notice == 1 && instance.contact.is_group<2
             );
           }
         },
@@ -713,7 +717,7 @@ export default {
           text: "取消免打扰",
           visible: instance => {
             return (
-              instance.contact.is_notice == 0 && instance.contact.id !='system'
+              instance.contact.is_notice == 0  && instance.contact.is_group<2
             );
           }
         },
@@ -867,7 +871,7 @@ export default {
             }
             return (
               (instance.message.fromUser.id == this.user.id &&
-              getTime() - instance.message.sendTime < 120000) || role<3
+              getTime() - instance.message.sendTime < this.globalConfig.chatInfo.redoTime*1000) || role<3
             );
           },
           text: "撤回消息"
@@ -983,7 +987,39 @@ export default {
             window.open(message.download);
             hide();
           }
-        }
+        },
+        {
+          text: "删除消息",
+          color: "red",
+          click: (e, instance, hide) => {
+            const { IMUI, message } = instance;
+            this.$confirm("删除消息会从所有人的聊天记录中抹掉，是否确定?", "提示", {
+              confirmButtonText: "确定",
+              cancelButtonText: "取消",
+              type: "warning"
+            })
+              .then(() => {
+                this.$api.imApi.delMessageAPI({ id: message.id}).then(res => {
+                  if (res.code == 0) {
+                    this.$message({
+                      type: "success",
+                      message: "删除成功!"
+                    });
+                    IMUI.removeMessage(message.id);
+                  }
+              })
+            }).catch(() => {
+                this.$message({
+                  type: "info",
+                  message: "已取消"
+                });
+              });
+            hide();
+          },
+          visible: instance => {
+            return instance.message.fromUser.id == this.user.id && instance.message.is_group<2 && this.globalConfig.chatInfo.dbDelMsg;
+          }
+        },
       ]
     };
   },
@@ -1100,7 +1136,7 @@ export default {
           break;
         // 撤回消息
         case "undoMessage":
-          if(message.from_user==this.user.id && message.isMobile==0 && getTime()-message.sendTime<120000){
+          if(message.from_user==this.user.id && message.isMobile==0 && getTime()-message.sendTime<this.globalConfig.chatInfo.redoTime*1000){
             return false;
           }
           IMUI.updateMessage(message);
@@ -1213,6 +1249,10 @@ export default {
             },100)
           }
           break;
+          // 更新配置
+        case "updateConfig":
+        this.$store.commit('setGlobalConfig', message);
+        break;
         // 发布公告
         case "setNotice":
           IMUI.updateContact({
@@ -1484,6 +1524,7 @@ export default {
               displayName: "新邀请",
               name_py:'xinyaoqing',
               avatar: InviteImg,
+              is_group:2,
               index: "[1]系统消息",
               click(next) {
                 next();

@@ -40,6 +40,10 @@
                       <vue-qr ref="qrCode" :text="inviteUrl" width="200" height="200" :logoSrc="logo"></vue-qr>
                   </div>
               </el-form-item>
+              <el-form-item label="注册时间间隔" prop="registerInterval">
+                <el-input-number class="ml-10" v-model="sysInfo.registerInterval" :min="0" :step="60"></el-input-number>
+                <span class="ml-10 c-999 f-12">秒，0表示不限制，防止用户无限注册，仅限单IP</span>
+              </el-form-item>
               <el-form-item label="注册认证" prop="regauth">
                   <el-radio-group v-model="sysInfo.regauth">
                   <el-radio label="0" border>关闭</el-radio>
@@ -54,7 +58,7 @@
                   <el-radio label="1" border>开启</el-radio>
                   </el-radio-group>
               </el-form-item>
-              <el-form-item label="运行模式" prop="regtype">
+              <el-form-item label="运行模式" prop="runMode">
                   <el-radio-group v-model="sysInfo.runMode">
                   <el-radio label="1" border>企业模式</el-radio>
                   <el-radio label="2" border>社交模式</el-radio>
@@ -85,7 +89,7 @@
               </el-form-item>
               <el-form-item label="群聊最多人数" prop="groupChat">
                 <el-input-number class="ml-10" v-model="chatInfo.groupUserMax" :min="0" :max="1000"></el-input-number>
-                <span class="ml-10 c-999 f-12">人，0表示不限制，不建议超过500人</span>
+                <span class="ml-10 c-999 f-12">人，0表示不限制，不建议超过300人</span>
               </el-form-item>
               <el-form-item label="开启在线状态" prop="online">
                   <el-switch v-model="chatInfo.online" active-value="1" inactive-value="0"></el-switch>
@@ -101,7 +105,7 @@
               </el-form-item>
               <el-form-item label="消息双向删除" prop="dbDelMsg">
                   <el-switch v-model="chatInfo.dbDelMsg" active-value="1" inactive-value="0"></el-switch>
-                  <span class="ml-10 c-999 f-12">开启后，用户删除消息会删除双方，群聊仅限删除自己的</span>
+                  <span class="ml-10 c-999 f-12">开启后，用户删除消息会删除双方，仅限删除自己发送的</span>
               </el-form-item>
               <el-form-item label="消息自动清理"  prop="msgClear">
                   <el-switch v-model="chatInfo.msgClear" active-value="1" inactive-value="0"></el-switch>
@@ -156,7 +160,7 @@
                     <div class="mt-15">
                         <span class="c-999 f-12">turn服务器</span> 
                         <el-input type="text"  placeholder="请输入stun服务器" v-model="chatInfo.stun" class="ml-10" style="width:300px"></el-input>
-                        <span class="ml-10 c-999 f-12">音视频通话需要有Stun服务器才可以进行</span>
+                        <span class="ml-10 c-999 f-12">音视频通话需要有Stun服务器才可以进行，请加`turn:`协议头</span>
                     </div>
                     <div class="mt-15">
                         <span class="c-999 f-12">turn用户名</span> 
@@ -321,7 +325,7 @@
               class="mb-15"
                 show-icon
                 :closable="false"
-                title="应用内的链接一定要是 '/' 开头，外部URL需要带协议头，以 '/' 结尾；图标、名称、链接为必填项，如果没填写则无法保存。"
+                title="应用内的链接一定要是 '/' 开头，外部URL需要带协议头，以 '/' 结尾；图标、名称、链接为必填项，如果没填写则无法保存。该功能只对移动端有效！"
                 type="warning">
           </el-alert>
           
@@ -403,6 +407,7 @@ export default {
           description: '',
           logo: '',
           regtype: '1',
+          registerInterval:0,
           regauth: '2',
           ipregion: '1',
           runMode: '1',

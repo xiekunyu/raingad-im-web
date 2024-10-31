@@ -40,6 +40,16 @@
             </div>
           </div>
           <div class="setting-item">
+            <div class="setting-title">群历史消息：</div>
+            <div class="setting-option">
+              <el-switch v-model="setting.history"  :active-value="'1'" :inactive-value="'0'"  @change="groupSetting"> </el-switch>
+            </div>
+            <div class="setting-description">
+              <div class="des-title">允许成员查看历史消息</div>
+              <div class="des-comment">启用后，新入群的成员可以查看所有的历史记录</div>
+            </div>
+          </div>
+          <div class="setting-item">
             <div class="setting-title">群禁言：</div>
             <div class="setting-option">
               <el-radio-group v-model="setting.nospeak" size="mini"  @change="groupSetting">
