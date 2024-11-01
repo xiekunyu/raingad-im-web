@@ -43,12 +43,42 @@
           <div class="mb-15">文件总数：xxxx</div> 
         </el-card>
       </el-col>
-      <el-col :span="6" v-if="globalConfig && globalConfig.demon_mode">
-        <el-card shadow="hover" header="系统公告" class="mb-20">
-          <div class="welcome">
-            
+      <el-col :span="12" v-if="globalConfig && globalConfig.demon_mode">
+        <el-card shadow="hover" header="" class="mb-20">
+          <div slot="header">
+            <span>系统公告</span>
+            <el-button style="float: right; padding: 3px 0" type="text" @click="noticeBox=true">发布公告</el-button>
           </div>
+          <div v-for="(item,index) in noticeList" :key="index" class="lz-flex lz-space-between">
+            <div class="mb-5 text-overflow cur-handle" style="width:70%" @click="viewNotice(item)">
+              <span class="el-icon el-icon-collection-tag mr-5"></span> {{ item.title }}
+            </div>
+            <div class="c-999">{{item.create_time}}</div>
+          </div>
+          <el-pagination
+              background
+              class="mt-10"
+              layout="prev, pager, next"
+              :page-size="noticeParam.limit"
+              :current-page.sync="noticeParam.page"
+              @current-change="getNoticeList"
+              :total="noticeTotal">
+            </el-pagination>
         </el-card>
+        <el-dialog :title="(notice.msgId ? '编辑' : '发布')+'公告'" width="500px" :visible.sync="noticeBox">
+          <el-form :model="notice">
+            <el-form-item label="公告标题">
+                <el-input v-model="notice.title"></el-input>
+            </el-form-item>
+            <el-form-item label="公告内容">
+              <el-input type="textarea" v-model="notice.content" :autosize="{ minRows: 10, maxRows: 20}"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="cancelPublish">取 消</el-button>
+            <el-button type="primary" @click="publishNotice">{{notice.msgId ? '更新' : '发布'}}</el-button>
+          </div>
+        </el-dialog>
       </el-col>
       <el-col :span="14"><el-card  class="task task-item mb-20" shadow="hover" v-loading="loading">
         <div slot="header">
@@ -104,6 +134,18 @@ export default {
           curName:'',
           dialogTableVisible:false,
           taskLog:'',
+          noticeBox:false,
+          noticeList:[],
+          notice:{
+            msgId:0,
+            title:'',
+            content:''
+          },
+          noticeParam:{
+            page:1,
+            limit:2
+          },
+          noticeTotal:0,
           task: [
                 {
                   name: "im_task_schedule",
@@ -129,6 +171,7 @@ export default {
       mounted() {
         this.resetTask();
         this.getTaskList();
+        this.getNoticeList();
       },
       methods: {
           resetTask(){
@@ -142,6 +185,14 @@ export default {
               }else if(res.code == 0){
                 this.taskStatus = true;
                 this.taskList=res.data;
+              }
+            })
+          },
+          getNoticeList(){
+            this.$api.commonApi.getNoticeList(this.noticeParam).then(res => {
+              if(res.code == 0){
+                this.noticeList=res.data;
+                this.noticeTotal=res.count;
               }
             })
           },
@@ -203,6 +254,33 @@ export default {
             }).catch(() => {
 
             })
+          },
+          // 发布公告
+          publishNotice(){
+            this.$api.commonApi.publishNotice(this.notice).then(res => {
+              this.noticeBox=false;
+                if(res.code == 0){
+                  this.cancelPublish();
+                  this.getNoticeList();
+                }
+              })
+          },
+          cancelPublish(){
+            this.noticeBox=false;
+            this.notice={
+                msgId:0,
+                title:'',
+                content:''
+              }
+          },
+          // 查看公告
+          viewNotice(item){
+            this.noticeBox=true;
+            this.notice={
+                msgId:item.msg_id,
+                title:item.extends.title,
+                content:item.extends.notice ?? ''
+              }
           }
       },
 }

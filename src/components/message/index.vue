@@ -255,6 +255,10 @@
                         <span v-if="item.userInfo.id != user.id">{{
                           item.userInfo.displayName
                         }}</span>
+                        <el-tooltip class="item" effect="dark" :content="'已禁言至：'+noSpeakExp(item.no_speak_time)" placement="top">
+                          <span v-if="noSpeakExp(item.no_speak_time)" class="c-red ml-5 el-icon el-icon-turn-off-microphone"></span>
+                        </el-tooltip>
+                        
                       </div>
                       <div class="user-role">
                         <el-tag type="danger" size="mini" v-if="item.role == 1">群主</el-tag>
@@ -354,6 +358,21 @@
     <el-dialog title="语音录制" custom-class="no-padding" :visible.sync="VoiceStatus" :modal="true" width="500px"
         append-to-body destroy-on-close>
         <voice-recorder @send="sendVoice"></voice-recorder>
+      </el-dialog>
+      <el-dialog title="设置禁言" width="200" :visible.sync="noSpeakBox">
+        <el-radio-group v-model="noSpeakData.noSpeakTimer" @change="noSpeakData.noSpeakDay=1"  size="small" class="mb-20">
+          <el-radio label="1" border>10分钟</el-radio>
+          <el-radio label="2" border>1小时</el-radio>
+          <el-radio label="3" border>3小时</el-radio>
+          <el-radio label="4" border>1天</el-radio>
+        </el-radio-group>
+        <div>
+          自定义<el-input-number class="ml-10 mr-10" v-model="noSpeakData.noSpeakDay"  @change="noSpeakData.noSpeakTimer=0" :min="1" :max="365" label="自定义"></el-input-number> 天
+        </div>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="noSpeakBox = false">取 消</el-button>
+          <el-button type="primary" @click="setNoSpeak()">确 定</el-button>
+        </div>
       </el-dialog>
     <group-qr :contact="currentChat"  :visible.sync="groupQrShow"></group-qr>
     <Socket ref="socket"></Socket>
@@ -456,6 +475,13 @@ export default {
       dialogTitle: "创建群聊",
       isAdd: 1,
       userIds: [],
+      noSpeakData:{
+        noSpeakTimer:0,
+        noSpeakDay:1,
+        user_id:0,
+        id:0,
+      },
+      curGroupUser:{},
       // 公告
       notice: "",
       // 搜索结果列表
@@ -497,6 +523,7 @@ export default {
         { name: "@我", count: 0 }
       ],
       quote:'',
+      noSpeakBox:false,
       // 群成员邮件菜单
       groupMenu: [
         {
@@ -577,6 +604,19 @@ export default {
               instance.contact.role == 2 &&
               this.currentChat.owner_id == this.user.id
             );
+          }
+        },
+        {
+          text: "设置禁言",
+          click: (e, instance, hide) => {
+            this.noSpeakBox=true;
+            const { IMUI, contact } = instance;
+            this.noSpeakData.user_id=contact.user_id;
+            this.noSpeakData.id=this.group_id;
+            hide();
+          },
+          visible: instance => {
+            return instance.contact.user_id != this.user.id && instance.contact.role >1 && this.currentChat.role <= 2;
           }
         },
         {
@@ -1038,7 +1078,7 @@ export default {
       return function(val) {
         return utils.timeFormat(val);
       };
-    }
+    },
   },
   watch: {
     isFullscreen(val){
@@ -1228,6 +1268,11 @@ export default {
               id: message.group_id,
               avatar: message.avatar
             });
+          }
+          break;
+       case "setNoSpeak":
+          if (message.group_id == this.group_id) {
+            this.getGroupUserList(message.group_id);
           }
           break;
         case "removeGroup":
@@ -2289,6 +2334,10 @@ export default {
       const { IMUI } = this.$refs;
       IMUI.changeMenu("setting");
     },
+    setNoSpeak(){
+      this.noSpeakBox=false;
+      this.$api.imApi.setNoSpeakAPI(this.noSpeakData);
+    },
     handleCommand(e){
       if(e=='addGroup'){
         this.openCreateGroup();
@@ -2365,6 +2414,13 @@ export default {
     },
     closeQuote(){
       this.quote='';
+    },
+    noSpeakExp(time){
+      if(time * 1000>new Date().getTime()){
+					return utils.date('m-d H:i',time);
+				}else{
+					return false;
+				}
     },
     eventBottom(isBottom){
       this.isBottom=isBottom;

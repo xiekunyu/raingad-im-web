@@ -1065,3 +1065,9 @@ a.c-orange:hover {
 	width:12px;
 	background-color: limegreen;
 }
+
+/*文字单行溢出省略号
+	Name:			style_text-overflow
+	Example:		class="text-overflow"
+*/
+.text-overflow{overflow:hidden !important;text-overflow:ellipsis;white-space:nowrap !important}

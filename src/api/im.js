@@ -161,6 +161,18 @@ imApi.editGroupNameAPI= (data)  =>{
 }
 
 /**
+ * 设置禁言
+ * @param {*} data
+ */
+imApi.setNoSpeakAPI= (data)  =>{
+    return request({
+        url: 'enterprise/group/setNoSpeak',
+        method: 'post',
+        data: data
+    })
+}
+
+/**
  * 获取群成员列表
  * @param {*} data
  */

@@ -82,4 +82,29 @@ commonApi.uploadAvatar= (data)  =>{
     })
 }
 
+// 发布公告
+commonApi.publishNotice= (data)  =>{
+    return request({
+        url: 'manage/index/publishNotice',
+        method: 'post',
+        data: data
+    })
+}
+
+// 公告列表
+commonApi.getNoticeList= (data)  =>{
+    return request({
+        url: 'manage/index/noticeList',
+        method: 'post',
+        data: data
+    })
+}
+// 删除公告
+commonApi.delNotice= (data)  =>{
+    return request({
+        url: 'manage/index/delNotice',
+        method: 'post',
+        data: data
+    })
+}
 export default commonApi;
