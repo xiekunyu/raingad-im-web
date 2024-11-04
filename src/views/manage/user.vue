@@ -190,6 +190,14 @@
                      <el-radio :label="0" border>禁用</el-radio>
                   </el-radio-group>
               </el-form-item>
+              <el-form-item label="好友上限" prop="friend_limit">
+                <el-input-number class="ml-10" v-model="detail.friend_limit" :min="0" :max="1000"></el-input-number>
+                <span class="ml-10 c-999 f-12">个，0表示不限制，-1表示禁止创建</span>
+              </el-form-item>
+              <el-form-item label="群聊上限" prop="group_limit">
+                <el-input-number class="ml-10" v-model="detail.group_limit" :min="0" :max="1000"></el-input-number>
+                <span class="ml-10 c-999 f-12">个，0表示不限制-1表示禁止创建</span>
+              </el-form-item>
               <el-form-item label="备注" prop="remark">
                <el-input type="textarea" :rows="2" v-model="detail.remark"></el-input>
               </el-form-item>
@@ -249,6 +257,8 @@
             email:'',
             sex:2,
             role:0,
+            friend_limit:0,
+            group_limit:0,
             remark:'',
             status:1,
          },
