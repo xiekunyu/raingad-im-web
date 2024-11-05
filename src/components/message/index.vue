@@ -359,7 +359,7 @@
         append-to-body destroy-on-close>
         <voice-recorder @send="sendVoice"></voice-recorder>
       </el-dialog>
-      <el-dialog title="设置禁言" width="200" :visible.sync="noSpeakBox">
+      <el-dialog title="设置禁言"  width="500px" append-to-body destroy-on-close :visible.sync="noSpeakBox">
         <el-radio-group v-model="noSpeakData.noSpeakTimer" @change="noSpeakData.noSpeakDay=1"  size="small" class="mb-20">
           <el-radio label="1" border>10分钟</el-radio>
           <el-radio label="2" border>1小时</el-radio>
