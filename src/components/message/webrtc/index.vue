@@ -128,7 +128,6 @@ export default {
       navigator.mediaDevices.enumerateDevices()
         .then(devices => {
           const videoInputDevices = devices.filter(device => device.kind === 'videoinput');
-          console.log("🚀 ~ checkForCamera ~ videoInputDevices:", videoInputDevices)
           this.hasCamera = videoInputDevices.length > 0;
         })
         .catch(error => {
@@ -148,7 +147,7 @@ export default {
 				  offerToRecieveAudio: 1,
 				  offerToRecieveVideo: 0
 			  }
-      let video=video_device==1 ? true : false;
+      let video= (video_device==1) ? true : false;
       var getUserMedias = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
       getUserMedias({ video: video, audio: {echoCancellation: true} }, (stream) => {
         this.initPeer(stream);
