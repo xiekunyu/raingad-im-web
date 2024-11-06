@@ -43,7 +43,7 @@
           <div class="mb-15">文件总数：xxxx</div> 
         </el-card>
       </el-col>
-      <el-col :span="12" v-if="globalConfig && globalConfig.demon_mode">
+      <el-col :span="12">
         <el-card shadow="hover" header="" class="mb-20">
           <div slot="header">
             <span>系统公告</span>
@@ -80,7 +80,7 @@
           </div>
         </el-dialog>
       </el-col>
-      <el-col :span="14"><el-card  class="task task-item mb-20" shadow="hover" v-loading="loading">
+      <el-col :span="12"><el-card  class="task task-item mb-20" shadow="hover" v-loading="loading">
         <div slot="header">
           <span>系统服务</span>
             <span class="handler" style="float: right;margin-top: -3px;">
@@ -143,7 +143,7 @@ export default {
           },
           noticeParam:{
             page:1,
-            limit:2
+            limit:10
           },
           noticeTotal:0,
           task: [
