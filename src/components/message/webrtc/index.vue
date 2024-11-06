@@ -72,6 +72,7 @@ export default {
       videoIcon:require('@/assets/img/webrtc/camera.png'),
       videoOffIcon:require('@/assets/img/webrtc/camera-off.png'),
       pc: null,           //peer实例
+      hasCamera:false,
       status: 0,          //状态0，默认，1：拨号中，2通话中，3来电中
       localVideo: "",    //本地视频的DOM
       remoteVideo: "",   //远程视频的DOM
@@ -123,8 +124,23 @@ export default {
         });
         this.localVideo.srcObject = this.localStream;
     },
+    checkForCamera() {
+      navigator.mediaDevices.enumerateDevices()
+        .then(devices => {
+          const videoInputDevices = devices.filter(device => device.kind === 'videoinput');
+          console.log("🚀 ~ checkForCamera ~ videoInputDevices:", videoInputDevices)
+          this.hasCamera = videoInputDevices.length > 0;
+        })
+        .catch(error => {
+          console.error("设备检测错误: " + error.message);
+        });
+    },
     // 初始化本地媒体
     initLocalStream(call_id, is_video) {
+      let video_device=0;
+      if(this.hasCamera){
+        video_device=1;
+      }
       this.offerParams = is_video ? {
 				  offerToRecieveAudio: 1,
 				  offerToRecieveVideo: 1
@@ -132,7 +148,7 @@ export default {
 				  offerToRecieveAudio: 1,
 				  offerToRecieveVideo: 0
 			  }
-      let video=is_video==1 ? true : false;
+      let video=video_device==1 ? true : false;
       var getUserMedias = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
       getUserMedias({ video: video, audio: {echoCancellation: true} }, (stream) => {
         this.initPeer(stream);
