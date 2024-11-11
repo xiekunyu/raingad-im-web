@@ -93,6 +93,7 @@ export default {
   mounted() {
     this.localVideo = this.$refs.localvideo;
     this.remoteVideo = this.$refs.remotevideo; 
+    this.checkForCamera();
   },
   methods: {
     // 初始化webrtc

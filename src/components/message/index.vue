@@ -1769,7 +1769,7 @@ export default {
           this.$message.error('已开启隐私，无法查看资料');
           return;
         }
-        if(message.fromUser.id!=this.user.id){
+        if(message.fromUser.id==this.user.id){
           return;
         }
         this.$user(message.fromUser.id);
