@@ -126,8 +126,9 @@
          <el-table-column
             fixed="right"
             label="操作"
-            width="130">
+            width="180">
             <template slot-scope="scope">
+               <el-button @click="openDialogue(scope.row)" type="text" size="small"><span class="c-orange">会话列表</span></el-button>
                <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
                <el-button @click="editUser(scope.row)" type="text" size="small" v-if="scope.row.user_id>1">编辑</el-button>
                <el-button @click="editPass(scope.row)" type="text" size="small">改密</el-button>
@@ -147,6 +148,16 @@
                :total="total">
          </el-pagination>
       </div>
+      <el-dialog
+         :title="currentUser.realname+' 的会话管理'"
+         :visible.sync="dialogueBox"
+         :modal="true"
+         width="80%"
+         @close="dialogueBox=false"
+         append-to-body
+      >
+         <dialogue :userInfo="currentUser" :key="componentKey"></dialogue>
+      </el-dialog>
       <el-dialog
          :title="formTitle"
          :visible.sync="dialogVisible"
@@ -232,12 +243,15 @@
  <script>
  import { mapState } from 'vuex';
  import userSelect from '@/components/userSelect/index';
+ import dialogue from './components/dialogue';
    export default {
       components: {
-         userSelect
+         userSelect,
+         dialogue
       },
       data() {
         return {
+         componentKey:0,
          total: 0,
          params:{
              page:1,
@@ -250,6 +264,7 @@
          formTitle:"添加成员",
          formType:"add",
          dialogVisible:false,
+         dialogueBox:false,
          detail:{},
          originDetail:{
             realname:'',  
@@ -353,6 +368,11 @@
          this.$user(row.user_id,{isManage:true,editDataCallbak: data =>{
             this.editUser(data);
          }});
+      },
+      openDialogue(row) {
+         this.currentUser=row;
+         this.componentKey++;
+         this.dialogueBox=true;
       },
       handleChange() {
          // 更换每页显示条数后，需要重新从第一页开始

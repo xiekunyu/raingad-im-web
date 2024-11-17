@@ -473,6 +473,9 @@ export function getInitStream(source, audio){
 export function getMsgType(type, callVideo){
     let msgName='[暂不支持的消息类型]';
         switch(type){
+            case 'text':
+                msgName='[文本]';
+                break;
             case 'image':
                 msgName='[图片]';
                 break;
@@ -484,6 +487,12 @@ export function getMsgType(type, callVideo){
                 break;
             case 'file':
                 msgName='[文件]';
+                break;
+            case 'location':
+                msgName='[位置]';
+                break;
+            case 'contact':
+                msgName='[个人名片]';
                 break;
             case 'webrtc':
                 if(callVideo){

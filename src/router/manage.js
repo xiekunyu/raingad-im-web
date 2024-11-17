@@ -35,6 +35,15 @@ export default [
                 }
             },
             {
+                path: '/manage/message',
+                name: 'user',
+                component: () =>import ('@/views/manage/message.vue'),
+                meta: { 
+                    title: '消息',
+                    icon: 'el-icon-chat-dot-round'
+                }
+            },
+            {
                 path: '/manage/group',
                 name: 'group',
                 component: () =>import ('@/views/manage/group.vue'),

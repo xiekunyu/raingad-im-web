@@ -58,6 +58,12 @@
                   <el-radio label="1" border>开启</el-radio>
                   </el-radio-group>
               </el-form-item>
+              <el-form-item label="多端同时登录" prop="multipleLogin">
+                  <el-radio-group v-model="sysInfo.multipleLogin">
+                  <el-radio label="0" border>关闭</el-radio>
+                  <el-radio label="1" border>开启</el-radio>
+                  </el-radio-group>
+              </el-form-item>
               <el-form-item label="运行模式" prop="runMode">
                   <el-radio-group v-model="sysInfo.runMode">
                   <el-radio label="1" border>企业模式</el-radio>
@@ -87,7 +93,7 @@
                   <el-switch v-model="chatInfo.groupChat" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">关闭后，用户将无法创建群聊</span>
               </el-form-item>
-              <el-form-item label="群聊最多人数" prop="groupChat">
+              <el-form-item label="群聊最多人数" prop="groupUserMax">
                 <el-input-number class="ml-10" v-model="chatInfo.groupUserMax" :min="0" :max="1000"></el-input-number>
                 <span class="ml-10 c-999 f-12">人，0表示不限制，不建议超过300人</span>
               </el-form-item>
@@ -95,11 +101,11 @@
                   <el-switch v-model="chatInfo.online" active-value="1" inactive-value="0"></el-switch>
                   <span class="ml-10 c-999 f-12">开启后，用户可以看到联系人的在线状态</span>
               </el-form-item>
-              <el-form-item label="消息发送频率" prop="groupChat">
+              <el-form-item label="消息发送频率" prop="sendInterval">
                 <el-input-number class="ml-10" v-model="chatInfo.sendInterval" :min="0" :max="1000"></el-input-number>
                 <span class="ml-10 c-999 f-12">秒，0表示不限制，防止用户刷消息</span>
               </el-form-item>
-              <el-form-item label="消息撤回时间" prop="groupChat">
+              <el-form-item label="消息撤回时间" prop="redoTime">
                 <el-input-number class="ml-10" v-model="chatInfo.redoTime" :min="0" :max="86400"></el-input-number>
                 <span class="ml-10 c-999 f-12">秒，0表示不支持撤回</span>
               </el-form-item>
@@ -412,7 +418,8 @@ export default {
           ipregion: '1',
           runMode: '1',
           state:true,
-          closeTips:''
+          closeTips:'',
+          multipleLogin:'0'
         },
         chatInfo: {
           simpleChat: true,

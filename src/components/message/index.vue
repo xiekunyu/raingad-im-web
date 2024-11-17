@@ -1141,6 +1141,10 @@ export default {
           }
           break;
         case "offline":
+          // 如果开启了多设备同时登录，则不走后面的逻辑
+          if(this.globalConfig.sysInfo.multipleLogin){
+            return;
+          }
           if(message.id==this.user.id && message.client_id!=client_id && !message.isMobile){
             this.$message.error="您的账号在其他地方登录，已被迫下线！";
             this.$store.dispatch("LogOut").then(() => {
@@ -1188,6 +1192,12 @@ export default {
               lastContent: "对方撤回了一条消息"
             });
           }
+          break;
+        case "delMessage":
+          IMUI.removeMessage(message.id);
+          break;
+        case "updateMessage":
+          IMUI.updateMessage(message);
           break;
         // 设置置顶
         case "setChatTop":
@@ -1327,6 +1337,9 @@ export default {
             id: message.group_id,
             setting: message.setting
           });
+          if(this.currentChat.id==message.group_id){
+            this.currentChat.setting=message.setting;
+          }
           break;
         case 'appendContact':
           IMUI.appendContact(message);

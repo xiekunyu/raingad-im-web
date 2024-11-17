@@ -161,6 +161,10 @@ export default {
     condition: {
       type: Object,
       default: {}
+    },
+    manage: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -208,22 +212,31 @@ export default {
       this.getMessage();
     },
     getMessage() {
-      this.$api.imApi.getMessageListAPI(this.params)
+      if(this.manage){
+        this.$api.messageApi.getMessageList(this.params)
         .then(res => {
-          this.dataList = res.data;
-          this.total = res.count;
-          if (res.count <= this.params.limit) {
-            this.singlePage = true;
-          } else {
-            this.singlePage = false;
-          }
-          if (this.params.type == "image") {
-            this.previewList = arrayToString(res.data, "content", false);
-          }
-        })
-        .catch(error => {
-          console.log(error);
+          this.realData(res)
         });
+      }else{
+        this.$api.imApi.getMessageListAPI(this.params)
+        .then(res => {
+          this.realData(res)
+        });
+      }
+        
+      
+    },
+    realData(res){
+      this.dataList = res.data;
+      this.total = res.count;
+      if (res.count <= this.params.limit) {
+        this.singlePage = true;
+      } else {
+        this.singlePage = false;
+      }
+      if (this.params.type == "image") {
+        this.previewList = arrayToString(res.data, "content", false);
+      }
     },
     handleCurrentChange(val) {
       this.params.page = val;
