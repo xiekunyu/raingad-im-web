@@ -4,7 +4,10 @@
             <el-aside width="320px">
                 <div class="lz-flex group-box">
                         <div class="group-box-header" v-if="!showSearch">
-                            <div>TA的联系人</div>
+                            <div>
+                                <el-button type="primary" size="small" plain @click="chooseTab(1)">TA的会话</el-button>
+                                <el-button type="success" size="small" plain @click="chooseTab(0)" class="ml-10">TA的联系人</el-button>
+                            </div>
                             <div>
                                 <el-button plain circle @click="showSearch=true" icon="el-icon-search" title="搜索"></el-button>
                             </div>
@@ -86,6 +89,7 @@
         active:0,
         currentChat: {},
         params:{
+            hasConvo:1,
             user_id:0,
             page:1,
             limit:20,
@@ -108,6 +112,12 @@
             this.condition={
                 user_id:this.userInfo.user_id
             }
+        },
+        chooseTab(val){
+            // 更换tab后
+            this.params.page = 1;
+            this.params.hasConvo = val;
+            this.getList();
         },
         getList(){
             this.params.user_id=this.userInfo.user_id;
