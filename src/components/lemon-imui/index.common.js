@@ -5912,7 +5912,7 @@ var CONTACT_TYPE = ["many", "single"];
     return "[图片]";
   },
   text: function text(message) {
-    return this.emojiNameToImage(clearHtml(message.content));
+    return this.emojiNameToImage(clearHtmlExcludeImg(message.content));
   },
   event: function event(message) {
     return '[通知]';

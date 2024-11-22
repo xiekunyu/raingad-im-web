@@ -24,8 +24,6 @@ const clearCacheEnterLogin = debounce(500, () => {
 
 })
 
-
-
 const errorMessage = debounce(500, (message, type = 'error') => {
     Message({
         message: message,
@@ -46,16 +44,12 @@ const confirmMessage = debounce(1000, (message) => {
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
-const baseURL = window.location.protocol+'//'+window.location.host;
-// process.env.BASE_API 自定义请求地址
-const devUrl=window.location.protocol+'//'+process.env.VUE_APP_BASE_API;
-
-window.BASE_URL = process.env.NODE_ENV === 'production' ? baseURL + '/' : devUrl
+const apiUrl= window.location.protocol+'//'+ (process.env.NODE_ENV === 'production' ? window.location.host + '/' : process.env.VUE_APP_BASE_API);
+window.BASE_URL = apiUrl;
 const service = axios.create({
-    baseURL: window.BASE_URL, // api 的 base_url
+    baseURL: apiUrl, // api 的 base_url
     timeout: 60000 // 请求超时时间
 })
-service.baseURL=window.BASE_URL;
 // request拦截器
 service.interceptors.request.use(
     config => {
