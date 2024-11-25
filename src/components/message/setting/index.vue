@@ -30,7 +30,7 @@
                     {{user.account}}
                     <span class="fc-primary ml-10 cur-handle" @click="editInfo(0)">修改</span>
                 </el-form-item>
-                <el-form-item label="姓名" v-if="$store.state.globalConfig.sysInfo.runMode==1">
+                <el-form-item label="姓名" v-if="$store.state.globalConfig.sysInfo.runMode==1 && $store.state.globalConfig.sysInfo.diyName!=1">
                     {{user.realname}}
                 </el-form-item>
                 <el-form-item label="昵称" v-else>

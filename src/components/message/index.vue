@@ -2122,6 +2122,7 @@ export default {
     openCreateGroup() {
       this.isAdd=1;
       this.dialogTitle = "创建群聊";
+      this.userIds=[];
       this.createChatBox = true;
     },
     // 打开选择新群主的窗口

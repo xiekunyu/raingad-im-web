@@ -70,6 +70,13 @@
                   <el-radio label="2" border>社交模式</el-radio>
                   </el-radio-group>
               </el-form-item>
+              <el-form-item label="自由改名" prop="diyName" v-show="sysInfo.runMode==1">
+                  <el-radio-group v-model="sysInfo.diyName">
+                  <el-radio label="0" border>关闭</el-radio>
+                  <el-radio label="1" border>开启</el-radio>
+                  </el-radio-group>
+                  <span class="ml-10 c-999 f-12">企业模式下默认不允许自由改名，开启后生效</span>
+              </el-form-item>
               <el-form-item label="系统状态" prop="state">
                   <el-switch v-model="sysInfo.state" active-value="1" inactive-value="0"></el-switch>
                   <div v-show="sysInfo.state==0">
@@ -417,6 +424,7 @@ export default {
           regauth: '2',
           ipregion: '1',
           runMode: '1',
+          diyName: '0',
           state:true,
           closeTips:'',
           multipleLogin:'0'
