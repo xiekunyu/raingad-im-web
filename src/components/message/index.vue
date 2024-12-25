@@ -77,13 +77,12 @@
                   v-if="is_group == 1"
                   @click="isEdit = true"
                 >
-                  <el-tag size="mini" v-if="is_group ==2">BOT</el-tag>
                    {{ contact.displayName }}<span class="mr-5">({{ groupUserCount }})</span>
                   <el-tag size="mini" v-if="contact.setting && contact.setting.nospeak == 1"  type="warning">仅群管理员可发言</el-tag>
                   <el-tag size="mini" v-if="contact.setting && contact.setting.nospeak == 2"  type="danger">全员禁言中</el-tag>
                 </span>
-                <span class="displayName" v-if="is_group == 2">
-                  <el-tag size="mini">BOT</el-tag>
+                <span class="displayName" v-if="is_group >1">
+                  <el-tag size="mini" v-if="is_group ==2">BOT</el-tag>
                    {{ contact.displayName }}
                 </span>
                 <span class="displayName" v-if="is_group == 0">

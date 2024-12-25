@@ -44,6 +44,7 @@ export default {
         padding:0 2px;
         vertical-align:middle;
       }
+      
     }
   }
 }
