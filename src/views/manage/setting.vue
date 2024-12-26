@@ -37,7 +37,7 @@
                           <span class="c-999 f-12 mr-10">邀请链接有效期：48小时</span> <el-button @click="resetInviteUrl">重新生成</el-button>
                       </div>
                       
-                      <vue-qr ref="qrCode" :text="inviteUrl" width="200" height="200" :logoSrc="logo"></vue-qr>
+                      <vue-qr ref="qrCode" :text="inviteUrl" width="200" height="200" :logoSrc="sysInfo.logo"></vue-qr>
                   </div>
               </el-form-item>
               <el-form-item label="注册时间间隔" prop="registerInterval">
@@ -404,7 +404,6 @@
 <script>
 import Lockr from 'lockr'
 import VueQr from 'vue-qr';
-import logo from '@/assets/img/logo.png';
 import userSelect from '@/components/userSelect/index';
 export default {
     components: {
@@ -413,7 +412,6 @@ export default {
     },
     data() {
       return {
-        logo,
         loadding:false,
         sysInfo: {
           name: '',
@@ -497,7 +495,7 @@ export default {
             fileExt:''
         },
         options:['jpg','png'],
-        inviteUrl:'https://im.raingad.com/#/invite/JSYEHNSH233K',
+        inviteUrl:'',
         textEmail:'',
         rules: {
           name: [

@@ -1,10 +1,10 @@
 <template>
   <div class="webrtc-box" v-show="status">
     <audio id="music1">
-        <source src="//im.file.raingad.com/static/voice/calling.mp3">
+        <source src="/static/voice/calling.mp3">
       </audio>
       <audio id="music2">
-        <source src="//im.file.raingad.com/static/voice/guaduan.mp3">
+        <source src="/static/voice/guaduan.mp3">
       </audio>
     <video v-show="localStream && is_video" class="localvideo" ref="localvideo" autoplay playsinline  muted></video>
     <video v-show="remoteStream && is_video" class="remotevideo" ref="remotevideo" autoplay playsinline></video>
@@ -21,18 +21,18 @@
       </div>
       <div class="calling-button">
         <div class="button" v-if="calling && status==3" >
-          <img class="image" src="https://im.file.raingad.com/static/image/jieting.png" @click="answer()"/>
+          <img class="image" src="/static/image/jieting.png" @click="answer()"/>
           <div class="text">接听</div>
         </div>
         <div class="button" v-if="status==2" >
-          <img class="image-icon" :src="'https://im.file.raingad.com/static/image/voice'+(voiceStatus ? '' : '-off')+'.png'" @click="switchVoice()"/>
+          <img class="image-icon" :src="'/static/image/voice'+(voiceStatus ? '' : '-off')+'.png'" @click="switchVoice()"/>
         </div>
         <div class="button" v-if="calling && status!=0" >
-          <img class="image" src="https://im.file.raingad.com/static/image/guaduan.png" @click="hangup(true)"/>
+          <img class="image" src="/static/image/guaduan.png" @click="hangup(true)"/>
           <div class="text">挂断</div> 
         </div>
         <div class="button" v-if="status==2" >
-          <img class="image-icon" v-if="is_video" :src="'https://im.file.raingad.com/static/image/camera'+(videoStatus ? '' : '-off')+'.png'" @click="switchVideo()"/>
+          <img class="image-icon" v-if="is_video" :src="'/static/image/camera'+(videoStatus ? '' : '-off')+'.png'" @click="switchVideo()"/>
           <div class="image-icon" v-else></div>
         </div>
       </div>

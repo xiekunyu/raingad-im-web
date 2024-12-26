@@ -2,7 +2,7 @@
   <div class="main-container">
     <div class="im-title">
       <div class="logo">
-        <el-image style="width: 80px; height: 80px" :src="$packageData.logo" fit="cover"></el-image>
+        <el-image style="width: 80px; height: 80px" :src="$packageData.logo" fit="cover"> </el-image>
       </div>
       <div class="im-content">
         <div class="im-name">
@@ -36,7 +36,7 @@
     class="mt-15 mb-15"
       show-icon
       :closable="false"
-      title="请仔细阅读一下文档！进群请先Star项目。本项目是一款开源的即时通信demo（存在一定的BUG），主要用于学习交流，为大家提供即时通讯的开发思路。"
+      title="本项目为演示系统，请仔细阅读一下文档！进群请先Star项目。本项目是一款开源的即时通信demo（存在一定的BUG），主要用于学习交流，为大家提供即时通讯的开发思路。"
       type="info">
     </el-alert>
     <el-alert
@@ -54,17 +54,17 @@
         type="error">
       </el-alert>
   <el-tabs v-model="activeName" type="card" @tab-click="handleClick" class="mb-20"> 
-    <el-tab-pane label="程序介绍">
+    <el-tab-pane label="📘 程序介绍">
       <div class="tip">
           <p class="mb-5" v-for="(item,index) in introduce" :key="index"><i :class="item.icon"></i> <span v-html="item.text"></span></p>
       </div>
     </el-tab-pane>
-    <el-tab-pane label="支持功能">
+    <el-tab-pane label="🪄 支持功能">
       <div class="success">
         <p class="mb-5"  v-for="(item,index) in $packageData.funcList" :key="index"><i :class="item.icon"></i>  <span v-html="item.text"></span></p>
       </div>
     </el-tab-pane>
-    <el-tab-pane label="技术栈">
+    <el-tab-pane label="🛒 技术栈">
       <div class="info">
           <p class="mb-5"  v-for="(item,index) in techStack"   :key="index"><i :class="item.icon"></i> <span v-html="item.text"></span></p>
       </div>
@@ -87,17 +87,9 @@
       </div>
       <div class=" mb-15 mr-15">
         <el-tooltip placement="right-start" effect="light">
-          <div slot="content"><el-image style="width:200px" src="https://emoji.raingad.com/file/h5.png"></el-image></div>
+          <div slot="content"><el-image style="width:200px" src="/assets/img/h5.png"></el-image></div>
           <el-button><a :href="$packageData.mobileUrl"
                     target="_blank">H5体验</a></el-button>
-        </el-tooltip>
-        
-      </div>
-      <div class="mb-15 mr-15">
-        <el-tooltip placement="right-start" effect="light">
-          <div slot="content"><el-image style="width:200px" src="https://emoji.raingad.com/file/app.png"></el-image></div>
-          <el-button><a href="https://emoji.raingad.com/file/raingad.apk"
-                    target="_blank">安卓APP体验</a></el-button>
         </el-tooltip>
         
       </div>
@@ -121,16 +113,10 @@
       </div>
     </div>
    
-    <div class="tip mb-20">
+    <div class="tip mb-20 mt-10">
       <h3 class="mb-5"><b>服务介绍</b></h3>
       <p>
-        详细的使用方法在源码中基本上都有备注，如果您觉得这个项目对您有帮助，欢迎star，如果有问题可以加QQ群交流，如果您有更好的建议，欢迎提出。 <b>如果觉得项目不错，不如请作者喝杯奶茶吧~</b>
-      </p>
-      <p class="mt-10">
-          <el-image class="mr-40 mb-20" style="width:300px;" src="https://emoji.raingad.com/file/wx.jpg"></el-image>
-          <el-image class="" style="width:280px;" src="https://emoji.raingad.com/file/zfb.jpg"></el-image>
-      </p>
-      <p>开源不易，如果需要以下功能，捐赠相应金额，作者可提供服务，进群后咨询作者！或者进群后直接扫码支付，联系群主提供支付凭证即可！</p>
+        详细的使用方法在源码中基本上都有备注，如果您觉得这个项目对您有帮助，欢迎star，如果有问题可以加QQ群交流，如果您有更好的建议，欢迎提出。<b> 开源不易，如果需要以下功能，捐赠相应金额，作者可提供服务，进群后咨询作者！</b></p>
       
       <p>1. 服务端协助部署：仅提供服务端远程 [todesk] 技术指导，需要提供纯净的centOS服务器一台。</p>
       <p>2. uniapp移动端源码【付费获取】(源码无加密，仅提供源码，<b>不提供专业指导和部署 </b>)</p>
@@ -145,7 +131,7 @@
     <div class="danger mb-20" >
       <h3 class="mb-5"><b>注意事项</b></h3>
       <p class="m-5">
-        1、凡是捐赠达到200元以上即可赠送API文档，包含：接口说明、安装教程、常见问题的解决方法等。<br>
+        1、捐赠购买移动端或者桌面端赠送文档，包含：接口说明、安装教程、常见问题的解决方法等。<br>
         2、源码作者不保证无任何问题，可能存在兼容性问题或者一些小的BUG，需要自行优化升级，望悉知。<br>
         3、捐赠获得的源码仅供学习或二次开发使用，不可对源码进行二次售卖。<br>
         4、价格或服务内容可能会有变动，<b class="c-red">随着功能的增加，价格会上涨</b>，以咨询作者时给的服务方案为准！
@@ -204,11 +190,11 @@ export default {
         },
         {
           icon: 'el-icon-mobile',
-          text: "移动端：uniapp for vue3+pinia。支持编译为小程序+h5+APP。<b class='c-red'>[捐赠获取]</b>"
+          text: "移动端：uniapp for vue3+pinia。支持编译为小程序+h5+APP。<b class='c-red'>[联系作者，捐赠获取]</b>"
         },
         {
           icon: 'el-icon-monitor',
-          text: "桌面端：vue2(web端修改版)+electron。<b class='c-red'>[捐赠获取]</b>"
+          text: "桌面端：vue2(web端修改版)+electron。<b class='c-red'>[联系作者，捐赠获取]</b>"
         }
       ],
       introduce:[
