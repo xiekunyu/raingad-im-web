@@ -28,7 +28,7 @@
       </div>
       <div class="ml-15 mb-15">
         <el-button type="warning" plain size="mini" round><a :href="$packageData.qqGroupUrl"
-            target="_blank">QQ交流群:336921267</a></el-button>
+            target="_blank">QQ交流群:1031495465</a></el-button>
       </div>
     </div>
 
@@ -126,6 +126,8 @@
       <p>6. 团队安心包：包含上述前4项服务，根据需求选择，以及安卓APP和H5打包（需要提供Dcloud账号【打包】、服务器、域名、证书等，APP还需要提供应用名称和图标）</p>
       <p>7、其他未列出的服务，请进群咨询作者！作者8年phper，前端水平一般，不接外包和二开！当然除非你要的东西非常简单。</p>
       <el-link class="mt-10 mb-10" type="primary" :href="$packageData.qqGroupUrl" target="_blank">有技术问题需要交流或者购买移动端的可以【戳我】加入交流群。<b class="c-red">加群前请先点star，否则不予通过，长时间不活跃的将被定期清理</b></el-link>
+
+      <div>作者QQ：1072129059 （添加作者咨询，需要购买才加，否则不予通过，源码预算600及以上，安装部署指导预算200及以上）</div>
     </div>
 
     <div class="danger mb-20" >
@@ -200,7 +202,7 @@ export default {
       introduce:[
         {
           icon:'el-icon-chat-dot-square',
-          text:this.$packageData.name+"是一个<b class='c-red'>开源的即时通信demo（存在一定的BUG），主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统、内网交流、社交交流。"
+          text:this.$packageData.name+"是一个<b class='c-red'>开源的即时通信demo（存在一定的BUG），已取得软件著作权，主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统、内网交流、社交交流。"
         },
         {
           icon:'el-icon-cpu',

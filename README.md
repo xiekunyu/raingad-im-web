@@ -157,7 +157,7 @@ this.$refs.webrtc.called(true);
 
 【仅限有问题或者购买移动端需求才可以申请加入交流群（长时间不活跃的将被定期清理），加群前请先点Star，否则不予通过】
 
-[QQ 交流群：336921267](https://jq.qq.com/?_wv=1027&k=jMQAt9lh) 
+[QQ 交流群：1031495465](https://qm.qq.com/q/RgHdvLGiMk)
 
 ### 部分截图
 ![聊天界面](src/assets/img/qunliao.png)

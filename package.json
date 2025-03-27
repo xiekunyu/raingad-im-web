@@ -1,6 +1,6 @@
 {
   "name": "Raingad-IM",
-  "version": "5.5.0",
+  "version": "5.5.2",
   "description": "一款基于vue2.0的即时聊天工具",
   "logo": "/assets/img/logo.png",
   "frontUrl": "https://gitee.com/raingad/im-chat-front",
@@ -8,7 +8,7 @@
   "mobileUrl": "https://im.raingad.com/h5",
   "author": "Raingad",
   "license": "Apache2.0",
-  "qqGroupUrl": "https://jq.qq.com/?_wv=1027&k=jMQAt9lh",
+  "qqGroupUrl": "https://qm.qq.com/q/RgHdvLGiMk",
   "private": true,
   "funcList": [
     {
