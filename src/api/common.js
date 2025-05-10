@@ -107,4 +107,13 @@ commonApi.delNotice= (data)  =>{
         data: data
     })
 }
+
+// 系统统计
+commonApi.systemSta= (data)  =>{
+    return request({
+        url: 'manage/index/index',
+        method: 'post',
+        data: data
+    })
+}
 export default commonApi;

@@ -2,12 +2,26 @@
   <div class="pd-20">
     <el-row :gutter="20">
       
-      <el-col :span="10" v-if="globalConfig && globalConfig.demon_mode">
+      <el-col :span="12" v-if="globalConfig && globalConfig.demon_mode">
         <el-card shadow="hover" header="欢迎" class="mb-20">
           <div class="welcome">
             <div class="logo">
               <img src="@/assets/img/logo.png">
               <h2>欢迎体验 {{$packageData.name}}</h2>
+            </div>
+            <div class="mt-20">
+              <p class="item-background">{{ $packageData.name }}是一个<b class="c-red">开源的即时通信demo，主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统、内网交流、社区交流。不建议用于商业用途，如确有需要商用，请联系作者授权，自行开发代码量必须要高于原代码量的30%以上，重构UI，并注明相关的版权问题。</p>
+             <div class="mt-15 ml-15 mb-15">
+              <span>
+                前端地址：<a :href="$packageData.frontUrl" target="_blank"><el-image
+                    :src="$packageData.frontUrl + '/badge/star.svg?theme=white'" alt="star"></el-image></a>
+              </span>
+              &emsp;
+              <span class="">
+                后端地址：<a :href="$packageData.backstageUrl" target="_blank"><el-image
+                    :src="$packageData.backstageUrl + '/badge/star.svg?theme=dark'" alt="star"></el-image></a>
+              </span>
+             </div> 
             </div>
             <div class="tips">
               <div class="tips-item" v-for="item in $packageData.funcList" :key="item.icon">
@@ -23,26 +37,47 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="8" v-if="globalConfig && globalConfig.demon_mode">
-        <el-card shadow="hover" header="关于项目" class="item-background mb-20">
-          <p>{{ $packageData.name }}是一个<b class="c-red">开源的即时通信demo，主要用于学习交流，为大家提供即时通讯的开发思路</b>，许多功能需要自行开发，开发的初衷旨在快速建立企业内部通讯系统、内网交流、社区交流。不建议用于商业用途，如确有需要商用，请联系作者授权，自行开发代码量必须要高于原代码量的30%以上，重构UI，并注明相关的版权问题。</p>
-          <div class="mt-15 ml-15 mb-15">
-            前端地址：<a :href="$packageData.frontUrl" target="_blank"><el-image
-                :src="$packageData.frontUrl + '/badge/star.svg?theme=white'" alt="star"></el-image></a>
-          </div>
-          <div class="ml-15 mb-15">
-            后端地址：<a :href="$packageData.backstageUrl" target="_blank"><el-image
-                :src="$packageData.backstageUrl + '/badge/star.svg?theme=dark'" alt="star"></el-image></a>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="6" v-if="globalConfig && globalConfig.demon_mode">
-        <el-card shadow="hover" class="mb-20" header="数据概览">
-          <div class="mb-15">用户总数：xxxx</div> 
-          <div class="mb-15">群聊总数：xxxx</div> 
-          <div class="mb-15">文件总数：xxxx</div> 
-        </el-card>
-      </el-col>
+			<el-col :span="4">
+				<el-card  shadow="hover" header="" class="mb-20">
+					<im-statistic title="用户总数" :value="statistics.userCount" suffix="个" groupSeparator></im-statistic> 
+				</el-card>
+			</el-col>
+      <el-col :span="4">
+				<el-card  shadow="hover" header="" class="mb-20">
+					<im-statistic title="在线用户" :value="statistics.onlineCount" suffix="个" groupSeparator>
+						<!-- <sc-trend v-model="22"></sc-trend> -->
+					</im-statistic>
+				</el-card>
+			</el-col>
+      <el-col :span="4">
+				<el-card  shadow="hover" header="" class="mb-20">
+					<im-statistic title="在线设备" :value="statistics.clientCount" suffix="个" groupSeparator>
+						<!-- <sc-trend v-model="22"></sc-trend> -->
+					</im-statistic>
+				</el-card>
+			</el-col>
+			<el-col :span="4">
+				<el-card  shadow="hover" header="" class="mb-20">
+					<im-statistic title="群聊总数" :value="statistics.groupCount" suffix="个" groupSeparator>
+						<!-- <sc-trend v-model="22"></sc-trend> -->
+					</im-statistic>
+				</el-card>
+			</el-col>
+
+			<el-col :span="4">
+				<el-card  shadow="hover" header="" class="mb-20">
+					<im-statistic title="消息总数" :value="statistics.messageCount" suffix="条" groupSeparator>
+						<!-- <sc-trend v-model="55"></sc-trend> -->
+					</im-statistic>
+				</el-card>
+			</el-col>
+      <el-col :span="4">
+				<el-card  shadow="hover" header="" class="mb-20">
+					<im-statistic title="文件总数" :value="statistics.fileCount" suffix="个" groupSeparator>
+						<!-- <sc-trend v-model="55"></sc-trend> -->
+					</im-statistic>
+				</el-card>
+			</el-col>
       <el-col :span="12">
         <el-card shadow="hover" header="" class="mb-20">
           <div slot="header">
@@ -118,13 +153,25 @@
   
 <script>
 import { mapState } from "vuex";
+import Lockr from 'lockr';
+import imStatistic from '@/components/message/mini/stastics.vue';
 export default {
     components: {
+      imStatistic
     },
     computed: {
       ...mapState({
-        globalConfig: state => state.globalConfig
+        globalConfig: state => state.globalConfig,
+        socketAction: state => state.socketAction,
       })
+    },
+    watch: {
+      socketAction(val) {
+        let data = val.data;
+        if(val.type=='statistics'){
+          Object.assign(this.statistics, data);
+        }
+      }
     },
     data() {
       return {
@@ -136,6 +183,7 @@ export default {
           taskLog:'',
           noticeBox:false,
           noticeList:[],
+          statistics:{},
           notice:{
             msgId:0,
             title:'',
@@ -171,6 +219,7 @@ export default {
       mounted() {
         this.resetTask();
         this.getTaskList();
+        this.getSta();
         this.getNoticeList();
       },
       methods: {
@@ -193,6 +242,13 @@ export default {
               if(res.code == 0){
                 this.noticeList=res.data;
                 this.noticeTotal=res.count;
+              }
+            })
+          },
+          getSta(){
+            this.$api.commonApi.systemSta({client_id:Lockr.get('client_id')}).then(res => {
+              if(res.code == 0){
+                this.statistics=res.data;
               }
             })
           },
@@ -286,8 +342,8 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.item-background p {
-  color: #999;
+.item-background {
+  color: #666;
   line-height: 1.8;
 }
 

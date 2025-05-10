@@ -20,7 +20,7 @@
                 websocket: null,
                 pingInterval:30,
                 connectNum:1,
-                manMade:true,
+                manMade:false,
                 //心跳检测
 		        timeout : 30000,//多少秒执行检测
 		        heartbeatInterval : null, //检测服务器端是否还活着
@@ -46,7 +46,6 @@
                 const WS_URI = this.getWsUrl();
                 this.websocket = new WebSocket(WS_URI);
                 this.start();
-
                 this.is_open_socket = true;
                 this.websocket.onmessage = this.websocketOnMessage;
                 this.websocket.onclose = this.websocketClose;
@@ -81,8 +80,7 @@
                 console.log("websocket连接关闭")
                 this.is_open_socket = false;
 				clearInterval(this.heartbeatInterval)
-				clearInterval(this.reconnectTimeOut)
-				if (this.connectNum < 3) {
+				if (this.connectNum < 10) {
 					this.manMade = false
 					this.reconnect();
 					this.connectNum += 1
@@ -121,6 +119,7 @@
                 if (!this.is_open_socket) {
                     return
                 }
+                clearInterval(this.heartbeatInterval)
                 this.websocket.close();
             },
             reconnect(){
@@ -129,10 +128,10 @@
                 clearInterval(this.heartbeatInterval)
                 //如果不是人为关闭的话，进行重连
                 if (!this.is_open_socket && this.manMade == false ) {
-                    console.log("5秒后重新连接...")
-                    this.reconnectTimeOut = setInterval(() => {
+                    console.log(5*this.connectNum+"秒后重新连接...")
+                    this.reconnectTimeOut = setTimeout(() => {
                         this.initWebSocket();
-                    }, 5000)
+                    }, 5000*this.connectNum)
                 }
             },
             playAudio () {

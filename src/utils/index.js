@@ -519,3 +519,14 @@ export function isEmpty(data) {
     if (typeof data === 'string') return data.trim() === ''
     return false
 }
+
+// 千分符
+export function groupSeparator(num) {
+	num = num + '';
+	if(!num.includes('.')){
+		num += '.'
+	}
+	return num.replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
+		return $1 + ',';
+	}).replace(/\.$/, '');
+}

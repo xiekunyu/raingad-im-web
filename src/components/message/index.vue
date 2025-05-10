@@ -1141,7 +1141,7 @@ export default {
           break;
         case "offline":
           // 如果开启了多设备同时登录，则不走后面的逻辑
-          if(this.globalConfig.sysInfo.multipleLogin){
+          if(parseInt(this.globalConfig.sysInfo.multipleLogin)==1){
             return;
           }
           if(message.id==this.user.id && message.client_id!=client_id && !message.isMobile){

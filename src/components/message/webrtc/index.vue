@@ -1,11 +1,14 @@
 <template>
-  <div class="webrtc-box" v-show="status">
-    <audio id="music1">
-        <source src="@/assets/voice/calling.mp3">
-      </audio>
-      <audio id="music2">
-        <source src="@/assets/voice/guaduan.mp3">
-      </audio>
+  <div class="webrtc-box" v-show="status" 
+      :style="{
+        top: position.y + 'px',
+        left: position.x + 'px',
+        height: boxHeight + 'px',
+      }"
+      >
+    <audio id="music1"><source src="@/assets/voice/calling.mp3"></audio>
+    <audio id="music2"><source src="@/assets/voice/guaduan.mp3"></audio>
+    <div @mousedown="startDrag" class="draggable-div">音视频通话</div>
     <video v-show="localStream && is_video" class="localvideo" ref="localvideo" autoplay playsinline  muted></video>
     <video v-show="remoteStream && is_video" class="remotevideo" ref="remotevideo" autoplay playsinline></video>
     <div>
@@ -19,8 +22,8 @@
           </span>
         </div>
         <div class="call-time" v-if="callTime && status==2">
-					  {{setCallTime()}}
-				  </div>
+            {{setCallTime()}}
+          </div>
       </div>
       <div class="calling-button">
         <div class="button" v-if="caller && status==3" >
@@ -40,6 +43,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
   
@@ -67,6 +71,11 @@ export default {
   },
   data() {
     return {
+      position: { x: 100, y: 100 },
+      isDragging: false,
+      dragOffset: { x: 0, y: 0 },
+      boxWidth: 310,
+      boxHeight: 300,
       voiceIcon:require('@/assets/img/webrtc/voice.png'),
       voiceOffIcon:require('@/assets/img/webrtc/voice-off.png'),
       videoIcon:require('@/assets/img/webrtc/camera.png'),
@@ -90,12 +99,69 @@ export default {
       timerIntervalId:null,  //通话计时器
     };
   },
+  watch: {
+    // 监听来电
+    status(val) {
+      if (val==2) {
+        if(this.is_video) {
+          this.boxHeight = 620;
+        }else{
+          this.boxHeight = 300;
+        }
+      }else if(val==1){
+        if(this.is_video) {
+          this.boxHeight = 450;
+        }else{
+          this.boxHeight = 250;
+        }
+      }else{
+         this.boxHeight = 250;
+      }
+    },
+    boxHeight(val) {
+      if(window.innerHeight-val < this.position.y){
+        this.position.y =window.innerHeight-val-20;
+      }
+      
+    },
+  },
   mounted() {
     this.localVideo = this.$refs.localvideo;
     this.remoteVideo = this.$refs.remotevideo; 
     this.checkForCamera();
+    this.position = {
+      x: window.innerWidth - this.boxWidth-10,
+      y: window.innerHeight - this.boxHeight-20
+    };
   },
   methods: {
+    startDrag(event) {
+      this.isDragging = true
+      this.dragOffset = {
+        x: event.clientX - this.position.x,
+        y: event.clientY - this.position.y
+      }
+      document.addEventListener('mousemove', this.onDrag)
+      document.addEventListener('mouseup', this.stopDrag)
+    },
+    onDrag(event) {
+      if (this.isDragging) {
+        let newX = event.clientX - this.dragOffset.x
+        let newY = event.clientY - this.dragOffset.y
+        // 确保 div 不超出窗口边界
+        newX = Math.max(0, Math.min(newX, window.innerWidth - this.boxWidth))
+        newY = Math.max(0, Math.min(newY, window.innerHeight - this.boxHeight-20))
+        this.position = {
+          x: newX,
+          y: newY
+        }
+      }
+    },
+    stopDrag() {
+      this.isDragging = false
+      document.removeEventListener('mousemove', this.onDrag)
+      document.removeEventListener('mouseup', this.stopDrag)
+    },
     // 初始化webrtc
     initPeer(stream){
         let opt = this.config;
@@ -420,11 +486,10 @@ export default {
 <style scoped lang="scss">
 .webrtc-box{
   background: #fff;
-  padding:20px 5px 10px;
+  padding:5px;
   border-radius: 6px;
   width:300px;
-  max-height:600px;
-  position: fixed;
+  position: absolute;
   right:20px;
   bottom: 20px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -436,6 +501,16 @@ export default {
     display: flex;
     justify-content: space-around;
   }
+}
+
+.draggable-div{
+  height: 20px;
+  font-weight: bold;
+  cursor: move;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin-bottom:5px;
 }
 .localvideo{
     width:300px;
