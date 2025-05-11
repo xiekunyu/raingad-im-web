@@ -95,7 +95,7 @@
             </el-main>
         </el-container>
         <!-- 创建群聊 -->
-        <Group :visible.sync="createChatBox" :title="dialogTitle" @manageGroup="manageGroup" :isAdd="isAdd" :userIds="userIds"></Group>
+        <Group :visible.sync="createChatBox" :title="dialogTitle" @manageGroup="manageGroup" :isAdd="isAdd?1:0" :userIds="userIds"></Group>
         <el-dialog
             title="消息管理器"
             :visible.sync="messageBox"
