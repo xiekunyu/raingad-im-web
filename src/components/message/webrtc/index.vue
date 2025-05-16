@@ -507,6 +507,7 @@ export default {
   height: 20px;
   font-weight: bold;
   cursor: move;
+  user-select: none;
   display: flex;
   align-items: center;
   padding: 5px;
