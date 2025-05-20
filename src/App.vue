@@ -100,5 +100,7 @@ export default {
     border: none;
   }
 
-
+  .resize-v{
+    height:0px !important;
+  }
 </style>

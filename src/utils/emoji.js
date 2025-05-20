@@ -358,19 +358,9 @@ export default [
   {
     label: "收藏",
     type:2,
-    name:'favor',
-    icon:"cuIcon-favor",
-      children: [
-        {
-          name: "1f62c",
-          title: "emoji",
-          src: apiUrl+"/static/img/emoji/twitter/1f62c.png"
-        },
-        {
-          name: "1f621",
-          title: "emoji",
-          src: apiUrl+"/static/img/emoji/twitter/1f621.png"
-        }
-      ]
+    icon: "cuIcon-like",
+    children: [
+      //必须放到这个位置，该列表通过后端获取
+    ]
   }
 ];

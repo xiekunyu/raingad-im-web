@@ -438,6 +438,17 @@ __webpack_require__("9c6c")(KEY);
 
 /***/ }),
 
+/***/ "20e3":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_messages_vue_vue_type_style_index_0_id_0b6f1009_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("ef69");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_messages_vue_vue_type_style_index_0_id_0b6f1009_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_messages_vue_vue_type_style_index_0_id_0b6f1009_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
 /***/ "214f":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -582,6 +593,17 @@ module.exports = function (it) {
     // ES3 arguments fallback
     : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
 };
+
+
+/***/ }),
+
+/***/ "260f":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_text_vue_vue_type_style_index_0_id_7774ccc0_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("43e9");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_text_vue_vue_type_style_index_0_id_7774ccc0_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_text_vue_vue_type_style_index_0_id_7774ccc0_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
 
 
 /***/ }),
@@ -816,6 +838,17 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "3453":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editor_vue_vue_type_style_index_1_id_231ffbae_prod_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("d5e9");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editor_vue_vue_type_style_index_1_id_231ffbae_prod_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editor_vue_vue_type_style_index_1_id_231ffbae_prod_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
 /***/ "3846":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -898,10 +931,14 @@ __webpack_require__("7a56")('RegExp');
 
 /***/ }),
 
-/***/ "3bcf":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "3d91":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// extracted by mini-css-extract-plugin
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_16346a2c_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("622b");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_16346a2c_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_16346a2c_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
 
 /***/ }),
 
@@ -923,6 +960,13 @@ module.exports = function (Constructor, NAME, next) {
   setToStringTag(Constructor, NAME + ' Iterator');
 };
 
+
+/***/ }),
+
+/***/ "43e9":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -978,17 +1022,6 @@ var defined = __webpack_require__("be13");
 module.exports = function (it) {
   return Object(defined(it));
 };
-
-
-/***/ }),
-
-/***/ "4c77":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_basic_vue_vue_type_style_index_0_id_728e23e7_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("d6f8");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_basic_vue_vue_type_style_index_0_id_728e23e7_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_basic_vue_vue_type_style_index_0_id_728e23e7_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
 
 
 /***/ }),
@@ -1164,17 +1197,6 @@ $export($export.P + $export.F * (fails(function () {
 
 /***/ }),
 
-/***/ "5778":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_text_vue_vue_type_style_index_0_id_fc6d50a4_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("80be");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_text_vue_vue_type_style_index_0_id_fc6d50a4_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_text_vue_vue_type_style_index_0_id_fc6d50a4_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
 /***/ "5ca1":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1341,6 +1363,13 @@ module.exports = function (R, S) {
 
 /***/ }),
 
+/***/ "5fff":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "613b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1360,6 +1389,13 @@ module.exports = function (key) {
 
 /***/ }),
 
+/***/ "622b":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "626a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1369,6 +1405,17 @@ var cof = __webpack_require__("2d95");
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
+
+
+/***/ }),
+
+/***/ "628d":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_basic_vue_vue_type_style_index_0_id_16af0e86_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("5fff");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_basic_vue_vue_type_style_index_0_id_16af0e86_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_basic_vue_vue_type_style_index_0_id_16af0e86_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
 
 
 /***/ }),
@@ -1500,6 +1547,17 @@ if (__webpack_require__("79e5")(function () { return $toString.call({ source: 'a
 "use strict";
 /* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_popover_vue_vue_type_style_index_0_id_ae0fc606_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("dfa9");
 /* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_popover_vue_vue_type_style_index_0_id_ae0fc606_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_popover_vue_vue_type_style_index_0_id_ae0fc606_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
+/***/ "718ea":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_emoji_vue_vue_type_style_index_0_id_da564488_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("e95c");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_emoji_vue_vue_type_style_index_0_id_da564488_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_emoji_vue_vue_type_style_index_0_id_da564488_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
 
 
@@ -1672,13 +1730,6 @@ NAME in FProto || __webpack_require__("9e1e") && dP(FProto, NAME, {
 
 /***/ }),
 
-/***/ "80be":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "8378":
 /***/ (function(module, exports) {
 
@@ -1792,6 +1843,24 @@ module.exports = {
 
 /***/ }),
 
+/***/ "8cde":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editor_vue_vue_type_style_index_0_id_231ffbae_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("8dba");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editor_vue_vue_type_style_index_0_id_231ffbae_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editor_vue_vue_type_style_index_0_id_231ffbae_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
+/***/ "8dba":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "8e6e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1849,91 +1918,2192 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 /***/ "9204":
 /***/ (function(module, exports) {
 
-var D=Object.defineProperty;var O=(g,t,e)=>t in g?D(g,t,{enumerable:!0,configurable:!0,writable:!0,value:e}):g[t]=e;var u=(g,t,e)=>(O(g,typeof t!="symbol"?t+"":t,e),e);(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const i of document.querySelectorAll('link[rel="modulepreload"]'))s(i);new MutationObserver(i=>{for(const r of i)if(r.type==="childList")for(const n of r.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&s(n)}).observe(document,{childList:!0,subtree:!0});function e(i){const r={};return i.integrity&&(r.integrity=i.integrity),i.referrerPolicy&&(r.referrerPolicy=i.referrerPolicy),i.crossOrigin==="use-credentials"?r.credentials="include":i.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function s(i){if(i.ep)return;i.ep=!0;const r=e(i);fetch(i.href,r)}})();class H{constructor(t){u(this,"richText");u(this,"vnode");u(this,"cursorIndex");u(this,"cursorLeft");u(this,"needCallSpace",!1);u(this,"VOID_KEY","\uFEFF");u(this,"ZERO_WIDTH_KEY","​");u(this,"pointEndIME");u(this,"IME_KEY","​_");this.richText=t,this.textInnerHtmlInit(),this.richText.focus()}textInnerHtmlInit(t=!1,e){if(t||this.getNodeEmpty(this.richText)){this.richText.innerHTML="";const s=this.getGridElm();this.richText.appendChild(s);const i=s.children[0].children[0];e&&(i.innerHTML=e,i.setAttribute("data-set-empty","false"));const r=i.childNodes[0];this.restCursorPos(r,r.textContent===this.VOID_KEY?1:r.textContent.length)}}onceCall(t,e=!1,s=""){return new Promise(i=>{const r=this.createAtUserSpan(t),n=this.replaceRegContent(r,!0,e,s)||"";i(n)})}searchCall(t,e){return new Promise(s=>{const i=this.createAtUserSpan(t);this.replaceRegContent(i,e),s()})}onceExternalCall(t){return new Promise(e=>{const s=this.createAtUserSpan(t),i=this.replaceRegContent(s,!1,!0)||"";e(i)})}upDataNodeOrIndex(){var n,o,a;const{focusNode:t,focusOffset:e,anchorOffset:s}=window.getSelection(),i=(t==null?void 0:t.parentNode)||void 0;!i||!i.getAttribute||i.getAttribute("data-set-richType")!=="richInput"||((a=(o=(n=t==null?void 0:t.parentNode)==null?void 0:n.parentNode)==null?void 0:o.parentNode)==null?void 0:a.parentNode)!==this.richText||(this.vnode=t,this.cursorIndex=e,this.cursorLeft=s<e?s:e)}showAt(){if(this.upDataNodeOrIndex(),!this.vnode||this.vnode.nodeType!==Node.TEXT_NODE)return!1;const t=this.vnode.textContent||"",e=/@([^@\s]*)$/,s=t.slice(0,this.cursorIndex),i=e.exec(s);return i&&i.length===2&&s[s.length-1]==="@"}getRangeRect(){let t=0,e=0;const s=window.getSelection().getRangeAt(0).getClientRects()[0];return s&&(t=s.x,e=s.y),{x:t,y:e}}createAtUserSpan(t){const e=document.createElement("span");return e.dataset.userId=String(t.id),e.className="at-user",e.contentEditable="false",e.textContent=`@${t.name}${this.needCallSpace?" ":""}`,this.createNewDom(e)}createNewDom(t){const e=document.createElement("span");return e.className="chat-tag",e.setAttribute("contenteditable","false"),e.setAttribute("data-set-richType","chatTag"),t.className+=" chat-stat",e.appendChild(t),e}restCursorPos(t,e){e==null?e=t.textContent===this.VOID_KEY?1:0:e>t.textContent.length&&(e=t.textContent.length);const s=new Range;s.setStart(t,e),s.setEnd(t,e);const i=window.getSelection();i&&(this.vnode=t,this.cursorIndex=e,this.cursorLeft=e,i.removeAllRanges(),i.addRange(s))}setCursorPos(t,e){const s=window.getSelection();if(s.rangeCount<=0)return;const i=s.getRangeAt(0);i.setStart(t,e),i.collapse(!0),this.vnode=t,this.cursorIndex=e,this.cursorLeft=e}replaceRegContent(t,e=!1,s=!1,i=""){const r=this.vnode.textContent;let n;typeof e=="boolean"?n=r.slice(0,e?this.cursorIndex-1:this.cursorIndex):n=r.slice(0,e-1),n.length===0?(this.vnode.parentElement.setAttribute("data-set-empty",!0),this.vnode.textContent=this.VOID_KEY):this.vnode.textContent=n;let o=i||r.slice(this.cursorIndex);const a=this.vnode.parentNode.parentNode,c=a.nextSibling;c?a.parentNode.insertBefore(t,c):a.parentNode.appendChild(t);const h=t.previousSibling.childNodes[0],d=h.childNodes[1];d&&h.removeChild(d);const f=this.getGridElm(!0),l=f.childNodes[0];!s&&o&&o!==this.VOID_KEY&&(l.setAttribute("data-set-empty","false"),l.innerHTML=o);const m=l.childNodes[1];return s&&m&&l.removeChild(m),t.nextSibling?(m&&l.removeChild(m),a.parentNode.insertBefore(f,t.nextSibling)):a.parentNode.appendChild(f),this.restCursorPos(l.childNodes[0]),o}switchRange(t){var n,o;const{focusNode:e,focusOffset:s}=window.getSelection();let i,r;if(e.nodeType===Node.TEXT_NODE){const a=e.textContent.length,c=e.parentNode.parentNode;switch(t){case"ArrowLeft":if(s>0&&e.textContent!==this.VOID_KEY){r=s-1,i=e;break}const p=(n=c==null?void 0:c.previousSibling)==null?void 0:n.previousSibling;if(p)i=p.childNodes[0].childNodes[0],r=i.textContent.length;else{const d=c.parentNode.previousSibling;d&&(i=d.lastChild.childNodes[0].childNodes[0],r=i.textContent.length)}break;case"ArrowRight":if(s<a&&e.textContent!==this.VOID_KEY){r=s+1,i=e;break}const h=(o=c==null?void 0:c.nextSibling)==null?void 0:o.nextSibling;if(h)i=h.childNodes[0].childNodes[0],r=i.textContent===this.VOID_KEY?1:0;else{const d=c.parentNode.nextSibling;d&&(i=d.childNodes[0].childNodes[0].childNodes[0],r=i.textContent===this.VOID_KEY?1:0)}break}}(r||r===0)&&this.restCursorPos(i,r)}getGridElm(t=!1){const e=document.createElement("span");if(e.setAttribute("data-set-richType","richMark"),e.innerHTML=`<span class="chat-grid-input chat-stat" data-set-richType="richInput" data-set-empty="true">${this.VOID_KEY}<br></span>`,t)return e;const s=document.createElement("p");return s.className="chat-grid-wrap",s.setAttribute("data-set-richType","richBox"),s.appendChild(e),s}updateGrid(){const t=window.getSelection(),e=t.focusNode,s=e.parentNode,i=s.getAttribute("data-set-richType");let r,n,o,a;switch(i){case"richAllBox":if(r=e.childNodes[t.focusOffset],!r||r.getAttribute("data-set-richType")==="chatTag"){const l=this.getGridElm(!0),m=l.children[0];r?(m.removeChild(m.childNodes[1]),e.insertBefore(l,r)):e.appendChild(l),this.restCursorPos(m.childNodes[0]);break}if(r.tagName==="BR"){const l=this.getGridElm(!0),m=l.children[0];e.insertBefore(l,r),e.removeChild(r),this.restCursorPos(m.childNodes[0],m.childNodes[0].textContent.length)}break;case"richMark":const c=s.parentNode,p=Array.prototype.indexOf.call(c.childNodes,s);if(p===-1)break;if(p===0){const l=t.focusNode;l.setAttribute("data-set-empty","true"),l.innerHTML=`${this.VOID_KEY}<br>`,r=l.childNodes[0],this.restCursorPos(r,r.textContent.length);break}let h=s.previousSibling,d;h.getAttribute("data-set-richType")==="chatTag"?(d=h.previousSibling,c.removeChild(h),c.removeChild(s)):(d=s.previousSibling,c.removeChild(s)),r=d.childNodes[0].childNodes[0],r.textContent===this.VOID_KEY&&r.parentNode.appendChild(document.createElement("br")),this.restCursorPos(r,r.textContent.length);break;case"richInput":if(a=s.parentNode,o=a.parentNode,this.getNodeEmpty(s)){s.setAttribute("data-set-empty","true"),o.childNodes[o.childNodes.length-1]===a&&(s.innerHTML=`${this.VOID_KEY}<br>`),r=s.childNodes[0],this.restCursorPos(r,r.textContent.length);break}if(String(s.getAttribute("data-set-empty"))==="true"){s.setAttribute("data-set-empty","false");const l=[],m=[];Array.prototype.forEach.call(s.childNodes,E=>{E.nodeType===Node.TEXT_NODE&&E.textContent.indexOf(this.VOID_KEY)!==-1?m.push(E):E.tagName==="BR"&&l.push(E)}),l.forEach(E=>{s.removeChild(E)}),m.forEach(E=>{const C=E.textContent.indexOf(this.VOID_KEY),b=new Range;b.setStart(E,E.textContent.indexOf(this.VOID_KEY)),b.setEnd(E,C+1),b.deleteContents()}),r=s.childNodes[0],this.restCursorPos(r,r.textContent.length)}if(n=s.parentNode.nextSibling,n&&n.nodeType===Node.TEXT_NODE){let l=n.textContent,m=this.getGridElm(!0);m.childNodes[0].textContent=l,m.childNodes[0].setAttribute("data-set-empty","false"),n.parentNode.insertBefore(m,n),n.parentNode.removeChild(n),n=m}n&&n.getAttribute("data-set-richType")==="richMark"&&this.markMerge(s.parentNode,n);break}}getNodeEmpty(t){const e=new RegExp(`^(${this.ZERO_WIDTH_KEY}|<br>|${this.VOID_KEY})+$`);return!t.innerHTML||e.test(t.innerHTML)}setWrap(){const t=window.getSelection();let{focusNode:e,focusOffset:s}=t;if(e.nodeType!==Node.TEXT_NODE){if(!e.getAttribute||e.getAttribute("data-set-richType")!=="richInput")return;e=e.childNodes[0]}const i=e.textContent.slice(s),r=e.parentNode.parentNode,n=r.parentNode,o=Array.prototype.indexOf.call(n.childNodes,r),a=Array.prototype.slice.call(n.childNodes,o+1),c=this.getGridElm();let p=c.children[0].children[0].childNodes[0],h=1;(i||a.length>0)&&p.parentNode.removeChild(p.parentNode.childNodes[1]),i&&i!==this.VOID_KEY&&(e.textContent=e.textContent.slice(0,s),p.textContent=(p.textContent+i).replace(new RegExp(this.VOID_KEY,"g"),()=>(h--,"")),p.parentElement.setAttribute("data-set-empty","false")),a.forEach(l=>{n.removeChild(l),c.appendChild(l)});const d=n.lastChild.childNodes[0],f=c.lastChild.childNodes[0];if(d.childNodes.length<=1){const l=d.childNodes[0];(!l.textContent||l.textContent===this.VOID_KEY)&&(d.innerHTML=`${this.VOID_KEY}<br>`,d.setAttribute("data-set-empty","true"))}if(f.parentElement.getAttribute("data-set-richType")!=="richMark")c.appendChild(this.getGridElm(!0));else if(f.childNodes.length<=1){const l=f.childNodes[0];(!l.textContent||l.textContent===this.VOID_KEY)&&(f.innerHTML=`${this.VOID_KEY}<br>`,f.setAttribute("data-set-empty","true"),p=c.children[0].children[0].childNodes[0])}n.nextSibling?this.richText.insertBefore(c,n.nextSibling):this.richText.appendChild(c),this.restCursorPos(p,p.textContent===this.VOID_KEY?1:h),this.viewIntoPoint()}selectRegionMerge(){const t=window.getSelection();if(t.isCollapsed||t.rangeCount<=0)return;const e=t.getRangeAt(0);if(e.startContainer.nodeType===Node.TEXT_NODE&&e.startContainer===e.endContainer){const s=e.startContainer;if(s.length===e.endOffset-e.startOffset){const i=s.parentNode,r=i.parentNode===i.parentNode.parentNode.lastChild;i.setAttribute("data-set-empty","true"),i.innerHTML=`\uFEFF${r?"<br>":""}`,this.restCursorPos(i.childNodes[0])}else e.deleteContents()}else if(e.commonAncestorContainer&&e.commonAncestorContainer.getAttribute("data-set-richType")==="richBox"){const s=e.startContainer.nodeType===Node.TEXT_NODE?e.startContainer.parentNode.parentNode:e.startContainer,i=e.endContainer.nodeType===Node.TEXT_NODE?e.endContainer.parentNode.parentNode:e.endContainer;e.deleteContents(),s.getAttribute("data-set-richType")===i.getAttribute("data-set-richType")&&this.markMerge(s,i)}else if(e.commonAncestorContainer===e.startContainer&&e.startContainer===e.endContainer)this.textInnerHtmlInit(!0);else{const s=n=>{if(n.nodeType===Node.TEXT_NODE)return n.parentNode.parentNode.parentNode;switch(n.getAttribute("data-set-richType")){case"richInput":return n.parentNode.parentNode;case"richMark":return n.parentNode;case"richBox":return n;default:return null}},i=s(e.startContainer),r=s(e.endContainer);if(!i||!r)return;e.deleteContents(),this.gridMerge(i,r)}return!0}gridElmMerge(){const t=window.getSelection(),{focusNode:e,focusOffset:s,isCollapsed:i}=t;if(s>1||!i)return!1;const r=(a,c)=>a.parentNode!==this.richText&&a!==a.parentNode.childNodes[0]?!1:Array.prototype.indexOf.call(this.richText.childNodes,a)!==-1?a:c>=6?!1:r(a.parentNode,c+1),n=r(e,0);if(!n||n===this.richText.childNodes[0]||s===1&&n.children[0].children[0].getAttribute("data-set-empty")==="false")return!1;const o=n.previousSibling;return this.gridMerge(o,n),!0}delMarkRule(){const t=window.getSelection(),e=t.focusNode,s=e.textContent,i=e.parentNode,r=i.parentNode,n=r.parentNode;if(!t.isCollapsed||i.getAttribute("data-set-richType")!=="richInput")return!1;if(s&&s.length===1&&r!==n.childNodes[0]&&(t.focusOffset!==0||s===this.VOID_KEY)){if(s===this.VOID_KEY){const o=r.previousSibling.previousSibling;n.removeChild(r.previousSibling),n.removeChild(r);const a=o.childNodes[0],c=a.childNodes[0];c.textContent===this.VOID_KEY&&o===n.lastChild&&a.appendChild(document.createElement("br")),this.restCursorPos(c,c.textContent.length)}else{i.innerHTML=r===n.lastChild?`${this.VOID_KEY}<br>`:this.VOID_KEY,i.setAttribute("data-set-empty","true");const o=i.childNodes[0];this.restCursorPos(o,1)}return!0}else if(t.focusOffset===0){const o=i.parentNode,a=o==null?void 0:o.previousSibling;return!a||a.getAttribute("data-set-richType")!=="chatTag"?!1:(this.delTag(a),!0)}}setIMESelection(){const t=window.getSelection(),e=t.focusNode,i=e.parentNode.parentNode;((i==null?void 0:i.getAttribute("data-set-richType"))||"")==="richMark"&&(this.pointEndIME=t.focusOffset,e.textContent=e.textContent.slice(0,this.pointEndIME)+this.IME_KEY+e.textContent.slice(this.pointEndIME),this.restCursorPos(e,this.pointEndIME+this.IME_KEY.length))}delMarkRuleIME(){const t=window.getSelection(),e=t.focusNode,s=e.parentNode,i=s.parentNode;if(((i==null?void 0:i.getAttribute("data-set-richType"))||"")==="richMark"){this.pointEndIME=t.focusOffset;const n=new RegExp(this.IME_KEY.slice(0,-1),"g");if(e.textContent=e.textContent.replace(n,""),this.pointEndIME>this.IME_KEY.length-1&&e.textContent!==this.VOID_KEY){const o=this.pointEndIME-(this.IME_KEY.length-1);e.textContent=e.textContent.slice(0,o-1)+e.textContent.slice(o),this.setCursorPos(e,o-1)}else{if(s.getAttribute("data-set-empty")==="false"&&(e.textContent===""||e.textContent===this.VOID_KEY)){s.innerHTML=i===i.parentElement.lastChild?`${this.VOID_KEY}<br>`:this.VOID_KEY,s.setAttribute("data-set-empty","true");const h=s.childNodes[0];this.setCursorPos(h,1);return}const a=i.previousSibling;if(a&&a.getAttribute&&a.getAttribute("data-set-richType")==="chatTag"){this.delTag(a);return}const c=i.parentElement,p=c.previousElementSibling;p&&this.gridMerge(p,c)}}}wrapIME(){const e=window.getSelection().focusNode;if(e.getAttribute&&e.getAttribute("data-set-richType")==="richBox"){const a=e.previousSibling.lastChild.children[0].childNodes[0];a.textContent=a.textContent.slice(0,-this.IME_KEY.length);const c=e.children[0];c.tagName==="BR"&&e.removeChild(c);return}const i=e.parentNode.parentNode,r=(i==null?void 0:i.getAttribute("data-set-richType"))||"";if(r==="richMark"){const a=i.parentElement.previousSibling.lastChild.children[0].childNodes[0];a.textContent=a.textContent.slice(0,-this.IME_KEY.length)}else if(r==="richBox"){const a=i.previousSibling.lastChild.children[0].childNodes[0];a.textContent=a.textContent.slice(0,-this.IME_KEY.length)}}resetIME(t){t===" "&&(t=" "),t||(t="");const e=window.getSelection(),s=e.focusNode,r=s.parentNode.parentNode;((r==null?void 0:r.getAttribute("data-set-richType"))||"")==="richMark"&&(s.textContent=s.textContent.slice(0,e.focusOffset-this.IME_KEY.length-t.length)+t+s.textContent.slice(e.focusOffset),s.textContent=s.textContent.replace(new RegExp(this.ZERO_WIDTH_KEY,"g"),""),this.setCursorPos(s,this.pointEndIME+t.length))}delTag(t){const e=t.previousSibling,s=t.nextSibling;t.parentNode.removeChild(t),this.markMerge(e,s)}gridMerge(t,e,s=!1){t.lastChild.getAttribute("data-set-richType")!=="richMark"&&t.appendChild(this.getGridElm(!0)),e.childNodes[0].getAttribute("data-set-richType")!=="richMark"&&e.insertBefore(this.getGridElm(!0),e.childNodes[0]);const i=t.lastChild.childNodes[0],r=i.childNodes[0];let n=r.textContent.length;Array.prototype.forEach.call(e.childNodes,a=>{t.appendChild(a.cloneNode(!0))}),e.childNodes.length>1&&i.childNodes[1]&&i.removeChild(i.childNodes[1]);const o=i.parentNode.nextSibling;if(o){const c=o.children[0].childNodes[0];c&&c.textContent!==this.VOID_KEY&&(i.childNodes[1]&&i.removeChild(i.childNodes[1]),r.textContent=(r.textContent+c.textContent).replace(new RegExp(this.VOID_KEY,"g"),()=>(n--,"")),r.parentElement.setAttribute("data-set-empty","false")),t.removeChild(o)}if(r.textContent===""&&(r.textContent=this.VOID_KEY,r.parentNode.setAttribute("data-set-empty","true"),n=1),s){const c=t.childNodes[t.childNodes.length-1].childNodes[0].childNodes[0];this.restCursorPos(c,c.textContent.length)}else this.richText.removeChild(e),this.restCursorPos(r,n);this.viewIntoPoint()}markMerge(t,e){const i=t.children[0].childNodes[0];let r=i.textContent.length;if(e){const a=e.children[0].childNodes[0];a&&a.textContent!==this.VOID_KEY&&(i.textContent=(i.textContent+a.textContent).replace(new RegExp(this.VOID_KEY,"g"),()=>(r--,"")),i.parentElement.setAttribute("data-set-empty","false")),e.parentNode.removeChild(e)}i.textContent===""&&(i.textContent=this.VOID_KEY,i.parentNode.setAttribute("data-set-empty","true"),r=1);const n=t.parentNode;i.textContent===this.VOID_KEY&&t===n.lastChild&&(i.parentNode.appendChild(document.createElement("br")),i.parentNode.setAttribute("data-set-empty","true"),r=1),this.restCursorPos(i,r)}setCallSpace(t){this.needCallSpace=t}getWrapNode(t){if(t.nodeType===Node.TEXT_NODE)return t.parentNode.parentNode.parentNode;switch(t.getAttribute("data-set-richType")){case"richInput":return t.parentNode.parentNode;case"richMark":return t.parentNode;case"richBox":return t}}getMarkNode(t){if(t.nodeType===Node.TEXT_NODE)return t.parentNode.parentNode;switch(t.getAttribute("data-set-richType")){case"richInput":return t.parentNode;case"richMark":return t}}getRichTextNodeIndex(t){const e=this.getMarkNode(t),s=e.parentNode;return{gridIndex:Array.prototype.indexOf.call(this.richText.childNodes,s),markIndex:Array.prototype.indexOf.call(s.childNodes,e)}}setWrapNodeByMark(t){const e=document.createElement("p");return e.className="chat-grid-wrap",e.setAttribute("data-set-richType","richBox"),Array.prototype.forEach.call(t,s=>{e.appendChild(s)}),e}setRangeLastText(){const t=this.richText.childNodes[this.richText.childNodes.length-1],i=t.childNodes[t.childNodes.length-1].children[0].childNodes[0];this.restCursorPos(i,i.textContent===this.VOID_KEY?1:i.textContent.length),this.viewIntoPoint()}viewIntoPoint(){const t=window.getSelection();if(t.rangeCount>0){const s=t.getRangeAt(0).getBoundingClientRect(),i=this.richText.parentElement;i.scrollTop=s.top+i.scrollTop-i.clientHeight/2}}}const v=(g=50)=>new Promise(t=>{setTimeout(t,g)}),M=(g,t,e,s)=>{const i=Object.assign(Object.assign({},{precision:"first",continuous:!1,space:"ignore",lastPrecision:"start",insensitive:!0}),s||{});return i.insensitive&&(g=g.toLowerCase(),e=e.toLowerCase()),i.space==="ignore"&&(e=e.replace(/\s/g,"")),P(g,t,e,i)||[]},P=(g,t,e,s)=>{let i=[];for(let r=0;r<g.length;r++){if(s.space==="ignore"&&g[r]===" "){i.push(r);continue}if(g[r]===e[0]){e=e.slice(1),i.push(r);continue}const n=t.split(" ");let o=0;if(n.forEach(a=>{const c=R(a,e);c>o&&(o=c)}),o&&(e=e.slice(o),i.push(r)),!e)break}if(e)return null;if(s.continuous){const r=i;if(i.some((o,a)=>a>0&&o!==r[a-1]+1))return null}return s.space==="ignore"&&(i=i.filter(r=>g[r]!==" ")),i.length?i:null},R=(g,t)=>{let e=0;for(let s=0;s<g.length;s++)g[s]===t[e]&&e++;return e};function _(){const g=navigator.userAgent,t=/(?:Windows Phone)/.test(g),e=/(?:SymbianOS)/.test(g)||t,s=/(?:Android)/.test(g),i=/(?:Firefox)/.test(g),r=/(?:iPad|PlayBook)/.test(g)||s&&!/(?:Mobile)/.test(g)||i&&/(?:Tablet)/.test(g),n=/(?:iPhone)/.test(g)&&!r;return{isTablet:r,isPhone:n,isAndroid:s,isPc:!n&&!s&&!e}}const K=function(g,t,e){return g.forEach(s=>{if(e in s){const i=t.indexOf(String(s[e]));i!==-1&&(t[i]=s)}}),t.filter(s=>s[e])},S=function(g){return Object.prototype.toString.call(g).slice(8,-1)},L=function(g,t){const e=S(g).toLowerCase();switch(S(t)){case"String":return e===t.toLowerCase();case"Array":return t.some(i=>e===i.toLowerCase());default:return!0}};class U{constructor({elm:t,userList:e,placeholder:s,copyType:i,uploadImage:r,needCallEvery:n,callEveryLabel:o,userProps:a,needCallSpace:c,wrapKeyFun:p,sendKeyFun:h,needDialog:d,maxLength:f}){u(this,"richText");u(this,"needCallEvery",!0);u(this,"callEveryLabel","所有人");u(this,"maxLength");u(this,"textLength",0);u(this,"needDialog",!0);u(this,"placeholderElm");u(this,"userProps",{id:"id",name:"name",avatar:"avatar",pinyin:"pinyin"});u(this,"chat");u(this,"targetUserList",[]);u(this,"userList",[]);u(this,"copyType",["text"]);u(this,"itemShowList",[]);u(this,"checkboxRows",[]);u(this,"base64Images",{});u(this,"uploadImage");u(this,"deviceInfo",_());u(this,"isComposition",!1);u(this,"undoHistory",[]);u(this,"redoHistory",[]);u(this,"doOverHistory",!0);u(this,"isExternalCallPopup",!1);u(this,"isIMEModel",!1);u(this,"chatEventModule",{enterSend:[],operate:[],defaultAction:[]});u(this,"wrapKeyFun",t=>t.ctrlKey&&["Enter"].includes(t.key));u(this,"sendKeyFun",t=>!t.ctrlKey&&["Enter"].includes(t.key));u(this,"startOpenIndex",0);u(this,"toolUserList");u(this,"dialogElm");u(this,"dialogCheckElm");u(this,"dialogMainElm");u(this,"checkboxElm");u(this,"searchResultElm");u(this,"checkGroupElm");u(this,"searchElm");u(this,"tagsElm");u(this,"dialogActiveItemElm");u(this,"searchEmptyLabel","没有匹配到任何结果");u(this,"checkAllLabel","全选");u(this,"dialogH5Elm");u(this,"dialogH5MainElm");u(this,"dialogH5CheckElm");u(this,"dialogH5ShowElm");u(this,"dialogH5SearchElm");u(this,"winClick",()=>{this.getElmBlock(this.dialogElm)&&this.exitDialog(),this.searchResultElm&&this.domElmShow(this.searchResultElm)});u(this,"winKeydown",async t=>{if(t.ctrlKey&&t.code==="KeyZ"&&t.preventDefault(),!(!this.getElmBlock(this.dialogElm)||this.itemShowList.length===0||this.isComposition)){if(t.code==="ArrowDown"){this.moveActiveItem("down");return}if(t.code==="ArrowUp"){this.moveActiveItem("up");return}if((t.code==="Enter"||t.code==="NumpadEnter")&&this.dialogActiveItemElm){t.preventDefault();const e=this.dialogActiveItemElm.getAttribute("data-set-id")||"";await v(100),this.toolUserList&&this.toolUserList.length>0?await this.matchSetTag(this.userList.find(s=>s.id===e)):await this.onceSetTag(e==="isALL"?{[this.userProps.id]:"isALL",[this.userProps.name]:this.callEveryLabel}:this.userList.find(s=>s.id===e)),this.exitDialog()}}});if(!(t instanceof HTMLElement))throw new Error("参数值elm：参数类型错误, 参数类型应为HTMLElement！");["absolute","relative","fixed"].includes(t.style.position)||(t.style.position="relative"),t.className+=` chat-area-${this.deviceInfo.isPc?"pc":"h5"}`,this.richText=document.createElement("div"),this.richText.setAttribute("class","chat-rich-text"),this.richText.setAttribute("data-set-richType","richAllBox"),this.richText.setAttribute("contenteditable","true"),t.appendChild(this.richText),this.placeholderElm=document.createElement("div"),this.placeholderElm.className="chat-placeholder-wrap",this.domElmShow(this.placeholderElm,!0),t.appendChild(this.placeholderElm),this.chat=new H(this.richText),o&&(this.callEveryLabel=o),d!==void 0&&(this.needDialog=String(d)!=="false"),this.needDialog&&(this.deviceInfo.isPc?this.hasPc():this.hasH5()),this.registerEvent(),this.updateConfig({userList:e,placeholder:s,maxLength:f,copyType:i,uploadImage:r,needCallEvery:n,needCallSpace:c,userProps:a,wrapKeyFun:p,sendKeyFun:h});const l={html:this.richText.innerHTML,gridIndex:0,markIndex:0,cursorIndex:this.chat.cursorIndex};this.undoHistory=[l]}registerEvent(){this.richText.addEventListener("keyup",t=>{if(!this.needDialog)return;if(t.stopPropagation(),this.deviceInfo.isPc){(t.keyCode===50||t.code==="Digit2"||t.key==="@")&&this.ruleCanShowPointDialog();return}const e=t.key==="Unidentified"?"android":"ios";let s=!1;switch(e){case"android":s=t.keyCode===229;break;case"ios":s=t.keyCode===50||t.code==="Digit2"||t.key==="@";break}s&&this.userList.length>0&&this.chat.showAt()&&(this.showH5Dialog(),this.isExternalCallPopup=!1)}),this.richText.addEventListener("keydown",async t=>{if(!this.deviceInfo.isPc&&t.key==="Unidentified"&&t.keyCode===229){t.preventDefault(),this.isIMEModel=!0,this.chat.setIMESelection();return}if(this.isIMEModel)return;if(this.getElmBlock(this.dialogElm)){["ArrowUp","ArrowDown","Enter","NumpadEnter"].includes(t.code)?t.preventDefault():["ArrowLeft","ArrowRight"].includes(t.code)&&this.exitDialog();return}t.code==="Backspace"||t.key==="Backspace"?(this.chat.selectRegionMerge()||this.chat.gridElmMerge()||this.chat.delMarkRule())&&(t.preventDefault(),await this.richTextInput()):this.wrapKeyFun(t)||!this.deviceInfo.isPc&&t.key==="Enter"?(t.preventDefault(),this.chat.setWrap(),await this.richTextInput()):this.sendKeyFun(t)?(t.preventDefault(),await v(100),this.enterSend()):["ArrowLeft","ArrowRight"].includes(t.code)?(t.preventDefault(),this.chat.switchRange(t.code)):t.ctrlKey&&t.code==="KeyA"?this.isEmpty()&&t.preventDefault():t.ctrlKey&&t.code==="KeyZ"?(t.preventDefault(),this.ruleChatEvent(this.undo,"defaultAction","UNDO")):t.ctrlKey&&t.code==="KeyY"&&(t.preventDefault(),this.ruleChatEvent(this.redo,"defaultAction","REDO")),["Backspace","Shift","Tab","CapsLock","Control","Meta","Alt","ContextMenu","Enter","NumpadEnter","Escape","ArrowLeft","ArrowUp","ArrowRight","ArrowDown","Home","End","PageUp","PageDown","Insert","Delete","NumLock"].indexOf(t.key)===-1&&!t.ctrlKey&&!t.altKey&&!t.metaKey&&this.chat.selectRegionMerge()}),this.richText.addEventListener("input",async t=>{if(this.isIMEModel){this.isIMEModel=!1,t.inputType==="deleteContentBackward"?(await v(50),this.chat.delMarkRuleIME()):t.inputType==="insertParagraph"?this.chat.wrapIME():this.chat.resetIME(t.data),this.chat.upDataNodeOrIndex(),this.chat.updateGrid(),this.maxLength!==void 0&&this.ruleMaxLength(),this.showPlaceholder(),this.triggerChatEvent("operate");return}if(await this.richTextInput(),this.getElmBlock(this.dialogElm)&&!this.isComposition){const e=this.chat.vnode.textContent,s=this.chat.cursorIndex,i=new RegExp(`^([${this.chat.ZERO_WIDTH_KEY}${this.chat.VOID_KEY}])+$`);if(!e||i.test(e)||s<this.startOpenIndex){this.exitDialog();return}const r=e.slice(this.startOpenIndex,s+1),n=String(r||"");if(/\s{2,}/ig.test(n)){this.exitDialog();return}if(!n){this.resizeUserTool(),this.showPCDialog();return}this.toolUserList||(this.toolUserList=this.userList);const o=this.searchUserList(n,this.toolUserList);o.length>0?(this.updateUserList(o,!0),this.showPCDialog()):this.exitDialog()}}),this.richText.addEventListener("copy",t=>{t.preventDefault(),this.ruleChatEvent(()=>{this.copyRange(t)},"defaultAction","COPY")}),this.richText.addEventListener("cut",t=>{t.preventDefault(),this.ruleChatEvent(()=>{this.copyRange(t),this.removeRange()},"defaultAction","CUT")}),this.richText.addEventListener("paste",t=>{t.preventDefault(),this.ruleChatEvent(()=>{const e=t.clipboardData.getData("text/plain");if(typeof e=="string"&&e!==""){if(this.copyType.indexOf("text")===-1)return;let s=document.createElement("div");s.innerHTML=t.clipboardData.getData("application/my-custom-format")||"",this.chat.selectRegionMerge(),s.children[0]&&s.children[0].getAttribute("data-set-richType")==="richBox"?this.insertInsideHtml(s.innerHTML):(s.innerHTML=e,this.insertText(s.innerText)),s=null}else{if(this.copyType.indexOf("image")===-1)return;const i=(t.clipboardData||t.originalEvent.clipboardData).items||[];Array.prototype.forEach.call(i,async r=>{if(r.type.indexOf("image")===-1)return;const n=r.getAsFile();if(this.uploadImage){const o=await this.uploadImage(n);this.insertHtml(`<img class="chat-img" src="${o}" alt="" />`)}else{const o=new FileReader;o.onload=a=>{this.insertHtml(`<img class="chat-img" src="${a.target.result}" alt="" />`)},o.readAsDataURL(n)}})}},"defaultAction","PASTE")}),this.richText.addEventListener("blur",t=>{this.chat.upDataNodeOrIndex()}),this.richText.addEventListener("focus",t=>{this.chat.upDataNodeOrIndex()}),this.richText.addEventListener("click",()=>{this.chat.upDataNodeOrIndex()}),this.richText.addEventListener("dragstart",t=>{t.stopPropagation(),t.preventDefault()}),this.richText.addEventListener("dragover",t=>{t.stopPropagation(),t.preventDefault()}),this.richText.addEventListener("drop",t=>{t.stopPropagation(),t.preventDefault()}),this.richText.addEventListener("compositionstart",()=>{this.isComposition=!0}),this.richText.addEventListener("compositionend",()=>{this.isComposition=!1})}async richTextInput(t=!0){this.chat.upDataNodeOrIndex(),this.deviceInfo.isPc&&this.chat.selectRegionMerge(),await v(50),this.isComposition||this.chat.updateGrid();const s=(this.richText.children[0]||{childNodes:[]}).childNodes[0];if(!s||!s.getAttribute||s.getAttribute("data-set-richType")!=="richMark"){this.chat.textInnerHtmlInit(!0),this.showPlaceholder(),this.triggerChatEvent("operate");return}if(this.maxLength!==void 0&&this.ruleMaxLength(),this.showPlaceholder(),this.triggerChatEvent("operate"),t&&!this.isComposition){const{gridIndex:i,markIndex:r}=this.chat.getRichTextNodeIndex(this.chat.vnode),n={html:this.richText.innerHTML,gridIndex:i,markIndex:r,cursorIndex:this.chat.cursorIndex};this.undoHistory.push(n),this.undoHistory.length>50&&this.undoHistory.shift()}}copyRange(t){const e=window.getSelection();if(e.isCollapsed||e.rangeCount<=0){t.clipboardData.setData("application/my-custom-format",""),t.clipboardData.setData("text/plain","");return}const s=e.toString()||"";let i=document.createElement("div");i.innerHTML=s;const r=i.innerText.replace(/\n\n/g,`
-`);i=null,t.clipboardData.setData("text/plain",r);const n=e.anchorNode,o=e.focusNode;if(n===o&&n.nodeType===Node.TEXT_NODE){const l=n.textContent.slice(e.anchorOffset,e.focusOffset);t.clipboardData.setData("application/my-custom-format",l);return}if(n===this.richText&&o===this.richText){t.clipboardData.setData("application/my-custom-format",this.richText.innerHTML);return}const a=this.chat.getWrapNode(n),c=this.chat.getWrapNode(o),p=this.chat.getMarkNode(n),h=this.chat.getMarkNode(o),d=Array.prototype.indexOf.call(a.childNodes,p),f=Array.prototype.indexOf.call(c.childNodes,h);if(a===c&&a.parentNode===this.richText){const l=d>f,m=Array.prototype.filter.call(a.childNodes,(w,N)=>l?N<d&&N>f:N>d&&N<f).map(w=>w.cloneNode(!0)),E=l?n.textContent.slice(0,e.anchorOffset):n.textContent.slice(e.anchorOffset),C=l?o.textContent.slice(e.focusOffset):o.textContent.slice(0,e.focusOffset),b=this.chat.getGridElm(!0),k=this.chat.getGridElm(!0);E&&(b.childNodes[0].innerHTML=E,b.childNodes[0].setAttribute("data-set-empty","false")),C&&(k.childNodes[0].innerHTML=C,k.childNodes[0].setAttribute("data-set-empty","false")),l?(m.unshift(k),m.push(b)):(m.unshift(b),m.push(k));let T=document.createElement("div");const A=this.chat.setWrapNodeByMark(m);T.appendChild(A),t.clipboardData.setData("application/my-custom-format",T.innerHTML),T=null;return}if(a.parentNode===this.richText&&c.parentNode===this.richText){const l=Array.prototype.indexOf.call(this.richText.childNodes,a),m=Array.prototype.indexOf.call(this.richText.childNodes,c),E=l>m,C=Array.prototype.filter.call(this.richText.childNodes,(x,y)=>E?y<l&&y>m:y>l&&y<m).map(x=>x.cloneNode(!0)),b=E?n.textContent.slice(0,e.anchorOffset):n.textContent.slice(e.anchorOffset),k=E?o.textContent.slice(e.focusOffset):o.textContent.slice(0,e.focusOffset),T=this.chat.getGridElm(!0),A=this.chat.getGridElm(!0);b&&(T.childNodes[0].innerHTML=b,T.childNodes[0].setAttribute("data-set-empty","false")),k&&(A.childNodes[0].innerHTML=k,A.childNodes[0].setAttribute("data-set-empty","false"));const w=Array.prototype.filter.call(a.childNodes,(x,y)=>E?y<d:y>d).map(x=>x.cloneNode(!0)),N=Array.prototype.filter.call(c.childNodes,(x,y)=>E?y>f:y<f).map(x=>x.cloneNode(!0));if(E){w.push(T),N.unshift(A);const x=this.chat.setWrapNodeByMark(w),y=this.chat.setWrapNodeByMark(N);C.push(x),C.unshift(y)}else{w.unshift(T),N.push(A);const x=this.chat.setWrapNodeByMark(w),y=this.chat.setWrapNodeByMark(N);C.unshift(x),C.push(y)}let I=document.createElement("div");Array.prototype.forEach.call(C,x=>{I.appendChild(x)}),t.clipboardData.setData("application/my-custom-format",I.innerHTML),I=null;return}}async removeRange(){window.getSelection().getRangeAt(0).deleteContents(),await v(50),this.chat.updateGrid(),this.showPlaceholder()}updateUserList(t=void 0,e){t&&(this.userList=this.getRuleUserList(t)),e||(this.base64Images={}),this.needDialog&&(this.deviceInfo.isPc?this.updatePCUser():this.updateH5User())}getRuleUserList(t){if(!L(t,"Array"))throw new Error("参数值userList：类型值应为Array！");this.targetUserList=JSON.parse(JSON.stringify(t||[]));const e=Object.create(null);return e[this.userProps.id]="isALL",e[this.userProps.name]=this.callEveryLabel,this.targetUserList.unshift(e),(t==null?void 0:t.map((s,i)=>{const r=s[this.userProps.id];if(!r&&r!==0)throw new Error(`参数值userList：下标第${i}项${this.userProps.id}值异常！`);return s.name=String(s[this.userProps.name]||""),s.pinyin=String(s[this.userProps.pinyin]||""),s.id=String(r),s.avatar=String(s[this.userProps.avatar]||""),s}))||[]}getElmBlock(t){return t&&t.style.display==="block"}domElmShow(t,e=!1){t&&(t.className=t.className.replace(/ chat-view-show| chat-view-hidden/g,""),e?(t.style.display="block",t.className+=" chat-view-show"):t.style.display="none")}getUserHtmlTemplate(t,e){const s=document.createElement("span");if(s.setAttribute("class",`call-user-dialog-item-sculpture ${e.avatar?"is-avatar":""}`),e.avatar){const r=new Image;r.alt="";const n=this.base64Images[e.id];n?r.src=n:(r.src=String(e.avatar),r.setAttribute("crossOrigin","Anonymous"),r.onload=()=>{const o=document.createElement("canvas");o.width=48,o.height=48;const a=o.getContext("2d");a&&(a.drawImage(r,0,0,o.width,o.height),this.base64Images[e.id]=o.toDataURL("image/png",1))}),s.appendChild(r)}else s.innerHTML=`<span style="transform: scale(0.75)">${e.name.slice(-2)}</span>`;t.appendChild(s);const i=document.createElement("span");i.setAttribute("class","call-user-dialog-item-name"),i.innerHTML=e.name,t.appendChild(i)}hasPc(){this.initCheckbox(),this.initCallUser(),window.addEventListener("click",this.winClick),window.addEventListener("keydown",this.winKeydown)}initCheckbox(){this.checkboxElm=document.createElement("div"),this.checkboxElm.setAttribute("class","checkbox-dialog"),this.domElmShow(this.checkboxElm),this.checkboxElm.innerHTML=`
-      <div class="checkbox-dialog-container">
-        <div class="checkbox-dialog-container-header">
-            <span>选择要@的人</span>
-            <span class="checkbox-dialog-container-header-close">⛌</span>
-        </div>
-        <div class="checkbox-dialog-container-body">
-            <div class="checkbox-dialog-left-box">
-                <div class="checkbox-dialog-search">
-                    <input class="checkbox-dialog-search-input" placeholder="搜索人员名称" type="text">
-
-                    <div data-set-remark="搜索下拉" class="checkbox-dialog-search-group"></div>
+var j = Object.defineProperty;
+var X = (m, t, e) => t in m ? j(m, t, {
+  enumerable: !0,
+  configurable: !0,
+  writable: !0,
+  value: e
+}) : m[t] = e;
+var y = (m, t, e) => (X(m, typeof t != "symbol" ? t + "" : t, e), e);
+(function () {
+  const t = document.createElement("link").relList;
+  if (t && t.supports && t.supports("modulepreload")) return;
+  for (const a of document.querySelectorAll('link[rel="modulepreload"]')) i(a);
+  new MutationObserver(a => {
+    for (const s of a) if (s.type === "childList") for (const n of s.addedNodes) n.tagName === "LINK" && n.rel === "modulepreload" && i(n);
+  }).observe(document, {
+    childList: !0,
+    subtree: !0
+  });
+  function e(a) {
+    const s = {};
+    return a.integrity && (s.integrity = a.integrity), a.referrerPolicy && (s.referrerPolicy = a.referrerPolicy), a.crossOrigin === "use-credentials" ? s.credentials = "include" : a.crossOrigin === "anonymous" ? s.credentials = "omit" : s.credentials = "same-origin", s;
+  }
+  function i(a) {
+    if (a.ep) return;
+    a.ep = !0;
+    const s = e(a);
+    fetch(a.href, s);
+  }
+})();
+function z() {
+  const m = navigator.userAgent,
+    t = /(?:Windows Phone)/.test(m),
+    e = /(?:SymbianOS)/.test(m) || t,
+    i = /(?:Android)/.test(m),
+    a = /(?:Firefox)/.test(m),
+    s = /(?:iPad|PlayBook)/.test(m) || i && !/(?:Mobile)/.test(m) || a && /(?:Tablet)/.test(m),
+    n = /(?:iPhone)/.test(m) && !s;
+  return {
+    isTablet: s,
+    isPhone: n,
+    isAndroid: i,
+    isPc: !n && !i && !e
+  };
+}
+function f(m, t = !1, e = "block") {
+  m && (m.className = m.className.replace(/ chat-view-show| chat-view-hidden/g, ""), t ? (m.style.display = e, m.className += " chat-view-show") : (m.className += " chat-view-hidden", m.style.display = "none"));
+}
+function O(m, t = "block") {
+  return m && m.style.display === t;
+}
+function E(m, t, e) {
+  m.classList[e ? "add" : "remove"](t);
+}
+const P = (m = 50) => new Promise(t => {
+    setTimeout(t, m);
+  }),
+  U = m => String(m) !== "false" && String(m) !== "null" && String(m) !== "0",
+  R = (m, t, e = !1) => {
+    let i;
+    return function (...a) {
+      const s = this,
+        n = () => {
+          i = null, e || m.apply(s, a);
+        },
+        o = e && !i;
+      clearTimeout(i), i = setTimeout(n, t), o && m.apply(s, a);
+    };
+  },
+  $ = (m, t) => {
+    let e;
+    return function (...i) {
+      const a = this;
+      e || (m.apply(a, i), e = !0, setTimeout(function () {
+        e = !1;
+      }, t));
+    };
+  },
+  _ = (m, t, e) => (m = m.toLowerCase(), t = t.toLowerCase(), e = e.toLowerCase(), e = e.replace(/\s/g, ""), Z(m, t || m, e)),
+  Z = (m, t, e) => {
+    if (!e) return !1;
+    const {
+      chinesePart: i,
+      pinyinPart: a,
+      numberPart: s
+    } = J(e);
+    if (i && !m.startsWith(i) || s && !m.includes(s)) return !1;
+    const n = t.replace(/\s+/g, "").toLowerCase();
+    return !(a && !tt(a, n));
+  },
+  J = m => {
+    let t = "",
+      e = "",
+      i = "",
+      a = null;
+    for (const s of m) Q(s) ? (a = "chinese", t += s) : /[a-zA-Z]/.test(s) ? (a = "pinyin", e += s.toLowerCase()) : /\d/.test(s) ? (a = "number", i += s) : a = null;
+    return {
+      chinesePart: t,
+      pinyinPart: e,
+      numberPart: i,
+      currentType: a
+    };
+  },
+  Q = m => {
+    const t = m.charCodeAt(0);
+    return t >= 19968 && t <= 40959 || t >= 13312 && t <= 19903 || t >= 131072 && t <= 173791;
+  },
+  tt = (m, t) => {
+    let e = 0;
+    for (const i of t) {
+      if (e >= m.length) break;
+      i === m[e] && e++;
+    }
+    return e === m.length;
+  },
+  W = (m, t, e) => m.getAttribute("data-set-richType") === t ? m : e > 0 ? W(m.parentElement, t, e - 1) : null,
+  et = '<svg class="check-empty-svg" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 1)" fill="none" fill-rule="evenodd"><ellipse fill="#f5f5f5" cx="32" cy="33" rx="32" ry="7"></ellipse><g fill-rule="nonzero" stroke="#d9d9d9"><path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path><path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" fill="#fafafa"></path></g></g></svg>',
+  it = '<svg class="empty-svg" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 1)" fill="none" fill-rule="evenodd"><ellipse fill="#f5f5f5" cx="32" cy="33" rx="32" ry="7"></ellipse><g fill-rule="nonzero" stroke="#d9d9d9"><path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path><path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" fill="#fafafa"></path></g></g></svg>',
+  st = '<svg class="icon-search" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M684.8 223.530667a326.272 326.272 0 0 1 24.96 433.621333c2.645333 2.133333 5.290667 4.48 7.850667 7.04L870.4 817.066667c24.789333 24.746667 32.896 56.832 18.133333 71.594666-14.762667 14.805333-46.848 6.656-71.637333-18.090666l-152.789333-152.832a106.282667 106.282667 0 0 1-7.210667-7.936 326.101333 326.101333 0 0 1-433.109333-25.173334c-127.445333-127.445333-127.573333-333.952-0.256-461.269333 127.36-127.36 333.866667-127.232 461.269333 0.213333zM275.328 275.114667a252.885333 252.885333 0 0 0 0.256 357.632 252.885333 252.885333 0 0 0 357.632 0.256 252.885333 252.885333 0 0 0-0.256-357.632 252.885333 252.885333 0 0 0-357.632-0.256z" fill="#9B9B9B"></path></svg>',
+  Y = '<div class="ant-spin ant-spin-spinning" aria-live="polite" aria-busy="true"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span></div>',
+  at = '<svg class="match-empty-svg" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 1)" fill="none" fill-rule="evenodd"><ellipse fill="#f5f5f5" cx="32" cy="33" rx="32" ry="7"></ellipse><g fill-rule="nonzero" stroke="#d9d9d9"><path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path><path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" fill="#fafafa"></path></g></g></svg>',
+  nt = '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24"><path fill="currentColor" d="M9.218 17.41 19.83 6.796a.99.99 0 1 1 1.389 1.415c-3.545 3.425-4.251 4.105-11.419 11.074a.997.997 0 0 1-1.375.018c-1.924-1.801-3.709-3.568-5.573-5.43a.999.999 0 0 1 1.414-1.413z"></path></svg>',
+  V = '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24"><path fill="currentColor" d="m20.23 8.653-7.795 9.685a1.2 1.2 0 0 1-1.87 0L2.771 8.652C2.14 7.867 2.698 6.7 3.706 6.7h15.588c1.008 0 1.567 1.167.935 1.952"></path></svg>';
+class ot {
+  constructor(t) {
+    y(this, "target");
+    y(this, "richText", document.createElement("div"));
+    y(this, "placeholderElm", document.createElement("div"));
+    y(this, "isExternalCallPopup", !1);
+    y(this, "isPointSearchMode", !1);
+    y(this, "checkboxRows", []);
+    y(this, "customTags", {});
+    y(this, "selectTags", {});
+    y(this, "pcElms", {
+      containerDialogElm: null,
+      pointDialogElm: null,
+      pointDialogCheckElm: null,
+      pointDialogMainElm: null,
+      pointDialogUsersElm: [],
+      pointDialogActiveElm: null,
+      pointDialogLoadingElm: null,
+      pointDialogEmptyElm: null,
+      checkDialogElm: null,
+      checkDialogSearchResultElm: null,
+      checkDialogUsersElm: null,
+      checkDialogSearchInputElm: null,
+      checkDialogTagsElm: null,
+      customTagDialogElms: {},
+      customTagDialogTagKey: "",
+      customTagDialogActiveElm: null,
+      selectDialogElms: {},
+      selectDialogKey: "",
+      selectDialogAim: null
+    });
+    y(this, "h5Elms", {
+      dialogElm: null,
+      dialogMainElm: null,
+      dialogCheckElm: null,
+      dialogShowElm: null,
+      dialogSearchElm: null,
+      dialogEmptyElm: null,
+      dialogLoadingElm: null
+    });
+    this.target = t, this.createRichText(), this.createPlaceholder(), t.deviceInfo.isPc ? this.createPCDialog() : this.createH5Dialog();
+  }
+  createRichText() {
+    const {
+        options: t,
+        deviceInfo: e
+      } = this.target,
+      {
+        elm: i
+      } = t;
+    E(i, `chat-area-${e.isPc ? "pc" : "h5"}`, !0), E(this.richText, "chat-rich-text", !0), this.richText.setAttribute("data-set-richType", "richAllBox"), this.richText.setAttribute("contenteditable", "true"), i.appendChild(this.richText);
+  }
+  createPlaceholder() {
+    const {
+        options: t
+      } = this.target,
+      {
+        elm: e
+      } = t;
+    E(this.placeholderElm, "chat-placeholder-wrap", !0), f(this.placeholderElm, !0), e.appendChild(this.placeholderElm);
+  }
+  createPCDialog() {
+    const {
+        options: t
+      } = this.target,
+      {
+        needDialog: e,
+        elm: i,
+        asyncMatch: a
+      } = t;
+    if (!e) return;
+    const {
+      pcElms: s
+    } = this;
+    if (s.containerDialogElm = document.createElement("div"), E(this.pcElms.containerDialogElm, "chat-dialog", !0), i.parentElement) i.nextElementSibling ? i.parentElement.insertBefore(s.containerDialogElm, i.nextElementSibling) : i.parentElement.appendChild(s.containerDialogElm);else throw new Error('配置项："elm" 需要存在一个父级元素，请检查后重新配置！');
+    a || this.createPCCheckDialog(), this.createPCPointDialog();
+  }
+  createPCCheckDialog() {
+    const {
+        options: t
+      } = this.target,
+      e = this.target.options.dialogLabels.pcPCheckDialog,
+      {
+        pcElms: i
+      } = this;
+    i.checkDialogElm = document.createElement("div"), E(i.checkDialogElm, "checkbox-dialog", !0), f(i.checkDialogElm), i.checkDialogElm.innerHTML = `
+          <div class="checkbox-dialog-container">
+            <div class="checkbox-dialog-container-header">
+                <span>${e.title}</span>
+                <span class="checkbox-dialog-container-header-close">⛌</span>
+            </div>
+            <div class="checkbox-dialog-container-body">
+                <div class="checkbox-dialog-left-box">
+                    <div class="checkbox-dialog-search">
+                        <input class="checkbox-dialog-search-input" placeholder="${e.searchPlaceholder}" type="text">
+                        <div class="checkbox-dialog-search-group"></div>
+                    </div>
+                    <div class="checkbox-dialog-tags"></div>
+                    <div class="checkbox-dialog-option">
+                        <button class="checkbox-dialog-option-btn btn-submit disabled">${e.confirmLabel}</button>
+                        <button class="checkbox-dialog-option-btn btn-close">${e.cancelLabel}</button>
+                    </div>
                 </div>
-
-                <div data-set-remark="反显选取的人员" class="checkbox-dialog-tags"></div>
-
-                <div class="checkbox-dialog-option">
-                    <button class="checkbox-dialog-option-btn btn-submit">确定</button>
-                    <button class="checkbox-dialog-option-btn btn-close">取消</button>
+                <div class="checkbox-dialog-right-box">
+                    <div class="checkbox-dialog-right-box-title">${e.userTagTitle}</div>
+                    <div class="checkbox-dialog-check-group"></div>
                 </div>
             </div>
-            
-            <div class="checkbox-dialog-right-box">
-                <div class="checkbox-dialog-right-box-title">研讨成员列表</div>
-
-                <div data-set-remark="多选人员列表" class="checkbox-dialog-check-group"></div>
+          </div>
+        `, i.containerDialogElm.appendChild(i.checkDialogElm), i.checkDialogUsersElm = i.checkDialogElm.querySelector(".checkbox-dialog-check-group"), i.checkDialogSearchResultElm = i.checkDialogElm.querySelector(".checkbox-dialog-search-group"), i.checkDialogSearchInputElm = i.checkDialogElm.querySelector(".checkbox-dialog-search-input"), i.checkDialogTagsElm = i.checkDialogElm.querySelector(".checkbox-dialog-tags");
+    const a = () => {
+      f(i.checkDialogElm), E(document.body, "disable-scroll");
+    };
+    i.checkDialogElm.querySelector(".checkbox-dialog-container-header-close").onclick = a, i.checkDialogElm.querySelector(".btn-close").onclick = a;
+    const s = i.checkDialogElm.querySelector(".btn-submit");
+    s.onclick = async () => {
+      if (s.classList.contains("disabled")) return;
+      const o = this.checkboxRows.map(l => {
+        const r = Object.create(null);
+        return r[t.userProps.id] = l.id, r[t.userProps.name] = l.name, r;
+      });
+      await this.target.batchSetTag(o), a();
+    }, f(i.checkDialogSearchResultElm), i.checkDialogSearchResultElm.onclick = o => {
+      o.stopPropagation();
+    }, i.checkDialogSearchInputElm.onclick = o => {
+      o.stopPropagation();
+    };
+    const n = R(o => {
+      const l = String(o.target.value || "").replace(/'/g, "").trim();
+      if (!l) {
+        f(i.checkDialogSearchResultElm);
+        return;
+      }
+      const r = this.target.searchUserList(l).map(d => d.id);
+      Array.from(i.checkDialogSearchResultElm.children, (d, c) => {
+        if (c === i.checkDialogSearchResultElm.children.length - 1) f(d, r.length === 0);else {
+          const h = d.getAttribute("data-set-id");
+          f(d, r.indexOf(h) !== -1, "flex");
+        }
+      }), f(i.checkDialogSearchResultElm, !0);
+    }, 200);
+    i.checkDialogSearchInputElm.oninput = n, i.checkDialogSearchInputElm.onfocus = n;
+  }
+  createPCPointDialog() {
+    const {
+      pcElms: t,
+      target: e
+    } = this;
+    t.pointDialogElm = document.createElement("div"), E(t.pointDialogElm, "call-user-dialog", !0), f(t.pointDialogElm);
+    const i = document.createElement("div");
+    E(i, "call-user-dialog-header", !0), i.innerHTML = `<span class="call-user-dialog-header-title">${e.options.dialogLabels.pcPointDialog.title}</span>`, t.pointDialogCheckElm = document.createElement("span"), E(t.pointDialogCheckElm, "call-user-dialog-header-check", !0), t.pointDialogCheckElm.innerText = e.options.dialogLabels.pcPointDialog.checkLabel, t.pointDialogCheckElm.onclick = () => {
+      this.target.showPCCheckDialog(), this.isExternalCallPopup = !1;
+    }, i.appendChild(t.pointDialogCheckElm), t.pointDialogElm.appendChild(i), t.pointDialogMainElm = document.createElement("div"), E(t.pointDialogMainElm, "call-user-dialog-main", !0), t.pointDialogElm.appendChild(t.pointDialogMainElm), e.options.asyncMatch && (t.pointDialogLoadingElm = document.createElement("div"), E(t.pointDialogLoadingElm, "call-user-dialog-loading", !0), t.pointDialogLoadingElm.innerHTML = Y, t.pointDialogElm.appendChild(t.pointDialogLoadingElm), f(t.pointDialogLoadingElm), t.pointDialogEmptyElm = document.createElement("div"), E(t.pointDialogEmptyElm, "call-user-dialog-empty", !0), t.pointDialogEmptyElm.innerHTML = `
+                ${at}
+                <span class="empty-label">${e.options.dialogLabels.pcPointDialog.emptyLabel}</span>
+            `, t.pointDialogElm.appendChild(t.pointDialogEmptyElm), f(t.pointDialogEmptyElm)), t.containerDialogElm.appendChild(t.pointDialogElm);
+  }
+  createH5Dialog() {
+    const {
+        options: t,
+        chatEvent: e
+      } = this.target,
+      {
+        needDialog: i,
+        dialogLabels: a
+      } = t;
+    if (!i) return;
+    const {
+      h5Elms: s
+    } = this;
+    s.dialogElm = document.createElement("div"), E(s.dialogElm, "call-user-popup", !0), s.dialogElm.innerHTML = `
+          <div class="call-user-popup-main">
+            <div class="call-user-popup-header">
+                <span class="popup-show">${a.h5Dialog.cancelLabel}</span>
+                <span class="popup-title">${a.h5Dialog.title}</span>
+                <span class="popup-check">${a.h5Dialog.confirmLabel}</span>
             </div>
-        </div>
-      </div>
-    `,document.body.appendChild(this.checkboxElm),this.checkGroupElm=this.checkboxElm.querySelector(".checkbox-dialog-check-group"),this.searchResultElm=this.checkboxElm.querySelector(".checkbox-dialog-search-group"),this.searchElm=this.checkboxElm.querySelector(".checkbox-dialog-search-input"),this.tagsElm=this.checkboxElm.querySelector(".checkbox-dialog-tags");const t=()=>{this.domElmShow(this.checkboxElm),this.isExternalCallPopup=!1},e=this.checkboxElm.querySelector(".checkbox-dialog-container-header-close"),s=this.checkboxElm.querySelector(".btn-close");e.onclick=t,s.onclick=t;const i=this.checkboxElm.querySelector(".btn-submit");i.onclick=async()=>{await this.batchSetTag(this.checkboxRows),t(),this.chat.viewIntoPoint()},this.domElmShow(this.searchResultElm),this.searchResultElm.onclick=r=>{r.stopPropagation()},this.searchElm.onclick=r=>{r.stopPropagation()},this.searchElm.oninput=r=>{this.searchResultElm.innerHTML="";const n=String(r.target.value||"").replace(/'/g,"");if(!n){this.domElmShow(this.searchResultElm);return}const o=this.searchUserList(n),a=document.createDocumentFragment();if(o.forEach(c=>{const p=document.createElement("div");p.setAttribute("class","checkbox-dialog-check-item"),p.setAttribute("data-set-value",c.id);const h=document.createElement("div");h.setAttribute("class","checkbox-dialog-check-item-label"),this.getUserHtmlTemplate(h,c),p.appendChild(h),p.onclick=()=>{this.domElmShow(this.searchResultElm);const d=p.getAttribute("data-set-value")||"";if(this.searchElm.value="",this.checkboxRows.some(l=>l.id===d))return;const f=this.userList.find(l=>l.id===d);f&&this.checkboxRows.push(f),Array.prototype.some.call(this.checkGroupElm.children,(l,m)=>{if(m===0&&this.checkboxRows.length===this.userList.length)return l.className+=" checkbox-dialog-check-item-check",!1;if(l.getAttribute("data-set-value")===d)return l.className+=" checkbox-dialog-check-item-check",!0}),this.updateTags()},a.appendChild(p)}),!o.length){const c=document.createElement("div");c.setAttribute("class","checkbox-dialog-search-empty"),c.innerText=this.searchEmptyLabel,a.appendChild(c)}this.searchResultElm.appendChild(a),this.domElmShow(this.searchResultElm,!0)}}searchUserList(t,e){return(e||this.userList).filter(s=>M(s.name,s.pinyin||"",t).length>0)}updateTags(){const t=this.checkboxRows.map(n=>n.id),e=[],s=[];Array.prototype.forEach.call(this.tagsElm.children,n=>{const o=n.getAttribute("data-set-value");t.indexOf(o)===-1?s.push(n):e.push(o)}),s.forEach(n=>{this.tagsElm.removeChild(n)});const i=this.checkboxRows.filter(n=>e.indexOf(n.id)===-1);if(!i.length)return;const r=document.createDocumentFragment();i.forEach(n=>{const o=document.createElement("div");o.setAttribute("class","checkbox-dialog-tag-item"),o.setAttribute("data-set-value",n.id),o.innerHTML=`
-        <span>${n.name}</span>
-      `;const a=document.createElement("span");a.setAttribute("class","checkbox-dialog-tag-item-close"),a.innerHTML="⛌",a.onclick=()=>{const c=o.getAttribute("data-set-value");this.checkboxRows=this.checkboxRows.filter(p=>p.id!==c),this.tagsElm.removeChild(o),Array.prototype.some.call(this.checkGroupElm.children,(p,h)=>{if(h===0)return p.className=p.className.replace(/ checkbox-dialog-check-item-check/g,""),!1;if(p.getAttribute("data-set-value")===c)return p.className=p.className.replace(/ checkbox-dialog-check-item-check/g,""),!0})},o.appendChild(a),r.appendChild(o)}),this.tagsElm.appendChild(r)}initCallUser(){this.dialogElm=document.createElement("div"),this.dialogElm.setAttribute("class","call-user-dialog"),this.domElmShow(this.dialogElm);const t=document.createElement("div");t.setAttribute("class","call-user-dialog-header"),t.innerHTML=`
-        <span class="call-user-dialog-header-title">群成员</span>
-    `,this.dialogCheckElm=document.createElement("span"),this.dialogCheckElm.setAttribute("class","call-user-dialog-header-check"),this.domElmShow(this.dialogCheckElm,this.userList.length>0),this.dialogCheckElm.innerText="多选",this.dialogCheckElm.onclick=()=>{this.showPCCheckDialog(),this.isExternalCallPopup=!1},t.appendChild(this.dialogCheckElm),this.dialogElm.appendChild(t),this.dialogMainElm=document.createElement("div"),this.dialogMainElm.setAttribute("class","call-user-dialog-main"),this.dialogElm.appendChild(this.dialogMainElm),this.updateUserList();const e=document.createElement("div");e.setAttribute("class","call-user-dialog-footer"),this.dialogElm.appendChild(e),document.body.appendChild(this.dialogElm)}resizeUserTool(){this.toolUserList&&(this.userList=this.toolUserList),this.toolUserList=void 0,this.updateUserList(this.userList,!0)}updatePCUser(){this.dialogMainElm.innerHTML="",this.dialogActiveItemElm=void 0;const t=this.userList&&this.userList.length>0,e=document.createDocumentFragment();if(this.domElmShow(this.dialogCheckElm),!this.toolUserList&&t&&(this.domElmShow(this.dialogCheckElm,!0),this.needCallEvery)){const i=document.createElement("div");i.setAttribute("class","call-user-dialog-item"),i.setAttribute("data-set-id","isALL"),this.userSelectStyleAndEvent(i,{[this.userProps.id]:"isALL",[this.userProps.name]:this.callEveryLabel}),i.innerHTML=`
-          <span class="call-user-dialog-item-sculpture">
-            <span style="transform: scale(0.75)">@</span>
-          </span>
-          <span class="call-user-dialog-item-name">${this.callEveryLabel}(${this.userList.length})</span>
-      `,e.appendChild(i)}this.userList.forEach(i=>{const r=document.createElement("div");r.setAttribute("class","call-user-dialog-item"),r.setAttribute("data-set-id",i.id),this.userSelectStyleAndEvent(r,i),this.getUserHtmlTemplate(r,i),e.appendChild(r)}),this.dialogMainElm.appendChild(e),this.callUserDialogMap(),this.checkGroupElm.innerHTML=`
-                    <div class="checkbox-dialog-check-item" data-set-value="ALL">
-                        <input type="checkbox" value>
-                        <span class="checkbox-dialog-check-item-inner"></span>
-                        <div class="checkbox-dialog-check-item-label">${this.checkAllLabel}</div>
-                    </div>`;const s=document.createDocumentFragment();this.userList.forEach(i=>{const r=document.createElement("div");r.setAttribute("class","checkbox-dialog-check-item"),r.setAttribute("data-set-value",i.id),r.innerHTML=`
-          <input type="checkbox" value>
-          <span class="checkbox-dialog-check-item-inner"></span>
-      `,this.getUserHtmlTemplate(r,i),s.appendChild(r)}),this.checkGroupElm.appendChild(s),this.checkGroupElm&&this.checkGroupElm.children.length&&Array.prototype.forEach.call(this.checkGroupElm.children,i=>{i.onclick=()=>{const r=i.getAttribute("data-set-value")||"",n=this.userList.find(o=>o.id===r);i.className.indexOf("checkbox-dialog-check-item-check")!==-1?(i.className=i.className.replace(/ checkbox-dialog-check-item-check/g,""),r!=="ALL"&&(this.checkboxRows=this.checkboxRows.filter(o=>o.id!==r))):(i.className+=" checkbox-dialog-check-item-check",r!=="ALL"&&n&&this.checkboxRows.push(n)),r==="ALL"?(Array.prototype.forEach.call(this.checkGroupElm.children,o=>{o.className=i.className}),this.checkboxRows=i.className.indexOf("checkbox-dialog-check-item-check")!==-1?this.userList.map(o=>o):[]):this.checkboxRows.length===this.userList.length?this.checkGroupElm.children[0].className+=" checkbox-dialog-check-item-check":this.checkGroupElm.children[0].className=this.checkGroupElm.children[0].className.replace(/ checkbox-dialog-check-item-check/g,""),this.updateTags()}})}userSelectStyleAndEvent(t,e){t.addEventListener("click",async s=>{s.stopPropagation(),this.upDateActiveItem(t),this.toolUserList&&this.toolUserList.length>0?await this.matchSetTag(e):await this.onceSetTag(e),this.exitDialog()})}callUserDialogMap(){this.itemShowList=[],Array.prototype.forEach.call(this.dialogMainElm.children||[],(t,e)=>{this.itemShowList.push({index:e,elm:t})})}ruleCanShowPointDialog(){this.userList.length>0&&this.chat.showAt()&&(this.startOpenIndex=this.chat.cursorIndex,this.showPCDialog())}showPCDialog(){this.domElmShow(this.dialogElm,!0);let t="0",e="100%";this.upDateActiveItem(this.dialogMainElm.firstElementChild,!0);const s=this.chat.getRangeRect(),{clientWidth:i,clientHeight:r}=this.dialogElm;s.x>window.innerWidth-i&&(s.x=s.x-i-16,t="100%"),s.y<r&&(s.y=r+s.y,e="0"),this.dialogElm.style.transformOrigin=`${t} ${e}`,this.dialogElm.style.left=s.x+6+"px",this.dialogElm.style.bottom=`calc(100% - ${s.y}px)`,this.dialogElm.style.opacity="1"}showPCCheckDialog(){this.winClick(),this.checkboxRows=[],this.domElmShow(this.checkboxElm,!0),this.tagsElm.scrollTop=0,this.checkGroupElm.scrollTop=0,this.searchElm.value="",Array.prototype.forEach.call(this.checkGroupElm.children,t=>{t.className="checkbox-dialog-check-item"}),this.updateTags(),this.isExternalCallPopup=!0}async showPCPointDialog(){this.insertText("@"),this.startOpenIndex=this.chat.cursorIndex,window.removeEventListener("click",this.winClick),this.showPCDialog(),await v(50),window.addEventListener("click",this.winClick)}moveActiveItem(t){if(!this.dialogActiveItemElm||this.itemShowList.length===0)return;let e=0;const s=this.dialogActiveItemElm.getAttribute("data-set-id");this.itemShowList.some(r=>{const n=r.elm.getAttribute("data-set-id");return e=r.index,s===n});const i=this.itemShowList.map(r=>r.index);if(t==="down"&&e!==this.itemShowList[this.itemShowList.length-1].index){const r=this.itemShowList[i.indexOf(e)+1];r&&this.upDateActiveItem(r.elm,!0)}else if(t==="up"&&e!==this.itemShowList[0].index){const r=this.itemShowList[i.indexOf(e)-1];r&&this.upDateActiveItem(r.elm,!0)}}upDateActiveItem(t,e=!1){this.dialogActiveItemElm&&(this.dialogActiveItemElm.className=this.dialogActiveItemElm.className.replace(/ call-user-dialog-item-active/g,"")),this.dialogActiveItemElm=t,t&&(t.className+=" call-user-dialog-item-active",e&&t.scrollIntoView({block:"center"}))}exitDialog(){this.toolUserList&&this.resizeUserTool(),this.upDateActiveItem(),this.domElmShow(this.dialogElm)}hasH5(){this.dialogH5Elm=document.createElement("div"),this.dialogH5Elm.setAttribute("class","call-user-popup"),this.dialogH5Elm.innerHTML=`
-      <div class="call-user-popup-main">
-        <div class="call-user-popup-header">
-            <span class="popup-show">收起</span>
-            <span class="popup-title">选择提醒的人</span>
-            <span class="popup-check">确定</span>
-        </div>
-        
-        <div class="call-user-popup-search">
-            <svg class="icon-search"
-                 style="vertical-align: middle;fill: currentColor;overflow: hidden;"
-                 viewBox="0 0 1024 1024" version="1.1"
-                 xmlns="http://www.w3.org/2000/svg"
-                 p-id="4209">
-                <path d="M684.8 223.530667a326.272 326.272 0 0 1 24.96 433.621333c2.645333 2.133333 5.290667 4.48 7.850667 7.04L870.4 817.066667c24.789333 24.746667 32.896 56.832 18.133333 71.594666-14.762667 14.805333-46.848 6.656-71.637333-18.090666l-152.789333-152.832a106.282667 106.282667 0 0 1-7.210667-7.936 326.101333 326.101333 0 0 1-433.109333-25.173334c-127.445333-127.445333-127.573333-333.952-0.256-461.269333 127.36-127.36 333.866667-127.232 461.269333 0.213333zM275.328 275.114667a252.885333 252.885333 0 0 0 0.256 357.632 252.885333 252.885333 0 0 0 357.632 0.256 252.885333 252.885333 0 0 0-0.256-357.632 252.885333 252.885333 0 0 0-357.632-0.256z"
-                      fill="#9B9B9B"
-                      p-id="4210"></path>
-            </svg>
-            <input class="call-user-popup-search-input"
-                   placeholder="搜索人员名称"
-                   type="text">
-        </div>
-        
-        <div class="call-user-popup-body">
-        </div>
-      </div>
-    `;const t=async()=>{this.dialogH5Elm.className=this.dialogH5Elm.className.replace(/ chat-view-show/g," chat-view-hidden"),this.dialogH5SearchElm.value="",await v(260),this.domElmShow(this.dialogH5Elm),this.chat.restCursorPos(this.chat.vnode,this.chat.cursorIndex),this.isExternalCallPopup=!1,this.chat.viewIntoPoint()};this.dialogH5Elm.onclick=t,this.dialogH5Elm.querySelector(".call-user-popup-main").onclick=e=>{e.stopPropagation()},this.dialogH5ShowElm=this.dialogH5Elm.querySelector(".popup-show"),this.dialogH5ShowElm.onclick=t,this.dialogH5CheckElm=this.dialogH5Elm.querySelector(".popup-check"),this.dialogH5CheckElm.onclick=async()=>{const e=this.dialogH5Elm.querySelectorAll(".user-popup-check-item-check")||[];if(e.length===0){await t();return}if(Array.prototype.some.call(e,r=>r.getAttribute("data-set-id")==="isALL")){await this.onceSetTag({[this.userProps.id]:"isALL",[this.userProps.name]:this.callEveryLabel}),await t();return}const s=Array.prototype.map.call(e,r=>r.getAttribute("data-set-id")),i=this.userList.filter(r=>s.includes(r.id));await this.batchSetTag(i),await t()},this.dialogH5MainElm=this.dialogH5Elm.querySelector(".call-user-popup-body"),this.updateUserList(),this.dialogH5SearchElm=this.dialogH5Elm.querySelector(".call-user-popup-search-input"),this.dialogH5SearchElm.oninput=e=>{const s=String(e.target.value||"").replace(/'/g,"");Array.prototype.forEach.call(this.dialogH5MainElm.children,i=>{if(!s){i.style.display="";return}const r=i.getAttribute("data-set-name")||"",n=i.getAttribute("data-set-pinyin")||"";i.style.display=M(r,n,s).length>0?"":"none"})},this.domElmShow(this.dialogH5Elm),document.body.appendChild(this.dialogH5Elm)}updateH5User(){this.dialogH5MainElm.innerHTML="",this.domElmShow(this.dialogH5CheckElm,this.userList.length>0);const t=this.userList&&this.userList.length>0,e=document.createDocumentFragment(),s=document.createElement("span");if(s.innerHTML=`
-        <input type="checkbox" value>
-        <span class="user-popup-check-item-inner"></span>
-    `,t){const i=document.createElement("div");this.needCallEvery&&(i.setAttribute("class","call-user-popup-item"),i.setAttribute("data-set-id","isALL"),i.innerHTML=`
-          <span class="call-user-dialog-item-sculpture">
-            <span style="transform: scale(0.75)">@</span>
-          </span>
-          <span class="call-user-dialog-item-name">${this.callEveryLabel}(${this.userList.length})</span>
-      `,i.appendChild(s.cloneNode(!0)),i.onclick=()=>{const r=i.className.indexOf("user-popup-check-item-check")===-1;Array.prototype.forEach.call(this.dialogH5MainElm.children,n=>{r?n.className+=" user-popup-check-item-check":n.className=n.className.replace(/ user-popup-check-item-check/g,"")})},e.appendChild(i)),this.userList.forEach((r,n)=>{const o=document.createElement("div");o.setAttribute("class","call-user-popup-item"),o.setAttribute("data-set-id",r.id),o.setAttribute("data-set-name",r.name),o.setAttribute("data-set-pinyin",r.pinyin||""),this.getUserHtmlTemplate(o,r),o.appendChild(s.cloneNode(!0)),e.appendChild(o),o.onclick=a=>{o.className.indexOf("user-popup-check-item-check")===-1?(o.className+=" user-popup-check-item-check",i.className+=Array.prototype.every.call(this.dialogH5MainElm.children,p=>p.className.indexOf("user-popup-check-item-check")!==-1||p.getAttribute("data-set-id")==="isALL")?" user-popup-check-item-check":""):(o.className=o.className.replace(/ user-popup-check-item-check/g,""),i.className=i.className.replace(/ user-popup-check-item-check/g,""))}})}this.dialogH5MainElm.appendChild(e)}showH5Dialog(){this.richText&&this.richText.blur(),Array.prototype.forEach.call(this.dialogH5MainElm.children,t=>{t.style.display="",t.className=t.className.replace(/ user-popup-check-item-check/g,"")}),this.domElmShow(this.dialogH5Elm,!0),this.dialogH5MainElm.scrollTop=0,this.isExternalCallPopup=!0}updateConfig({copyType:t,userProps:e,userList:s,uploadImage:i,needCallEvery:r,placeholder:n,maxLength:o,needCallSpace:a,wrapKeyFun:c,sendKeyFun:p}={}){if(t){if(!L(t,"Array"))throw new Error("参数值copyType：类型值应为Array！");this.copyType=t.map(h=>{if(["text","image"].indexOf(h)===-1)throw new Error(`参数值copyType：无效的参数值"${h}"！`);return h})}if(e){if(!L(e,"Object"))throw new Error("参数值copyType：类型值应为Object！");this.userProps=Object.assign({},{id:"id",name:"name",avatar:"avatar",pinyin:"pinyin"},e)}if(i){if(typeof i!="function")throw new Error("参数值uploadImage：参数类型错误，参数类型应为Function！");this.uploadImage=i}if(n&&(this.placeholderElm.innerText=n),o!==void 0){if(!L(o,"Number"))throw new Error("参数值maxLength：类型值应为Number！");this.maxLength=o,this.ruleMaxLength()}if((r!==void 0||s)&&(this.needCallEvery=String(r)!=="false",this.updateUserList(s)),a!==void 0&&this.chat.setCallSpace(a),c){if(typeof c!="function")throw new Error("参数值wrapKeyFun：参数类型错误，参数类型应为Function！");this.wrapKeyFun=c}if(p){if(typeof p!="function")throw new Error("参数值sendKeyFun：参数类型错误，参数类型应为Function！");this.sendKeyFun=p}}enterSend(){this.triggerChatEvent("enterSend")}insertHtml(t){const e=document.createElement("span");e.innerHTML=t,e.className="chat-set-html";const s=this.chat.createNewDom(e);return this.chat.replaceRegContent(s),this.chat.viewIntoPoint(),this.richTextInput(),s}insertInsideHtml(t){let e=document.createElement("div");if(e.innerHTML=t,!e.children.length)return;const s=this.chat.vnode,i=this.chat.getWrapNode(s);if(e.children.length===1)this.chat.gridMerge(i,e.children[0],!0);else{this.chat.gridMerge(i,e.children[0],!0);const r=Array.prototype.slice.call(e.children,1);let n=i;Array.prototype.forEach.call(r,(o,a)=>{if(n.parentElement?this.richText.insertBefore(o,n.nextElementSibling):this.richText.appendChild(o),n=o,a===r.length-1){const p=o.childNodes[o.childNodes.length-1].childNodes[0].childNodes[0];this.chat.restCursorPos(p,p.textContent.length)}})}e=null,this.chat.viewIntoPoint(),this.richTextInput()}insertText(t){var p,h;if(!t)return;const e=new RegExp(`${this.chat.ZERO_WIDTH_KEY}${this.chat.VOID_KEY}`,"ig"),s=t.replace(e,"");if(!s)return;let i,r=0;const n=this.chat.vnode;n&&n.parentElement&&n.parentElement.getAttribute("data-set-richType")==="richInput"?(i=n.parentElement,r=n.textContent===this.chat.VOID_KEY?1:this.chat.cursorLeft):(i=(h=(p=this.richText)==null?void 0:p.lastChild)==null?void 0:h.lastChild,r=i.childNodes[0].textContent.length);const o=(d,f=!1)=>{const l=i.childNodes[0],m=l.textContent.split("");return m.splice(r,0,d),l.textContent=m.join("").replace(new RegExp(this.chat.VOID_KEY,"g"),()=>(r--,"")),i.setAttribute("data-set-empty","false"),i.childNodes[1]&&i.removeChild(i.childNodes[1]),this.chat.restCursorPos(l,r+d.length),f&&this.chat.viewIntoPoint(),i.parentElement.parentElement},a=(d,f=!1,l)=>{const m=this.chat.getGridElm(),E=m.childNodes[0].childNodes[0];let C=1;return d&&(E.innerHTML=d,E.setAttribute("data-set-empty","false"),C=d.length),l.nextSibling?this.richText.insertBefore(m,l.nextSibling):this.richText.appendChild(m),f&&(this.chat.restCursorPos(E.childNodes[0],C),this.chat.viewIntoPoint()),m},c=s.split(`
-`);if(c.length>1){let d;c.forEach((f,l)=>{l===0?d=o(f):d=a(f,l===c.length-1,d)})}else o(s,!0);this.richTextInput()}getCallUserList(){const t=this.richText.querySelectorAll(".at-user");if(t&&t.length>0){const e=Array.prototype.map.call(t,s=>s.dataset.userId);return K(this.targetUserList,e,this.userProps.id)}else return[]}getCallUserTagList(){const t=this.richText.querySelectorAll(".at-user");return t&&t.length>0?Array.prototype.map.call(t,e=>({[this.userProps.id]:e.dataset.userId,[this.userProps.name]:e.innerText.slice(1)})):[]}clear(t){this.chat.textInnerHtmlInit(!0,t);const e={html:this.richText.innerHTML,gridIndex:0,markIndex:0,cursorIndex:this.chat.cursorIndex};this.undoHistory=[e],this.redoHistory=[],this.richTextInput(!1)}isEmpty(t=!1){if((this.richText.querySelectorAll(".chat-tag")||[]).length>0)return!1;const s=new RegExp(`^(${this.chat.ZERO_WIDTH_KEY}|<br>|${this.chat.VOID_KEY})+$`),i=this.richText.querySelectorAll(".chat-grid-input")||[];return t?Array.prototype.every.call(i,r=>!r.innerHTML||!r.innerText||!r.innerText.trim()||s.test(r.innerHTML)):Array.prototype.every.call(i,r=>!r.innerHTML||!r.innerText||s.test(r.innerHTML))}showPlaceholder(){this.domElmShow(this.placeholderElm,this.isEmpty())}getReduceNode(t={}){const e=Object.assign({},{needUserId:!1,wrapClassName:void 0,rowClassName:void 0,imgToText:!1,identifyLink:!1},t),s=/(https?|http|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/g,r=this.richText.cloneNode(!0).querySelectorAll(".chat-grid-wrap")||[],n=document.createElement("div");return e.wrapClassName&&(n.className=e.wrapClassName),Array.prototype.forEach.call(r,(o,a)=>{const c=o.querySelectorAll(".chat-stat")||[],p=document.createElement("p");e.rowClassName&&(p.className=e.rowClassName),Array.prototype.forEach.call(c,h=>{this.chat.getNodeEmpty(h)||(h.removeAttribute("data-set-richType"),h.removeAttribute("contenteditable"),h.removeAttribute("data-set-empty"),e.needUserId||h.removeAttribute("data-user-id"),e.imgToText&&h.firstChild&&h.firstChild.tagName==="IMG"&&(h.className+=" img-to-text",h.innerHTML=`[${h.firstChild.getAttribute("data-img-text")||"元素data-img-text未定义"}]`),e.identifyLink&&h.className.indexOf("chat-grid-input")!==-1&&(h.innerHTML=h.innerHTML.replace(s,d=>`<a class="chat-grid-link" href="${d}" target="_blank">${d}</a>`)),p.appendChild(h))}),p.innerHTML||(p.innerHTML="<br>"),n.appendChild(p)}),n}getText(t={}){let e="";const s=this.getReduceNode(t);return Array.prototype.forEach.call(s.children,(i,r)=>{e=e+(r>0?`
-`:"")+i.textContent}),e}getHtml(t={}){return this.getReduceNode(t).innerHTML}dispose(){const t=this.richText.parentElement;t&&(t.removeChild(this.richText),t.removeChild(this.placeholderElm)),this.needDialog&&(this.deviceInfo.isPc?(document.body.removeChild(this.dialogElm),document.body.removeChild(this.checkboxElm),window.removeEventListener("click",this.winClick),window.removeEventListener("keydown",this.winKeydown)):document.body.removeChild(this.dialogH5Elm));for(const e in this)delete this[e];Object.setPrototypeOf(this,Object)}setUserTag(t){const e=this.chat.createAtUserSpan({id:t[this.userProps.id],name:t[this.userProps.name]});this.chat.replaceRegContent(e,!1),this.chat.viewIntoPoint(),this.richTextInput()}async matchSetTag(t){await this.chat.searchCall(t,this.startOpenIndex),await this.richTextInput()}async onceSetTag(t){await this.chat.onceCall({id:t[this.userProps.id],name:t[this.userProps.name]}),await this.richTextInput()}async batchSetTag(t){if(t.length===1){this.isExternalCallPopup?await this.chat.onceExternalCall(t[0]):await this.onceSetTag(t[0]);return}let e="";for(let s=0;s<=t.length-1;){const i={id:t[s][this.userProps.id],name:t[s][this.userProps.name]};s===0?e=this.isExternalCallPopup?await this.chat.onceExternalCall(i):await this.chat.onceCall(i,!0):s===t.length-1?await this.chat.onceCall(i,!1,e):await this.chat.onceCall(i,!0),s++}await this.richTextInput()}disabled(){this.richText.setAttribute("contenteditable","false"),this.richText.className=this.richText.className.replace(/ chat-rich-text-disabled/g,"")+" chat-rich-text-disabled"}enable(){this.richText.setAttribute("contenteditable","true"),this.richText.className=this.richText.className.replace(/ chat-rich-text-disabled/g,""),this.chat.setRangeLastText()}undo(){if(!this.doOverHistory||!this.undoHistory||this.undoHistory.length<=1)return;const t=this.undoHistory[this.undoHistory.length-2],e=this.undoHistory[this.undoHistory.length-1];this.redoHistory.push(e),this.undoHistory.pop(),this.setChatHistory(t,!1)}redo(){if(!this.doOverHistory||!this.redoHistory||this.redoHistory.length<1)return;const t=this.redoHistory[this.redoHistory.length-1];this.redoHistory.pop(),this.setChatHistory(t,!0)}ruleMaxLength(){if(this.isEmpty()||this.maxLength===void 0){this.textLength=0;return}let t=0,e=0;const s=[];Array.prototype.some.call(this.richText.children,(r,n)=>{const{nodeInfos:o,nodeTextLength:a}=this.getGirdNodeTextInfo(r);if(t+=a,s.push(o),e=n,t>=this.maxLength)return!0});const i=[];Array.prototype.forEach.call(this.richText.children,(r,n)=>{n>e&&i.push(r)}),i.forEach(r=>this.richText.removeChild(r)),this.deepDelGirdText(s,t)}getGirdNodeTextInfo(t){const e=[];let s=0;if(t.children.length===1&&t!==t.parentElement.children[0]){const i=t.children[0],r=(i.textContent||"").replace(new RegExp(this.chat.VOID_KEY,"g"),"");s+=r.length||1,e[0]={node:i,textLength:r.length||1,type:"richMark"}}else Array.prototype.forEach.call(t.children,(i,r)=>{if(i.getAttribute("data-set-richType")==="richMark"){const o=(i.textContent||"").replace(new RegExp(this.chat.VOID_KEY,"g"),"");s+=o.length,e[r]={node:i,textLength:o.length,type:"richMark"}}else{const o=(i.textContent||"").replace(new RegExp(this.chat.VOID_KEY,"g"),"");s+=o.length||1,e[r]={node:i,textLength:o.length||1,type:"chatTag"}}});return{nodeInfos:e,nodeTextLength:s}}deepDelGirdText(t,e){if(e>this.maxLength){const s=t[t.length-1];t.pop(),this.deepDelNode(s,t,e)}else this.textLength=e}deepDelNode(t,e,s){const i=t[0].node.parentElement;if(s>this.maxLength){let r=s-this.maxLength,n=t[t.length-1];if(n.type==="richMark")if(n.textLength===0||r>=n.textLength)i.removeChild(n.node),t.pop(),r=r-n.textLength,n=t[t.length-1],i.removeChild(n.node),t.pop(),r=r-n.textLength;else{const o=n.node.childNodes[0];o.textContent=o.textContent.slice(0,n.textLength-r),o.textContent===0&&(o.setAttribute("data-set-empty","true"),o.innerHTML=`${this.chat.VOID_KEY}<br>`),r=0}else i.removeChild(n.node),t.pop(),r=r-n.textLength;r>0?t.length>0?this.deepDelNode(t,e,r+this.maxLength):(this.richText.appendChild(i),this.deepDelGirdText(e,r+this.maxLength)):(this.textLength=this.maxLength+r,this.enable())}}setChatHistory(t,e){this.doOverHistory=!1;const{html:s,gridIndex:i,markIndex:r,cursorIndex:n}=t;this.richText.innerHTML=s;const o=this.richText.childNodes[i].childNodes[r].childNodes[0].childNodes[0];this.chat.restCursorPos(o,n),this.chat.viewIntoPoint(),this.richTextInput(e).then(()=>{this.doOverHistory=!0})}revisePCPointDialogLabel(t={}){const e=Object.assign({},{title:"群成员",checkLabel:"多选"},t);this.dialogElm.querySelector(".call-user-dialog-header-title").innerText=e.title,this.dialogCheckElm.innerText=e.checkLabel}revisePCCheckDialogLabel(t={}){const e=Object.assign({},{title:"选择要@的人",searchPlaceholder:"搜素人员名称",searchEmptyLabel:"没有匹配到任何结果",userTagTitle:"研讨成员列表",checkAllLabel:"全选",confirmLabel:"确定",cancelLabel:"取消"},t);this.checkboxElm.querySelector(".checkbox-dialog-container-header").children[0].innerText=e.title,this.searchElm.setAttribute("placeholder",e.searchPlaceholder||""),this.searchEmptyLabel=e.searchEmptyLabel||"",this.checkboxElm.querySelector(".checkbox-dialog-right-box-title").innerText=e.userTagTitle,this.checkAllLabel=e.checkAllLabel||"",this.checkGroupElm.children[0].children[2].innerText=this.checkAllLabel,this.checkboxElm.querySelector(".btn-submit").innerText=e.confirmLabel,this.checkboxElm.querySelector(".btn-close").innerText=e.cancelLabel}reviseH5DialogLabel(t){const e=Object.assign({},{title:"选择提醒的人",searchPlaceholder:"搜素人员名称",confirmLabel:"确定",cancelLabel:"收起"},t);this.dialogH5Elm.querySelector(".popup-title").innerText=e.title,this.dialogH5SearchElm.setAttribute("placeholder",e.searchPlaceholder||""),this.dialogH5CheckElm.innerText=e.confirmLabel,this.dialogH5ShowElm.innerText=e.cancelLabel}reverseAnalysis(t,e){const s=document.createElement("div");s.innerHTML=t;const i=s.children;Array.prototype.forEach.call(i,r=>{r.className="chat-grid-wrap",r.setAttribute("data-set-richType","richBox");const n=r.children,o={},a=[];Array.prototype.forEach.call(n,(h,d)=>{if(h.className.indexOf("chat-grid-input")!==-1){const m=h.innerText;h.className="",h.setAttribute("data-set-richType","richMark"),h.innerHTML=`<span class="chat-grid-input chat-stat" data-set-richType="richInput" data-set-empty="false">${m}</span>`;return}if(h.tagName==="BR"){const m=this.chat.getGridElm(!0);r.removeChild(h),r.appendChild(m);return}const f=h.cloneNode(!0);f.setAttribute("contenteditable","false");const l=document.createElement("span");l.className="chat-tag",l.setAttribute("contenteditable","false"),l.setAttribute("data-set-richType","chatTag"),l.appendChild(f),o[d]=l,d!==n.length-1?n[d+1].className.indexOf("chat-grid-input")===-1&&a.push(d):a.push(d),d===0&&a.push(-1)});for(const h in o){const d=Number(h);d===n.length-1?(r.removeChild(n[d]),r.appendChild(o[h])):(r.insertBefore(o[h],n[d+1]),r.removeChild(n[d]))}const c=[],p=r.children;a.forEach(h=>{h===p.length-1?c.push("isEnd"):c.push(p[h+1])}),c.forEach(h=>{const d=this.chat.getGridElm(!0);if(h==="isEnd")r.appendChild(d);else{const f=d.children[0];f.removeChild(f.childNodes[1]),r.insertBefore(d,h)}})}),e?(this.enable(),this.insertInsideHtml(s.innerHTML)):(this.richText.innerHTML=s.innerHTML,this.enable(),this.chat.viewIntoPoint(),this.richTextInput())}addEventListener(t,e){this.chatEventModule[t].push(e)}removeEventListener(t,e){const s=this.chatEventModule[t],i=s.indexOf(e);i!==-1&&s.splice(i,1)}triggerChatEvent(t,...e){let s;return this.chatEventModule[t].forEach(i=>{i&&(s?i(...e):s=i(...e))}),s}ruleChatEvent(t,e,...s){(this.triggerChatEvent(e,...s)+"").toUpperCase()!=="PREVENT"&&(t&&t.bind(this)(),t=null)}}if(!window)throw new Error("非web环境！");window.console&&window.console.log&&console.log(" %c ".concat("ChatArea"," %c v4.6.5 "),"background: #269AFF; color: #FFFFFF; padding: 4px 0; border-radius: 4px 0px 0px 4px; font-style: italic;","background: #FFFFFF; color: #269AFF; padding: 2px 0; border-radius: 0px 4px 4px 0px; font-style: italic; border: 2px solid #269AFF;");window.ChatArea=U;
-
+            <div class="call-user-popup-search">
+                ${st}
+                <input class="call-user-popup-search-input"
+                       placeholder="${a.h5Dialog.searchPlaceholder}"
+                       type="text">
+            </div>
+            <div class="call-user-popup-body"></div>
+          </div>
+        `;
+    const n = async () => {
+      s.dialogElm.className = s.dialogElm.className.replace(/ chat-view-show/g, " chat-view-hidden"), s.dialogSearchElm.value = "", await P(260), f(s.dialogElm), E(document.body, "disable-scroll"), t.asyncMatch && this.target.updateUserList([]), this.target.chatInput.restCursorPos(this.target.chatInput.vnode, this.target.chatInput.cursorIndex), this.target.chatInput.viewIntoPoint();
+    };
+    s.dialogElm.onclick = n;
+    const o = s.dialogElm.querySelector(".call-user-popup-main");
+    o.onclick = l => {
+      l.stopPropagation();
+    }, s.dialogShowElm = s.dialogElm.querySelector(".popup-show"), s.dialogShowElm.onclick = n, s.dialogCheckElm = s.dialogElm.querySelector(".popup-check"), s.dialogCheckElm.onclick = async () => {
+      if (s.dialogCheckElm.classList.contains("disabled")) return;
+      const l = s.dialogElm.querySelectorAll(".user-popup-check-item-check") || [];
+      if (l.length === 0) {
+        await n();
+        return;
+      }
+      if (Array.prototype.some.call(l, c => c.getAttribute("data-set-id") === "isALL")) {
+        await this.target.onceSetTag({
+          [t.userProps.id]: "isALL",
+          [t.userProps.name]: t.dialogLabels.h5Dialog.callEveryLabel
+        }), await n();
+        return;
+      }
+      const r = Array.from(l, c => c.getAttribute("data-set-id")),
+        d = t.userList.filter(c => r.indexOf(String(c[t.userProps.id])) !== -1);
+      await this.target.batchSetTag(d), await n();
+    }, s.dialogMainElm = s.dialogElm.querySelector(".call-user-popup-body"), s.dialogEmptyElm = document.createElement("div"), E(s.dialogEmptyElm, "call-user-popup-empty", !0), this.h5Elms.dialogEmptyElm.innerHTML = `
+            ${it}
+            <span class="empty-label">${t.dialogLabels.h5Dialog.searchEmptyLabel}</span>
+        `, f(s.dialogEmptyElm), o.appendChild(s.dialogEmptyElm), t.asyncMatch && (s.dialogLoadingElm = document.createElement("div"), E(s.dialogLoadingElm, "call-user-popup-loading", !0), s.dialogLoadingElm.innerHTML = Y, f(s.dialogLoadingElm), o.appendChild(s.dialogLoadingElm)), s.dialogSearchElm = s.dialogElm.querySelector(".call-user-popup-search-input"), s.dialogSearchElm.oninput = R(l => {
+      const r = String(l.target.value || "").replace(/'/g, "").trim();
+      if (t.asyncMatch) {
+        e.matchKey++;
+        const c = e.matchKey;
+        this.target.updateUserList([]), f(s.dialogLoadingElm, !0), f(s.dialogEmptyElm);
+        const h = e.triggerChatEvent("atMatch", r);
+        h && h instanceof Promise && h.then(u => {
+          if (c === e.matchKey) {
+            if (f(s.dialogLoadingElm), !u || u.length <= 0) {
+              f(s.dialogEmptyElm, !0, "flex");
+              return;
+            }
+            this.target.updateUserList(u);
+          }
+        });
+        return;
+      }
+      const d = [];
+      Array.from(this.h5Elms.dialogMainElm.children, c => {
+        if (!r) {
+          f(c, !0, "flex"), d.push(c);
+          return;
+        }
+        const h = c.getAttribute("data-set-name") || "",
+          u = c.getAttribute("data-set-pinyin") || "";
+        _(h, u, r) ? (f(c, !0, "flex"), d.push(c)) : f(c);
+      }), f(this.h5Elms.dialogEmptyElm, !d.length, "flex");
+    }, 200), f(s.dialogElm), document.body.appendChild(s.dialogElm);
+  }
+  updatePCUser() {
+    const {
+      pcElms: t,
+      target: e
+    } = this;
+    t.pointDialogMainElm.innerHTML = "", t.pointDialogActiveElm = void 0;
+    const i = document.createDocumentFragment();
+    if (this.target.options.needCallEvery) {
+      const o = document.createElement("div");
+      E(o, "call-user-dialog-item", !0), o.setAttribute("data-set-id", "isALL"), this.userSelectStyleAndEvent(o, {
+        id: "isALL",
+        name: e.options.dialogLabels.pcPointDialog.callEveryLabel
+      }), o.innerHTML = `
+                <span class="call-user-dialog-item-sculpture">
+                  <span style="transform: scale(0.75)">@</span>
+                </span>
+                <span class="call-user-dialog-item-name">${e.options.dialogLabels.pcPointDialog.callEveryLabel}(${e.options.reformList.length})</span>
+            `, i.appendChild(o);
+    }
+    if (e.options.reformList.forEach(o => {
+      const l = document.createElement("div");
+      E(l, "call-user-dialog-item", !0), l.setAttribute("data-set-id", o.id), this.userSelectStyleAndEvent(l, o), this.getUserHtmlTemplate(l, o), i.appendChild(l);
+    }), t.pointDialogMainElm.appendChild(i), t.pointDialogUsersElm = [], Array.from(t.pointDialogMainElm.children || [], (o, l) => {
+      t.pointDialogUsersElm.push({
+        index: l,
+        elm: o
+      });
+    }), e.options.asyncMatch) return;
+    t.checkDialogUsersElm.innerHTML = `
+            <div class="checkbox-dialog-check-item" data-set-value="ALL">
+                <input type="checkbox" value>
+                <span class="checkbox-dialog-check-item-inner"></span>
+                <div class="checkbox-dialog-check-item-label">${e.options.dialogLabels.pcPCheckDialog.checkAllLabel}</div>
+            </div>
+        `;
+    const a = document.createDocumentFragment();
+    e.options.reformList.forEach(o => {
+      const l = document.createElement("div");
+      E(l, "checkbox-dialog-check-item", !0), l.setAttribute("data-set-value", o.id), l.innerHTML = `
+                <input type="checkbox" value>
+                <span class="checkbox-dialog-check-item-inner"></span>
+            `, this.getUserHtmlTemplate(l, o), a.appendChild(l);
+    }), t.checkDialogUsersElm.appendChild(a), t.checkDialogUsersElm && t.checkDialogUsersElm.children.length && Array.from(t.checkDialogUsersElm.children, o => {
+      o.onclick = () => {
+        const l = o.getAttribute("data-set-value") || "",
+          r = e.options.reformList.find(c => c.id === l),
+          d = o.className.indexOf("checkbox-dialog-check-item-check") === -1;
+        l === "ALL" ? this.checkboxRows = d ? e.options.reformList.map(c => c) : [] : d ? this.checkboxRows.push(r) : this.checkboxRows = this.checkboxRows.filter(c => c.id !== l), this.updateCheckDialogTags();
+      };
+    });
+    const s = document.createDocumentFragment();
+    e.options.reformList.forEach(o => {
+      const l = document.createElement("div");
+      E(l, "checkbox-dialog-check-item", !0), l.setAttribute("data-set-id", o.id);
+      const r = document.createElement("div");
+      E(r, "checkbox-dialog-check-item-label", !0), this.getUserHtmlTemplate(r, o), l.appendChild(r), l.onclick = () => {
+        f(this.pcElms.checkDialogSearchResultElm);
+        const d = l.getAttribute("data-set-id") || "";
+        if (this.pcElms.checkDialogSearchInputElm.value = "", this.pcElms.checkDialogSearchInputElm.focus(), this.checkboxRows.some(h => h.id === d)) return;
+        const c = e.options.reformList.find(h => h.id === d);
+        c && this.checkboxRows.push(c), this.updateCheckDialogTags();
+      }, s.appendChild(l);
+    });
+    const n = document.createElement("div");
+    E(n, "checkbox-dialog-search-empty", !0), n.innerText = e.options.dialogLabels.pcPCheckDialog.searchEmptyLabel, s.appendChild(n), t.checkDialogSearchResultElm.appendChild(s);
+  }
+  updateH5User() {
+    const {
+      h5Elms: t,
+      target: e
+    } = this;
+    t.dialogMainElm.innerHTML = "";
+    const i = e.options.reformList && e.options.reformList.length > 0,
+      a = document.createDocumentFragment(),
+      s = document.createElement("span");
+    if (s.innerHTML = `
+            <input type="checkbox" value>
+            <span class="user-popup-check-item-inner"></span>
+        `, i) {
+      const n = document.createElement("div");
+      e.options.needCallEvery && (E(n, "call-user-popup-item", !0), n.setAttribute("data-set-id", "isALL"), n.innerHTML = `
+                    <span class="call-user-dialog-item-sculpture">
+                        <span style="transform: scale(0.75)">@</span>
+                    </span>
+                    <span class="call-user-dialog-item-name">${e.options.dialogLabels.h5Dialog.callEveryLabel}(${e.options.reformList.length})</span>
+                `, n.appendChild(s.cloneNode(!0)), n.onclick = () => {
+        const o = !n.classList.contains("user-popup-check-item-check");
+        Array.from(this.h5Elms.dialogMainElm.children, l => {
+          E(l, "user-popup-check-item-check", o);
+        }), E(this.h5Elms.dialogCheckElm, "disabled", !o);
+      }, a.appendChild(n)), e.options.reformList.forEach((o, l) => {
+        const r = document.createElement("div");
+        E(r, "call-user-popup-item", !0), r.setAttribute("data-set-id", o.id), r.setAttribute("data-set-name", o.name), r.setAttribute("data-set-pinyin", o.pinyin || ""), this.getUserHtmlTemplate(r, o), r.appendChild(s.cloneNode(!0)), a.appendChild(r), r.onclick = d => {
+          const c = !r.classList.contains("user-popup-check-item-check");
+          E(r, "user-popup-check-item-check", c);
+          const h = Array.prototype.every.call(this.h5Elms.dialogMainElm.children, p => p.classList.contains("user-popup-check-item-check") || p.getAttribute("data-set-id") === "isALL");
+          E(n, "user-popup-check-item-check", h);
+          const u = Array.prototype.some.call(this.h5Elms.dialogMainElm.children, p => p.classList.contains("user-popup-check-item-check"));
+          E(this.h5Elms.dialogCheckElm, "disabled", !u);
+        };
+      });
+    }
+    t.dialogMainElm.appendChild(a);
+  }
+  updateCheckDialogTags() {
+    const t = this.checkboxRows.map(l => l.id),
+      e = [],
+      i = [],
+      a = document.createElement("div");
+    a.className = "check-empty", a.innerHTML = `
+            ${et}
+            <span class="check-empty-label">${this.target.options.dialogLabels.pcPCheckDialog.checkEmptyLabel}</span>
+        `, Array.from(this.pcElms.checkDialogTagsElm.children, l => {
+      const r = l.getAttribute("data-set-value");
+      t.indexOf(r) === -1 ? i.push(l) : e.push(r);
+    }), Array.from(this.pcElms.checkDialogUsersElm.children, (l, r) => {
+      if (r === 0) {
+        E(l, "checkbox-dialog-check-item-check", t.length === this.target.options.reformList.length);
+        return;
+      }
+      const d = l.getAttribute("data-set-value");
+      E(l, "checkbox-dialog-check-item-check", t.indexOf(d) !== -1);
+    }), i.forEach(l => {
+      this.pcElms.checkDialogTagsElm.removeChild(l);
+    });
+    const s = this.pcElms.checkDialogElm.querySelector(".btn-submit");
+    E(s, "disabled", t.length <= 0), t.length || this.pcElms.checkDialogTagsElm.appendChild(a);
+    const n = this.checkboxRows.filter(l => e.indexOf(l.id) === -1);
+    if (!n.length) return;
+    const o = document.createDocumentFragment();
+    n.forEach(l => {
+      const r = document.createElement("div");
+      r.setAttribute("class", "checkbox-dialog-tag-item"), r.setAttribute("data-set-value", l.id), r.innerHTML = `
+        <span>${l.name}</span>
+      `;
+      const d = document.createElement("span");
+      d.setAttribute("class", "checkbox-dialog-tag-item-close"), d.innerHTML = "⛌", d.onclick = () => {
+        const c = r.getAttribute("data-set-value");
+        this.checkboxRows = this.checkboxRows.filter(h => h.id !== c), this.updateCheckDialogTags();
+      }, r.appendChild(d), o.appendChild(r);
+    }), this.pcElms.checkDialogTagsElm.appendChild(o);
+  }
+  userSelectStyleAndEvent(t, e) {
+    t.addEventListener("click", async i => {
+      const {
+        options: a
+      } = this.target;
+      if (i.stopPropagation(), this.updatePointActiveUserElm(t), this.isPointSearchMode || a.asyncMatch) await this.target.matchSetTag(e);else {
+        const s = a.userList.find(n => String(n[a.userProps.id]) === e.id);
+        await this.target.onceSetTag(s);
+      }
+      this.exitPointDialog();
+    });
+  }
+  bindCustomTrigger() {
+    Object.values(this.pcElms.customTagDialogElms).forEach(e => {
+      this.pcElms.containerDialogElm.removeChild(e);
+    }), this.pcElms.customTagDialogElms = {}, this.customTags = {}, this.target.options.customTrigger.forEach(e => {
+      e.tagList && e.tagList.length > 0 && (this.customTags[e.prefix] = e.tagList.map(i => ({
+        id: String(i.id),
+        name: String(i.name),
+        pinyin: String(i.pinyin || "")
+      })), this.createCustomTagDialog(e));
+    });
+  }
+  createCustomTagDialog(t) {
+    const e = document.createElement("div");
+    e.setAttribute("class", "call-tag-dialog"), f(e);
+    const i = document.createElement("div");
+    i.setAttribute("class", "call-tag-dialog-header"), i.innerHTML = `<span class="call-tag-dialog-header-title">${t.dialogTitle || t.prefix}</span>`, e.appendChild(i);
+    const a = document.createElement("div");
+    a.setAttribute("class", "call-tag-dialog-main"), t.tagList.forEach(s => {
+      const n = document.createElement("div");
+      n.setAttribute("class", "call-tag-dialog-item"), n.setAttribute("data-set-id", s.id);
+      const o = document.createElement("span");
+      o.setAttribute("class", "call-tag-dialog-item-name"), o.innerHTML = s.name, n.appendChild(o), n.addEventListener("click", async l => {
+        l.stopPropagation(), this.updateActiveCustomTagElm(n), this.isPointSearchMode ? await this.target.matchSetCustomTag(s) : await this.target.onceSetCustomTag(s), this.exitCustomTagDialog();
+      }), a.appendChild(n);
+    }), e.appendChild(a), this.pcElms.containerDialogElm.appendChild(e), this.pcElms.customTagDialogElms[t.prefix] = e;
+  }
+  getUserHtmlTemplate(t, e) {
+    const i = document.createElement("span");
+    if (i.setAttribute("class", `call-user-dialog-item-sculpture ${e.avatar ? "is-avatar" : ""}`), e.avatar) {
+      const s = new Image();
+      s.alt = "", s.src = String(e.avatar), i.appendChild(s);
+    } else i.innerHTML = `<span style="transform: scale(0.75)">${e.name.slice(-2)}</span>`;
+    t.appendChild(i);
+    const a = document.createElement("span");
+    a.setAttribute("class", "call-user-dialog-item-name"), a.innerHTML = e.name, t.appendChild(a);
+  }
+  updatePointActiveUserElm(t, e = !1) {
+    if (this.pcElms.pointDialogActiveElm && E(this.pcElms.pointDialogActiveElm, "call-user-dialog-item-active"), this.pcElms.pointDialogActiveElm = t, t && (E(t, "call-user-dialog-item-active", !0), e)) {
+      const i = Array.prototype.filter.call(this.pcElms.pointDialogMainElm.children, l => l.className.indexOf("user-no-match") === -1),
+        a = t.clientHeight,
+        s = Array.prototype.indexOf.call(i, t),
+        n = Math.ceil(Math.floor(this.pcElms.pointDialogMainElm.clientHeight / a) / 2),
+        o = s + 1 - n;
+      o > 0 ? this.pcElms.pointDialogMainElm.scrollTop = o * a : this.pcElms.pointDialogMainElm.scrollTop = 0;
+    }
+  }
+  updateActiveCustomTagElm(t, e = !1) {
+    if (this.pcElms.customTagDialogActiveElm && E(this.pcElms.customTagDialogActiveElm, "call-tag-dialog-item-active"), this.pcElms.customTagDialogActiveElm = t, t && (E(t, "call-tag-dialog-item-active", !0), e)) {
+      const i = this.pcElms.customTagDialogElms[this.pcElms.customTagDialogTagKey].children[1],
+        a = Array.prototype.filter.call(i.children, r => r.className.indexOf("tag-no-match") === -1),
+        s = t.clientHeight,
+        n = Array.prototype.indexOf.call(a, t),
+        o = Math.ceil(Math.floor(i.clientHeight / s) / 2),
+        l = n + 1 - o;
+      l > 0 ? i.scrollTop = l * s : i.scrollTop = 0;
+    }
+  }
+  showPointDialog(t) {
+    this.exitCustomTagDialog(), this.exitPointDialog(), this.isPointSearchMode = !!t;
+    let e = null;
+    this.pcElms.pointDialogUsersElm.forEach(i => {
+      const a = i.elm,
+        s = a.getAttribute("data-set-id"),
+        n = t && t.every(o => o.id !== s);
+      !e && !n && (e = a), E(a, "user-no-match", n);
+    }), e !== null && this.updatePointActiveUserElm(e), f(this.pcElms.pointDialogCheckElm, !this.target.options.asyncMatch && !this.isPointSearchMode), f(this.pcElms.pointDialogElm, !0), this.target.chatEvent.debounceEvents.dialogMoveToRange(this.pcElms.pointDialogElm), this.pcElms.pointDialogMainElm.scrollTop = 0;
+  }
+  showCustomTagDialog(t, e) {
+    this.exitCustomTagDialog(), this.exitPointDialog(), this.isPointSearchMode = !!e, this.pcElms.customTagDialogTagKey = t;
+    const i = this.pcElms.customTagDialogElms[t],
+      a = i.children[1];
+    let s = null;
+    Array.from(a.children, n => {
+      const o = n.getAttribute("data-set-id"),
+        l = e && e.every(r => r.id !== o);
+      !s && !l && (s = n), E(n, "tag-no-match", l);
+    }), s !== null && this.updateActiveCustomTagElm(s), f(i, !0), this.target.chatEvent.debounceEvents.dialogMoveToRange(i), i.children[1].scrollTop = 0;
+  }
+  exitPointDialog() {
+    this.updatePointActiveUserElm(), this.target.options.asyncMatch && this.target.updateUserList([]), f(this.pcElms.pointDialogElm);
+  }
+  exitCustomTagDialog() {
+    this.updateActiveCustomTagElm();
+    for (const t in this.pcElms.customTagDialogElms) f(this.pcElms.customTagDialogElms[t]);
+  }
+  ruleShowPointDialog() {
+    const {
+      options: t,
+      chatInput: e
+    } = this.target;
+    t.needDialog && t.reformList.length > 0 && e.showAt() && (this.isExternalCallPopup = !1, this.showPointDialog());
+  }
+  showPlaceholder() {
+    f(this.placeholderElm, this.target.isEmpty());
+  }
+  bindSelectList() {
+    Object.values(this.pcElms.selectDialogElms).forEach(e => {
+      this.pcElms.containerDialogElm.removeChild(e);
+    }), this.pcElms.selectDialogElms = {}, this.selectTags = {}, this.target.options.selectList.forEach(e => {
+      e.options && e.options.length > 0 && (this.selectTags[e.key] = e.options.map(i => ({
+        id: String(i.id),
+        name: String(i.name),
+        preview: String(i.preview || "")
+      })), this.createSelectDialog(e));
+    });
+  }
+  createSelectDialog(t) {
+    const e = document.createElement("div");
+    e.setAttribute("class", "chat-select-dialog"), f(e);
+    const i = document.createElement("div");
+    i.setAttribute("class", "chat-select-dialog-header"), i.innerHTML = `<span class="chat-select-dialog-header-title">${t.dialogTitle || t.key}</span>`, e.appendChild(i);
+    const a = document.createElement("div");
+    a.setAttribute("class", "chat-select-dialog-main"), t.options.forEach(n => {
+      const o = document.createElement("div");
+      if (o.setAttribute("class", "chat-select-dialog-item"), o.setAttribute("data-set-id", n.id), n.preview) {
+        const d = document.createElement("img");
+        d.setAttribute("class", "chat-select-dialog-preview"), d.src = String(n.preview), o.appendChild(d);
+      }
+      const l = document.createElement("span");
+      l.setAttribute("class", "chat-select-dialog-name"), l.textContent = n.name;
+      const r = document.createElement("span");
+      r.setAttribute("class", "chat-select-dialog-check"), r.innerHTML = nt, f(r), l.appendChild(r), o.appendChild(l), o.onclick = async () => {
+        await this.target.setSelectTag(n), this.target.chatInput.restCursorPos(this.target.chatInput.vnode, this.target.chatInput.cursorIndex);
+      }, a.appendChild(o);
+    }), e.appendChild(a);
+    const s = document.createElement("div");
+    s.setAttribute("class", "chat-select-arrow"), e.appendChild(s), this.pcElms.containerDialogElm.appendChild(e), this.pcElms.selectDialogElms[t.key] = e;
+  }
+  exitSelectDialog() {
+    for (const t in this.pcElms.selectDialogElms) f(this.pcElms.selectDialogElms[t]);
+    this.pcElms.selectDialogKey = "", E(this.pcElms.selectDialogAim, "aim"), this.pcElms.selectDialogAim = null;
+  }
+}
+class lt {
+  constructor(t) {
+    y(this, "target");
+    y(this, "richText");
+    y(this, "vnode");
+    y(this, "cursorIndex");
+    y(this, "cursorLeft");
+    y(this, "needCallSpace", !1);
+    y(this, "VOID_KEY", "\uFEFF");
+    y(this, "ZERO_WIDTH_KEY", "​");
+    y(this, "IME_RECORD", {
+      MARK: void 0,
+      GRID: void 0,
+      TAG: void 0,
+      NODE: void 0,
+      INDEX: void 0
+    });
+    this.target = t, this.richText = t.chatElement.richText, this.textInnerHtmlInit();
+  }
+  textInnerHtmlInit(t = !1, e) {
+    if (t || this.getNodeEmpty(this.richText)) {
+      this.richText.innerHTML = "";
+      const i = this.getGridElm();
+      this.richText.appendChild(i);
+      const a = i.children[0].children[0];
+      e && (a.textContent = e, a.setAttribute("data-set-empty", "false"));
+      const s = a.childNodes[0];
+      this.restCursorPos(s, s.textContent === this.VOID_KEY ? 1 : s.textContent.length);
+    }
+  }
+  onceCall(t) {
+    return new Promise(e => {
+      const i = this.createChatTagElm(t, "@", "at-user", "user-id");
+      this.replaceRegContent(i), e();
+    });
+  }
+  onceSearchCall(t, e) {
+    return new Promise(i => {
+      const a = this.createChatTagElm(t, "@", "at-user", "user-id");
+      this.replaceRegContent(a, e), i();
+    });
+  }
+  onceCustomCall(t, e, i) {
+    return new Promise(a => {
+      const s = this.createChatTagElm(t, i, "at-tag", "tag-id");
+      s.children[0].setAttribute("data-set-prefix", i), this.replaceRegContent(s, e), a();
+    });
+  }
+  upDataNodeOrIndex() {
+    var n, o, l;
+    const {
+        focusNode: t,
+        focusOffset: e,
+        anchorOffset: i
+      } = window.getSelection(),
+      a = (t == null ? void 0 : t.parentNode) || void 0;
+    !a || !a.getAttribute || a.getAttribute("data-set-richType") !== "richInput" || ((l = (o = (n = t == null ? void 0 : t.parentNode) == null ? void 0 : n.parentNode) == null ? void 0 : o.parentNode) == null ? void 0 : l.parentNode) !== this.richText || (this.vnode = t, this.cursorIndex = e, this.cursorLeft = i < e ? i : e);
+  }
+  showAt() {
+    if (this.upDataNodeOrIndex(), !this.vnode || this.vnode.nodeType !== Node.TEXT_NODE) return !1;
+    const t = this.vnode.textContent || "",
+      e = /@([^@\s]*)$/,
+      i = t.slice(0, this.cursorIndex),
+      a = e.exec(i);
+    return a && a.length === 2 && i[i.length - 1] === "@";
+  }
+  getRangeRect() {
+    let t = 0,
+      e = 0;
+    const i = window.getSelection();
+    if (i.focusNode.nodeType !== Node.TEXT_NODE) return null;
+    const a = i.getRangeAt(0).getClientRects()[0];
+    return a && (t = a.x, e = a.y), {
+      x: t,
+      y: e
+    };
+  }
+  createChatTagElm(t, e, i, a) {
+    const s = document.createElement("span");
+    return s.className = i, s.setAttribute(`data-${a}`, String(t.id)), s.contentEditable = "false", s.textContent = `${e}${t.name}${this.needCallSpace ? " " : ""}`, this.createNewDom(s);
+  }
+  createNewDom(t) {
+    const e = document.createElement("span");
+    return e.className = "chat-tag", e.setAttribute("contenteditable", "false"), e.setAttribute("data-set-richType", "chatTag"), t.className += " chat-stat", e.appendChild(t), e;
+  }
+  restCursorPos(t, e) {
+    e == null ? e = t.textContent === this.VOID_KEY ? 1 : 0 : e > t.textContent.length && (e = t.textContent.length);
+    const i = new Range();
+    i.setStart(t, e), i.setEnd(t, e);
+    const a = window.getSelection();
+    a && (this.vnode = t, this.cursorIndex = e, this.cursorLeft = e, a.removeAllRanges(), a.addRange(i));
+  }
+  replaceRegContent(t, e = !0) {
+    const i = this.vnode.textContent;
+    let a;
+    typeof e == "boolean" ? a = i.slice(0, e ? this.cursorIndex - 1 : this.cursorIndex) : a = i.slice(0, e - 1), a.length === 0 ? (this.vnode.parentElement.setAttribute("data-set-empty", !0), this.vnode.textContent = this.VOID_KEY) : this.vnode.textContent = a;
+    let s = i.slice(this.cursorIndex);
+    const n = this.vnode.parentNode.parentNode,
+      o = n.nextSibling;
+    o ? n.parentNode.insertBefore(t, o) : n.parentNode.appendChild(t);
+    const r = t.previousSibling.childNodes[0],
+      d = r.childNodes[1];
+    d && r.removeChild(d);
+    const c = this.getGridElm(!0),
+      h = c.childNodes[0];
+    s && s !== this.VOID_KEY && (h.setAttribute("data-set-empty", "false"), h.innerHTML = s);
+    const u = h.childNodes[1];
+    t.nextSibling ? (u && h.removeChild(u), n.parentNode.insertBefore(c, t.nextSibling)) : n.parentNode.appendChild(c), this.restCursorPos(h.childNodes[0]);
+  }
+  batchReplaceRegContent(t = [], e = !0) {
+    return new Promise(i => {
+      let a = `<span data-set-richType="richMark"><span class="chat-grid-input chat-stat" data-set-richType="richInput" data-set-empty="true">${this.VOID_KEY}</span></span>`;
+      t.forEach(n => {
+        a += `<span class="chat-tag" contenteditable="false" data-set-richType="chatTag"><span class="at-user chat-stat" data-user-id="${n.id}" contentEditable="false">@${n.name}${this.needCallSpace ? " " : ""}</span></span><span data-set-richType="richMark"><span class="chat-grid-input chat-stat" data-set-richType="richInput" data-set-empty="true">${this.VOID_KEY}</span></span>`;
+      });
+      const s = document.createElement("div");
+      s.innerHTML = a, this.insetRangeGrid(s, e ? 1 : 0), i();
+    });
+  }
+  switchRange(t) {
+    var n, o;
+    let {
+      focusNode: e,
+      focusOffset: i
+    } = window.getSelection();
+    e.getAttribute && e.getAttribute("data-set-richType") === "richInput" && (e = e.childNodes[0]);
+    let a, s;
+    if (e.nodeType === Node.TEXT_NODE) {
+      const l = e.textContent.length,
+        r = e.parentNode.parentNode;
+      switch (t) {
+        case "ArrowLeft":
+          if (i > 0 && e.textContent !== this.VOID_KEY) {
+            s = i - 1, a = e;
+            break;
+          }
+          const d = (n = r == null ? void 0 : r.previousSibling) == null ? void 0 : n.previousSibling;
+          if (d) a = d.childNodes[0].childNodes[0], s = a.textContent.length;else {
+            const h = r.parentNode.previousSibling;
+            h && (a = h.lastChild.childNodes[0].childNodes[0], s = a.textContent.length);
+          }
+          break;
+        case "ArrowRight":
+          if (i < l && e.textContent !== this.VOID_KEY) {
+            s = i + 1, a = e;
+            break;
+          }
+          const c = (o = r == null ? void 0 : r.nextSibling) == null ? void 0 : o.nextSibling;
+          if (c) a = c.childNodes[0].childNodes[0], s = a.textContent === this.VOID_KEY ? 1 : 0;else {
+            const h = r.parentNode.nextSibling;
+            h && (a = h.childNodes[0].childNodes[0].childNodes[0], s = a.textContent === this.VOID_KEY ? 1 : 0);
+          }
+          break;
+      }
+    }
+    (s || s === 0) && this.restCursorPos(a, s);
+  }
+  getGridElm(t = !1) {
+    const e = document.createElement("span");
+    if (e.setAttribute("data-set-richType", "richMark"), e.innerHTML = `<span class="chat-grid-input chat-stat" data-set-richType="richInput" data-set-empty="true">${this.VOID_KEY}<br></span>`, t) return e;
+    const i = document.createElement("p");
+    return i.className = "chat-grid-wrap", i.setAttribute("data-set-richType", "richBox"), i.appendChild(e), i;
+  }
+  updateGrid() {
+    const t = window.getSelection(),
+      e = t.focusNode;
+    if (!e) return;
+    const i = e.parentNode,
+      a = i.getAttribute("data-set-richType");
+    let s, n, o, l;
+    switch (a) {
+      case "richAllBox":
+        if (s = e.childNodes[t.focusOffset], !s || s.getAttribute("data-set-richType") === "chatTag") {
+          const p = this.getGridElm(!0),
+            g = p.children[0];
+          s ? (g.removeChild(g.childNodes[1]), e.insertBefore(p, s)) : e.appendChild(p), this.restCursorPos(g.childNodes[0]);
+          break;
+        }
+        if (s.tagName === "BR") {
+          const p = this.getGridElm(!0),
+            g = p.children[0];
+          e.insertBefore(p, s), e.removeChild(s), this.restCursorPos(g.childNodes[0], g.childNodes[0].textContent.length);
+        }
+        break;
+      case "richMark":
+        const r = i.parentNode,
+          d = Array.prototype.indexOf.call(r.childNodes, i);
+        if (d === -1) break;
+        if (d === 0) {
+          const p = t.focusNode;
+          p.setAttribute("data-set-empty", "true"), p.innerHTML = `${this.VOID_KEY}<br>`, s = p.childNodes[0], this.restCursorPos(s, s.textContent.length);
+          break;
+        }
+        let c = i.previousSibling,
+          h;
+        c.getAttribute("data-set-richType") === "chatTag" ? (h = c.previousSibling, r.removeChild(c), r.removeChild(i)) : (h = i.previousSibling, r.removeChild(i)), s = h.childNodes[0].childNodes[0], s.textContent === this.VOID_KEY && s.parentNode.appendChild(document.createElement("br")), this.restCursorPos(s, s.textContent.length);
+        break;
+      case "richInput":
+        if (l = i.parentNode, o = l.parentNode, this.getNodeEmpty(i)) {
+          i.setAttribute("data-set-empty", "true"), o.childNodes[o.childNodes.length - 1] === l && (i.innerHTML = `${this.VOID_KEY}<br>`), s = i.childNodes[0], this.restCursorPos(s, s.textContent.length);
+          break;
+        }
+        if (String(i.getAttribute("data-set-empty")) === "true") {
+          i.setAttribute("data-set-empty", "false"), s = i.childNodes[0], this.target.chatEvent.isIMEModel ? (i.childNodes[1] && i.removeChild(i.childNodes[1]), s.textContent === this.VOID_KEY && i.setAttribute("data-set-empty", "true")) : i.textContent = s.textContent.replace(new RegExp(this.VOID_KEY, "g"), "");
+          const p = i.childNodes[0];
+          this.restCursorPos(p, p.textContent.length);
+        }
+        if (n = i.parentNode.nextSibling, n && n.nodeType === Node.TEXT_NODE) {
+          let p = n.textContent,
+            g = this.getGridElm(!0);
+          g.childNodes[0].textContent = p, g.childNodes[0].setAttribute("data-set-empty", "false"), n.parentNode.insertBefore(g, n), n.parentNode.removeChild(n), n = g;
+        }
+        n && n.getAttribute("data-set-richType") === "richMark" && this.markMerge(i.parentNode, n);
+        break;
+    }
+  }
+  getNodeEmpty(t) {
+    const e = new RegExp(`^(${this.ZERO_WIDTH_KEY}|<br>|${this.VOID_KEY})+$`);
+    return !t.innerHTML || e.test(t.innerHTML);
+  }
+  setWrap(t = !0) {
+    const e = window.getSelection();
+    let {
+      focusNode: i,
+      focusOffset: a
+    } = e;
+    if (i.nodeType !== Node.TEXT_NODE) {
+      if (!i.getAttribute || i.getAttribute("data-set-richType") !== "richInput") return;
+      i = i.childNodes[0];
+    }
+    const s = i.textContent.slice(a),
+      n = i.parentNode.parentNode,
+      o = n.parentNode,
+      l = Array.prototype.indexOf.call(o.childNodes, n),
+      r = Array.prototype.slice.call(o.childNodes, l + 1),
+      d = this.getGridElm();
+    let c = d.children[0].children[0].childNodes[0],
+      h = 1;
+    (s || r.length > 0) && c.parentNode.removeChild(c.parentNode.childNodes[1]), s && s !== this.VOID_KEY && (i.textContent = i.textContent.slice(0, a), c.textContent = (c.textContent + s).replace(new RegExp(this.VOID_KEY, "g"), () => (h--, "")), c.parentElement.setAttribute("data-set-empty", "false")), r.forEach(g => {
+      o.removeChild(g), d.appendChild(g);
+    });
+    const u = o.lastChild.childNodes[0],
+      p = d.lastChild.childNodes[0];
+    if (u.childNodes.length <= 1) {
+      const g = u.childNodes[0];
+      (!g.textContent || g.textContent === this.VOID_KEY) && (u.innerHTML = `${this.VOID_KEY}<br>`, u.setAttribute("data-set-empty", "true"));
+    }
+    if (p.parentElement.getAttribute("data-set-richType") !== "richMark") d.appendChild(this.getGridElm(!0));else if (p.childNodes.length <= 1) {
+      const g = p.childNodes[0];
+      (!g.textContent || g.textContent === this.VOID_KEY) && (p.innerHTML = `${this.VOID_KEY}<br>`, p.setAttribute("data-set-empty", "true"), c = d.children[0].children[0].childNodes[0]);
+    }
+    o.nextSibling ? this.richText.insertBefore(d, o.nextSibling) : this.richText.appendChild(d), t && (this.restCursorPos(c, c.textContent === this.VOID_KEY ? 1 : h), this.viewIntoPoint());
+  }
+  selectRegionMerge() {
+    const t = window.getSelection();
+    if (t.isCollapsed || t.rangeCount <= 0) return;
+    const e = t.getRangeAt(0);
+    if (e.startContainer.nodeType === Node.TEXT_NODE && e.startContainer === e.endContainer) {
+      const i = e.startContainer;
+      if (i.length === e.endOffset - e.startOffset) {
+        const a = i.parentNode,
+          s = a.parentNode === a.parentNode.parentNode.lastChild;
+        a.setAttribute("data-set-empty", "true"), a.innerHTML = `\uFEFF${s ? "<br>" : ""}`, this.restCursorPos(a.childNodes[0]);
+      } else e.deleteContents();
+    } else if (e.commonAncestorContainer && e.commonAncestorContainer.getAttribute("data-set-richType") === "richBox") {
+      const i = e.startContainer.nodeType === Node.TEXT_NODE ? e.startContainer.parentNode.parentNode : e.startContainer,
+        a = e.endContainer.nodeType === Node.TEXT_NODE ? e.endContainer.parentNode.parentNode : e.endContainer;
+      e.deleteContents(), i.getAttribute("data-set-richType") === a.getAttribute("data-set-richType") && this.markMerge(i, a);
+    } else if (e.commonAncestorContainer === e.startContainer && e.startContainer === e.endContainer) this.textInnerHtmlInit(!0);else {
+      const i = n => {
+          if (n.nodeType === Node.TEXT_NODE) return n.parentNode.parentNode.parentNode;
+          switch (n.getAttribute("data-set-richType")) {
+            case "richInput":
+              return n.parentNode.parentNode;
+            case "richMark":
+              return n.parentNode;
+            case "richBox":
+              return n;
+            default:
+              return null;
+          }
+        },
+        a = i(e.startContainer),
+        s = i(e.endContainer);
+      if (!a || !s) return;
+      e.deleteContents(), this.gridMerge(a, s);
+    }
+    return !0;
+  }
+  gridElmMerge() {
+    const t = window.getSelection(),
+      {
+        focusNode: e,
+        focusOffset: i,
+        isCollapsed: a
+      } = t;
+    if (i > 1 || !a) return !1;
+    const s = (l, r) => l.parentNode !== this.richText && l !== l.parentNode.childNodes[0] ? !1 : Array.prototype.indexOf.call(this.richText.childNodes, l) !== -1 ? l : r >= 6 ? !1 : s(l.parentNode, r + 1),
+      n = s(e, 0);
+    if (!n || n === this.richText.childNodes[0] || i === 1 && n.children[0].children[0].getAttribute("data-set-empty") === "false") return !1;
+    const o = n.previousSibling;
+    return this.gridMerge(o, n), !0;
+  }
+  delMarkRule() {
+    const t = window.getSelection(),
+      e = t.focusNode,
+      i = e.textContent,
+      a = e.parentNode,
+      s = a.parentNode,
+      n = s.parentNode;
+    if (!t.isCollapsed || a.getAttribute("data-set-richType") !== "richInput") return !1;
+    if (i && i.length === 1 && s !== n.childNodes[0] && (t.focusOffset !== 0 || i === this.VOID_KEY)) {
+      if (i === this.VOID_KEY) {
+        const o = s.previousSibling.previousSibling;
+        n.removeChild(s.previousSibling), n.removeChild(s);
+        const l = o.childNodes[0],
+          r = l.childNodes[0];
+        r.textContent === this.VOID_KEY && o === n.lastChild && l.appendChild(document.createElement("br")), this.restCursorPos(r, r.textContent.length);
+      } else {
+        a.innerHTML = s === n.lastChild ? `${this.VOID_KEY}<br>` : this.VOID_KEY, a.setAttribute("data-set-empty", "true");
+        const o = a.childNodes[0];
+        this.restCursorPos(o, 1);
+      }
+      return !0;
+    } else if (t.focusOffset === 0) {
+      const o = a.parentNode,
+        l = o == null ? void 0 : o.previousSibling;
+      return !l || l.getAttribute("data-set-richType") !== "chatTag" ? !1 : (this.delTag(l), !0);
+    }
+  }
+  delTag(t) {
+    const e = t.previousSibling,
+      i = t.nextSibling;
+    t.parentNode.removeChild(t), this.markMerge(e, i);
+  }
+  gridMerge(t, e, i = !0) {
+    t.lastChild.getAttribute("data-set-richType") !== "richMark" && t.appendChild(this.getGridElm(!0)), e.childNodes[0].getAttribute("data-set-richType") !== "richMark" && e.insertBefore(this.getGridElm(!0), e.childNodes[0]);
+    const a = t.lastChild.childNodes[0],
+      s = a.childNodes[0];
+    let n = s.textContent.length;
+    Array.from(e.childNodes, l => {
+      t.appendChild(l.cloneNode(!0));
+    }), e.childNodes.length > 1 && a.childNodes[1] && a.removeChild(a.childNodes[1]);
+    const o = a.parentNode.nextSibling;
+    if (o) {
+      const r = o.children[0].childNodes[0];
+      r && r.textContent !== this.VOID_KEY && (a.childNodes[1] && a.removeChild(a.childNodes[1]), s.textContent = (s.textContent + r.textContent).replace(new RegExp(this.VOID_KEY, "g"), () => (n--, "")), s.parentElement.setAttribute("data-set-empty", "false")), t.removeChild(o);
+    }
+    s.textContent === "" && (s.textContent = this.VOID_KEY, s.parentNode.setAttribute("data-set-empty", "true"), n = 1), this.richText.removeChild(e), i && (this.restCursorPos(s, n), this.viewIntoPoint());
+  }
+  markMerge(t, e) {
+    const a = t.children[0].childNodes[0];
+    let s = a.textContent.length;
+    if (e) {
+      const l = e.children[0].childNodes[0];
+      l && l.textContent !== this.VOID_KEY && (a.textContent = (a.textContent + l.textContent).replace(new RegExp(this.VOID_KEY, "g"), () => (s--, "")), a.parentElement.setAttribute("data-set-empty", "false")), e.parentNode.removeChild(e);
+    }
+    a.textContent === "" && (a.textContent = this.VOID_KEY, a.parentNode.setAttribute("data-set-empty", "true"), s = 1);
+    const n = t.parentNode;
+    a.textContent === this.VOID_KEY && t === n.lastChild && (a.parentNode.appendChild(document.createElement("br")), a.parentNode.setAttribute("data-set-empty", "true"), s = 1), this.restCursorPos(a, s);
+  }
+  setCallSpace(t) {
+    this.needCallSpace = t;
+  }
+  getWrapNode(t, e = !1) {
+    if (t.nodeType === Node.TEXT_NODE) return t.parentNode.parentNode.parentNode;
+    const i = t.getAttribute("data-set-richType");
+    if (e && i === "chatTag") return t.parentNode;
+    switch (i) {
+      case "richInput":
+        return t.parentNode.parentNode;
+      case "richMark":
+        return t.parentNode;
+      case "richBox":
+        return t;
+    }
+  }
+  getMarkNode(t, e = !1) {
+    if (t.nodeType === Node.TEXT_NODE) return t.parentNode.parentNode;
+    const i = t.getAttribute("data-set-richType");
+    if (e && i === "chatTag") return t;
+    switch (i) {
+      case "richInput":
+        return t.parentNode;
+      case "richMark":
+        return t;
+    }
+  }
+  getRichTextNodeIndex(t) {
+    const e = this.getMarkNode(t),
+      i = e.parentNode;
+    return !e || !i ? {
+      gridIndex: null,
+      markIndex: null
+    } : {
+      gridIndex: Array.prototype.indexOf.call(this.richText.childNodes, i),
+      markIndex: Array.prototype.indexOf.call(i.childNodes, e)
+    };
+  }
+  setWrapNodeByMark(t) {
+    const e = document.createElement("p");
+    return e.className = "chat-grid-wrap", e.setAttribute("data-set-richType", "richBox"), Array.from(t, i => {
+      e.appendChild(i);
+    }), e;
+  }
+  setRangeLastText() {
+    const t = this.richText.childNodes[this.richText.childNodes.length - 1],
+      a = t.childNodes[t.childNodes.length - 1].children[0].childNodes[0];
+    this.restCursorPos(a, a.textContent === this.VOID_KEY ? 1 : a.textContent.length), this.viewIntoPoint();
+  }
+  viewIntoPoint() {
+    const t = window.getSelection();
+    if (t.rangeCount > 0) {
+      const e = t.getRangeAt(0),
+        i = this.getWrapNode(e.endContainer);
+      if (!i) return;
+      const a = this.richText.parentElement,
+        {
+          scrollHeight: s,
+          clientHeight: n,
+          scrollTop: o
+        } = a;
+      if (s <= n) return;
+      const l = i.getBoundingClientRect().top - a.getBoundingClientRect().top + i.clientHeight + o,
+        r = o,
+        d = n + o;
+      if (l < r || l > d) {
+        const c = l - n;
+        a.scrollTo(0, c);
+      }
+    }
+  }
+  insetRangeGrid(t, e = 0) {
+    const i = this.vnode.textContent,
+      a = i.slice(0, this.cursorIndex - e);
+    a.length === 0 ? (this.vnode.parentElement.setAttribute("data-set-empty", !0), this.vnode.textContent = this.VOID_KEY) : this.vnode.textContent = a;
+    let s = i.slice(this.cursorIndex);
+    const n = [],
+      o = document.createDocumentFragment();
+    Array.from(t.children).forEach((g, T) => {
+      n.push(g), T !== 0 && o.appendChild(g);
+    });
+    const r = n[n.length - 1].children[0];
+    s && s.length > 0 && s !== this.VOID_KEY ? (r.setAttribute("data-set-empty", "false"), r.innerHTML = r.textContent + s) : r.setAttribute("data-set-empty", "true");
+    const d = this.getMarkNode(this.vnode),
+      c = d.parentElement,
+      h = d.children[0],
+      u = n[0].textContent;
+    u && u.length > 0 && u !== this.VOID_KEY && (h.setAttribute("data-set-empty", "false"), h.innerHTML = (h.textContent + u).replace(new RegExp(this.VOID_KEY, "g"), "")), h.childNodes[1] && h.removeChild(h.childNodes[1]), d.nextElementSibling ? (r.childNodes[1] && r.removeChild(r.childNodes[1]), c.insertBefore(o, d.nextElementSibling)) : c.appendChild(o);
+    const p = s && s !== this.VOID_KEY ? s.length : 0;
+    if (n.length > 1) {
+      const g = r.childNodes[0];
+      this.restCursorPos(g, g.textContent === this.VOID_KEY ? 1 : g.textContent.length - p);
+    } else {
+      const g = h.childNodes[0];
+      this.restCursorPos(g, g.textContent === this.VOID_KEY ? 1 : g.textContent.length - p);
+    }
+  }
+  insetRangeGrids(t) {
+    const e = document.createDocumentFragment();
+    Array.from(t).forEach(n => {
+      e.appendChild(n);
+    });
+    const i = this.getWrapNode(this.vnode);
+    this.restCursorPos(this.vnode, this.cursorIndex), this.setWrap(!1);
+    const a = i.nextElementSibling;
+    a && this.richText.insertBefore(e, a), a && a.previousElementSibling ? (this.gridMerge(i, i.nextElementSibling, !1), this.gridMerge(a.previousElementSibling, a, !0)) : this.gridMerge(i, i.nextElementSibling, !0);
+  }
+  setIMERecord() {
+    if (this.target.deviceInfo.isPc) return;
+    const t = this.getMarkNode(this.vnode);
+    if (!t) {
+      this.IME_RECORD.MARK = null, this.IME_RECORD.TAG = null, this.IME_RECORD.GRID = null;
+      return;
+    }
+    this.target.chatEvent.isIMEModel && t.children[0].childNodes[0].textContent === this.VOID_KEY && (t.children[0].childNodes[0].textContent = this.VOID_KEY + this.VOID_KEY, this.restCursorPos(this.vnode, this.cursorIndex + 1)), this.IME_RECORD.NODE = this.vnode, this.IME_RECORD.INDEX = this.cursorIndex, this.IME_RECORD.MARK = t, this.IME_RECORD.TAG = this.IME_RECORD.MARK.previousElementSibling, this.IME_RECORD.GRID = this.IME_RECORD.MARK.parentElement;
+  }
+  handleIMEDelete() {
+    const e = (this.richText.children[0] || {
+      childNodes: []
+    }).childNodes[0];
+    if (!e || !e.getAttribute || e.getAttribute("data-set-richType") !== "richMark") {
+      this.textInnerHtmlInit(!0);
+      return;
+    }
+    if (this.IME_RECORD.INDEX <= 2 && this.IME_RECORD.TAG) {
+      const i = this.IME_RECORD.TAG.previousElementSibling;
+      this.IME_RECORD.GRID.removeChild(this.IME_RECORD.TAG), this.markMerge(i, this.IME_RECORD.MARK);
+    }
+    this.upDataNodeOrIndex();
+  }
+  handleIMEWrap() {
+    this.upDataNodeOrIndex();
+  }
+}
+const rt = {
+    needDialog: !0,
+    needDebounce: !0,
+    asyncMatch: !1,
+    userList: [],
+    reformList: [],
+    placeholder: "",
+    maxLength: void 0,
+    copyType: ["text"],
+    uploadImage: void 0,
+    needCallEvery: !0,
+    needCallSpace: !1,
+    userProps: {},
+    customTrigger: [],
+    dialogLabels: {
+      pcPointDialog: {},
+      pcPCheckDialog: {},
+      h5Dialog: {}
+    },
+    wrapKeyFun: m => m.ctrlKey && ["Enter"].includes(m.key),
+    sendKeyFun: m => !m.ctrlKey && ["Enter"].includes(m.key)
+  },
+  B = {
+    id: "id",
+    name: "name",
+    avatar: "avatar",
+    pinyin: "pinyin"
+  },
+  F = {
+    title: "群成员",
+    callEveryLabel: "所有人",
+    checkLabel: "多选",
+    emptyLabel: "暂无数据"
+  },
+  G = {
+    title: "选择要@的人",
+    searchPlaceholder: "搜素人员名称",
+    searchEmptyLabel: "没有匹配到任何结果",
+    userTagTitle: "研讨成员列表",
+    checkAllLabel: "全选",
+    checkEmptyLabel: "请选择需要@的成员",
+    confirmLabel: "确定",
+    cancelLabel: "取消"
+  },
+  q = {
+    title: "选择提醒的人",
+    callEveryLabel: "所有人",
+    searchPlaceholder: "搜素人员名称",
+    searchEmptyLabel: "没有匹配到任何结果",
+    confirmLabel: "确定",
+    cancelLabel: "收起"
+  },
+  ct = {
+    needUserId: !1,
+    needTagId: !1,
+    needSelectId: !1,
+    wrapClassName: void 0,
+    rowClassName: void 0,
+    imgToText: !1,
+    identifyLink: !1
+  },
+  ht = ["Backspace", "Shift", "Tab", "CapsLock", "Control", "Meta", "Alt", "ContextMenu", "Enter", "NumpadEnter", "Escape", "ArrowLeft", "ArrowUp", "ArrowRight", "ArrowDown", "Home", "End", "PageUp", "PageDown", "Insert", "Delete", "NumLock"],
+  dt = {
+    "!": "！",
+    $: "￥",
+    "(": "（",
+    ")": "）",
+    "[": "【",
+    "]": "】",
+    "-": "——",
+    ";": "；",
+    ":": "：",
+    "\\": "、",
+    "'": "’",
+    '"': "“",
+    "`": "·",
+    ",": "，",
+    "<": "《",
+    ".": "。",
+    ">": "》",
+    "?": "？"
+  };
+class pt {
+  constructor(t) {
+    y(this, "target");
+    y(this, "outerApply", !1);
+    y(this, "isComposition", !1);
+    y(this, "matchKey", 0);
+    y(this, "startOpenIndex", 0);
+    y(this, "textLength", 0);
+    y(this, "isIMEModel", !1);
+    y(this, "undoHistory", []);
+    y(this, "redoHistory", []);
+    y(this, "doOverHistory", !0);
+    y(this, "notMergeKey", ht);
+    y(this, "tagProps", dt);
+    y(this, "chatEventModule", {
+      enterSend: [],
+      operate: [],
+      defaultAction: [],
+      atMatch: [],
+      atCheck: [],
+      tagCheck: [],
+      selectCheck: []
+    });
+    y(this, "debounceEvents", {
+      recordHistory: () => {},
+      dialogMoveToRange: t => {},
+      selectDialogToAim: () => {},
+      matchPointDialog: () => {},
+      movePointActiveUserElm: t => {},
+      moveCustomActiveTagElm: t => {}
+    });
+    this.target = t, this.registerEvent(), this.otherEvent();
+  }
+  registerEvent() {
+    const {
+      chatElement: t,
+      options: e,
+      deviceInfo: i,
+      chatInput: a
+    } = this.target;
+    t.richText.addEventListener("keyup", s => {
+      if (!e.needDialog) return;
+      if (s.stopPropagation(), i.isPc) {
+        s.keyCode === 50 || s.code === "Digit2" || s.key === "@" ? t.ruleShowPointDialog() : Object.keys(t.pcElms.customTagDialogElms).indexOf(s.key) !== -1 && t.showCustomTagDialog(s.key);
+        return;
+      }
+      const n = s.key === "Unidentified" ? "android" : "ios";
+      let o = !1;
+      switch (n) {
+        case "android":
+          o = s.keyCode === 229;
+          break;
+        case "ios":
+          o = s.keyCode === 50 || s.code === "Digit2" || s.key === "@";
+          break;
+      }
+      o && (e.reformList.length > 0 || e.asyncMatch) && a.showAt() && (this.target.showH5Dialog(), t.isExternalCallPopup = !1);
+    }), t.richText.addEventListener("keydown", async s => {
+      if (!i.isPc && s.key === "Unidentified" && s.keyCode === 229) {
+        this.isIMEModel = !0, a.setIMERecord();
+        return;
+      }
+      if (!this.isIMEModel) {
+        if (O(t.pcElms.pointDialogElm)) {
+          ["ArrowUp", "ArrowDown", "Enter", "NumpadEnter"].includes(s.code) ? s.preventDefault() : ["ArrowLeft", "ArrowRight"].includes(s.code) && t.exitPointDialog();
+          return;
+        }
+        if (t.pcElms.customTagDialogTagKey && O(t.pcElms.customTagDialogElms[t.pcElms.customTagDialogTagKey])) {
+          ["ArrowUp", "ArrowDown", "Enter", "NumpadEnter"].includes(s.code) ? s.preventDefault() : ["ArrowLeft", "ArrowRight"].includes(s.code) && t.exitCustomTagDialog();
+          return;
+        }
+        s.code === "Backspace" || s.key === "Backspace" ? (a.selectRegionMerge() || a.gridElmMerge() || a.delMarkRule()) && (s.preventDefault(), await this.richTextInput()) : e.wrapKeyFun(s) || !i.isPc && s.key === "Enter" ? (s.preventDefault(), a.setWrap(), await this.richTextInput()) : e.sendKeyFun(s) ? (s.preventDefault(), await P(100), this.triggerChatEvent("enterSend")) : ["ArrowLeft", "ArrowRight"].includes(s.code) ? (s.preventDefault(), a.switchRange(s.code)) : s.ctrlKey && s.code === "KeyA" ? this.target.isEmpty() && s.preventDefault() : s.ctrlKey && s.code === "KeyZ" ? (s.preventDefault(), this.ruleChatEvent(() => {
+          this.target.undo();
+        }, "defaultAction", "UNDO")) : s.ctrlKey && s.code === "KeyY" && (s.preventDefault(), this.ruleChatEvent(() => {
+          this.target.redo();
+        }, "defaultAction", "REDO")), this.notMergeKey.indexOf(s.key) === -1 && !s.ctrlKey && !s.altKey && !s.metaKey && a.selectRegionMerge();
+      }
+    }), t.richText.addEventListener("input", async s => {
+      if (this.isIMEModel) {
+        await P(50), s.inputType === "deleteContentBackward" ? a.handleIMEDelete() : s.inputType === "insertParagraph" ? a.handleIMEWrap() : (a.upDataNodeOrIndex(), this.isComposition || a.updateGrid()), e.maxLength !== void 0 && this.ruleMaxLength(), t.showPlaceholder(), this.triggerChatEvent("operate"), this.isIMEModel = !1;
+        return;
+      }
+      await this.richTextInput(), i.isPc && !this.isComposition && this.debounceEvents.matchPointDialog();
+    }), t.richText.addEventListener("copy", s => {
+      s.preventDefault(), this.ruleChatEvent(() => {
+        this.copyRange(s);
+      }, "defaultAction", "COPY");
+    }), t.richText.addEventListener("cut", s => {
+      s.preventDefault(), this.ruleChatEvent(() => {
+        this.copyRange(s), this.removeRange();
+      }, "defaultAction", "CUT");
+    }), t.richText.addEventListener("paste", s => {
+      s.preventDefault();
+      const {
+        options: n,
+        chatInput: o
+      } = this.target;
+      this.ruleChatEvent(() => {
+        const l = s.clipboardData.getData("text/plain");
+        if (typeof l == "string" && l !== "") {
+          if (n.copyType.indexOf("text") === -1) return;
+          let r = document.createElement("div");
+          r.innerHTML = s.clipboardData.getData("application/my-custom-format") || "", o.selectRegionMerge(), r.children[0] && r.children[0].getAttribute("data-set-richType") === "richBox" ? this.insertInsideHtml(r.innerHTML) : (r.innerHTML = l, this.target.insertText(r.innerText)), r = null;
+        } else {
+          if (n.copyType.indexOf("image") === -1) return;
+          const d = (s.clipboardData || s.originalEvent.clipboardData).items || [];
+          Array.from(d, async c => {
+            if (c.type.indexOf("image") === -1) return;
+            const h = c.getAsFile();
+            if (n.uploadImage) {
+              const u = await n.uploadImage(h);
+              this.target.insertHtml(`<img class="chat-img" src="${u}" alt="" />`);
+            } else {
+              const u = new FileReader();
+              u.onload = p => {
+                this.target.insertHtml(`<img class="chat-img" src="${p.target.result}" alt="" />`);
+              }, u.readAsDataURL(h);
+            }
+          });
+        }
+      }, "defaultAction", "PASTE");
+    }), t.richText.addEventListener("blur", () => {
+      a.upDataNodeOrIndex(), a.setIMERecord();
+    }), t.richText.addEventListener("focus", () => {
+      a.upDataNodeOrIndex(), a.setIMERecord();
+    }), t.richText.addEventListener("click", s => {
+      a.upDataNodeOrIndex(), a.setIMERecord();
+      const n = W(s.target, "chatTag", 3);
+      if (n) {
+        const o = n.children[0];
+        if (o.classList.contains("at-select")) {
+          const l = o.getAttribute("data-select-key");
+          this.target.showPCSelectDialog(l, o);
+        }
+      }
+    }), t.richText.addEventListener("dragstart", s => {
+      s.stopPropagation(), s.preventDefault();
+    }), t.richText.addEventListener("dragover", s => {
+      s.stopPropagation(), s.preventDefault();
+    }), t.richText.addEventListener("drop", s => {
+      s.stopPropagation(), s.preventDefault();
+    }), t.richText.addEventListener("compositionstart", () => {
+      this.isComposition = !0;
+    }), t.richText.addEventListener("compositionend", () => {
+      this.isComposition = !1;
+    }), window.addEventListener("click", this.winClick.bind(this)), window.addEventListener("keydown", this.winKeydown.bind(this));
+  }
+  otherEvent() {
+    const {
+        options: t,
+        chatInput: e,
+        chatElement: i
+      } = this.target,
+      {
+        needDebounce: a
+      } = t,
+      s = () => {
+        const {
+          gridIndex: h,
+          markIndex: u
+        } = e.getRichTextNodeIndex(e.vnode);
+        if (h === null || u == null) return;
+        const p = {
+          html: i.richText.innerHTML,
+          gridIndex: h,
+          markIndex: u,
+          cursorIndex: e.cursorIndex
+        };
+        this.undoHistory.push(p), this.undoHistory.length > 50 && this.undoHistory.shift();
+      };
+    this.debounceEvents.recordHistory = a ? R(s, 200) : s;
+    const n = h => {
+      let u = "0",
+        p = "100%";
+      const g = e.getRangeRect();
+      if (!g) return;
+      const T = i.pcElms.containerDialogElm.getBoundingClientRect();
+      let D = g.x - T.x,
+        x = T.y - g.y;
+      const {
+        clientWidth: C,
+        clientHeight: b
+      } = h;
+      g.x > window.innerWidth - C - 30 && (D = g.x - C - T.x - 16, u = "100%"), g.y < b && (x = x - b, p = "0"), h.style.transform = "translate(0, 0)", h.style.transformOrigin = `${u} ${p}`, h.style.left = D + 6 + "px", h.style.bottom = `${x}px`, h.style.opacity = "1";
+    };
+    this.debounceEvents.dialogMoveToRange = a ? R(n, 120, !0) : n;
+    const o = () => {
+      if (!t.needDialog) return;
+      const h = e.vnode.textContent || "",
+        u = e.cursorIndex,
+        p = h.slice(0, u);
+      let g = -1,
+        T = -1,
+        D = "userTag";
+      p.lastIndexOf("@") !== -1 && (g = p.lastIndexOf("@")), i.pcElms.customTagDialogTagKey && p.lastIndexOf(i.pcElms.customTagDialogTagKey) !== -1 && (T = p.lastIndexOf(i.pcElms.customTagDialogTagKey));
+      const x = this.tagProps[i.pcElms.customTagDialogTagKey];
+      if (x && p.lastIndexOf(x) !== -1 && (T = p.lastIndexOf(x)), T > g && (D = "customTag"), D === "userTag" && t.asyncMatch) {
+        if (g < 0) {
+          i.exitPointDialog();
+          return;
+        }
+        this.matchKey++;
+        const L = this.matchKey;
+        this.startOpenIndex = g + 1;
+        const v = p.slice(this.startOpenIndex) || "";
+        if (/\s/ig.test(v)) {
+          i.exitPointDialog();
+          return;
+        }
+        this.target.updateUserList([]), f(i.pcElms.pointDialogLoadingElm, !0, "flex"), f(i.pcElms.pointDialogEmptyElm), i.showPointDialog();
+        const N = this.triggerChatEvent("atMatch", v);
+        N && N instanceof Promise && N.then(w => {
+          if (L === this.matchKey) {
+            if (f(i.pcElms.pointDialogLoadingElm), !w || w.length <= 0) {
+              f(i.pcElms.pointDialogEmptyElm, !0, "flex");
+              return;
+            }
+            this.target.updateUserList(w), i.pcElms.pointDialogUsersElm && i.pcElms.pointDialogUsersElm.length > 0 && i.updatePointActiveUserElm(i.pcElms.pointDialogUsersElm[0].elm);
+          }
+        });
+        return;
+      }
+      if (D === "userTag" && t.reformList.length <= 0 || D === "customTag" && i.customTags[i.pcElms.customTagDialogTagKey].length <= 0) return;
+      const C = () => {
+          D === "userTag" ? i.exitPointDialog() : i.exitCustomTagDialog();
+        },
+        b = () => {
+          D === "userTag" ? i.showPointDialog() : i.showCustomTagDialog(i.pcElms.customTagDialogTagKey);
+        };
+      if (g < 0 && T < 0) {
+        i.exitPointDialog(), i.exitCustomTagDialog();
+        return;
+      }
+      this.startOpenIndex = D === "userTag" ? g + 1 : T + 1;
+      const M = new RegExp(`^([${e.ZERO_WIDTH_KEY}${e.VOID_KEY}])+$`);
+      if (!p || M.test(p) || u < this.startOpenIndex) {
+        C();
+        return;
+      }
+      const I = p.slice(this.startOpenIndex) || "";
+      if (/\s/ig.test(I)) {
+        C();
+        return;
+      }
+      if (!I) {
+        b();
+        return;
+      }
+      if (D === "userTag") {
+        const L = this.target.searchUserList(I);
+        L.length > 0 ? i.showPointDialog(L) : C();
+      } else {
+        const v = i.customTags[i.pcElms.customTagDialogTagKey].filter(N => _(N.name, N.pinyin || "", I));
+        v.length > 0 ? i.showCustomTagDialog(i.pcElms.customTagDialogTagKey, v) : C();
+      }
+    };
+    this.debounceEvents.matchPointDialog = a ? R(o, 200) : o;
+    const l = h => {
+      if (!i.pcElms.pointDialogActiveElm) return;
+      let u = 0;
+      const p = i.pcElms.pointDialogActiveElm.getAttribute("data-set-id");
+      i.pcElms.pointDialogUsersElm.some(x => {
+        const C = x.elm.getAttribute("data-set-id");
+        return u = x.index, p === C;
+      });
+      const g = i.pcElms.pointDialogUsersElm.filter(x => !x.elm.classList.contains("user-no-match")),
+        T = g.map(x => x.index);
+      let D;
+      h === "down" ? u === g[g.length - 1].index ? D = g[0] : D = g[T.indexOf(u) + 1] : h === "up" && (u === g[0].index ? D = g[g.length - 1] : D = g[T.indexOf(u) - 1]), D && i.updatePointActiveUserElm(D.elm, !0);
+    };
+    this.debounceEvents.movePointActiveUserElm = $(l, 80);
+    const r = h => {
+      if (!i.pcElms.customTagDialogActiveElm) return;
+      const u = i.customTags[i.pcElms.customTagDialogTagKey].map(C => C.id),
+        p = i.pcElms.customTagDialogActiveElm.getAttribute("data-set-id"),
+        g = u.indexOf(p),
+        T = Array.from(i.pcElms.customTagDialogElms[i.pcElms.customTagDialogTagKey].children[1].children, (C, b) => ({
+          elm: C,
+          index: b
+        })).filter(C => !C.elm.classList.contains("tag-no-match")),
+        D = T.map(C => C.index);
+      let x;
+      h === "down" ? g === T[T.length - 1].index ? x = T[0] : x = T[D.indexOf(g) + 1] : h === "up" && (g === T[0].index ? x = T[T.length - 1] : x = T[D.indexOf(g) - 1]), x && i.updateActiveCustomTagElm(x.elm, !0);
+    };
+    this.debounceEvents.moveCustomActiveTagElm = $(r, 80);
+    const d = () => {
+      i.exitCustomTagDialog(), i.exitPointDialog();
+      const h = i.pcElms.selectDialogAim.getClientRects()[0],
+        u = i.pcElms.selectDialogElms[i.pcElms.selectDialogKey];
+      f(u, !0);
+      const p = u.querySelector(".chat-select-arrow");
+      let g = u.clientHeight + 16;
+      if (g > h.y ? (g = -(h.height + 16), p.style.top = "-16px", p.style.bottom = "auto", p.style.transform = "rotate(0deg)") : (p.style.transform = "rotate(180deg)", p.style.bottom = "-16px", p.style.top = "auto"), window.innerWidth - h.x < u.clientWidth) {
+        const D = u.clientWidth - (window.innerWidth - h.x) - 10;
+        u.style.left = "auto", u.style.right = "10px", p.style.left = "auto", p.style.right = D - p.clientWidth / 2 + h.width / 2 + "px";
+      } else u.style.left = h.x + "px", u.style.right = "auto", p.style.left = h.width / 2 - p.clientWidth / 2 + "px", p.style.right = "auto";
+      u.style.top = h.y + "px", u.style.transform = `translateY(${-g}px)`;
+      const T = u.querySelectorAll(".chat-select-dialog-item");
+      if (i.pcElms.selectDialogAim.classList.contains("at-select")) {
+        const D = i.pcElms.selectDialogAim.getAttribute("data-select-id");
+        E(i.pcElms.selectDialogAim, "aim", !0), Array.from(T, x => {
+          const C = x.lastChild.lastChild;
+          f(C, D === x.getAttribute("data-set-id"), "inline-block");
+        });
+      } else Array.from(T, D => {
+        const x = D.lastChild.lastChild;
+        f(x, !1, "inline-block");
+      });
+    };
+    this.debounceEvents.selectDialogToAim = a ? R(d, 120) : d;
+    const c = {
+      html: i.richText.innerHTML,
+      gridIndex: 0,
+      markIndex: 0,
+      cursorIndex: e.cursorIndex
+    };
+    this.undoHistory = [c];
+  }
+  winClick() {
+    if (!this.target || this.outerApply) return;
+    const {
+      chatElement: t
+    } = this.target;
+    O(t.pcElms.pointDialogElm) && t.exitPointDialog(), t.pcElms.checkDialogSearchResultElm && f(t.pcElms.checkDialogSearchResultElm), t.pcElms.customTagDialogTagKey && O(t.pcElms.customTagDialogElms[t.pcElms.customTagDialogTagKey]) && t.exitCustomTagDialog(), t.pcElms.selectDialogKey && O(t.pcElms.selectDialogElms[t.pcElms.selectDialogKey]) && t.exitSelectDialog();
+  }
+  async winKeydown(t) {
+    if (!this.target) return;
+    const {
+      chatElement: e,
+      options: i
+    } = this.target;
+    if (t.ctrlKey && t.code === "KeyZ" && t.preventDefault(), !this.isComposition) {
+      if (O(e.pcElms.pointDialogElm)) {
+        if (t.code === "ArrowDown") {
+          t.preventDefault(), this.debounceEvents.movePointActiveUserElm("down");
+          return;
+        }
+        if (t.code === "ArrowUp") {
+          t.preventDefault(), this.debounceEvents.movePointActiveUserElm("up");
+          return;
+        }
+        if ((t.code === "Enter" || t.code === "NumpadEnter") && e.pcElms.pointDialogActiveElm) {
+          t.preventDefault();
+          const a = e.pcElms.pointDialogActiveElm.getAttribute("data-set-id");
+          if (await P(100), e.isPointSearchMode || i.asyncMatch) await this.target.matchSetTag(i.reformList.find(s => s.id === a));else {
+            const s = i.userList.find(n => String(n[i.userProps.id]) === a);
+            await this.target.onceSetTag(s);
+          }
+          e.exitPointDialog();
+        }
+      } else if (e.pcElms.customTagDialogTagKey && O(e.pcElms.customTagDialogElms[e.pcElms.customTagDialogTagKey])) {
+        if (t.code === "ArrowDown") {
+          t.preventDefault(), this.debounceEvents.moveCustomActiveTagElm("down");
+          return;
+        }
+        if (t.code === "ArrowUp") {
+          t.preventDefault(), this.debounceEvents.moveCustomActiveTagElm("up");
+          return;
+        }
+        if ((t.code === "Enter" || t.code === "NumpadEnter") && e.pcElms.customTagDialogActiveElm) {
+          t.preventDefault();
+          const a = e.pcElms.customTagDialogActiveElm.getAttribute("data-set-id");
+          await P(100);
+          const n = e.customTags[e.pcElms.customTagDialogTagKey].find(o => o.id === a);
+          e.isPointSearchMode ? await this.target.matchSetCustomTag(n) : await this.target.onceSetCustomTag(n), e.exitCustomTagDialog();
+        }
+      }
+    }
+  }
+  async richTextInput(t = !0) {
+    const {
+      chatInput: e,
+      deviceInfo: i,
+      chatElement: a,
+      options: s
+    } = this.target;
+    e.upDataNodeOrIndex(), i.isPc && e.selectRegionMerge(), await P(50), this.isComposition || e.updateGrid();
+    const o = (a.richText.children[0] || {
+      childNodes: []
+    }).childNodes[0];
+    if (!o || !o.getAttribute || o.getAttribute("data-set-richType") !== "richMark") {
+      e.textInnerHtmlInit(!0), a.showPlaceholder(), this.triggerChatEvent("operate");
+      return;
+    }
+    s.maxLength !== void 0 && this.ruleMaxLength(), a.showPlaceholder(), this.triggerChatEvent("operate"), t && this.doOverHistory && !this.isComposition && this.debounceEvents.recordHistory(), e.viewIntoPoint();
+  }
+  ruleMaxLength() {
+    const {
+      options: t,
+      chatElement: e
+    } = this.target;
+    if (this.target.isEmpty() || t.maxLength === void 0) {
+      this.textLength = 0;
+      return;
+    }
+    let i = 0,
+      a = 0;
+    const s = [];
+    Array.prototype.some.call(e.richText.children, (o, l) => {
+      const {
+        nodeInfos: r,
+        nodeTextLength: d
+      } = this.getGirdNodeTextInfo(o);
+      if (i += d, s.push(r), a = l, i >= t.maxLength) return !0;
+    });
+    const n = [];
+    Array.from(e.richText.children, (o, l) => {
+      l > a && n.push(o);
+    }), n.forEach(o => e.richText.removeChild(o)), this.deepDelGirdText(s, i);
+  }
+  getGirdNodeTextInfo(t) {
+    const {
+        chatInput: e
+      } = this.target,
+      i = [];
+    let a = 0;
+    if (t.children.length === 1 && t !== t.parentElement.children[0]) {
+      const s = t.children[0],
+        n = (s.textContent || "").replace(new RegExp(e.VOID_KEY, "g"), "");
+      a += n.length || 1, i[0] = {
+        node: s,
+        textLength: n.length || 1,
+        type: "richMark"
+      };
+    } else Array.from(t.children, (s, n) => {
+      if (s.getAttribute("data-set-richType") === "richMark") {
+        const l = (s.textContent || "").replace(new RegExp(e.VOID_KEY, "g"), "");
+        a += l.length, i[n] = {
+          node: s,
+          textLength: l.length,
+          type: "richMark"
+        };
+      } else {
+        const l = (s.textContent || "").replace(new RegExp(e.VOID_KEY, "g"), "");
+        a += l.length || 1, i[n] = {
+          node: s,
+          textLength: l.length || 1,
+          type: "chatTag"
+        };
+      }
+    });
+    return {
+      nodeInfos: i,
+      nodeTextLength: a
+    };
+  }
+  deepDelGirdText(t, e) {
+    if (e > this.target.options.maxLength) {
+      const i = t[t.length - 1];
+      t.pop(), this.deepDelNode(i, t, e);
+    } else this.textLength = e;
+  }
+  deepDelNode(t, e, i) {
+    const a = t[0].node.parentElement;
+    if (i > this.target.options.maxLength) {
+      let s = i - this.target.options.maxLength,
+        n = t[t.length - 1];
+      if (n.type === "richMark") {
+        if (n.textLength === 0 || s >= n.textLength) a.removeChild(n.node), t.pop(), s = s - n.textLength, n = t[t.length - 1], a.removeChild(n.node), t.pop(), s = s - n.textLength;else {
+          const o = n.node.childNodes[0];
+          o.textContent = o.textContent.slice(0, n.textLength - s), o.textContent === 0 && (o.setAttribute("data-set-empty", "true"), o.innerHTML = `${this.target.chatInput.VOID_KEY}<br>`), s = 0;
+        }
+      } else a.removeChild(n.node), t.pop(), s = s - n.textLength;
+      s > 0 ? t.length > 0 ? this.deepDelNode(t, e, s + this.target.options.maxLength) : (this.target.chatElement.richText.appendChild(a), this.deepDelGirdText(e, s + this.target.options.maxLength)) : (this.textLength = this.target.options.maxLength + s, this.target.enable());
+    }
+  }
+  copyRange(t) {
+    const e = window.getSelection();
+    if (e.isCollapsed || e.rangeCount <= 0) {
+      t.clipboardData.setData("application/my-custom-format", ""), t.clipboardData.setData("text/plain", "");
+      return;
+    }
+    const {
+        chatElement: i,
+        chatInput: a
+      } = this.target,
+      s = e.toString() || "";
+    let n = document.createElement("div");
+    n.innerHTML = s;
+    const o = n.innerText.replace(/\n\n/g, `
+`);
+    n = null, t.clipboardData.setData("text/plain", o);
+    const l = e.anchorNode,
+      r = e.focusNode;
+    if (l === r && l.nodeType === Node.TEXT_NODE) {
+      const x = l.textContent.slice(e.anchorOffset, e.focusOffset);
+      t.clipboardData.setData("application/my-custom-format", x);
+      return;
+    }
+    if (l === i.richText && r === i.richText) {
+      t.clipboardData.setData("application/my-custom-format", i.richText.innerHTML);
+      return;
+    }
+    const d = a.getWrapNode(l, !0),
+      c = a.getWrapNode(r, !0),
+      h = a.getMarkNode(l, !0),
+      u = a.getMarkNode(r, !0),
+      p = h.getAttribute("data-set-richType") === "richMark",
+      g = u.getAttribute("data-set-richType") === "richMark",
+      T = Array.prototype.indexOf.call(d.childNodes, h),
+      D = Array.prototype.indexOf.call(c.childNodes, u);
+    if (d === c && d.parentNode === i.richText) {
+      const x = T > D,
+        C = Array.prototype.filter.call(d.childNodes, (w, S) => x ? S < T && S > D : S > T && S < D).map(w => w.cloneNode(!0)),
+        b = p ? x ? l.textContent.slice(0, e.anchorOffset) : l.textContent.slice(e.anchorOffset) : "",
+        M = g ? x ? r.textContent.slice(e.focusOffset) : r.textContent.slice(0, e.focusOffset) : "",
+        I = a.getGridElm(!0),
+        L = a.getGridElm(!0);
+      b && (I.childNodes[0].innerHTML = b, I.childNodes[0].setAttribute("data-set-empty", "false")), M && (L.childNodes[0].innerHTML = M, L.childNodes[0].setAttribute("data-set-empty", "false")), x ? (C[0].getAttribute("data-set-richType") !== "richMark" && C.unshift(L), C[C.length - 1].getAttribute("data-set-richType") !== "richMark" && C.push(I)) : (C[0].getAttribute("data-set-richType") !== "richMark" && C.unshift(I), C[C.length - 1].getAttribute("data-set-richType") !== "richMark" && C.push(L));
+      let v = document.createElement("div");
+      const N = a.setWrapNodeByMark(C);
+      v.appendChild(N), t.clipboardData.setData("application/my-custom-format", v.innerHTML), v = null;
+      return;
+    }
+    if (d.parentNode === i.richText && c.parentNode === i.richText) {
+      const x = Array.prototype.indexOf.call(i.richText.childNodes, d),
+        C = Array.prototype.indexOf.call(i.richText.childNodes, c),
+        b = x > C,
+        M = Array.prototype.filter.call(i.richText.childNodes, (k, A) => b ? A < x && A > C : A > x && A < C).map(k => k.cloneNode(!0)),
+        I = p ? b ? l.textContent.slice(0, e.anchorOffset) : l.textContent.slice(e.anchorOffset) : "",
+        L = g ? b ? r.textContent.slice(e.focusOffset) : r.textContent.slice(0, e.focusOffset) : "",
+        v = a.getGridElm(!0),
+        N = a.getGridElm(!0);
+      I && (v.childNodes[0].innerHTML = I, v.childNodes[0].setAttribute("data-set-empty", "false")), L && (N.childNodes[0].innerHTML = L, N.childNodes[0].setAttribute("data-set-empty", "false"));
+      const w = Array.prototype.filter.call(d.childNodes, (k, A) => b ? A < T : A > T).map(k => k.cloneNode(!0)),
+        S = Array.prototype.filter.call(c.childNodes, (k, A) => b ? A > D : A < D).map(k => k.cloneNode(!0));
+      if (b) {
+        w.push(v), S.unshift(N);
+        const k = a.setWrapNodeByMark(w),
+          A = a.setWrapNodeByMark(S);
+        M.push(k), M.unshift(A);
+      } else {
+        w.unshift(v), S.push(N);
+        const k = a.setWrapNodeByMark(w),
+          A = a.setWrapNodeByMark(S);
+        M.unshift(k), M.push(A);
+      }
+      let H = document.createElement("div");
+      Array.from(M, k => {
+        H.appendChild(k);
+      }), t.clipboardData.setData("application/my-custom-format", H.innerHTML), H = null;
+      return;
+    }
+  }
+  async removeRange() {
+    const {
+      chatInput: t,
+      chatElement: e
+    } = this.target;
+    window.getSelection().getRangeAt(0).deleteContents(), await P(50), t.updateGrid(), e.showPlaceholder();
+  }
+  async setChatHistory(t) {
+    const {
+      chatElement: e,
+      chatInput: i
+    } = this.target;
+    this.doOverHistory = !1;
+    const {
+      html: a,
+      gridIndex: s,
+      markIndex: n,
+      cursorIndex: o
+    } = t;
+    e.richText.innerHTML = a;
+    const l = e.richText.childNodes[s].childNodes[n].childNodes[0].childNodes[0];
+    i.restCursorPos(l, o), await this.richTextInput(), this.doOverHistory = !0;
+  }
+  insertInsideHtml(t) {
+    const {
+      chatInput: e
+    } = this.target;
+    let i = document.createElement("div");
+    i.innerHTML = t, i.children.length && (i.children.length === 1 ? e.insetRangeGrid(i.children[0]) : e.insetRangeGrids(i.children), i = null, this.richTextInput());
+  }
+  triggerChatEvent(t, ...e) {
+    let i;
+    return this.chatEventModule[t].forEach(a => {
+      a && (i ? a(...e) : i = a(...e));
+    }), i;
+  }
+  ruleChatEvent(t, e, ...i) {
+    (this.triggerChatEvent(e, ...i) + "").toUpperCase() !== "PREVENT" && (t && t.bind(this)(), t = null);
+  }
+}
+const K = function (m, t, e) {
+  return m.forEach(i => {
+    if (e in i) {
+      const a = t.indexOf(String(i[e]));
+      a !== -1 && (t[a] = i);
+    }
+  }), t.filter(i => i[e]);
+};
+class gt {
+  constructor(t) {
+    var _ref, _ref2, _ref3;
+    y(this, "options");
+    y(this, "deviceInfo", z());
+    y(this, "chatElement");
+    y(this, "chatInput");
+    y(this, "chatEvent");
+    var i, a, s;
+    this.options = Object.assign({}, rt, t), this.options.userProps = Object.assign({}, B, t.userProps || {}), this.options.dialogLabels.pcPointDialog = Object.assign({}, F, (_ref = (i = t.dialogLabels) == null ? void 0 : i.pcPointDialog) !== null && _ref !== void 0 ? _ref : {}), this.options.dialogLabels.pcPCheckDialog = Object.assign({}, G, (_ref2 = (a = t.dialogLabels) == null ? void 0 : a.pcPCheckDialog) !== null && _ref2 !== void 0 ? _ref2 : {}), this.options.dialogLabels.h5Dialog = Object.assign({}, q, (_ref3 = (s = t.dialogLabels) == null ? void 0 : s.h5Dialog) !== null && _ref3 !== void 0 ? _ref3 : {}), this.chatElement = new ot(this), this.chatInput = new lt(this), this.chatEvent = new pt(this), this.updateConfig(t);
+    const e = this;
+    Object.defineProperty(this, "richText", {
+      get() {
+        return e.chatElement.richText;
+      }
+    }), Object.defineProperty(this, "textLength", {
+      get() {
+        return e.chatEvent.textLength;
+      }
+    }), this.deviceInfo.isPc || this.addEventListener("operate", () => {
+      this.chatInput.setIMERecord();
+    }), requestAnimationFrame(() => {
+      this.chatElement.richText.focus();
+    });
+  }
+  updateConfig(t) {
+    t.copyType !== void 0 && (this.options.copyType = t.copyType), t.userProps && (this.options.userProps = Object.assign({}, B, t.userProps)), t.uploadImage !== void 0 && (this.options.uploadImage = t.uploadImage), t.placeholder !== void 0 && (this.chatElement.placeholderElm.textContent = t.placeholder), t.maxLength !== void 0 && (this.options.maxLength = t.maxLength, this.chatEvent.ruleMaxLength()), (this.options.asyncMatch || t.needCallEvery !== void 0 || t.userList) && (this.options.needCallEvery = this.options.asyncMatch ? !1 : U(t.needCallEvery), this.updateUserList(this.options.asyncMatch ? [] : t.userList)), t.needCallSpace !== void 0 && this.chatInput.setCallSpace(U(t.needCallSpace)), t.wrapKeyFun !== void 0 && (this.options.wrapKeyFun = t.wrapKeyFun), t.sendKeyFun !== void 0 && (this.options.sendKeyFun = t.sendKeyFun), this.options.needDialog && t.customTrigger && this.deviceInfo.isPc && (this.options.customTrigger = t.customTrigger, this.chatElement.bindCustomTrigger()), this.options.needDialog && t.selectList && this.deviceInfo.isPc && (this.options.selectList = t.selectList, this.chatElement.bindSelectList());
+  }
+  updateUserList(t = void 0) {
+    const {
+      options: e,
+      chatElement: i
+    } = this;
+    if (t) {
+      e.userList = JSON.parse(JSON.stringify(t));
+      const s = {
+        [e.userProps.id]: "isALL",
+        [e.userProps.name]: ""
+      };
+      e.userList.unshift(s), e.reformList = t.map((n, o) => {
+        const l = n[e.userProps.id];
+        if (!l && l !== 0) throw new Error(`配置项userList：下标第${o}项${e.userProps.id}值异常！`);
+        return {
+          id: String(l),
+          name: String(n[e.userProps.name] || ""),
+          avatar: String(n[e.userProps.avatar] || ""),
+          pinyin: String(n[e.userProps.pinyin] || "")
+        };
+      });
+    }
+    const a = e.userList[0];
+    a && a[e.userProps.id] === "isALL" && (a[e.userProps.name] = this.deviceInfo.isPc ? e.dialogLabels.pcPointDialog.callEveryLabel : e.dialogLabels.h5Dialog.callEveryLabel), e.needDialog && (this.deviceInfo.isPc ? i.updatePCUser() : i.updateH5User());
+  }
+  searchUserList(t) {
+    return this.options.reformList.filter(e => _(e.name, e.pinyin || "", t));
+  }
+  getReduceNode(t) {
+    const e = Object.assign({}, ct, t || {}),
+      i = /(https?|http|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/g,
+      s = this.chatElement.richText.cloneNode(!0).querySelectorAll(".chat-grid-wrap") || [],
+      n = document.createElement("div");
+    return e.wrapClassName && (n.className = e.wrapClassName), Array.from(s, (o, l) => {
+      const r = o.querySelectorAll(".chat-stat") || [],
+        d = document.createElement("p");
+      e.rowClassName && (d.className = e.rowClassName), Array.from(r, c => {
+        this.chatInput.getNodeEmpty(c) || (c.removeAttribute("data-set-richType"), c.removeAttribute("contenteditable"), c.removeAttribute("data-set-empty"), e.needUserId || c.removeAttribute("data-user-id"), e.needTagId || (c.removeAttribute("data-set-prefix"), c.removeAttribute("data-tag-id")), e.needSelectId || (c.removeAttribute("data-select-id"), c.removeAttribute("data-select-key")), e.imgToText && c.firstChild && c.firstChild.tagName === "IMG" && (c.classList.add("img-to-text"), c.innerHTML = `[${c.firstChild.getAttribute("data-img-text") || "元素data-img-text未定义"}]`), e.identifyLink && c.className.indexOf("chat-grid-input") !== -1 && (c.innerHTML = c.innerHTML.replace(i, h => `<a class="chat-grid-link" href="${h}" target="_blank">${h}</a>`)), c.classList.contains("at-select") && (c.classList.remove("aim"), c.removeChild(c.lastChild)), d.appendChild(c));
+      }), d.innerHTML || (d.innerHTML = "<br>"), n.appendChild(d);
+    }), n;
+  }
+  getText(t) {
+    let e = "";
+    const i = this.getReduceNode(t);
+    return Array.from(i.children, (a, s) => {
+      e = e + (s > 0 ? `
+` : "") + a.textContent;
+    }), e;
+  }
+  getHtml(t) {
+    return this.getReduceNode(t).innerHTML;
+  }
+  reverseAnalysis(t, e) {
+    if (!t) return;
+    const i = document.createElement("div");
+    i.innerHTML = t;
+    const a = i.children;
+    Array.from(a, s => {
+      s.className = "chat-grid-wrap", s.setAttribute("data-set-richType", "richBox");
+      const n = s.children,
+        o = {},
+        l = [];
+      Array.from(n, (c, h) => {
+        if (c.className.indexOf("chat-grid-input") !== -1) {
+          const g = c.textContent || "";
+          c.className = "", c.setAttribute("data-set-richType", "richMark"), c.innerHTML = `<span class="chat-grid-input chat-stat" data-set-richType="richInput" data-set-empty="false">${g}</span>`;
+          return;
+        }
+        if (c.tagName === "BR") {
+          const g = this.chatInput.getGridElm(!0);
+          s.removeChild(c), s.appendChild(g);
+          return;
+        }
+        const u = c.cloneNode(!0);
+        u.setAttribute("contenteditable", "false");
+        const p = document.createElement("span");
+        p.className = "chat-tag", p.setAttribute("contenteditable", "false"), p.setAttribute("data-set-richType", "chatTag"), p.appendChild(u), o[h] = p, h !== n.length - 1 ? n[h + 1].className.indexOf("chat-grid-input") === -1 && l.push(h) : l.push(h), h === 0 && l.push(-1);
+      });
+      for (const c in o) {
+        const h = Number(c),
+          u = o[c].lastChild;
+        u.classList.contains("at-select") && (u.innerHTML = `${u.textContent}${V}`), h === n.length - 1 ? (s.removeChild(n[h]), s.appendChild(o[c])) : (s.insertBefore(o[c], n[h + 1]), s.removeChild(n[h]));
+      }
+      const r = [],
+        d = s.children;
+      l.forEach(c => {
+        c === d.length - 1 ? r.push("isEnd") : r.push(d[c + 1]);
+      }), r.forEach(c => {
+        const h = this.chatInput.getGridElm(!0);
+        if (c === "isEnd") s.appendChild(h);else {
+          const u = h.children[0];
+          u.childNodes.length > 1 && u.removeChild(u.childNodes[1]), s.insertBefore(h, c);
+        }
+      });
+    }), e ? (this.enable(), this.chatEvent.insertInsideHtml(i.innerHTML)) : (this.chatElement.richText.innerHTML = i.innerHTML, this.enable(), this.chatEvent.richTextInput());
+  }
+  insertHtml(t) {
+    if (!t) return;
+    const e = document.createElement("span");
+    e.innerHTML = t, e.className = "chat-set-html";
+    const i = this.chatInput.createNewDom(e);
+    return this.chatInput.replaceRegContent(i, !1), this.chatEvent.richTextInput(), i;
+  }
+  insertText(t) {
+    if (!t) return;
+    const e = new RegExp(`${this.chatInput.ZERO_WIDTH_KEY}${this.chatInput.VOID_KEY}`, "ig"),
+      i = t.replace(e, "");
+    if (!i) return;
+    const a = i.split(`
+`);
+    let s = "";
+    a.forEach(n => {
+      const o = n !== "";
+      s += `<p class="chat-grid-wrap" data-set-richtype="richBox"><span data-set-richtype="richMark"><span class="chat-grid-input chat-stat" data-set-richtype="richInput" data-set-empty="${o ? "false" : "true"}">${o ? n : this.chatInput.VOID_KEY + "<br>"}</span></span></p>`;
+    }), this.chatEvent.insertInsideHtml(s);
+  }
+  getCallUserList() {
+    const t = this.chatElement.richText.querySelectorAll(".at-user");
+    if (t && t.length > 0) {
+      const e = Array.from(t, i => i.dataset.userId);
+      return K(this.options.userList, e, this.options.userProps.id);
+    } else return [];
+  }
+  getCallUserTagList() {
+    const t = this.chatElement.richText.querySelectorAll(".at-user");
+    if (t && t.length > 0) {
+      const e = [];
+      return Array.from(t, i => {
+        e.some(a => a[this.options.userProps.id] === i.dataset.userId) || e.push({
+          [this.options.userProps.id]: i.dataset.userId,
+          [this.options.userProps.name]: i.textContent.slice(1)
+        });
+      }), e;
+    } else return [];
+  }
+  getCustomTagList() {
+    const t = Object.keys(this.chatElement.customTags),
+      e = {},
+      i = this.chatElement.richText.querySelectorAll(".at-tag");
+    return t.forEach(a => {
+      let s = Array.prototype.filter.call(i, n => n.getAttribute("data-set-prefix") === String(a)).map(n => n.getAttribute("data-tag-id"));
+      s = s.filter((n, o) => s.indexOf(n) === o), e[a] = K(this.chatElement.customTags[a], s, "id");
+    }), e;
+  }
+  getSelectTagList() {
+    const t = Object.keys(this.chatElement.selectTags),
+      e = {},
+      i = this.chatElement.richText.querySelectorAll(".at-select");
+    return t.forEach(a => {
+      let s = Array.prototype.filter.call(i, n => n.getAttribute("data-select-key") === String(a)).map(n => n.getAttribute("data-select-id"));
+      s = s.filter((n, o) => s.indexOf(n) === o), e[a] = K(this.chatElement.selectTags[a], s, "id");
+    }), e;
+  }
+  clear(t) {
+    this.chatInput.textInnerHtmlInit(!0, t);
+    const e = {
+      html: this.chatElement.richText.innerHTML,
+      gridIndex: 0,
+      markIndex: 0,
+      cursorIndex: this.chatInput.cursorIndex
+    };
+    this.chatEvent.undoHistory = [e], this.chatEvent.redoHistory = [], this.chatEvent.richTextInput(!1);
+  }
+  isEmpty(t = !1) {
+    if ((this.chatElement.richText.querySelectorAll(".chat-tag") || []).length > 0) return !1;
+    const i = new RegExp(`^(${this.chatInput.ZERO_WIDTH_KEY}|<br>|${this.chatInput.VOID_KEY})+$`),
+      a = this.chatElement.richText.querySelectorAll(".chat-grid-input") || [];
+    return t ? Array.prototype.every.call(a, s => !s.innerHTML || !s.textContent || !s.textContent.trim() || i.test(s.innerHTML)) : Array.prototype.every.call(a, s => !s.innerHTML || !s.textContent || i.test(s.innerHTML));
+  }
+  dispose() {
+    if (this.options.elm.removeChild(this.chatElement.richText), this.options.elm.removeChild(this.chatElement.placeholderElm), this.options.needDialog) if (this.deviceInfo.isPc) {
+      const t = this.chatElement.pcElms.containerDialogElm.parentElement;
+      t && t.removeChild(this.chatElement.pcElms.containerDialogElm);
+    } else document.body.removeChild(this.chatElement.h5Elms.dialogElm);
+  }
+  showPCPointDialog() {
+    this.options.needDialog && (this.insertText("@"), this.options.asyncMatch && f(this.chatElement.pcElms.pointDialogEmptyElm, !0, "flex"), this.chatEvent.outerApply = !0, this.chatElement.showPointDialog(), P(50).then(() => {
+      this.chatEvent.outerApply = !1;
+    }));
+  }
+  showPCCheckDialog() {
+    !this.options.needDialog || this.options.asyncMatch || (this.chatEvent.winClick(), this.chatElement.checkboxRows = [], f(this.chatElement.pcElms.checkDialogElm, !0), E(document.body, "disable-scroll", !0), this.chatElement.pcElms.checkDialogTagsElm.scrollTop = 0, this.chatElement.pcElms.checkDialogUsersElm.scrollTop = 0, this.chatElement.pcElms.checkDialogSearchInputElm.value = "", this.chatElement.updateCheckDialogTags(), this.chatElement.isExternalCallPopup = !0);
+  }
+  showPCCustomTagDialog(t) {
+    !this.options.needDialog || this.options.asyncMatch || (this.insertText(t), this.chatEvent.outerApply = !0, this.chatElement.showCustomTagDialog(t), P(50).then(() => {
+      this.chatEvent.outerApply = !1;
+    }));
+  }
+  showPCSelectDialog(t, e) {
+    this.chatEvent.outerApply = !0, e && (this.chatElement.pcElms.selectDialogAim = e), this.chatElement.pcElms.selectDialogKey = t, this.chatEvent.debounceEvents.selectDialogToAim(), P(50).then(() => {
+      this.chatEvent.outerApply = !1;
+    });
+  }
+  showH5Dialog() {
+    this.chatElement.richText && this.chatElement.richText.blur(), Array.from(this.chatElement.h5Elms.dialogMainElm.children, t => {
+      t.style.display = "", E(t, "user-popup-check-item-check");
+    }), E(this.chatElement.h5Elms.dialogCheckElm, "disabled", !0), f(this.chatElement.h5Elms.dialogElm, !0), E(document.body, "disable-scroll", !0), this.options.asyncMatch && f(this.chatElement.h5Elms.dialogEmptyElm, !0, "flex"), this.chatElement.h5Elms.dialogMainElm.scrollTop = 0, this.chatElement.isExternalCallPopup = !0;
+  }
+  disabled() {
+    this.chatElement.richText.setAttribute("contenteditable", "false"), E(this.chatElement.richText, "chat-rich-text-disabled", !0);
+  }
+  enable() {
+    this.chatElement.richText.setAttribute("contenteditable", "true"), E(this.chatElement.richText, "chat-rich-text-disabled"), this.chatInput.setRangeLastText();
+  }
+  async setUserTag(t) {
+    this.chatEvent.triggerChatEvent("atCheck", [t]);
+    const e = this.chatInput.createChatTagElm({
+      id: t[this.options.userProps.id],
+      name: t[this.options.userProps.name]
+    }, "@", "at-user", "user-id");
+    this.chatInput.replaceRegContent(e, !1), await this.chatEvent.richTextInput();
+  }
+  async setCustomTag(t, e) {
+    this.chatEvent.triggerChatEvent("tagCheck", t), await this.chatInput.onceCustomCall(t, !1, e), await this.chatEvent.richTextInput();
+  }
+  async setSelectTag(t, e) {
+    if (this.chatEvent.triggerChatEvent("selectCheck", t), this.chatElement.pcElms.selectDialogAim && this.chatElement.pcElms.selectDialogAim.classList.contains("at-select")) {
+      if (this.chatElement.pcElms.selectDialogAim.getAttribute("data-select-id") === t.id) return;
+      this.chatElement.pcElms.selectDialogAim.setAttribute("data-select-id", t.id), this.chatElement.pcElms.selectDialogAim.childNodes[0].textContent = t.name;
+    } else {
+      const i = document.createElement("span");
+      i.setAttribute("class", "at-select"), i.setAttribute("data-select-key", e || this.chatElement.pcElms.selectDialogKey), i.setAttribute("data-select-id", t.id), i.innerHTML = `${t.name}${V}`;
+      const a = this.chatInput.createNewDom(i);
+      this.chatInput.replaceRegContent(a, !1);
+    }
+    await this.chatEvent.richTextInput();
+  }
+  async matchSetTag(t) {
+    this.chatEvent.triggerChatEvent("atCheck", [t]), await this.chatInput.onceSearchCall(t, this.chatEvent.startOpenIndex), await this.chatEvent.richTextInput();
+  }
+  async onceSetTag(t) {
+    this.chatEvent.triggerChatEvent("atCheck", [t]), await this.chatInput.onceCall({
+      id: t[this.options.userProps.id],
+      name: t[this.options.userProps.name]
+    }), await this.chatEvent.richTextInput();
+  }
+  async batchSetTag(t) {
+    this.chatEvent.triggerChatEvent("atCheck", t);
+    const e = [];
+    for (let i = 0; i <= t.length - 1;) e.push({
+      id: t[i][this.options.userProps.id],
+      name: t[i][this.options.userProps.name]
+    }), i++;
+    await this.chatInput.batchReplaceRegContent(e, !this.chatElement.isExternalCallPopup), await this.chatEvent.richTextInput();
+  }
+  async onceSetCustomTag(t) {
+    this.chatEvent.triggerChatEvent("tagCheck", t), await this.chatInput.onceCustomCall(t, !0, this.chatElement.pcElms.customTagDialogTagKey), await this.chatEvent.richTextInput();
+  }
+  async matchSetCustomTag(t) {
+    await this.chatInput.onceCustomCall(t, this.chatEvent.startOpenIndex, this.chatElement.pcElms.customTagDialogTagKey), await this.chatEvent.richTextInput(), this.chatEvent.triggerChatEvent("tagCheck", t);
+  }
+  async undo() {
+    const {
+      chatEvent: t
+    } = this;
+    if (!t.doOverHistory || !t.undoHistory || t.undoHistory.length <= 1) return;
+    const e = t.undoHistory[t.undoHistory.length - 2],
+      i = t.undoHistory[t.undoHistory.length - 1];
+    t.redoHistory.push(i), t.undoHistory.pop(), await t.setChatHistory(e);
+  }
+  async redo() {
+    const {
+      chatEvent: t
+    } = this;
+    if (!t.doOverHistory || !t.redoHistory || t.redoHistory.length < 1) return;
+    const e = t.redoHistory[t.redoHistory.length - 1];
+    t.redoHistory.pop(), t.undoHistory.push(e), await t.setChatHistory(e);
+  }
+  delUserTags(t) {
+    const e = t || this.options.userList.map(s => s[this.options.userProps.id]),
+      i = this.chatElement.richText.querySelectorAll(".at-user"),
+      a = [];
+    Array.from(i, s => {
+      const n = s.getAttribute("data-user-id");
+      e.some(o => String(o) === n) && a.push(s.parentElement);
+    });
+    for (let s = 0; s < a.length;) {
+      const n = a[s];
+      this.chatInput.delTag(n), s++;
+    }
+    this.enable(), this.chatEvent.richTextInput();
+  }
+  delCustomTags(t, e) {
+    const i = this.options.customTrigger.find(o => o.prefix === t);
+    if (!i || i.tagList.length === 0) return;
+    const a = e || i.tagList.map(o => o.id),
+      s = this.chatElement.richText.querySelectorAll(".at-tag"),
+      n = [];
+    Array.from(s, o => {
+      const l = o.getAttribute("data-set-prefix"),
+        r = o.getAttribute("data-tag-id");
+      l === t && a.some(d => String(d) === r) && n.push(o.parentElement);
+    });
+    for (let o = 0; o < n.length;) {
+      const l = n[o];
+      this.chatInput.delTag(l), o++;
+    }
+    this.enable(), this.chatEvent.richTextInput();
+  }
+  delSelectTags(t, e) {
+    const i = this.options.selectList.find(o => o.key === t);
+    if (!i || i.options.length === 0) return;
+    const a = e || i.options.map(o => o.id),
+      s = this.chatElement.richText.querySelectorAll(".at-select"),
+      n = [];
+    Array.from(s, o => {
+      const l = o.getAttribute("data-select-key"),
+        r = o.getAttribute("data-select-id");
+      l === t && a.some(d => String(d) === r) && n.push(o.parentElement);
+    });
+    for (let o = 0; o < n.length;) {
+      const l = n[o];
+      this.chatInput.delTag(l), o++;
+    }
+    this.enable(), this.chatEvent.richTextInput();
+  }
+  addEventListener(t, e) {
+    this.chatEvent.chatEventModule[t].push(e);
+  }
+  removeEventListener(t, e) {
+    const i = this.chatEvent.chatEventModule[t],
+      a = i.indexOf(e);
+    a !== -1 && i.splice(a, 1);
+  }
+  revisePCPointDialogLabel(t) {
+    this.options.needDialog && (this.options.dialogLabels.pcPointDialog = Object.assign({}, F, t || {}), this.chatElement.pcElms.pointDialogElm.querySelector(".call-user-dialog-header-title").textContent = this.options.dialogLabels.pcPointDialog.title, this.chatElement.pcElms.pointDialogCheckElm.textContent = this.options.dialogLabels.pcPointDialog.checkLabel, this.chatElement.pcElms.pointDialogEmptyElm && (this.chatElement.pcElms.pointDialogEmptyElm.children[1].textContent = this.options.dialogLabels.pcPointDialog.emptyLabel), this.options.asyncMatch || this.updateUserList());
+  }
+  revisePCCheckDialogLabel(t) {
+    !this.options.needDialog || this.options.asyncMatch || (this.options.dialogLabels.pcPCheckDialog = Object.assign({}, G, t || {}), this.chatElement.pcElms.checkDialogElm.querySelector(".checkbox-dialog-container-header").children[0].textContent = this.options.dialogLabels.pcPCheckDialog.title, this.chatElement.pcElms.checkDialogSearchInputElm.setAttribute("placeholder", this.options.dialogLabels.pcPCheckDialog.searchPlaceholder), this.chatElement.pcElms.checkDialogElm.querySelector(".checkbox-dialog-search-empty").textContent = this.options.dialogLabels.pcPCheckDialog.searchEmptyLabel, this.chatElement.pcElms.checkDialogElm.querySelector(".checkbox-dialog-right-box-title").textContent = this.options.dialogLabels.pcPCheckDialog.userTagTitle, this.chatElement.pcElms.checkDialogUsersElm.children[0].children[2].textContent = this.options.dialogLabels.pcPCheckDialog.checkAllLabel, this.chatElement.pcElms.checkDialogElm.querySelector(".btn-submit").textContent = this.options.dialogLabels.pcPCheckDialog.confirmLabel, this.chatElement.pcElms.checkDialogElm.querySelector(".btn-close").textContent = this.options.dialogLabels.pcPCheckDialog.cancelLabel);
+  }
+  reviseH5DialogLabel(t) {
+    this.options.needDialog && (this.options.dialogLabels.h5Dialog = Object.assign({}, q, t || {}), this.chatElement.h5Elms.dialogElm.querySelector(".popup-title").textContent = this.options.dialogLabels.h5Dialog.title, this.chatElement.h5Elms.dialogSearchElm.setAttribute("placeholder", this.options.dialogLabels.h5Dialog.searchPlaceholder), this.chatElement.h5Elms.dialogEmptyElm.children[1].textContent = this.options.dialogLabels.h5Dialog.searchEmptyLabel, this.chatElement.h5Elms.dialogCheckElm.textContent = this.options.dialogLabels.h5Dialog.confirmLabel, this.chatElement.h5Elms.dialogShowElm.textContent = this.options.dialogLabels.h5Dialog.cancelLabel, this.options.asyncMatch || this.updateUserList());
+  }
+}
+if (!window) throw new Error("非web环境！");
+window.console && window.console.log && console.log(" %c ".concat("ChatArea", " %c v5.3.1 "), "background: #269AFF; color: #FFFFFF; padding: 4px 0; border-radius: 4px 0px 0px 4px; font-style: italic;", "background: #FFFFFF; color: #269AFF; padding: 2px 0; border-radius: 0px 4px 4px 0px; font-style: italic; border: 2px solid #269AFF;");
+window.ChatArea = gt;
 
 /***/ }),
 
@@ -2976,13 +5146,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "ab30":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "ac6a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3065,32 +5228,10 @@ __webpack_require__("5ca1")({
 
 /***/ }),
 
-/***/ "b25a":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_4b7eee71_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("ab30");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_4b7eee71_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_4b7eee71_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
 /***/ "ba05":
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "bd33":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editor_vue_vue_type_style_index_0_id_2ac8dde4_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("e6e3");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editor_vue_vue_type_style_index_0_id_2ac8dde4_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editor_vue_vue_type_style_index_0_id_2ac8dde4_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
 
 /***/ }),
 
@@ -3132,6 +5273,17 @@ module.exports = function (IS_INCLUDES) {
     } return !IS_INCLUDES && -1;
   };
 };
+
+
+/***/ }),
+
+/***/ "c4d7":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_resize_vue_vue_type_style_index_0_id_3dd7fdc8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("d519");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_resize_vue_vue_type_style_index_0_id_3dd7fdc8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_resize_vue_vue_type_style_index_0_id_3dd7fdc8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
 
 
 /***/ }),
@@ -3369,6 +5521,13 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "d519":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "d53b":
 /***/ (function(module, exports) {
 
@@ -3379,14 +5538,14 @@ module.exports = function (done, value) {
 
 /***/ }),
 
-/***/ "d6dd":
+/***/ "d5e9":
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
 
 /***/ }),
 
-/***/ "d6f8":
+/***/ "d6dd":
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -3455,13 +5614,6 @@ module.exports = (
 
 /***/ }),
 
-/***/ "e6e3":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "e853":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3485,14 +5637,17 @@ module.exports = function (original) {
 
 /***/ }),
 
-/***/ "ed7d":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "e95c":
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_messages_vue_vue_type_style_index_0_id_0e79532a_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("3bcf");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_messages_vue_vue_type_style_index_0_id_0e79532a_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_index_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_messages_vue_vue_type_style_index_0_id_0e79532a_prod_lang_stylus__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
+// extracted by mini-css-extract-plugin
 
+/***/ }),
+
+/***/ "ef69":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -3741,7 +5896,7 @@ var es7_array_includes = __webpack_require__("6762");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.includes.js
 var es6_string_includes = __webpack_require__("2fdb");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/popover.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/popover.vue?vue&type=script&lang=js
 
 
 
@@ -4085,7 +6240,7 @@ document.addEventListener("click", function (e) {
     });
   }
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/tabs.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/tabs.vue?vue&type=script&lang=js
 /* harmony default export */ var tabsvue_type_script_lang_js = ({
   name: "LemonTabs",
   props: {
@@ -4166,7 +6321,7 @@ var tabs_component = normalizeComponent(
 )
 
 /* harmony default export */ var tabs = (tabs_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/button.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/button.vue?vue&type=script&lang=js
 /* harmony default export */ var buttonvue_type_script_lang_js = ({
   name: "LemonButton",
   props: {
@@ -4224,7 +6379,7 @@ var button_component = normalizeComponent(
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
 var es6_number_constructor = __webpack_require__("c5f6");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/badge.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/badge.vue?vue&type=script&lang=js
 
 /* harmony default export */ var badgevue_type_script_lang_js = ({
   name: "LemonBadge",
@@ -4280,7 +6435,7 @@ var badge_component = normalizeComponent(
 )
 
 /* harmony default export */ var badge = (badge_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/avatar.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/avatar.vue?vue&type=script&lang=js
 
 /* harmony default export */ var avatarvue_type_script_lang_js = ({
   name: "LemonAvatar",
@@ -4470,11 +6625,11 @@ function hoursTimeFormat(t) {
   var nowDateY = Y(nowDate);
   var format;
   if (dateY !== nowDateY) {
-    format = "y年m月d日 h:i";
+    format = "y-m-d h:i";
   } else if ("".concat(dateY, "-").concat(MD(date)) === "".concat(nowDateY, "-").concat(MD(nowDate))) {
     format = "h:i";
   } else {
-    format = "m月d日 h:i";
+    format = "m-d h:i";
   }
   return timeFormat(t, format);
 }
@@ -4562,7 +6717,7 @@ function generateUUID() {
   });
   return uuid;
 }
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/contact.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/contact.vue?vue&type=script&lang=js
 
 
 
@@ -4683,12 +6838,12 @@ var ChatArea = __webpack_require__("9204");
 
 // CONCATENATED MODULE: ./node_modules/chatarea/index.js
 
-const chatarea_ChatArea = window.ChatArea
+const chatarea_ChatArea = window.ChatArea;
 /* harmony default export */ var chatarea = (chatarea_ChatArea);
 // EXTERNAL MODULE: ./node_modules/chatarea/lib/ChatArea.css
 var lib_ChatArea = __webpack_require__("6fb5");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/editor.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/editor.vue?vue&type=script&lang=js
 
 
 
@@ -4707,13 +6862,13 @@ function editorvue_type_script_lang_js_objectSpread(e) { for (var r = 1; r < arg
 
 // 引入css样式
 
+var editorvue_type_script_lang_js_i18n = JSON.parse(localStorage.getItem('i18n'));
 var command = function command(_command, val) {
   document.execCommand(_command, false, val);
 };
 var selection = window.getSelection();
 var range;
 var emojiData = [];
-var isInitTool = false;
 /* harmony default export */ var editorvue_type_script_lang_js = ({
   name: "LemonEditor",
   inject: {
@@ -4734,7 +6889,7 @@ var isInitTool = false;
     },
     sendText: {
       type: String,
-      default: "发 送"
+      default: editorvue_type_script_lang_js_i18n ? editorvue_type_script_lang_js_i18n.sendText : '发 送'
     },
     wrapKey: {
       type: Function,
@@ -4757,7 +6912,9 @@ var isInitTool = false;
       submitDisabled: true,
       //proxyTools: [],
       accept: "",
-      chatArea: null
+      chatArea: null,
+      curEmoji: '',
+      i18n: this.IMUI.i18n
     };
   },
   created: function created() {
@@ -4789,17 +6946,29 @@ var isInitTool = false;
         }
       });
       _this.chatArea.revisePCCheckDialogLabel({
-        title: '选择要@的人',
-        searchPlaceholder: '搜素人员名称',
-        searchEmptyLabel: '没有匹配到任何结果',
-        userTagTitle: '成员列表',
-        checkAllLabel: '全选',
-        confirmLabel: '确定',
-        cancelLabel: '取消'
+        title: _this.i18n.atTitle,
+        searchPlaceholder: _this.i18n.searchPlaceholder,
+        searchEmptyLabel: _this.i18n.searchEmptyLabel,
+        userTagTitle: _this.i18n.userTagTitle,
+        checkAllLabel: _this.i18n.checkAllLabel,
+        confirmLabel: _this.i18n.confirmLabel,
+        cancelLabel: _this.i18n.cancelLabel
       });
+
+      // 修改PC光标选择弹窗默认文案
+      _this.chatArea.revisePCPointDialogLabel({
+        title: _this.i18n.groupUserTitle,
+        callEveryLabel: _this.i18n.callEveryLabel,
+        checkLabel: _this.i18n.checkLabel,
+        emptyLabel: _this.i18n.emptyLabel
+      });
+
+      // 监听失去焦点
       _this.chatArea.richText.addEventListener("blur", function (e) {
-        setTimeout(_this.chatArea.winClick, 200);
+        // setTimeout(this.chatArea.chatEvent.winClick(), 200);
       });
+
+      // 监听文件拖拽
       _this.chatArea.richText.addEventListener("drop", function (e) {
         var dataTransfer = e.dataTransfer;
         var files = dataTransfer.files;
@@ -4807,13 +6976,41 @@ var isInitTool = false;
           _this.$emit("upload", file);
         });
       });
+      // 设置阻止默认操作
+      _this.chatArea.addEventListener('defaultAction', function (type) {
+        switch (type) {
+          case 'PASTE':
+            // 粘贴
+            return 'PREVENT';
+        }
+      });
+      // 监听粘贴事件
+      _this.chatArea.richText.addEventListener("paste", function (e) {
+        e.preventDefault();
+        var clipboardData = e.clipboardData || window.clipboardData;
+        var text = clipboardData.getData("Text");
+        if (text) {
+          if (/<[^>]*>/g.test(text)) {
+            _this.chatArea.reverseAnalysis(text, true);
+          } else {
+            _this.chatArea.insertText(text);
+          }
+          _this.submitDisabled = false;
+        } else {
+          var _this$_getClipboardBl = _this._getClipboardBlob(clipboardData),
+            blob = _this$_getClipboardBl.blob,
+            blobUrl = _this$_getClipboardBl.blobUrl;
+          _this.clipboardBlob = blob;
+          _this.clipboardUrl = blobUrl;
+        }
+      });
       // 监听发送键
-      _this.chatArea.enterSend = function () {
+      _this.chatArea.addEventListener('enterSend', function () {
         // 在此处执行你对发送消息的处理
         if (_this.submitDisabled == false) {
           _this._handleSend();
         }
-      };
+      });
     });
   },
   render: function render() {
@@ -4860,8 +7057,11 @@ var isInitTool = false;
         toolLeft.push(node);
       }
     });
-    return h("div", {
-      "class": "lemon-editor"
+    return h("lemon-resize", {
+      "class": "lemon-editor",
+      "attrs": {
+        "size": 200
+      }
     }, [this.clipboardUrl && h("div", {
       "class": "lemon-editor__clipboard-image"
     }, [h("img", {
@@ -4878,11 +7078,11 @@ var isInitTool = false;
       "attrs": {
         "color": "grey"
       }
-    }, ["\u53D6\u6D88"]), h("lemon-button", {
+    }, [this.i18n.cancelLabel]), h("lemon-button", {
       "on": {
         "click": this.sendClipboardImage
       }
-    }, ["\u53D1\u9001\u56FE\u7247"])])]), h("input", {
+    }, [this.i18n.sendImage])])]), h("input", {
       "style": "display:none",
       "attrs": {
         "type": "file",
@@ -4905,9 +7105,6 @@ var isInitTool = false;
       "class": "lemon-editor__input",
       "ref": "textarea",
       "on": {
-        "keyup": this._handleKeyup,
-        "keydown": this._handleKeydown,
-        "paste": this._handlePaste,
         "click": this._handleClick,
         "input": this._handleInput
       },
@@ -4918,7 +7115,7 @@ var isInitTool = false;
       "class": "lemon-editor__footer"
     }, [h("div", {
       "class": "lemon-editor__tip"
-    }, [useScopedSlot(this.IMUI.$scopedSlots["editor-footer"], "使用 ctrl + enter 换行")]), h("div", {
+    }, [useScopedSlot(this.IMUI.$scopedSlots["editor-footer"], this.i18n.wrapKey)]), h("div", {
       "class": "lemon-editor__submit"
     }, [h("lemon-button", {
       "attrs": {
@@ -4936,7 +7133,7 @@ var isInitTool = false;
       if (!this.tools) return [];
       var defaultTools = [{
         name: "emoji",
-        title: "表情",
+        title: this.i18n.emoji,
         click: null,
         render: function render(menu) {
           return h("i", {
@@ -4945,7 +7142,7 @@ var isInitTool = false;
         }
       }, {
         name: "uploadFile",
-        title: "文件上传",
+        title: this.i18n.fileUpload,
         click: function click() {
           return _this3.selectFile("*");
         },
@@ -4956,7 +7153,7 @@ var isInitTool = false;
         }
       }, {
         name: "uploadImage",
-        title: "图片上传",
+        title: this.i18n.imageUpload,
         click: function click() {
           return _this3.selectFile("image/*");
         },
@@ -4987,6 +7184,10 @@ var isInitTool = false;
     }
   },
   methods: {
+    _sendEmoji: function _sendEmoji(item) {
+      this.curEmoji = item;
+      this.$emit('send', item.src);
+    },
     closeClipboardImage: function closeClipboardImage() {
       this.clipboardUrl = "";
       this.clipboardBlob = null;
@@ -5031,21 +7232,39 @@ var isInitTool = false;
     _renderEmojiTabs: function _renderEmojiTabs() {
       var _this4 = this;
       var h = this.$createElement;
-      var renderImageGrid = function renderImageGrid(items) {
-        return items.map(function (item) {
-          return h("img", {
-            "attrs": {
-              "src": item.src,
-              "title": item.title
-            },
-            "class": "lemon-editor__emoji-item",
-            "on": {
-              "click": function click() {
-                return _this4._handleSelectEmoji(item);
+      var renderImageGrid = function renderImageGrid(items, index) {
+        if (index == 1) {
+          return items.map(function (item) {
+            return h("img", {
+              "attrs": {
+                "src": item.src,
+                "title": item.title,
+                "loading": "lazy"
+              },
+              "class": "lemon-editor__emoji-item diy-emoji",
+              "on": {
+                "click": function click() {
+                  return _this4._sendEmoji(item);
+                }
               }
-            }
+            });
           });
-        });
+        } else {
+          return items.map(function (item) {
+            return h("img", {
+              "attrs": {
+                "src": item.src,
+                "title": item.title
+              },
+              "class": "lemon-editor__emoji-item",
+              "on": {
+                "click": function click() {
+                  return _this4._handleSelectEmoji(item);
+                }
+              }
+            });
+          });
+        }
       };
       if (emojiData[0].label) {
         var nodes = emojiData.map(function (item, index) {
@@ -5055,7 +7274,7 @@ var isInitTool = false;
               "index": index,
               "tab": item.label
             }
-          }, [renderImageGrid(item.children)]);
+          }, [renderImageGrid(item.children, index)]);
         });
         return h("lemon-tabs", {
           "style": "width: 412px"
@@ -5092,20 +7311,6 @@ var isInitTool = false;
       }
       return selectFile;
     }(),
-    _handlePaste: function _handlePaste(e) {
-      e.preventDefault();
-      var clipboardData = e.clipboardData || window.clipboardData;
-      var text = clipboardData.getData("Text");
-      if (text) {
-        this.submitDisabled = false;
-      } else {
-        var _this$_getClipboardBl = this._getClipboardBlob(clipboardData),
-          blob = _this$_getClipboardBl.blob,
-          blobUrl = _this$_getClipboardBl.blobUrl;
-        this.clipboardBlob = blob;
-        this.clipboardUrl = blobUrl;
-      }
-    },
     _getClipboardBlob: function _getClipboardBlob(clipboard) {
       var blob, blobUrl;
       for (var i = 0; i < clipboard.items.length; ++i) {
@@ -5118,19 +7323,6 @@ var isInitTool = false;
         blob: blob,
         blobUrl: blobUrl
       };
-    },
-    _handleKeyup: function _handleKeyup(e) {
-      this.saveRange();
-      this._checkSubmitDisabled();
-    },
-    _handleKeydown: function _handleKeydown(e) {
-      if (e.keyCode == 13 || e.keyCode == 13 && e.shiftKey) {
-        e.preventDefault();
-      }
-      if (this.wrapKey(e)) {
-        e.preventDefault();
-        command("insertLineBreak");
-      }
     },
     getFormatValue: function getFormatValue() {
       return this.IMUI.emojiImageToName(this.chatArea.getHtml({
@@ -5173,11 +7365,15 @@ var isInitTool = false;
 });
 // CONCATENATED MODULE: ./packages/components/editor.vue?vue&type=script&lang=js
  /* harmony default export */ var components_editorvue_type_script_lang_js = (editorvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./packages/components/editor.vue?vue&type=style&index=0&id=2ac8dde4&prod&lang=stylus
-var editorvue_type_style_index_0_id_2ac8dde4_prod_lang_stylus = __webpack_require__("bd33");
+// EXTERNAL MODULE: ./packages/components/editor.vue?vue&type=style&index=0&id=231ffbae&prod&lang=stylus
+var editorvue_type_style_index_0_id_231ffbae_prod_lang_stylus = __webpack_require__("8cde");
+
+// EXTERNAL MODULE: ./packages/components/editor.vue?vue&type=style&index=1&id=231ffbae&prod&lang=css
+var editorvue_type_style_index_1_id_231ffbae_prod_lang_css = __webpack_require__("3453");
 
 // CONCATENATED MODULE: ./packages/components/editor.vue
 var editor_render, editor_staticRenderFns
+
 
 
 
@@ -5197,7 +7393,7 @@ var editor_component = normalizeComponent(
 )
 
 /* harmony default export */ var editor = (editor_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/messages.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/messages.vue?vue&type=script&lang=js
 
 
 
@@ -5207,8 +7403,17 @@ var editor_component = normalizeComponent(
 
 
 
+var messagesvue_type_script_lang_js_i18n = JSON.parse(localStorage.getItem('i18n'));
 /* harmony default export */ var messagesvue_type_script_lang_js = ({
   name: "LemonMessages",
+  inject: {
+    IMUI: {
+      from: "IMUI",
+      default: function _default() {
+        return this;
+      }
+    }
+  },
   components: {},
   props: {
     //是否隐藏消息发送人昵称
@@ -5231,7 +7436,7 @@ var editor_component = normalizeComponent(
     },
     loadendText: {
       type: [String, Function],
-      default: "暂无更多消息"
+      default: messagesvue_type_script_lang_js_i18n ? messagesvue_type_script_lang_js_i18n.noneMsg : '暂无更多消息'
     },
     messages: {
       type: Array,
@@ -5267,11 +7472,12 @@ var editor_component = normalizeComponent(
       "class": "lemon-icon-loading lemonani-spin"
     })])]), this.messages.map(function (message, index) {
       var node = [];
+      var noMsgType = "[" + _this.IMUI.i18n.noMsgType + "]";
       var tagName = "lemon-message-".concat(message.type);
       var msgComponet = _this.toCamelCase(tagName);
       if (!_this.$options.components[msgComponet]) {
         message.type = "text";
-        message.content = "[暂不支持的消息类型]";
+        message.content = noMsgType;
         tagName = "lemon-message-text";
       }
       var prev = _this.messages[index - 1];
@@ -5427,8 +7633,8 @@ var editor_component = normalizeComponent(
 });
 // CONCATENATED MODULE: ./packages/components/messages.vue?vue&type=script&lang=js
  /* harmony default export */ var components_messagesvue_type_script_lang_js = (messagesvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./packages/components/messages.vue?vue&type=style&index=0&id=0e79532a&prod&lang=stylus
-var messagesvue_type_style_index_0_id_0e79532a_prod_lang_stylus = __webpack_require__("ed7d");
+// EXTERNAL MODULE: ./packages/components/messages.vue?vue&type=style&index=0&id=0b6f1009&prod&lang=stylus
+var messagesvue_type_style_index_0_id_0b6f1009_prod_lang_stylus = __webpack_require__("20e3");
 
 // CONCATENATED MODULE: ./packages/components/messages.vue
 var messages_render, messages_staticRenderFns
@@ -5451,7 +7657,131 @@ var messages_component = normalizeComponent(
 )
 
 /* harmony default export */ var messages = (messages_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/message/basic.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"026e9f3c-vue-loader-template"}!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/resize.vue?vue&type=template&id=3dd7fdc8&scoped=true
+var resizevue_type_template_id_3dd7fdc8_scoped_true_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    ref: "resize",
+    staticClass: "resize"
+  }, [_c('div', {
+    ref: "resizeHandle",
+    class: _vm.direction == 'vertical' ? 'resize-v' : 'resize-h'
+  }), _vm._t("default")], 2);
+};
+var resizevue_type_template_id_3dd7fdc8_scoped_true_staticRenderFns = [];
+
+// CONCATENATED MODULE: ./packages/components/resize.vue?vue&type=template&id=3dd7fdc8&scoped=true
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/resize.vue?vue&type=script&lang=js
+
+/* harmony default export */ var resizevue_type_script_lang_js = ({
+  name: 'LemonResize',
+  props: {
+    direction: {
+      type: String,
+      default: 'vertical' //horizontal
+    },
+    size: {
+      type: Number,
+      default: 250
+    },
+    sizeRange: {
+      type: Array,
+      default: function _default() {
+        return [200, 360];
+      }
+    }
+  },
+  data: function data() {
+    return {
+      height: 200,
+      width: 250
+    };
+  },
+  mounted: function mounted() {
+    this.dragControllerDiv(this.$refs.resize, this.$refs.resizeHandle);
+  },
+  methods: {
+    dragControllerDiv: function dragControllerDiv(resizeBox, resizeHandle) {
+      var _this = this;
+      if (this.direction === 'horizontal') {
+        resizeBox.style.width = (localStorage.getItem('horizontalSize') || this.size) + 'px';
+        // 鼠标按下事件
+        resizeHandle.onmousedown = function (e) {
+          var resizeWidth = resizeBox.offsetWidth;
+          var startX = e.clientX; // 水平坐标
+          // 鼠标拖动事件
+          document.onmousemove = function (ev) {
+            var moveX = ev.clientX;
+            var moveLen = resizeWidth + (moveX - startX);
+            if (_this.sizeRange[0] <= moveLen && _this.sizeRange[1] >= moveLen) {
+              resizeBox.style.width = moveLen + 'px';
+              _this.width = moveLen;
+              _this.$emit('box-resize', moveLen, e);
+            }
+          };
+          // 鼠标松开事件
+          document.onmouseup = function () {
+            localStorage.setItem('horizontalSize', _this.width);
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+        };
+      } else {
+        resizeBox.style.height = (localStorage.getItem('verticalSize') || this.size) + 'px';
+        // 鼠标按下事件
+        resizeHandle.onmousedown = function (e) {
+          var resizeHeight = resizeBox.offsetHeight;
+          var startY = e.clientY; // 重置坐标
+          // 鼠标拖动事件
+          document.onmousemove = function (ev) {
+            var moveY = ev.clientY;
+            var moveLen = resizeHeight - (moveY - startY);
+            if (_this.sizeRange[0] <= moveLen && _this.sizeRange[1] >= moveLen) {
+              resizeBox.style.height = moveLen + 'px';
+              _this.height = moveLen;
+              _this.$emit('box-resize', moveLen, e);
+            }
+          };
+          // 鼠标松开事件
+          document.onmouseup = function () {
+            localStorage.setItem('verticalSize', _this.height);
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+        };
+      }
+    }
+  }
+});
+// CONCATENATED MODULE: ./packages/components/resize.vue?vue&type=script&lang=js
+ /* harmony default export */ var components_resizevue_type_script_lang_js = (resizevue_type_script_lang_js); 
+// EXTERNAL MODULE: ./packages/components/resize.vue?vue&type=style&index=0&id=3dd7fdc8&prod&scoped=true&lang=css
+var resizevue_type_style_index_0_id_3dd7fdc8_prod_scoped_true_lang_css = __webpack_require__("c4d7");
+
+// CONCATENATED MODULE: ./packages/components/resize.vue
+
+
+
+
+
+
+/* normalize component */
+
+var resize_component = normalizeComponent(
+  components_resizevue_type_script_lang_js,
+  resizevue_type_template_id_3dd7fdc8_scoped_true_render,
+  resizevue_type_template_id_3dd7fdc8_scoped_true_staticRenderFns,
+  false,
+  null,
+  "3dd7fdc8",
+  null
+  
+)
+
+/* harmony default export */ var resize = (resize_component.exports);
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/message/basic.vue?vue&type=script&lang=js
 
 /* harmony default export */ var basicvue_type_script_lang_js = ({
   name: "lemonMessageBasic",
@@ -5520,7 +7850,9 @@ var messages_component = normalizeComponent(
           _this._emitClick(e, "displayName");
         }
       }
-    }, [fromUser.displayName]), this.hideTime == false && h("span", {
+    }, [fromUser.displayName]), h("span", {
+      "class": "lemon-message__tag"
+    }, [useScopedSlot(this.IMUI.$scopedSlots["message-tag"], null, this.message)]), this.hideTime == false && h("span", {
       "class": "lemon-message__time",
       "on": {
         "click": function click(e) {
@@ -5577,8 +7909,8 @@ var messages_component = normalizeComponent(
 });
 // CONCATENATED MODULE: ./packages/components/message/basic.vue?vue&type=script&lang=js
  /* harmony default export */ var message_basicvue_type_script_lang_js = (basicvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./packages/components/message/basic.vue?vue&type=style&index=0&id=728e23e7&prod&lang=stylus
-var basicvue_type_style_index_0_id_728e23e7_prod_lang_stylus = __webpack_require__("4c77");
+// EXTERNAL MODULE: ./packages/components/message/basic.vue?vue&type=style&index=0&id=16af0e86&prod&lang=stylus
+var basicvue_type_style_index_0_id_16af0e86_prod_lang_stylus = __webpack_require__("628d");
 
 // CONCATENATED MODULE: ./packages/components/message/basic.vue
 var basic_render, basic_staticRenderFns
@@ -5601,7 +7933,7 @@ var basic_component = normalizeComponent(
 )
 
 /* harmony default export */ var basic = (basic_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/message/text.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/message/text.vue?vue&type=script&lang=js
 
 
 
@@ -5638,8 +7970,8 @@ function textvue_type_script_lang_js_objectSpread(e) { for (var r = 1; r < argum
 });
 // CONCATENATED MODULE: ./packages/components/message/text.vue?vue&type=script&lang=js
  /* harmony default export */ var message_textvue_type_script_lang_js = (textvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./packages/components/message/text.vue?vue&type=style&index=0&id=fc6d50a4&prod&lang=stylus
-var textvue_type_style_index_0_id_fc6d50a4_prod_lang_stylus = __webpack_require__("5778");
+// EXTERNAL MODULE: ./packages/components/message/text.vue?vue&type=style&index=0&id=7774ccc0&prod&lang=stylus
+var textvue_type_style_index_0_id_7774ccc0_prod_lang_stylus = __webpack_require__("260f");
 
 // CONCATENATED MODULE: ./packages/components/message/text.vue
 var text_render, text_staticRenderFns
@@ -5662,7 +7994,7 @@ var text_component = normalizeComponent(
 )
 
 /* harmony default export */ var message_text = (text_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/message/image.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/message/image.vue?vue&type=script&lang=js
 
 
 
@@ -5719,7 +8051,7 @@ var image_component = normalizeComponent(
 )
 
 /* harmony default export */ var message_image = (image_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/message/file.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/message/file.vue?vue&type=script&lang=js
 
 
 
@@ -5783,7 +8115,7 @@ var file_component = normalizeComponent(
 )
 
 /* harmony default export */ var file = (file_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/message/event.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/message/event.vue?vue&type=script&lang=js
 /* harmony default export */ var eventvue_type_script_lang_js = ({
   name: "lemonMessageEvent",
   inheritAttrs: false,
@@ -5835,6 +8167,63 @@ var event_component = normalizeComponent(
 )
 
 /* harmony default export */ var message_event = (event_component.exports);
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/message/emoji.vue?vue&type=script&lang=js
+
+
+
+
+
+
+function emojivue_type_script_lang_js_ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function emojivue_type_script_lang_js_objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? emojivue_type_script_lang_js_ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : emojivue_type_script_lang_js_ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+/* harmony default export */ var emojivue_type_script_lang_js = ({
+  name: "lemonMessageEmoji",
+  inheritAttrs: false,
+  render: function render() {
+    var h = arguments[0];
+    return h("lemon-message-basic", helper_default()([{
+      "class": "lemon-message-emoji"
+    }, {
+      "props": emojivue_type_script_lang_js_objectSpread({}, this.$attrs)
+    }, {
+      "scopedSlots": {
+        content: function content(props) {
+          return h("img", {
+            "attrs": {
+              "src": props.content
+            }
+          });
+        }
+      }
+    }]));
+  }
+});
+// CONCATENATED MODULE: ./packages/components/message/emoji.vue?vue&type=script&lang=js
+ /* harmony default export */ var message_emojivue_type_script_lang_js = (emojivue_type_script_lang_js); 
+// EXTERNAL MODULE: ./packages/components/message/emoji.vue?vue&type=style&index=0&id=da564488&prod&lang=stylus
+var emojivue_type_style_index_0_id_da564488_prod_lang_stylus = __webpack_require__("718ea");
+
+// CONCATENATED MODULE: ./packages/components/message/emoji.vue
+var emoji_render, emoji_staticRenderFns
+
+
+
+
+
+/* normalize component */
+
+var emoji_component = normalizeComponent(
+  message_emojivue_type_script_lang_js,
+  emoji_render,
+  emoji_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var emoji = (emoji_component.exports);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.find-index.js
 var es6_array_find_index = __webpack_require__("20d6");
 
@@ -5902,20 +8291,61 @@ var MESSAGE_TYPE = ["voice", "file", "video", "image", "text"];
  */
 var MESSAGE_STATUS = ["going", "succeed", "failed"];
 var CONTACT_TYPE = ["many", "single"];
+// CONCATENATED MODULE: ./packages/utils/i18n/index.js
+/* harmony default export */ var utils_i18n = ({
+  sendText: '发 送',
+  sendMsg: '发送消息',
+  sendImage: '发送图片',
+  imageUpload: '图片上传',
+  fileUpload: '文件上传',
+  noneMsg: '暂无更多消息',
+  moreMsg: '查看更多',
+  sendAgain: '重新发送',
+  chat: '聊天',
+  contact: '通讯录',
+  image: '图片',
+  file: '文件',
+  emoji: '表情',
+  emojiDiy: '自定义表情',
+  noMsgType: '暂时不支持此消息',
+  eventNotice: '通知',
+  checkAllLabel: '全选',
+  confirmLabel: '确定',
+  cancelLabel: '取消',
+  wrapKey: "使用Ctrl + enter换行",
+  sendKey: "按Enter发送",
+  draft: "草稿",
+  atTitle: '选择要@的人',
+  searchPlaceholder: '搜素人员名称',
+  searchEmptyLabel: '没有匹配到任何结果',
+  userTagTitle: '成员列表',
+  groupUserTitle: '群成员',
+  callEveryLabel: '所有人',
+  checkLabel: '多选',
+  emptyLabel: '暂无数据'
+});
 // CONCATENATED MODULE: ./packages/lastContentRender.js
 
+
+var lastContentRender_i18n = JSON.parse(localStorage.getItem('i18n'));
+if (!lastContentRender_i18n) {
+  lastContentRender_i18n = utils_i18n;
+}
 /* harmony default export */ var packages_lastContentRender = ({
   file: function file(message) {
-    return "[文件]";
+    return "[" + lastContentRender_i18n.file + "]";
   },
   image: function image(message) {
-    return "[图片]";
+    return "[" + lastContentRender_i18n.image + "]";
+  },
+  emoji: function emoji(message) {
+    return "[" + lastContentRender_i18n.emojiDiy + "]";
   },
   text: function text(message) {
     return this.emojiNameToImage(clearHtmlExcludeImg(message.content));
   },
   event: function event(message) {
-    return '[通知]';
+    return "[" + lastContentRender_i18n.eventNotice + "]";
   }
 });
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
@@ -5982,7 +8412,7 @@ var memory_MemoryCache = /*#__PURE__*/function () {
   return MemoryCache;
 }();
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/index.vue?vue&type=script&lang=js
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./packages/components/index.vue?vue&type=script&lang=js
 
 
 
@@ -6004,6 +8434,7 @@ var memory_MemoryCache = /*#__PURE__*/function () {
 
 function componentsvue_type_script_lang_js_ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function componentsvue_type_script_lang_js_objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? componentsvue_type_script_lang_js_ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : componentsvue_type_script_lang_js_ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+
 
 
 
@@ -6113,6 +8544,7 @@ var renderDrawerContent = function renderDrawerContent() {};
       activeSidebar: DEFAULT_MENU_LASTMESSAGES,
       contacts: [],
       menus: [],
+      i18n: {},
       editorTools: [{
         name: "emoji"
       }, {
@@ -6127,6 +8559,7 @@ var renderDrawerContent = function renderDrawerContent() {};
   },
   created: function created() {
     this.initMenus();
+    this.initI18n();
   },
   mounted: function () {
     var _mounted = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -6200,7 +8633,7 @@ var renderDrawerContent = function renderDrawerContent() {};
       var unread = "+1";
       var messageList = allMessages[message.toContactId];
       // 如果是自己的消息需要push，发送的消息不再增加未读条数
-      if (message.type == 'event' || this.user.id == message.fromUser.id) unread = "+0";
+      if (message.type == "event" || this.user.id == message.fromUser.id) unread = "+0";
       if (messageList === undefined) {
         this.updateContact({
           id: message.toContactId,
@@ -6245,13 +8678,18 @@ var renderDrawerContent = function renderDrawerContent() {};
     _handleSend: function _handleSend(text) {
       var _this5 = this;
       var atUserList = this.$refs.editor.chatArea.getCallUserList();
+      var fileId = this.$refs.editor.curEmoji.file_id ? this.$refs.editor.curEmoji.file_id : 0;
+      var msgType = fileId ? "emoji" : "text";
+      this.$refs.editor.curEmoji = "";
       // 将数组中的id提取出来
       var atUserIds = atUserList.map(function (item) {
         return item.id;
       });
       var message = this._createMessage({
         content: text,
-        at: atUserIds
+        at: atUserIds,
+        file_id: fileId,
+        type: msgType
       });
       this.appendMessage(message, true);
       this._emitSend(message, function () {
@@ -6305,7 +8743,7 @@ var renderDrawerContent = function renderDrawerContent() {};
       }, this);
     },
     callIsBottom: function callIsBottom(isBottom) {
-      this.$emit('is-bottom', isBottom);
+      this.$emit("is-bottom", isBottom);
     },
     clearCacheContainer: function clearCacheContainer(name) {
       this.CacheContactContainer.remove(name);
@@ -6459,15 +8897,19 @@ var renderDrawerContent = function renderDrawerContent() {};
     },
     _renderSidebar: function _renderSidebar(children, name, fixedtop) {
       var h = this.$createElement;
-      return h("div", {
+      return h("lemon-resize", {
+        "attrs": {
+          "direction": "horizontal"
+        },
         "class": "lemon-sidebar",
+        "on": {
+          "box-resize": this.boxResize,
+          "scroll": this._handleSidebarScroll
+        },
         "directives": [{
           name: "show",
           value: this.activeSidebar == name
-        }],
-        "on": {
-          "scroll": this._handleSidebarScroll
-        }
+        }]
       }, [h("div", {
         "class": "lemon-sidebar__fixed-top"
       }, [fixedtop]), h("div", {
@@ -6502,14 +8944,14 @@ var renderDrawerContent = function renderDrawerContent() {};
           }]
         }, [this.CacheContactContainer.get(name)]));
       }
-      for (var _name2 in this.CacheMenuContainer.get()) {
+      for (var _name in this.CacheMenuContainer.get()) {
         nodes.push(h("div", {
           "class": cls,
           "directives": [{
             name: "show",
-            value: this.activeSidebar == _name2 && !this.currentIsDefSidebar
+            value: this.activeSidebar == _name && !this.currentIsDefSidebar
           }]
-        }, [this.CacheMenuContainer.get(_name2)]));
+        }, [this.CacheMenuContainer.get(_name)]));
       }
       nodes.push(h("div", {
         "class": cls,
@@ -6587,7 +9029,7 @@ var renderDrawerContent = function renderDrawerContent() {};
             _this13.changeContact(curact.id, DEFAULT_MENU_LASTMESSAGES);
           }
         }
-      }, ["\u53D1\u9001\u6D88\u606F"])]), curact)]));
+      }, [this.i18n.sendMsg])]), curact)]));
       return nodes;
     },
     _handleSidebarScroll: function _handleSidebarScroll() {
@@ -6620,7 +9062,7 @@ var renderDrawerContent = function renderDrawerContent() {};
     },
     lastContentRender: function lastContentRender(message) {
       if (!isFunction(packages_lastContentRender[message.type])) {
-        return "[不支持的消息类型]";
+        return "[" + this.i18n.noMsgType + "]";
       }
       return packages_lastContentRender[message.type].call(this, message);
     },
@@ -6665,7 +9107,7 @@ var renderDrawerContent = function renderDrawerContent() {};
       });
       this.updateContact({
         id: cid,
-        lastContent: "<span style=\"color:red;\">[\u8349\u7A3F]</span><span>".concat(this.lastContentRender({
+        lastContent: "<span style=\"color:red;\">[".concat(this.i18n.draft, "]</span><span>").concat(this.lastContentRender({
           type: "text",
           content: editorValue
         }), "</span>")
@@ -6678,7 +9120,7 @@ var renderDrawerContent = function renderDrawerContent() {};
       var draft = this.CacheDraft.get(contactId);
       if (draft) {
         var currentContent = this.findContact(contactId).lastContent;
-        if (currentContent.indexOf('<span style="color:red;">[草稿]</span>') === 0) {
+        if (currentContent.indexOf('<span style="color:red;">[' + this.i18n.draft + ']</span>') === 0) {
           this.updateContact({
             id: contactId,
             lastContent: draft.lastContent
@@ -6714,6 +9156,7 @@ var renderDrawerContent = function renderDrawerContent() {};
             case 6:
               //保存上个聊天目标的草稿
               if (this.currentContactId) {
+                console.log("🚀 ~ changeContact ~ this.currentContactId:", this.currentContactId);
                 editorValue = this.$refs.editor.chatArea.getHtml({
                   needUserId: true
                 });
@@ -6858,6 +9301,18 @@ var renderDrawerContent = function renderDrawerContent() {};
         return emojiMap[name] = src;
       });
     },
+    //设置多语言
+    initI18n: function initI18n(data) {
+      var item = utils_i18n;
+      if (data) {
+        item = Object.assign(utils_i18n, data);
+      } else {
+        var i18n = JSON.parse(localStorage.getItem('i18n'));
+        if (i18n) item = i18n;
+      }
+      localStorage.setItem('i18n', JSON.stringify(item));
+      this.i18n = item;
+    },
     initEditorTools: function initEditorTools(data) {
       //this.editorTools = data;
       this.editorTools = data;
@@ -6872,7 +9327,7 @@ var renderDrawerContent = function renderDrawerContent() {};
       var h = this.$createElement;
       var defaultMenus = [{
         name: DEFAULT_MENU_LASTMESSAGES,
-        title: "聊天",
+        title: this.i18n.chat,
         unread: 0,
         click: null,
         render: function render(menu) {
@@ -6883,7 +9338,7 @@ var renderDrawerContent = function renderDrawerContent() {};
         isBottom: false
       }, {
         name: DEFAULT_MENU_CONTACTS,
-        title: "通讯录",
+        title: this.i18n.contact,
         unread: 0,
         click: null,
         render: function render(menu) {
@@ -7096,6 +9551,9 @@ var renderDrawerContent = function renderDrawerContent() {};
       this.$refs.drawer.style.boxShadow = shadow;
       this.drawerVisible = true;
     },
+    boxResize: function boxResize(size, e) {
+      this.$emit("sidebar-resize", size, e);
+    },
     closeDrawer: function closeDrawer() {
       this.drawerVisible = false;
     },
@@ -7108,13 +9566,16 @@ var renderDrawerContent = function renderDrawerContent() {};
     setUserTag: function setUserTag(data) {
       this.$refs.editor.chatArea.setUserTag(data);
       this.$refs.editor._checkSubmitDisabled();
+    },
+    getChatArea: function getChatArea() {
+      return this.$refs.editor.chatArea;
     }
   }
 });
 // CONCATENATED MODULE: ./packages/components/index.vue?vue&type=script&lang=js
  /* harmony default export */ var packages_componentsvue_type_script_lang_js = (componentsvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./packages/components/index.vue?vue&type=style&index=0&id=4b7eee71&prod&lang=stylus
-var componentsvue_type_style_index_0_id_4b7eee71_prod_lang_stylus = __webpack_require__("b25a");
+// EXTERNAL MODULE: ./packages/components/index.vue?vue&type=style&index=0&id=16346a2c&prod&lang=stylus
+var componentsvue_type_style_index_0_id_16346a2c_prod_lang_stylus = __webpack_require__("3d91");
 
 // CONCATENATED MODULE: ./packages/components/index.vue
 var components_render, components_staticRenderFns
@@ -7159,8 +9620,10 @@ var common = __webpack_require__("6a2b");
 
 
 
-var version = "1.4.2";
-var packages_components = [components, components_contact, messages, editor, avatar, badge, components_button, popover, tabs, basic, message_text, message_image, file, message_event];
+
+
+var version = "2.1.0";
+var packages_components = [components, components_contact, messages, editor, avatar, badge, components_button, popover, tabs, resize, basic, message_text, message_image, file, message_event, emoji];
 var packages_install = function install(Vue) {
   Vue.directive("LemonContextmenu", contextmenu);
   packages_components.forEach(function (component) {
