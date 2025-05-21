@@ -2111,7 +2111,7 @@ export default {
     },
     // 查看
     openNotice() {
-      var notice="<div style='white-space: break-spaces;'>"+this.notice+"</div>"
+      var notice="<div style='white-space: break-spaces;word-break:break-all'>"+this.notice+"</div>"
       this.$alert(notice, "群公告", {
         confirmButtonText: "确定",
          dangerouslyUseHTMLString: true
@@ -2606,6 +2606,7 @@ export default {
       cursor: pointer;
       overflow: hidden;
       text-overflow: ellipsis;
+      word-break: break-all;
       display: -webkit-box;
       -webkit-line-clamp: 5;
       -webkit-box-orient: vertical;
